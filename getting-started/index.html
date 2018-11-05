@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Getting Started with Fano Web Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Getting started with Fano Web Framework, web application framework for modern Pascal programming language.">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+    <!-- Header -->
+    <header id="header">
+        <a href="/" class="title">Fano</a>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/getting-started" class="active">Getting Started</a></li>
+                <li><a href="/learn-more" class="active">Learn more</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Main -->
+        <section id="main" class="wrapper">
+            <div class="inner">
+                <h1 class="major">Getting Started</h1>
+                <h2>Requirement</h2>
+                <p>Main requirement is <a href="https://www.freepascal.org/">Free Pascal compiler</a> version >= 3.0.</p>
+                <p>From your shell, run following command</p>
+                <pre><code>$ fpc -i</code></pre>
+                <p>If you see following similar output</p>
+                <pre><code>Free Pascal Compiler version 3.0.4
+
+Compiler date      : 2017/10/03
+Compiler CPU target: x86_64
+...</code></pre>
+                <p>then you are good. If not, you may not have Free Pascal installed in your system.</p>
+                <p>In that case, you may want to take a look following resources:</p>
+                <ul>
+                    <li><a href="https://www.freepascal.org/download.var">Download Free Pascal</a></li>
+                    <li><a href="https://www.freepascal.org/docs.var">Free Pascal Documentation</a></li>
+                </ul>
+
+                <h2>Installation</h2>
+                <h3>Clone from Fano App example web application</h3>
+                <p>The easiest way is to clone from <a href="https://github.com/zamronypj/fano-app">Fano App</a> sample skeleton web application repository.</p>
+                <pre><code>$ git clone git@github.com:zamronypj/fano-app.git --recursive</code></pre>
+                <p><code>--recursive</code> parameter is needed to make git also pulls from <a href="https://github.com/zamronypj/fano">Fano</a> repository.</p>
+                <p>If your are missing <code>--recursive</code> when cloning Fano App repository, you may find out that <code>fano</code> directory is empty.
+                In that case, run</p>
+                <pre><code>$ git submodule update --init</code></pre>
+                <p>To update Fano to its latest commit, run</p>
+                <pre><code>$ git checkout master && git submodule foreach --recursive git pull origin master</code></pre>
+
+                <p>Above command will checkout to <code>master</code> branch of Fano App repository and pull latest update from <code>master</code> branch of Fano repository.</p>
+                <h3>Copy compiler configuration</h3>
+                <p>Copy <code>*.cfg.sample</code> to <code>*.cfg</code>.
+                <p>Make adjustment as you need in <code>build.cfg</code>, <code>build.prod.cfg</code>, <code>build.dev.cfg</code>.</p>
+
+                <p>These <code>*.cfg</code> files contain some Free Pascal compiler switches that you can turn on/off to change how executable is compiled and generated. For complete
+                explanation on available compiler switches, consult Free Pascal documentation.</p>
+
+                <p>Also copy <code>app/config/config.json.sample</code> to <code>app/config/config.json</code> and edit
+                configuration as needed. For example, you may need to change <code>baseUrl</code> to match your own base url so JavaScript or CSS stylesheets point to correct URL.</p>
+
+<pre><code>$ cp app/config/config.json.sample app/config/config.json
+$ cp build.prod.cfg.sample build.prod.cfg
+$ cp build.dev.cfg.sample build.dev.cfg
+$ cp build.cfg.sample build.cfg</code></pre>
+
+                <p><code>tools/config.setup.sh</code> shell script is provided to simplify copying those
+                configuration files. Following shell command is similar to command above.</p>
+
+<pre><code>$ ./tools/config.setup.sh</code></pre>
+
+
+                <h2>Build Application</h2>
+                <p>Fano App repository comes with several shell scripts to simplify task. The most important is
+                <code>build.sh</code> (or <code>build.cmd</code> on Windows)</p>
+                <p>After you configure <code>*.cfg</code>, to compile and build binary executable, run</p>
+                <pre><code>$ ./build.sh</code></pre>
+                <p>By default, it will output binary executable in <code>app/public</code> directory.</p>
+
+                <h3>Build for different environment</h3>
+
+                <p>To build for different environment, set <code>BUILD_TYPE</code> environment variable.</p>
+
+                <h4>Build for production environment</h4>
+
+                <pre><code>$ BUILD_TYPE=prod ./build.sh</code></pre>
+
+                <p>Build process will use compiler configuration defined in <code>fano/fano.cfg</code>, <code>build.cfg</code> and <code>build.prod.cfg</code>.
+                    By default, <code>build.prod.cfg</code> contains some compiler switches that will aggressively optimize executable both in speed and size.</p>
+
+                <h4>Build for development environment</h4>
+
+                <pre><code>$ BUILD_TYPE=dev ./build.sh</code></pre>
+
+                <p>Build process will use compiler configuration defined in <code>fano/fano.cfg</code>, <code>build.cfg</code> and <code>build.dev.cfg</code>.</p>
+
+                <p>If <code>BUILD_TYPE</code> environment variable is not set, production environment will be assumed.</p>
+
+                <h3>Change executable output directory</h3>
+
+                <p>Compilation will output executable to directory defined in <code>EXEC_OUTPUT_DIR</code>
+                environment variable. By default, it is <code>app/public</code> directory.</p>
+
+                <pre><code>$ EXEC_OUTPUT_DIR=/path/to/public/dir ./build.sh</code></pre>
+
+                <h3>Change executable name</h3>
+
+                <p>Compilation will use executable filename as defined in <code>EXEC_OUTPUT_NAME</code>
+                environment variable. By default is <code>app.cgi</code> filename.</p>
+
+                <pre><code>$ EXEC_OUTPUT_NAME=index.cgi ./build.sh</code></pre>
+
+                <h2>Run Application</h2>
+
+                <h3>Run with a webserver</h3>
+
+                <p>Setup a virtual host. Please consult documentation of web server you use.
+                For example on Apache,</p>
+
+<pre><code>&lt;VirtualHost *:80&gt;
+     ServerName www.example.com
+     DocumentRoot /home/example/app/public
+
+     &lt;Directory "/home/example/app/public"&gt;
+         Options +ExecCGI
+         AllowOverride FileInfo
+         Require all granted
+         DirectoryIndex app.cgi
+         AddHandler cgi-script .cgi
+     &lt;/Directory&gt;
+&lt;/VirtualHost&gt;</code></pre>
+                <p>On Apache, you will need to enable CGI module, such as <code>mod_cgi</code> or <code>mod_cgid</code>. If CGI module not loaded, above virtual host will cause <code>app.cgi</code> is downloaded instead of executed.</p>
+
+                <p>For example, on Debian, this will enable <code>mod_cgi</code> module.</p>
+
+<pre><code>$ sudo a2enmod cgi
+$ sudo systemctl restart apache2</code></pre>
+
+                <p>Depending on your server setup, for example, if  you use <code>.htaccess</code>, add following code:</p>
+
+<pre><code>&lt;IfModule mod_rewrite.c&gt;
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ app.cgi [L]
+&lt;/IfModule&gt;</code></pre>
+
+                <p>and put <code>.htaccess</code> file in same directory as <code>app.cgi</code> file (i.e., in <code>app/public</code> directory).
+                Content of <code>.htaccess</code> basically tells Apache to serve existing files/directories directly. For any non-existing files/directories, pass them to our application.
+                </p>
+                <p>Fano App repository contains sample <code>app/public/htaccess.example</code> file that you can use. Just copy and rename it to <code>.htaccess</code>.</p>
+                <p>After you setup virtual host, try open application through Internet browser.</p>
+                <h3>Simulate run on command line</h3>
+
+<pre><code>$ cd app/public
+$ REQUEST_METHOD=GET \
+  REQUEST_URI=/test/test \
+  SERVER_NAME=juhara.com \
+  ./app.cgi</code></pre>
+
+                <p><code>tools/simulate.run.sh</code> is bash script that can be used to simplify simulating run
+                application in shell.</p>
+
+                <pre><code>$ ./tools/simulate.run.sh</code></pre>
+
+                <p>or to change route to access, set <code>REQUEST_URI</code> variable.</p>
+
+                <pre><code>$ REQUEST_URI=/test/test ./simulate.run.sh</code></pre>
+
+                <p>This is similar to simulate browser requesting this page, for example,</p>
+
+                <pre><code>$ wget -O- http://[your fano app hostname]/test/test</code></pre>
+
+                <p>However, running using <code>tools/simulate.run.sh</code> allows you to view output of <code>heaptrc</code>
+                unit for detecting memory leak (if you enable <code>-gh</code> switch in <code>build.dev.cfg</code>).</p>
+
+
+                <h2>Deployment</h2>
+
+                <p>You need to deploy only executable binary and any supporting files such as HTML templates, images, css stylesheets, application config.
+                Any <code>pas</code> or <code>inc</code> files or shell scripts is not needed in deployment machine in order application to run.</p>
+
+                <p>So for this repository, you will need to copy <code>public</code>, <code>Templates</code>, <code>config</code>
+                and <code>storages</code> directories to your deployment machine. Make sure that
+                <code>storages</code> directory is writable by web server.</p>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="wrapper alt">
+        <div class="inner">
+            <ul class="menu">
+                <li>&copy; juhara.com. All rights reserved.</li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+</body>
+</html>
