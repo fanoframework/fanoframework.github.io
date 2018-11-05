@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Fano Web Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Fano Web Framework, web application framework for modern Pascal programming language.">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+    <!-- Sidebar -->
+    <section id="sidebar">
+        <div class="inner">
+            <nav>
+                <ul>
+                    <li><a href="#intro">Intro</a></li>
+                    <li><a href="#feature">Features</a></li>
+                    <li><a href="/getting-started">Getting Started</a></li>
+                    <li><a href="/documentation">Documentation</a></li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Wrapper -->
+    <div id="wrapper">
+
+        <!-- Intro -->
+        <section id="intro" class="wrapper style1 fullscreen fade-up">
+            <div class="inner">
+                <h1>Fano Web Framework</h1>
+                <p>Web application framework for modern Pascal programming language.</p>
+                <ul class="actions">
+                    <li><a href="https://github.com/zamronypj/fano"
+                    class="button primary icon fa-github">View Source</a></li>
+                    <li><a href="https://github.com/zamronypj/fano-app"
+                    class="button primary icon fa-github">Sample Application</a></li>
+                </ul>
+<pre><code>program app;
+
+uses
+
+    fano,
+    myapp;
+
+var
+    appInstance : IWebApplication;
+
+begin
+    appInstance := TMyApp.create(
+        TDependencyContainer.create(TDependencyList.create()),
+        TCGIEnvironment.create(),
+        TErrorHandler.create()
+    );
+    appInstance.run();
+end.</code></pre>
+                <ul class="actions">
+                    <li><a href="/getting-started" class="button">Getting Started</a></li>
+                </ul>
+            </div>
+        </section>
+        <section id="feature" class="wrapper style2 fade-up">
+            <div class="inner">
+                <h2>Features</h2>
+                <p>Some of available features are:</p>
+                <div class="features">
+                    <section>
+                        <span class="icon major fa-code"></span>
+                        <h3>Routing</h3>
+                        <p>Route matching that will call appropriate controller to handle request.</p>
+                    </section>
+                    <section>
+                        <span class="icon major fa-chain"></span>
+                        <h3>Middlewares</h3>
+                        <p>Software layer that is executed before or after actual controller execution.</p>
+                    </section>
+                    <section>
+                        <span class="icon major fa-cog"></span>
+                        <h3>Dependency Container</h3>
+                        <p>Dependency container that manage application dependencies.</p>
+                    </section>
+                    <section>
+                        <span class="icon major fa-desktop"></span>
+                        <h3>MVC</h3>
+                        <p>Model View Controller paradigm for better code organization.</p>
+                    </section>
+                    <section>
+                        <span class="icon major fa-star"></span>
+                        <h3>Minimal external dependencies</h3>
+                        <p>Fano requires minimal external libraries to work. By default, it requires
+                        only <a href="https://www.freepascal.org/">Free Pascal >= 3.0</a> compiler and its run-time libraries.</p>
+                    </section>
+                    <section>
+                        <span class="icon major fa-unlock"></span>
+                        <h3>Extensible</h3>
+                        <p>Fano aims to be extensible. You can always replace any software components with your own implementation if required.</p>
+                    </section>
+                </div>
+
+                <ul class="actions">
+                    <li><a href="/documentation" class="button">Learn more</a></li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+    <!-- Footer -->
+    <footer id="footer" class="wrapper style1-alt">
+        <div class="inner">
+            <ul class="menu">
+                <li>&copy; juhara.com. All rights reserved.</li>
+            </ul>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
