@@ -1,0 +1,27 @@
+{% include plain.header.html %}
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                <li><a href="#intro">Intro</a></li>
+                <li><a href="#feature">Features</a></li>
+                <li><a href="/getting-started">Getting Started</a></li>
+                <li><a href="/documentation">Documentation</a></li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            {{ content }}
+        </div>
+    </section>
+</div>
+
+{% include footer.html %}

@@ -13,3 +13,11 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 
 ## Dependency Container
+
+## Request
+
+## Response
+
+## Routing
+
+## Error Handling
