@@ -1,3 +1,8 @@
+---
+title: Getting Started
+description: Basic tutorial to get started with Fano Framework, web application framework for modern Pascal programming language
+---
+
 <h1 class="major">Getting Started</h1>
 
 ## Requirement
