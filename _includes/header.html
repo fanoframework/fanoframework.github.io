@@ -17,19 +17,19 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     <meta property="og:description" content="{{ page.description }}"/>
     <meta property="og:type" content="website"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    <link rel="shortcut icon" href="{{ "/assets/images/favicon.png" | relative_url }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" />
+    <noscript><link rel="stylesheet" href="{{ "/assets/css/noscript.css" | relative_url }}" /></noscript>
 </head>
 <body class="is-preload">
 
     <!-- Header -->
     <header id="header">
-        <a href="/" class="title">Fano</a>
+        <a href="/" class="title">Fano Framework</a>
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/documentation" class="active">Documentation</a></li>
+                <li><a href="{{ "/" | relative_url }}">Home</a></li>
+                <li><a href="{{ "/documentation" | relative_url }}" class="active">Documentation</a></li>
             </ul>
         </nav>
     </header>
