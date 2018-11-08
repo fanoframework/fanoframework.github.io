@@ -6,11 +6,16 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
 -->
 <html>
 <head>
-    <title>Fano Framework</title>
+    <title>{{ site.title }}</title>
     <meta charset="utf-8" />
     <meta name="description" content="Fano Framework, web application framework for modern Pascal programming language.">
     <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta property="og:title" content="{{ page.title }}"/>
+    <meta property="og:site_name" content="{{ site.title }}"/>
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}"/>
+    <meta property="og:description" content="{{ page.description }}"/>
+    <meta property="og:type" content="website"/>
     <link rel="shortcut icon" href="{{ "/assets/images/favicon.png" | relative_url }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" />
     <noscript><link rel="stylesheet" href="{{ "/assets/css/noscript.css" | relative_url }}" /></noscript>
