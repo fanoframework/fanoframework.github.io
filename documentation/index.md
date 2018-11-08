@@ -1,5 +1,6 @@
 ---
-title: Fano Web Framework Documentation
+title: Documentation
+description: Documentation and developer's resources for Fano Framework, web application framework for modern Pascal programming language
 ---
 
 ## Tutorials
