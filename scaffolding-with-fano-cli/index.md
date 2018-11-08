@@ -23,10 +23,10 @@ $ fanocli --help
 
 ## Scaffolding project directory structure
 
-To scaffolding project structure using Fano framework, run with  `--create-project` command line options
+To scaffold project structure using Fano framework, run with  `--create-project` command line options
 
 ```
-$ fanocli --create-project=[another project name]
+$ fanocli --create-project=[project-name]
 ```
 
 For example, following command will cause a new project created in directory name `test-fano` inside current directory.
@@ -35,16 +35,16 @@ For example, following command will cause a new project created in directory nam
 $ fanocli --create-project=test-fano
 ```
 
-This command line options creates GIT repository and initial commit for you  automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse
+This command line options creates Git repository and initial commit for you  automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse
 to merge because they have unrelated commit histories.
 
 To workaround this problem, you can run `git merge` with option `--allow-unrelated-histories` or create project directory structure without
-GIT repository.
+Git repository.
 
-## Scaffolding project directory structure without GIT
+## Scaffolding project directory structure without Git
 
-To scaffolding project structure using Fano framework but without initializing
-GIT repository, run with  `--create-project-without-git` command line options
+To scaffold project structure without initializing
+Git repository, run with  `--create-project-without-git` command line options
 
 ```
 $ fanocli --create-project-without-git=test-fano
