@@ -11,9 +11,9 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     <meta name="description" content="Fano Framework, web application framework for modern Pascal programming language.">
     <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="/assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+    <link rel="shortcut icon" href="{{ "/assets/images/favicon.png" | relative_url }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}" />
+    <noscript><link rel="stylesheet" href="{{ "/assets/css/noscript.css" | relative_url }}" /></noscript>
 </head>
 <body class="is-preload">
 
@@ -64,7 +64,7 @@ begin
     appInstance.run();
 end.</code></pre>
                 <ul class="actions">
-                    <li><a href="/getting-started" class="button">Getting Started</a></li>
+                    <li><a href="{{ "/getting-started" | relative_url }}" class="button">Getting Started</a></li>
                 </ul>
             </div>
         </section>
@@ -107,7 +107,7 @@ end.</code></pre>
                 </div>
 
                 <ul class="actions">
-                    <li><a href="/documentation" class="button">Learn more</a></li>
+                    <li><a href="{{ "/documentation" | relative_url }}" class="button">Learn more</a></li>
                     <li><a href="https://github.com/fanoframework/fanoframework.github.io"
                     class="button icon fa-github">Edit Documentation</a></li>
                 </ul>
@@ -124,13 +124,14 @@ end.</code></pre>
             </ul>
         </div>
     </footer>
+
     <!-- Scripts -->
-    <script src="/assets/js/jquery.min.js"></script>
-    <script src="/assets/js/jquery.scrollex.min.js"></script>
-    <script src="/assets/js/jquery.scrolly.min.js"></script>
-    <script src="/assets/js/browser.min.js"></script>
-    <script src="/assets/js/breakpoints.min.js"></script>
-    <script src="/assets/js/util.js"></script>
-    <script src="/assets/js/main.js"></script>
+    <script src="{{ "/assets/js/jquery.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/jquery.scrollex.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/jquery.scrolly.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/browser.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/breakpoints.min.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/util.js" | relative_url }}"></script>
+    <script src="{{ "/assets/js/main.js" | relative_url }}"></script>
 </body>
 </html>
