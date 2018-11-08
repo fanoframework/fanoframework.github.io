@@ -1,3 +1,7 @@
+---
+title: Scaffolding with Fano CLI
+description: Tutorial how to use Fano CLI to scaffold web application using Fano Framework
+---
 <h1 class="major">Scaffolding with Fano CLI</h1>
 
 ## What is Fano CLI?
