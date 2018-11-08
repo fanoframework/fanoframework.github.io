@@ -1,3 +1,5 @@
 theme: jekyll-theme-minimal
 title: Fano Framework
+site.title: Fano Framework
 description: Fano Framework, web application framework for modern Pascal programming language.
+site.description: Fano Framework, web application framework for modern Pascal programming language.
