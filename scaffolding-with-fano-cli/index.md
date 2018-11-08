@@ -31,7 +31,7 @@ For example, following command will cause a new project created in directory nam
 $ fanocli --create-project=test-fano
 ```
 
-This command line options creates GIT repository and initial commit for you  automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuses
+This command line options creates GIT repository and initial commit for you  automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse
 to merge because they have unrelated commit histories.
 
 To workaround this problem, you can run `git merge` with option `--allow-unrelated-histories` or create project directory structure without
@@ -39,7 +39,7 @@ GIT repository.
 
 ## Scaffolding project directory structure without GIT
 
-To scaffolding project structure using Fano framework but without initializing
+To scaffold project structure using Fano framework but without initializing
 GIT repository, run with  `--create-project-without-git` command line options
 
 ```
