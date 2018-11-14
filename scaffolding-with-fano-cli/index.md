@@ -51,3 +51,29 @@ $ fanocli --create-project-without-git=test-fano
 ```
 
 This command line options is provided to enable you to initialize GIT repository manually.
+
+### Creating controller
+
+After you create project structure, to scaffold controller class, run with  `--create-controller` command line options
+
+```
+$ cd test-fano
+$ fanocli --create-controller=Hello
+```
+
+It will create following files
+
+- `test-fano/app/App/Hello/Controllers/HelloController.pas`
+- `test-fano/app/App/Hello/Controllers/Factories/HelloControllerFactory.pas`
+- `test-fano/app/Routes/Hello/routes.inc`
+
+and also modify following files
+
+- `test-fano/app/bootstrap.pas`
+- `test-fano/app/Dependencies/controllers.dependencies.inc`
+- `test-fano/app/Routes/routes.inc`
+- `test-fano/build.cfg`
+- `test-fano/build.cfg.sample`
+
+By default, it will create GET route to `/hello`. So after running `build.sh`
+script, you can access `HelloController` by vising URL `http://[your host name]/hello`
