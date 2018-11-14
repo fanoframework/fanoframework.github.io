@@ -79,7 +79,7 @@ $ git commit -m "Initial commit"
 ```
 This command line options is provided to enable you to initialize Git repository manually.
 
-### Creating controller
+## Creating controller
 
 After you create project structure, to scaffold controller class, run with  `--create-controller` command line options
 
