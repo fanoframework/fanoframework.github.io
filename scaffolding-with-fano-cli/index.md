@@ -73,7 +73,7 @@ After project directory is constructed, you need to execute following shell comm
 ```
 $ cd test-fano
 $ git init
-$ git submodule add https://github.com/fanoframework/fano.git
+$ git submodule add https://github.com/fanoframework/fano.git vendor/fano
 $ git add .
 $ git commit -m "Initial commit"
 ```
