@@ -112,3 +112,28 @@ script, you can access `HelloController` by visiting URL
 ```
 wget http://[your host name]/hello
 ```
+
+## Creating view
+
+After you create project structure, to scaffold view class, run with  `--create-view` command line options
+
+```
+$ cd test-fano
+$ fanocli --create-view=Hello
+```
+
+It will create following files
+
+```
+test-fano/app/App/Hello/Views/HelloView.pas
+test-fano/app/App/Hello/Views/Factories/HelloViewFactory.pas
+```
+
+and also modify following files
+
+```
+test-fano/app/bootstrap.pas
+test-fano/app/Dependencies/views.dependencies.inc
+test-fano/build.cfg
+test-fano/build.cfg.sample
+```
