@@ -137,3 +137,28 @@ test-fano/app/Dependencies/views.dependencies.inc
 test-fano/build.cfg
 test-fano/build.cfg.sample
 ```
+
+## Creating model
+
+After you create project structure, to scaffold model class, run with  `--create-model` command line options
+
+```
+$ cd test-fano
+$ fanocli --create-model=Hello
+```
+
+It will create following files
+
+```
+test-fano/app/App/Hello/Models/HelloModel.pas
+test-fano/app/App/Hello/Models/Factories/HelloModelFactory.pas
+```
+
+and also modify following files
+
+```
+test-fano/app/bootstrap.pas
+test-fano/app/Dependencies/models.dependencies.inc
+test-fano/build.cfg
+test-fano/build.cfg.sample
+```
