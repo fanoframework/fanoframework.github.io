@@ -175,7 +175,7 @@ $ fanocli --create-mvc=Hello
 Command above is equal to following command
 
 ```
-$ fanocli --create-controller=Hello && \
-  fanocli --create-model=Hello && \
-  fanocli --create-view=Hello
+$ fanocli --create-controller=Hello
+$ fanocli --create-model=Hello
+$ fanocli --create-view=Hello
 ```
