@@ -140,7 +140,7 @@ test-fano/build.cfg.sample
 
 ## Creating model
 
-After you create project structure, to scaffold model class, run with  `--create-model` command line options
+After you create project structure, to scaffold model class, run with  `--create-model` command line option
 
 ```
 $ cd test-fano
@@ -161,4 +161,21 @@ test-fano/app/bootstrap.pas
 test-fano/app/Dependencies/models.dependencies.inc
 test-fano/build.cfg
 test-fano/build.cfg.sample
+```
+
+## Creating controller, view and model at same time
+
+To simplify creating controller, view and model at same time, you can use
+`--create-mvc` command line option.
+
+```
+$ fanocli --create-mvc=Hello
+```
+
+Command above is equal to following command
+
+```
+$ fanocli --create-controller=Hello && \
+  fanocli --create-model=Hello && \
+  fanocli --create-view=Hello
 ```
