@@ -162,3 +162,13 @@ test-fano/app/Dependencies/models.dependencies.inc
 test-fano/build.cfg
 test-fano/build.cfg.sample
 ```
+
+## Build
+
+Change active directory to new project directory after you created project and run
+
+```
+$ /build.sh
+```
+
+to build application.
