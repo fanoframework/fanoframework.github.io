@@ -179,3 +179,12 @@ $ fanocli --create-controller=Hello
 $ fanocli --create-model=Hello
 $ fanocli --create-view=Hello
 ```
+## Build
+
+Change active directory to new project directory after you created project and run
+
+```
+$ /build.sh
+```
+
+to build application.
