@@ -44,6 +44,38 @@ mostly in conjunction with TCompositeView
 
 ### Load template from string
 
+Built-in `TView` class dependends on instance of `ITemplateParser` interface and
+and content of HTML template. `ITemplateParser` instance will be responsible to
+parse variable placeholder, for example `{{varName}}`, in template with actual value.
+
+```
+var fileReader : IFileReader;
+    templateParser : ITemplateParser;    
+    view : IView;
+...
+templateParser:= TSimpleTemplateParser.create('{{', '}}');
+fileReader:= TStringFileReader.create();
+view := TView.create(
+    templateParser,
+    fileReader.readFile(
+        extractFileDir(getCurrentDir()) + '/src/Templates/header.html'
+    )
+);
+```
+
+If your HTML template does not contain any variable placeholders to be replaced with value, you can modify code above and replace `templateParser` with `TNullTemplateParser`.
+
+```
+templateParser:= TNullTemplateParser.create();
+```
+
+There is `TTemplateParser` class which does similar thing as `TSimpleTemplateParser`. `TTemplateParser` class utilizes regular expression
+to replace variable placeholders and more flexible.
+
+For example using `TTemplateParser` class, you can add whitespaces between open and closing tag, so `{{ varName }}` and `{{varName}}` are considered same variable. `TSimpleTemplateParser` class replaces variable placeholders as exact
+string replacement and only support `{{varName}}` format but it is faster because it does not use regex.
+
+
 ### Load template from single HTML file
 
 ## Compose view from several views
