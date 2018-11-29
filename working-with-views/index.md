@@ -54,7 +54,7 @@ uses fano;
 var templateParser : ITemplateParser;    
     view : IView;
 ...
-templateParser:= TSimpleTemplateParser.create('{{', '}}');
+templateParser:= TSimpleTemplateParser.create('{{"{{"}}', '{{"}}"}}');
 view := TView.create(
     templateParser,
     '<html><head><title>Hello</title></head>' +
@@ -101,7 +101,7 @@ var fileReader : IFileReader;
     templateParser : ITemplateParser;    
     view : IView;
 ...
-templateParser:= TSimpleTemplateParser.create('{{', '}}');
+templateParser:= TSimpleTemplateParser.create('{{"{{"}}', '{{"}}"}}');
 fileReader:= TStringFileReader.create();
 view := TView.create(
     templateParser,
