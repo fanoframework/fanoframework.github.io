@@ -44,7 +44,7 @@ mostly in conjunction with TCompositeView
 
 ### Load template from string
 
-Built-in `TView` class dependends on instance of `ITemplateParser` interface and
+Built-in `TView` class depends on instance of `ITemplateParser` interface and
 and content of HTML template. `ITemplateParser` instance will be responsible to
 parse variable placeholder, for example `[[varName]]`, in template with actual value.
 
