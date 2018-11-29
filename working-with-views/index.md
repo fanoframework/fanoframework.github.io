@@ -113,6 +113,89 @@ view := TView.create(
 
 ## Compose view from several views
 
+Fano has `TCompositeView`, built-in class that implements `IView` interface which render view from two `IView` interface instances.
+
+For example, if you have following HTML template structure
+
+```
+<!-- start of header part -->
+<html>
+<head>
+</head>
+<body>
+<!-- end of header part -->
+
+<!-- main content -->    
+
+<!-- start footer part -->
+</body>
+</html>
+<!-- end footer part -->
+```
+
+where header part and footer part mostly similar between pages.
+
+You can create `IView` instances that render header, main content and footer
+and then compose them as one view with `TCompositeView`.
+
+### Header part
+
+```
+uses fano;
+...
+var headerView : IView;
+...
+headerView := TView.create(
+    templateParser,
+    '<!-- start of header part -->' +
+    '<html><head></head><body>' +
+    '<!-- end of header part -->'
+);
+```
+
+### Footer part
+
+```
+uses fano;
+...
+var footerView : IView;
+...
+footerView := TView.create(
+    templateParser,
+    '<!-- start footer part -->' +
+    '</body></html>' +
+    '<!-- end footer part -->'
+);
+```
+
+### Main content part
+
+```
+uses fano;
+...
+var contentView : IView;
+...
+contentView := TView.create(
+    templateParser,
+    '<!-- main content part -->'
+);
+```
+
+### Composed view
+
+`TCompositeView` supports composing two views. To compose more than two views you need to daisy-chained them, for example:
+
+```
+uses fano;
+...
+var view : IView;
+...
+view := TCompositeView.create(
+    TCompositeView.create(headerView, contentView)
+    footerView
+);
+```
+
 ## Displaying dynamic data
 
 ### Working with view parameter
