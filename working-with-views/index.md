@@ -55,7 +55,7 @@ var templateParser : ITemplateParser;
 templateParser:= TSimpleTemplateParser.create('{{', '}}');
 view := TView.create(
     templateParser,
-    '<html><head><title>Hello</title></head><body>Hello {{varName}}</body></html>'
+    '<html><head><title>Hello</title></head><body>Hello {{ "{{varName" }}}}</body></html>'
 );
 ```
 
