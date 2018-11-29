@@ -46,7 +46,7 @@ mostly in conjunction with TCompositeView
 
 Built-in `TView` class dependends on instance of `ITemplateParser` interface and
 and content of HTML template. `ITemplateParser` instance will be responsible to
-parse variable placeholder, for example `{{ "{{varName" }}}}`, in template with actual value.
+parse variable placeholder, for example `[[varName]]`, in template with actual value.
 
 ```
 uses fano;
@@ -54,11 +54,11 @@ uses fano;
 var templateParser : ITemplateParser;    
     view : IView;
 ...
-templateParser:= TSimpleTemplateParser.create('{{"{{', '"}}}}');
+templateParser:= TSimpleTemplateParser.create('[[', ']]');
 view := TView.create(
     templateParser,
     '<html><head><title>Hello</title></head>' +
-    '<body>Hello {{ "{{varName" }}}}</body></html>'
+    '<body>Hello [[varName]]</body></html>'
 );
 ```
 
@@ -71,10 +71,10 @@ templateParser:= TNullTemplateParser.create();
 There is `TTemplateParser` class which does similar thing as `TSimpleTemplateParser`. `TTemplateParser` class utilizes regular expression
 to replace variable placeholders and more flexible.
 
-For example using `TTemplateParser` class, you can add whitespaces between open and closing tag, so `{{ "{{ varName " }}}}` and `{{ "{{varName" }}}}` are considered same variable.
+For example using `TTemplateParser` class, you can add whitespaces between open and closing tag, so `[[ varName ]]` and `[[varName]]` are considered same variable.
 
 `TSimpleTemplateParser` class replaces variable placeholders with exact
-string replacement and only support `{{ "{{varName" }}}}` format but it is faster because it does not use regular expression.
+string replacement and only support `[[varName]]` format but it is faster because it does not use regular expression.
 
 
 ### Load template from single HTML file
@@ -101,7 +101,7 @@ var fileReader : IFileReader;
     templateParser : ITemplateParser;    
     view : IView;
 ...
-templateParser:= TSimpleTemplateParser.create('{{"{{', '"}}}}');
+templateParser:= TSimpleTemplateParser.create('[[', ']]');
 fileReader:= TStringFileReader.create();
 view := TView.create(
     templateParser,
