@@ -49,6 +49,8 @@ and content of HTML template. `ITemplateParser` instance will be responsible to
 parse variable placeholder, for example `{{ "{{varName" }}}}`, in template with actual value.
 
 ```
+uses fano;
+...
 var templateParser : ITemplateParser;    
     view : IView;
 ...
@@ -77,7 +79,24 @@ string replacement and only support `{{ "{{varName" }}}}` format but it is faste
 
 ### Load template from single HTML file
 
+Fano comes with built-in utility to read file content and store it in
+string with `IFileReader` interface. This interface has one method `readFile()` as follows:
+
 ```
+(*!------------------------------------------------
+ * read file content to string
+ *-----------------------------------------------
+ * @param filePath path of file to be read
+ * @return file content
+ *-----------------------------------------------*)
+function readFile(const filePath : string) : string;
+```
+
+To initialize `IView` from HTML template file, you can use following code snippet.
+
+```
+uses fano;
+...
 var fileReader : IFileReader;
     templateParser : ITemplateParser;    
     view : IView;
@@ -87,7 +106,7 @@ fileReader:= TStringFileReader.create();
 view := TView.create(
     templateParser,
     fileReader.readFile(
-        extractFileDir(getCurrentDir()) + '/src/Templates/header.html'
+        '/path/to/templates/file.html'
     )
 );
 ```
