@@ -73,7 +73,7 @@ There is `TTemplateParser` class which does similar thing as `TSimpleTemplatePar
 to replace variable placeholders and more flexible.
 
 For example using `TTemplateParser` class, you can add whitespaces between open and closing tag, so `{{ "{{ varName " }}}}` and `{{ "{{varName" }}}}` are considered same variable. `TSimpleTemplateParser` class replaces variable placeholders as exact
-string replacement and only support `\{\{varName\}\}` format but it is faster because it does not use regex.
+string replacement and only support `{{ "{{varName" }}}}` format but it is faster because it does not use regex.
 
 
 ### Load template from single HTML file
