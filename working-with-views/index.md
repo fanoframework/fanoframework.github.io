@@ -72,7 +72,7 @@ templateParser:= TNullTemplateParser.create();
 There is `TTemplateParser` class which does similar thing as `TSimpleTemplateParser`. `TTemplateParser` class utilizes regular expression
 to replace variable placeholders and more flexible.
 
-For example using `TTemplateParser` class, you can add whitespaces between open and closing tag, so `\{\{ varName \}\}` and `\{\{varName\}\}` are considered same variable. `TSimpleTemplateParser` class replaces variable placeholders as exact
+For example using `TTemplateParser` class, you can add whitespaces between open and closing tag, so `{{ "{{ varName " }}}}` and `{{ "{{varName" }}}}` are considered same variable. `TSimpleTemplateParser` class replaces variable placeholders as exact
 string replacement and only support `\{\{varName\}\}` format but it is faster because it does not use regex.
 
 
