@@ -220,7 +220,7 @@ var viewParams : IViewParameters;
 viewParams.setVar('foo', 'Hello').setVar('bar', 'World');
 ```
 
-And you have following template
+And you have following HTML template
 
 ```
 <html>
@@ -250,7 +250,11 @@ Output response will be
 </html>
 ```
 
-
 ### Working with array of data
+
+Built-in implementation of template parser is basically just string manipulation operation and does not offer sophisticated template engine.
+
+This should not be a problem when you need to display, for example, a list of
+items.
 
 ## Displaying data from model
