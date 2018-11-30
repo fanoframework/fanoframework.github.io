@@ -198,7 +198,58 @@ view := TCompositeView.create(
 
 ## Displaying dynamic data
 
+To display dynamic data into `TView`, you will need to pass `ITemplateParser` interface instance which provide functionality to replace variable placeholder.
+
 ### Working with view parameter
+
+`render()` method from `IView` interface accepts instance `IViewParameters` as its first parameter. Controller will be responsible to provide view parameters.
+
+`IViewParameters` interface has three methods:
+
+- `getVar()`, method that return string value of variable name
+- `setVar()`, method that set string value of variable name
+- `vars()`, returns all variable name as TStrings
+
+If you set variable name such as following code:
+
+```
+uses fano;
+...
+var viewParams : IViewParameters;
+...
+viewParams.setVar('foo', 'Hello').setVar('bar', 'World');
+```
+
+And you have following template
+
+```
+<html>
+<head><!--[foo]--></head>
+<body>
+<div class="foo"><!--[foo]--><div>
+<div class="bar"><!--[bar]--><div>
+</body>
+</html>
+```
+
+with template parser instance defined as follow
+
+```
+templateParser:= TSimpleTemplateParser.create('<!--[', ']-->');
+```
+
+Output response will be
+
+```
+<html>
+<head>Hello</head>
+<body>
+<div class="foo">Hello<div>
+<div class="bar">World<div>
+</body>
+</html>
+```
+
 
 ### Working with array of data
 
