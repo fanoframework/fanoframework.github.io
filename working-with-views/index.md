@@ -255,6 +255,55 @@ Output response will be
 Built-in implementation of template parser is basically just string manipulation operation and does not offer sophisticated template engine.
 
 This should not be a problem when you need to display, for example, a list of
-items.
+items, because you can always create your own `IView` interface implementation
+to display that data. Following snippet code is view implementation that display data from static JSON file. It is part of [fano-mvc](https://github.com/fanoframework/fano-mvc) sample application.
+
+```
+(*!------------------------------------------------
+ * render view
+ *------------------------------------------------
+ * @param viewParams view parameters
+ * @param response response instance
+ * @return response
+ *-----------------------------------------------*)
+function TUserListingView.render(
+    const viewParams : IViewParameters;
+    const response : IResponse
+) : IResponse;
+var userData : IModelReadOnlyData;
+    respBody : IResponseStream;
+begin
+    userData := userModel.data();
+    respBody := response.body();
+    if (userData.count() > 0) then
+    begin
+        respBody.write(
+            '<div class="container has-text-centered">' +
+            '<div class="column">' +
+            '<table class="table is-fullwidth is-hoverable">' +
+            '<thead>' +
+              '<tr>' +
+              '  <th>No</th>' +
+              '  <th>Name</th>' +
+              '  <th>Email</th>' +
+              '</tr>' +
+            '</thead><tbody>'
+        );
+        while (not userData.eof()) do
+        begin
+            respBody.write(
+                '<tr>' +
+                '<td>' + userData.readString('id') + '</td>' +
+                '<td>' + userData.readString('name') + '</td>' +
+                '<td>' + userData.readString('email') + '</td>' +
+                '</tr>'
+            );
+            userData.next();
+        end;
+        respBody.write('</tbody></table></div></div>');
+    end;
+    result := response;
+end;
+```
 
 ## Displaying data from model
