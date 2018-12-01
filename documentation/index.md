@@ -6,8 +6,9 @@ description: Documentation and developer's resources for Fano Framework, web app
 ## Tutorials
 
 - [Getting Started](/getting-started)
-- [Working With Views](/working-with-views)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
+- [Working With Views](/working-with-views)
+- [Working With Models](/working-with-models)
 
 ## Application
 
