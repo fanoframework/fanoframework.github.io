@@ -256,7 +256,76 @@ Built-in implementation of template parser is basically just string manipulation
 
 This should not be a problem when you need to display, for example, a list of
 items, because you can always create your own `IView` interface implementation
-to display that data. Following snippet code is view implementation that display data from static JSON file. It is part of [fano-mvc](https://github.com/fanoframework/fano-mvc) sample application.
+to display that data.
+
+For example if we have array of `TUserData` which declared as follows:
+
+```
+type
+
+    TUserData = record
+        id : integer;
+        name : string;
+        email : string;
+    end;
+    TUserDataArr = array of TUserData;
+...
+var userData : TUserDataArr;
+```
+
+Then you can create `IView` implementation that dis
+
+```
+(*!------------------------------------------------
+ * render view
+ *------------------------------------------------
+ * @param viewParams view parameters
+ * @param response response instance
+ * @return response
+ *-----------------------------------------------*)
+function TUserListingView.render(
+    const viewParams : IViewParameters;
+    const response : IResponse
+) : IResponse;
+var respBody : IResponseStream;
+    i : integer;
+begin
+    if (length(userData) > 0) then
+    begin
+        respBody.write(
+            '<table>' +
+            '<thead>' +
+              '<tr>' +
+              '  <th>No</th>' +
+              '  <th>Name</th>' +
+              '  <th>Email</th>' +
+              '</tr>' +
+            '</thead><tbody>'
+        );
+        for i:=0 to length(userData)-1 do
+        begin
+            respBody.write(
+                '<tr>' +
+                '<td>' + intToStr(userData[i].id) + '</td>' +
+                '<td>' + userData[i].name' + '</td>' +
+                '<td>' + userData[i].email + '</td>' +
+                '</tr>'
+            );
+        end;
+        respBody.write('</tbody></table>');
+    end;
+    result := response;
+end;
+```
+
+## Displaying data from model
+
+[Working with Models](/working-with-models) explains about model that Fano Framework use.
+
+To work with models in view instance, what you need to do is to inject model
+instance into view
+
+Following snippet code is view implementation that display data from static JSON file. It is part of [fano-mvc](https://github.com/fanoframework/fano-mvc) sample application.
 
 ```
 (*!------------------------------------------------
@@ -278,9 +347,7 @@ begin
     if (userData.count() > 0) then
     begin
         respBody.write(
-            '<div class="container has-text-centered">' +
-            '<div class="column">' +
-            '<table class="table is-fullwidth is-hoverable">' +
+            '<table>' +
             '<thead>' +
               '<tr>' +
               '  <th>No</th>' +
@@ -300,10 +367,8 @@ begin
             );
             userData.next();
         end;
-        respBody.write('</tbody></table></div></div>');
+        respBody.write('</tbody></table>');
     end;
     result := response;
 end;
 ```
-
-## Displaying data from model
