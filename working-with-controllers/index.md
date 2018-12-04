@@ -5,7 +5,6 @@ description: Tutorial on how to work with controllers in Fano Framework
 
 <h1 class="major">Working with Controllers</h1>
 
-
 ## IRequestHandler and IRouteHandler interface
 
 When web application receives request from web server, it will be given
@@ -19,3 +18,11 @@ Interface `IRouteHandler`, is extension to `IRequestHandler` interface and provi
 `IRouteHandler` is basis of all route handler. When you set route, you must pass instance of class that implements `IRouteHandler`.
 
 Fano Framework provides base controller in `TController` class that implements `IRouteHandler`. But of course, you are free to implements your own.
+
+## Using TController class
+
+`TController` class is built-in class that provides ability for route handler to
+works with view and middlewares.
+
+Except for simple route handler which display static view, you are very likely need to extends this class as `TController` by defaut, does very little job, which is
+returning response from `IView` instance.
