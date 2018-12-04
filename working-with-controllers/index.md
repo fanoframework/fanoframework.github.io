@@ -24,5 +24,48 @@ Fano Framework provides base controller in `TController` class that implements `
 `TController` class is built-in class that provides ability for route handler to
 works with view and middlewares.
 
-Except for simple route handler which display static view, you are very likely need to extends this class as `TController` by defaut, does very little job, which is
+Except for simple route handler which display static view, you are very likely need to extends this class as `TController` by defaut, does few things, which is
 returning response from `IView` instance.
+
+## Creating TController class
+
+`TController` constructor expects 4 parameters
+
+```
+constructor TController.create(
+    const beforeMiddlewares : IMiddlewareCollection;
+    const afterMiddlewares : IMiddlewareCollection;
+    const viewInst : IView;
+    const viewParamsInst : IViewParameters
+);
+```
+
+- `beforeMiddlewares`, instance of collection of middlewares that will be called
+before this controller get executed.
+- `afterMiddlewares`, instance of collection of middlewares that will be called
+after this controller get executed.
+- `viewInst`, view to be used, i.e., instance of class that implements `IView` interface.
+- `ViewParamsInst`, view parameters, i.e., instance of class that implements `IViewParameters` interface.
+
+`viewInst` and `viewParamsInst` that you pass during class construction, will be available from inherited class as `gView` and `viewParams` respectively.
+
+## Implements controller logic
+
+`handleRequest()` is method that will be invoked by dispatcher to handle request.
+This method is part of `IRequestHandler` interface.
+
+```
+function handleRequest(
+    const request : IRequest;
+    const response : IResponse
+) : IResponse;
+```
+
+-- `request` is current request instance,
+-- `response`, current response instance
+
+`handleRequest` should return instance of response that will be used as response
+to request.
+
+`TController` class provides basic implementation of this method, which is, to return view output. Fano Framework provides some built-in response class that you can use such HTML response, JSON response or binary response (for example to output image). Of course, you are free to implements your own output response.
+
