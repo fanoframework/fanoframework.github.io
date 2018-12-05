@@ -16,6 +16,8 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Dependency Container
 
+## Dispatcher
+
 ## Request
 
 ## Response
