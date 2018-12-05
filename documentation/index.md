@@ -18,6 +18,8 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Dispatcher
 
+- [About Dispatcher](/dispatcher)
+
 ## Request
 
 ## Response
