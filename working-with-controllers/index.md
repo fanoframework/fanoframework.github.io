@@ -51,8 +51,8 @@ after this controller get executed.
 
 ## Implements controller logic
 
-`handleRequest()` is method that will be invoked by dispatcher to handle request.
-This method is part of `IRequestHandler` interface.
+`handleRequest()` is method that will be invoked by dispatcher to handle request, so you mostly do not call it directly.
+This method is part of `IRequestHandler` interface. Dispatcher will pass request and response instance to this method.
 
 ```
 function handleRequest(
@@ -61,11 +61,10 @@ function handleRequest(
 ) : IResponse;
 ```
 
--- `request` is current request instance,
--- `response`, current response instance
+- `request` is current request instance
+- `response`, current response instance
 
-`handleRequest` should return instance of response that will be used as response
-to request.
+`handleRequest()` should return instance of response that will be used as response to request. You can return response given by dispatcher or create entirely new response instance.
+
 
 `TController` class provides basic implementation of this method, which is, to return view output. Fano Framework provides some built-in response class that you can use such HTML response, JSON response or binary response (for example to output image). Of course, you are free to implements your own output response.
-
