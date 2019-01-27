@@ -57,6 +57,8 @@ after this controller get executed.
 
 `viewInst` and `viewParamsInst` that you pass during class construction, will be available from inherited class as `gView` and `viewParams` respectively.
 
+For more information regarding view and view parameters, read [Working with Views](working-with-views).
+
 ## Implements controller logic
 
 `handleRequest()` is method that will be invoked by dispatcher to handle request, so you mostly do not call it directly.
