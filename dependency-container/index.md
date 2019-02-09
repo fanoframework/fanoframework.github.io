@@ -34,7 +34,6 @@ service factory `TSimpleRouteCollectionFactory` with name `router`. This factory
 
 ```
 container.add('router', TSimpleRouteCollectionFactory.create());
-
 ```
 
 Later, to get instance of `router` from container,
@@ -43,7 +42,6 @@ Later, to get instance of `router` from container,
 var inst : IDependency;
 ...
 inst := container.get('router');
-
 ```
 
 In Fano Framework, `get()` method of `IDependencyContainer` always returns `IDependency` interface instance. So you need to convert it to its correct type
@@ -79,7 +77,6 @@ var router1, router2 : IRouteMatcher;
 ...
 router1 := container.get('router') as IRouteMatcher;
 router2 := container.get('router') as IRouteMatcher;
-
 ```
 
 When a service is registered using `factory()` method, it is registered as multiple instance service. So every time a service is queried, container returns
@@ -92,7 +89,6 @@ var router1, router2 : IRouteMatcher;
 ...
 router1 := container.get('router') as IRouteMatcher;
 router2 := container.get('router') as IRouteMatcher;
-
 ```
 
 ## Built-in dependency container
