@@ -27,6 +27,8 @@ The services are registered into dependency container during service registratio
 During service registration, a service name is associated with a factory class
 that must implements `IDependencyFactory` interface that will responsible to create the required service.
 
+For a service to be able to work with `IDependencyContainer` implementation, it must implements `IDependency` interface. Fano Framework comes with base class `TInjectableObject` that implements `IDependency` interface.
+
 For example, following code registers
 service factory `TSimpleRouteCollectionFactory` with name `router`. This factory class will create `TSimpleRouteCollection` class.
 
