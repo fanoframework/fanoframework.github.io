@@ -158,6 +158,8 @@ begin
     myFile[0].moveTo(targetUploadPath);
 end;
 ```
+`targetUploadPath` is full filename (including its target directory). You must make sure that `targetUploadPath` is writeable. Exception `EInOutError` is raised when
+uploaded file can not be written to target path.
 
 ### Get uploaded file size
 
