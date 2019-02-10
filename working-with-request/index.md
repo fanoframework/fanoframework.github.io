@@ -104,7 +104,7 @@ var params : IList;
 params := request.getParsedBodyParams();
 ```
 
-## Handling file uploaded
+## Handling file upload
 
 If you have form like following snippet
 
