@@ -24,6 +24,8 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Request
 
+- [Working with Request](/working-with-request)
+
 ## Response
 
 ## Routing
