@@ -45,8 +45,7 @@ params := request.getQueryParams();
 
 ## Retrieve cookies
 
-To retrieve value of `msg1` and `msg2` parameters from cookies, you can use `getCookieParam()`
-method.
+To retrieve value of `msg1` and `msg2` parameters from cookies, you can use `getCookieParam()` method.
 
 ```
 var msg1, msg2 : string;
@@ -90,7 +89,7 @@ msg1 := request.getParsedBodyParam('msg1');
 msg2 := request.getParsedBodyParam('msg2');
 ```
 
-To set default value if `msg1` cookie is not set,
+To set default value if `msg1` parameter is not set,
 
 ```
 msg1 := request.getParsedBodyParam('msg1', 'ok');
