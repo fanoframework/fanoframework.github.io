@@ -30,4 +30,6 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Routing
 
+- [Working with Router](/working-with-router)
+
 ## Error Handling
