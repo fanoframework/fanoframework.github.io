@@ -195,3 +195,6 @@ filename := myFile[0].getClientFilename();
 ```
 
 If client does not send filename then it returns empty string.
+
+For example how to handle file upload with Fano Framework, see
+[Fano Upload](https://github.com/fanoframework/fano-upload).
