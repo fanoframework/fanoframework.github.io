@@ -72,3 +72,16 @@ var handler : IRouteHandler;
 ...
 router.options('/', handler);
 ```
+
+## Getting route argument
+
+`IRouteHandler` interface provides `getArg()` to allow application to retrieve route argument.
+
+If you have route pattern `/myroute/{name}` and you access route via URl `http://[your-host-name]/myroute/john` then you can get value of `name` parameter as follows
+
+```
+var handler : IRouteHandler;
+    name : string;
+...
+name := handler.getArg('name'); //name = 'john'
+```
