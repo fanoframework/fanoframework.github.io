@@ -10,7 +10,7 @@ description: Tutorial on how to work with router in Fano Framework
 Fano Framework comes with basic router implementation `TRouter` class which implements `IRouter` interface.
 
 ```
-container.add('router', TSimpleRouteCollectionFactory.create());
+container.add('router', TSimpleRouterFactory.create());
 ```
 
 ## Create route
