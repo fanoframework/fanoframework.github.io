@@ -81,7 +81,8 @@ If you have route pattern `/myroute/{name}` and you access route via URl `http:/
 
 ```
 var handler : IRouteHandler;
-    name : string;
+    arg : TPlaceholder;
 ...
-name := handler.getArg('name'); //name = 'john'
+arg := handler.getArg('name');
+//arg.phName = 'name', arg.phValue = 'john'
 ```
