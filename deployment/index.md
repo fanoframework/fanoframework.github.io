@@ -39,6 +39,10 @@ This section explains how to deploy web application as CGI application on Nginx 
 
 ### Nginx
 
+
+## Deploy as standalone web server
+
+
 ## Deploy using Docker
 
 ## Deployment with Continous Integration tools
