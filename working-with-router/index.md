@@ -86,3 +86,20 @@ var handler : IRouteHandler;
 arg := handler.getArg('name');
 //arg.phName = 'name', arg.phValue = 'john'
 ```
+
+You can get all route arguments using `getArgs()` method,
+
+```
+var placeHolders : TArrayOfPlaceholders;
+    arg : TPlaceholder;
+    i:integer;
+...
+placeHolders := getArgs();
+
+for i:=0 to length(placeholders)-1 do
+begin
+    arg := placeholders[i];
+end;
+```
+
+See [code example](https://github.com/fanoframework/fano-app/blob/master/app/App/Hello/Controllers/HelloController.pas) how to read route argument.
