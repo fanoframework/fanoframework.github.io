@@ -34,6 +34,8 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Error Handling
 
+- [Error Handler](/error-handler)
+
 ## Deployment
 
 - [Deploy Fano Framework web application on various server setup](/deployment)
