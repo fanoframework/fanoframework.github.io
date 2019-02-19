@@ -71,6 +71,13 @@ So in our example, we end up with following configuration:
  </VirtualHost>
 ```
 
+You need to make sure that `app.cgi` has execution bit, if not then run
+
+```
+$ chmod 744 /home/myuser/myapp/public/app.cgi
+```
+For most uses-cases, `744` permission is suffice if your web server is run as your user account. If executable binary failed to run, try `774`
+
 Save it as `fano.conf` file. Note that saving data to `/etc/apache2/sites-available` directory requires administrative privilege.
 
 - Enable virtual host
