@@ -37,6 +37,7 @@ store any variable replacement. See *Working with view parameter* section for mo
 Fano provides some built-in classes implementing `IView` interface which you can use to work with HTML template to display web application response.
 
 - `TView`, class that display view from HTML template string.
+- `TTemplateView`, class that display view from HTML template file.
 - `TCompositeView`, class that display view from two other `IView` instance. This is provided so we can compose several views as one. For example display
 template consist of header, main content and footer.
 - `TNullView` class implements `IView` but does nothing. This class is provide
@@ -108,6 +109,18 @@ view := TView.create(
     fileReader.readFile(
         '/path/to/templates/file.html'
     )
+);
+```
+
+While `TView` can load HTML from file, `TTemplateView` is provided to simplify little bit,
+
+```
+uses fano;
+...
+view := TTemplateView.create(
+    '/path/to/templates/file.html'
+    templateParser,
+    fileReader
 );
 ```
 
