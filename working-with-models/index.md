@@ -18,14 +18,14 @@ Model is a object that encapsulate data. In Fano framework, model that can only 
  * @param params parameter for search/filtering
  * @return model data
 s         *-----------------------------------------------*)
-function read(const params : IModelWriteOnlyData = nil) : IModelReadOnlyData;
+function read(const params : IModelParams = nil) : IModelResultSet;
 
 (*!----------------------------------------------
  * return data instance after read() is execute
  *-----------------------------------------------
  * @return model data
  *-----------------------------------------------*)
-function data() : IModelReadOnlyData;
+function data() : IModelResultSet;
 ```
 Fano Framework does not have built-in implementation of both interface as they
 may be specific to application need.
@@ -44,7 +44,7 @@ In Fano framework, model that can only be used to write data implements `IModelW
  * @param data data being stored
  * @return current instance
  *-----------------------------------------------*)
-function write(const params : IModelReadOnlyData; const data : IModelReadOnlyData) : IModelWriter;
+function write(const params : IModelParams; const data : IModelParams) : IModelWriter;
 ```
 Fano Framework does not have built-in implementation of both interface as they
 may be specific to application need.
