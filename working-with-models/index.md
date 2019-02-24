@@ -61,6 +61,17 @@ type
     end;
 ```
 
+## Model result set
+
+After model read data from storage, data can be accessed through `IModelResultSet` interface instance.
+
+This interface has several methods:
+
+- `count()` returns number of data currently in result set.
+- `eof()` returns if current cursor pointer is at the end of result set.
+- `next()` advances current cursor pointer to next data.
+- `readString()` read data as string.
+
 ## Display model data in View
 
 See [Working with Views](/working-with-views) to understand how model can be used inside `IView` instance.

@@ -52,7 +52,7 @@ parse variable placeholder, for example `[[varName]]`, in template with actual v
 ```
 uses fano;
 ...
-var templateParser : ITemplateParser;    
+var templateParser : ITemplateParser;
     view : IView;
 ...
 templateParser:= TSimpleTemplateParser.create('[[', ']]');
@@ -99,7 +99,7 @@ To initialize `IView` from HTML template file, you can use following code snippe
 uses fano;
 ...
 var fileReader : IFileReader;
-    templateParser : ITemplateParser;    
+    templateParser : ITemplateParser;
     view : IView;
 ...
 templateParser:= TSimpleTemplateParser.create('[[', ']]');
@@ -138,7 +138,7 @@ For example, if you have following HTML template structure
 <body>
 <!-- end of header part -->
 
-<!-- main content -->    
+<!-- main content -->
 
 <!-- start footer part -->
 </body>
@@ -352,7 +352,7 @@ function TUserListingView.render(
     const viewParams : IViewParameters;
     const response : IResponse
 ) : IResponse;
-var userData : IModelReadOnlyData;
+var userData : IModelResultSet;
     respBody : IResponseStream;
 begin
     userData := userModel.data();
