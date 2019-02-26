@@ -63,9 +63,7 @@ type
 
 ## Model result set
 
-After model read data from storage, data can be accessed through `IModelResultSet` interface instance.
-
-This interface has several methods:
+After model read data from storage, it returns instance of `IModelResultSet` interface instance. Data can be accessed through this interface which has several methods:
 
 - `count()` returns number of data currently in result set.
 - `eof()` returns if current cursor pointer is at the end of result set.
