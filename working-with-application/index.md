@@ -87,6 +87,9 @@ If you use `TSimpleWebApplication`, then some required default services are prov
 - Router instance which support regular expression.
 - Simple dispatcher implementation which does not use middlewares.
 
+Also, developers only need to implements two abstract methods as
+`initDispatcher()` method has already been implemented.
+
 [View TSimpleWebApplication source code](https://github.com/fanoframework/fano/blob/master/App/Implementations/AppImpl.pas).
 
 See [sample application](https://github.com/fanoframework/fano-app) to understand how to setup application instance.
