@@ -13,6 +13,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Application
 
+- [Working with Application](/working-with-application)
 
 ## Dependency Container
 
