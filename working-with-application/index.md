@@ -95,9 +95,13 @@ See [sample application](https://github.com/fanoframework/fano-app) to understan
 
 Implementation of IWebApplication that implements FastCGI protocol, currently, is still under development.
 
-## Apache Modules Application
+## Apache modules Application
 
 Implementation of IWebApplication that run as Apache modules is not yet implemented.
+
+## Standalone web server application
+
+Implementation of IWebApplication that run as standalone web server is not yet implemented..
 
 ## Application implementation which support Rack-like protocol
 
