@@ -23,7 +23,7 @@ Depending on how you construct the application service provider, it may pass the
 
 `TFanoWebApplication` constructor requires developer to pass instance of
 `IDependencyContainer`, `ICGIEnvironment` and `IErrorHandler` instance which serves
-as service container, CGI environment variable container and error handler that handle any exception that may be triggered.
+as [service container](/dependency-container), CGI environment variable container and [error handler](/error-handler) that handle any exception that may be triggered.
 
 Fano Framework provides some built-in implementations for dependency container, environment variable and error handler. For example,
 if `TBootstrapApp` inherits from `TFanoWebApplication`, you can use
@@ -44,9 +44,7 @@ of dependency container.
 - `buildRoutes` method will be called to allow developer to register any routes that application need. This method has one parameter which is instance
 of dependency container which developer can use to get router instance.
 
-- `initDispatcher` method will be called and must return dispatcher instance to use.
-This method also pass dependency container which developer can use to get dispatcher
-instance.
+- `initDispatcher` method will be called and must return dispatcher instance to use. This method also pass dependency container which developer can use to get dispatcher instance.
 
 ```
 (*!-----------------------------------------------
