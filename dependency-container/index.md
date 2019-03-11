@@ -30,10 +30,10 @@ that must implements `IDependencyFactory` interface that will responsible to cre
 For a service to be able to work with `IDependencyContainer` implementation, it must implements `IDependency` interface. Fano Framework comes with base class `TInjectableObject` that implements `IDependency` interface.
 
 For example, following code registers
-service factory `TSimpleRouteCollectionFactory` with name `router`. This factory class will create `TSimpleRouteCollection` class.
+service factory `TSimpleRouterFactory` with name `router`. This factory class will create `TRouter` class.
 
 ```
-container.add('router', TSimpleRouteCollectionFactory.create());
+container.add('router', TSimpleRouterFactory.create());
 ```
 
 Later, to get instance of `router` from container,
