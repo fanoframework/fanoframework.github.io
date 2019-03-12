@@ -38,7 +38,7 @@ All built-in loggers inherit from `TAbstractLogger` which provides most of metho
 
 ### Log to file
 
-`TFileLogger` is logger implementation which write log to file. Its constructor expects filename where to write log. EInOutError exception will be triggered when
+`TFileLogger` is logger implementation which write log to file. Its constructor expects filename where to write log. `EInOutError` exception will be triggered when
 filename can not be created or open for writing. In that case, make sure correct
 directory/file permission is given.
 
@@ -54,7 +54,7 @@ logger := TFileLogger.create('storages/logs/app.log');
 
 ### Log to several medium
 
-`TCompositeLogger` is logger implementation that is composed from two external `ILogger` instance and provided so developer can combine two or more loggers as one. For example, to log to file and to log to RDBMS simultaneously.
+`TCompositeLogger` is logger implementation that is composed from two external `ILogger` instances. It can be used to combine two or more loggers as one, thus creating more complex logging functionality. For example, to log to file and to log to RDBMS simultaneously.
 
 ```
 var logger : ILogger;
