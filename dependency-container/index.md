@@ -7,8 +7,8 @@ description: Tutorial on how to work with dependency container in Fano Framework
 
 ## Why dependency container?
 
-Fano Framework is designed to be extensible. It uses class composition a lot.
-Instead of creating class with deep inheritance, many classes in this framework which do complex thing depend on one or more classes that do simple thing.
+Fano Framework is designed to be extensible. It uses class composition heavily.
+Instead of creating class with deep inheritance, many complex classes in this framework depend on one or more classes that do simple thing.
 
 Because of this, creating instance of a class may require us to create
 other classes instance that it requires. Some classes may shared same dependency to same class, some classes may not. Some classes need same instance of
