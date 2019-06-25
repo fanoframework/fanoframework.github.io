@@ -132,7 +132,8 @@ This section explains how to deploy web application as CGI application on Nginx 
 
 ### Apache
 
-Currently, to deploy as FastCGI application you can only deploy with `mod_proxy_fcgi`
+Currently, to deploy as FastCGI application you can only deploy with
+[mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)
 
 You need to have `mod_proxy_fcgi` installed and loaded. This module is Apache's built-in module, so it is very likely that you will have it with your Apache installation. You just need to make sure it is loaded.
 
