@@ -41,6 +41,22 @@ to merge because they have unrelated commit histories.
 To workaround this problem, you can run `git merge` with option `--allow-unrelated-histories` or create project directory without creating initial commit or create project directory structure without
 Git repository.
 
+## Scaffolding FastCGI project directory structure
+
+To scaffold FastCGI project structure using Fano framework, run with  `--create-project-fcgi` command line options
+
+```
+$ fanocli --create-project-fcgi=[project-name]
+```
+
+For example, following command will cause a new FastCGI project created in directory name `test-fano-fcgi` inside current directory.
+
+```
+$ fanocli --create-project-fcgi=test-fano-fcgi
+```
+
+Generated project files are mostly similar to `--create-project` output, except that `src/app.pas`, and `src/bootstrap.pas` which will generate a daemon FastCGI web application.
+
 ## Scaffolding project directory structure with Git without initial commit
 
 To scaffold project structure using Fano framework with Git repository initialized but without creating initial commit, run with  `--create-project-no-commit` command line options
