@@ -132,6 +132,54 @@ This section explains how to deploy web application as CGI application on Nginx 
 
 ### Apache
 
+Currently, to deploy as FastCGI application you can only deploy with
+[mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)
+
+You need to have `mod_proxy_fcgi` installed and loaded. This module is Apache's built-in module, so it is very likely that you will have it with your Apache installation. You just need to make sure it is loaded.
+
+#### Debian
+
+For example, on Debian,
+
+```
+$ sudo a2enmod proxy_fcgi
+$ sudo systemctl restart apache2
+```
+
+Create virtual host config and add `ProxyPassMatch`, for example
+
+```
+<VirtualHost *:80>
+     ServerName www.example.com
+     DocumentRoot /home/example/public
+
+     <Directory "/home/example/public">
+         Options +ExecCGI
+         AllowOverride FileInfo
+         Require all granted
+     </Directory>
+
+    ProxyRequests Off
+    ProxyPass /css !
+    ProxyPass /images !
+    ProxyPass /js !
+    ProxyPassMatch ^/(.*)$ fcgi://127.0.0.1:20477
+</VirtualHost>
+```
+You may need to replace `fcgi://127.0.0.1:20477` with hostname and port where your
+application is running.
+
+Last four line of virtual host configurations basically tell Apache to serve any
+files inside `css`, `images`, `js` directly otherwise pass it to our application.
+
+On Debian, save it to `/etc/apache2/sites-available` for example as `fano-fastcgi.conf`
+Enable this site and restart Apache
+
+```
+$ sudo a2ensite fano-fastcgi.conf
+$ sudo systemctl restart apache2
+```
+
 ### Nginx
 
 
