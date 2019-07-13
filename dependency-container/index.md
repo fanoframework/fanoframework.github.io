@@ -39,6 +39,12 @@ For example, following code registers service factory `TSimpleRouterFactory` wit
 container.add('router', TSimpleRouterFactory.create());
 ```
 
+You can also use alternative way
+
+```
+container.add(GUIDToString(IRouteMatcher), TSimpleRouterFactory.create());
+```
+
 ## Retrieve service instance from dependency container
 
 Later, to get instance of `router` from container,
@@ -63,6 +69,14 @@ or simply,
 var router : IRouteMatcher;
 ...
 router := container.get('router') as IRouteMatcher;
+```
+
+or if use GUID string as service name
+
+```
+var router : IRouteMatcher;
+...
+router := container.get(GUIDToString(IRouteMatcher)) as IRouteMatcher;
 ```
 
 When `get()` can not find service, it raises `EDependencyNotFound` exception.

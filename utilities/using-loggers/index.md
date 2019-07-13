@@ -113,5 +113,10 @@ container.add('logger',
 );
 ```
 
+After logger factory is registered, you can access logger anywhere from application as shown in following code.
 
-
+```
+var logger : ILogger;
+...
+logger := container.get('logger) as ILogger;
+```
