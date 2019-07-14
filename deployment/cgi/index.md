@@ -125,3 +125,5 @@ This section explains how to deploy server that you have no full control and hav
 ### Nginx
 
 This section explains how to deploy web application as CGI application on Nginx web server.
+
+[Back to Deployment](/deployment)

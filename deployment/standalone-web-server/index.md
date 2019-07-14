@@ -4,3 +4,5 @@ description: Tutorial on how to deploy Fano application as stand-alone web serve
 ---
 
 <h1 class="major">Deployment as stand-alone Web Server</h1>
+
+[Back to Deployment](/deployment)
