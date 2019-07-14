@@ -85,7 +85,7 @@ $ sudo chown [your current user]:www-data /tmp-fano-fcgi.sock
 ```
 where `www-data` is user which Apache runs.
 
-Using `/tmp` also may cause problem if you run Debian 9 - based distribution (such as Ubuntu 18.04). Since Debian 9 (Stretch), by default each user has private /tmp directory. So if you run application as current user, `/tmp/fano-fcgi.sock` will not be found by Apache which run as different user.
+Using `/tmp` also may cause problem if you run Debian 9 - based distribution (such as Ubuntu 18.04). Since Debian 9 (Stretch), each user, by default, has private /tmp directory. So if you run application as current user, `/tmp/fano-fcgi.sock` will not be found by Apache which run as different user.
 
 Proper way is setup application to run as service, set socket file to `/var/run` and set group which service run, add Apache user into that group. Then you can
 just run application using
