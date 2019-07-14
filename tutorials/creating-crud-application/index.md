@@ -7,7 +7,15 @@ description: Step by step tutorial for creating basic MySQL CRUD application fro
 
 ## Application Functionalities and Requirements
 
+### Features
+
+- Allow user to be able to create a book
+- Allow user to be able to search one or more books
+- Allow user to be able to update a book
+- Allow user to be able to delete a book
+
 ## Database schema
+
 
 ## Setup Project Directory Structure
 
@@ -19,6 +27,11 @@ description: Step by step tutorial for creating basic MySQL CRUD application fro
 
 ### Updating a Book
 
+
 ### Deleting a Book
 
+
 ## Summary
+
+
+[Back to Tutorials](/tutorials)
