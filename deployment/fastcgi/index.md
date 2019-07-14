@@ -41,7 +41,7 @@ Create virtual host config and add `ProxyPassMatch`, for example
     ProxyPassMatch ^/(.*)$ fcgi://127.0.0.1:20477
 </VirtualHost>
 ```
-You may need to replace `fcgi://127.0.0.1:20477` with hostname and port where your
+You may need to replace `fcgi://127.0.0.1:20477` with host and port where your
 application is running.
 
 Last four line of virtual host configurations basically tell Apache to serve any
