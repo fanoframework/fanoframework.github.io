@@ -5,8 +5,8 @@ description: Tutorial on how to deploy web application built with Fano Framework
 
 <h1 class="major">Deployment</h1>
 
-- [Deploy as CGI application](/cgi)
-- [Deploy as FastCGI application](/fastcgi)
-- [Deploy as standalone web server](/standalone-web-server)
-- [Deploy using Docker](/docker)
-- [Deploy with Continous Integration tools](/continous-integration)
+- [Deploy as CGI application](/deployment/cgi)
+- [Deploy as FastCGI application](/deployment/fastcgi)
+- [Deploy as standalone web server](/deployment/standalone-web-server)
+- [Deploy using Docker](/deployment/docker)
+- [Deploy with Continous Integration tools](/deployment/continous-integration)
