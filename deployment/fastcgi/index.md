@@ -64,7 +64,7 @@ If application is listening using socket file `/tmp/fano-fcgi.sock`, you need to
 ```
 ProxyPassMatch ^/(.*)$ "unix:/tmp/fano-fcgi.sock|fcgi://127.0.0.1/"
 ```
-Note that `|fcgi://127.0.0.1/` is required so `mod_proxy_fcgi` is called to handle request eventhough host and port information are ignored.
+Note that `|fcgi://127.0.0.1/` is required so `mod_proxy_fcgi` is called to handle request, although, host and port information are ignored.
 
 #### Socket file permission issue
 
@@ -85,7 +85,7 @@ $ sudo chown [your current user]:www-data /tmp-fano-fcgi.sock
 ```
 where `www-data` is user which Apache runs.
 
-Using `/tmp` also may cause problem if you run Debian 9 - based distribution (such as Ubuntu 18.04). Since Debian 9 (Stretch), each user, by default, has private /tmp directory. So if you run application as current user, `/tmp/fano-fcgi.sock` will not be found by Apache which run as different user.
+Using `/tmp` also may cause problem if you run Debian 9 - based distribution (such as Ubuntu 18.04). In Debian 9 (Stretch) or newer, each user, by default, has private /tmp directory. So if you run application as current user, `/tmp/fano-fcgi.sock` will not be found by Apache which run as different user.
 
 Proper way is setup application to run as service, set socket file to `/var/run` and set group which service run, add Apache user into that group. Then you can
 just run application using
@@ -95,5 +95,38 @@ systemctl start [your-app-service-name]
 ```
 
 
-
 ## Nginx
+
+### Debian
+
+Create virtual host configuration in `/etc/nginx/sites-available`, for example
+
+```
+server {
+    listen 80;
+    root /home/example/public;
+    index index.html;
+    server_name example.com;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.*$ {
+        fastcgi_pass 127.0.0.1:20477;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+```
+Change `fastcgi_pass` to match host and port where application is listening.
+
+If listening using unix domain socket, you need to change `fastcgi_pass` to
+
+```
+fastcgi_pass unix:/tmp/fano-fcgi.sock;
+```
+
+where `/tmp/fano-fcgi.sock` is socket file which application using and of course it must be writeable by nginx.
