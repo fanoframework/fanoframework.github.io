@@ -94,6 +94,7 @@ just run application using
 systemctl start [your-app-service-name]
 ```
 
+### Fedora
 
 ## Nginx
 
