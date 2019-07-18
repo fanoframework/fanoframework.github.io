@@ -5,10 +5,9 @@ description: Tutorial on how to deploy FastCGI web application built with Fano F
 
 <h1 class="major">Deployment as FastCGI application</h1>
 
-## Apache
+## Apache with mod_proxy_fcgi module
 
-Currently, to deploy as FastCGI application you can only deploy with
-[mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)
+To deploy as FastCGI application with [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)
 
 You need to have `mod_proxy_fcgi` installed and loaded. This module is Apache's built-in module, so it is very likely that you will have it with your Apache installation. You just need to make sure it is loaded.
 
@@ -95,6 +94,55 @@ systemctl start [your-app-service-name]
 ```
 
 ### Fedora
+
+
+## Apache with mod_fcgid module
+
+To deploy as FastCGI application with [mod_fcgid](https://httpd.apache.org/docs/2.4/mod/mod_fcgid.html), make sure you use `TSimpleSockFastCGIWebApplication` as base application.
+Internally, it uses `TBoundSocketSvrImpl` as socket server.
+
+Unlike `mod_proxy_fcgi` module qhich our application is run independently,
+`mod_fcgid` provides automatic process management. So our application process lifecycle is managed by this module. It will spawn or kill one or more our application processes based on request load.
+
+Socket connection is already bound and listen by `mod_fcgid`. so we need to
+use `TBoundSocketSvrImpl` as socket server.
+
+and ofcourse you need to have `mod_fcgid` installed and loaded.
+
+### Debian
+
+To install `mod_fcgid`,
+
+```
+$ apt-get install libapache2-mod-fcgid
+```
+
+To enable it,
+
+```
+$ sudo a2enmod fcgid
+$ sudo systemctl restart apache2
+```
+
+Create virtual host config and add `fcgid-script`, for example
+
+```
+<VirtualHost *:80>
+     ServerName www.example.com
+     DocumentRoot /home/example/public
+
+     <Directory "/home/example/public">
+        Options +ExecCGI
+        AllowOverride FileInfo
+        Require all granted
+        AddHandler fcgid-script .cgi
+        DirectoryIndex app.cgi
+     </Directory>
+</VirtualHost>
+```
+
+Configuration above basically tells Apache to give any request to *.cgi file to
+be handled by `mod_fcgid` module (identified by `fcgid-script` handler).
 
 ## Nginx
 
