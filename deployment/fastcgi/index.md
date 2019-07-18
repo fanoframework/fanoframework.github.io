@@ -101,7 +101,7 @@ systemctl start [your-app-service-name]
 To deploy as FastCGI application with [mod_fcgid](https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html), make sure you use `TSimpleSockFastCGIWebApplication` as base application.
 Internally, it uses `TBoundSocketSvrImpl` as socket server.
 
-Unlike `mod_proxy_fcgi` module qhich our application is run independently,
+Unlike `mod_proxy_fcgi` module where our application is run independently,
 `mod_fcgid` provides automatic process management. So our application process lifecycle is managed by this module. It will spawn or kill one or more our application processes based on request load.
 
 Socket connection is already bound and listen by `mod_fcgid`. so we need to
