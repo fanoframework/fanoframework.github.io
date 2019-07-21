@@ -8,6 +8,10 @@ description: Tutorial on how to deploy SCGI web application built with Fano Fram
 Fano Framework can be deployed as [SCGI (Simple Common Gateway Interface)](https://python.ca/scgi/protocol.txt) web application. SCGI is similar to FastCGI protocol
 but simpler to parse.
 
+To be able to run as SCGI web application, you need to use
+`TBaseSimpleScgiWebApplication` or `TSimpleScgiWebApplication`.
+See [Fano SCGI](https://github.com/fanoframework/fano-scgi) for example application.
+
 ## Apache with mod_proxy_scgi module
 
 To deploy as SCGI application with [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html)
