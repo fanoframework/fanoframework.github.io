@@ -163,6 +163,7 @@ server {
 
     location ~ \.*$ {
         fastcgi_pass 127.0.0.1:20477;
+        include fastcgi_params;
     }
 
     location ~ /\.ht {
