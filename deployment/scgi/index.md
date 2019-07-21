@@ -93,12 +93,4 @@ server {
 ```
 Change `scgi_pass` to match host and port where application is listening.
 
-If listening using unix domain socket, you need to change `scgi_pass` to
-
-```
-scgi_pass unix:/tmp/fano-fcgi.sock;
-```
-
-where `/tmp/fano-fcgi.sock` is socket file which application using and of course it must be writeable by nginx.
-
 [Back to Deployment](/deployment)
