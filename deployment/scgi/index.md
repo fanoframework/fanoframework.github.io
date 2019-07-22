@@ -10,7 +10,10 @@ but simpler to parse.
 
 To be able to run as SCGI web application, you need to use
 `TBaseSimpleScgiWebApplication` or `TSimpleScgiWebApplication`.
+
 See [Fano SCGI](https://github.com/fanoframework/fano-scgi) for example application.
+You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to easily
+create new SCGI web application project.
 
 ## Apache with mod_proxy_scgi module
 

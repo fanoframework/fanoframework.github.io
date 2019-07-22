@@ -56,6 +56,25 @@ $ fanocli --create-project-fcgi=test-fano-fcgi
 ```
 
 Generated project files are mostly similar to `--create-project` output, except that `src/app.pas`, and `src/bootstrap.pas` which will generate a daemon FastCGI web application.
+See [Deploy as FastCGI application](/deployment/fastcgi) for information on how to
+setup FastCGI application to work with various web server.
+
+## Scaffolding SCGI project directory structure
+
+To scaffold SCGI project structure using Fano framework, run with  `--create-project-scgi` command line options
+
+```
+$ fanocli --create-project-scgi=[project-name]
+```
+
+For example, following command will cause a new FastCGI project created in directory name `test-fano-scgi` inside current directory.
+
+```
+$ fanocli --create-project-fcgi=test-fano-scgi
+```
+
+Generated project files are mostly similar to `--create-project-fcgi` output but for SCGI protocol. See [Deploy as SCGI application](/deployment/scgi) for information on how to
+setup SCGI application to work with various web server.
 
 ## Scaffolding project directory structure with Git without initial commit
 
