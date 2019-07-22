@@ -121,6 +121,36 @@ router1 := container.get('router') as IRouteMatcher;
 router2 := container.get('router') as IRouteMatcher;
 ```
 
+## Adding service alias
+
+To register new name for an existing service, dependency container provides method `alias()`.
+This method expects two parameters. First parameter is new name for existing service, and second parameter identifies existing service to be aliased.
+
+For example, if you have service registered as follows,
+
+```
+container.add(GUIDToString(IRouteMatcher), TSimpleRouterFactory.create());
+```
+
+You can create alias for above service as follows,
+
+```
+container.alias(GUIDToString(IRouter), GUIDToString(IRouteMatcher));
+```
+
+Then you can retrieve instance using
+
+```
+var
+   router : IRouter;
+   routeMatcher : IRouteMatcher;
+...
+router := container.get(GUIDToString(IRouter)) as IRouter;
+routeMatcher := container.get(GUIDToString(IRouteMatcher)) as IRouteMatcher;
+```
+
+Both `router` and `routeMatcher` will point to same class instance.
+
 ## Built-in dependency container
 
 Fano Framework comes with built-in dependency container, `TDependencyContainer`.
