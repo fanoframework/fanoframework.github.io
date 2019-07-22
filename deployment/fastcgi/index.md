@@ -7,7 +7,12 @@ description: Tutorial on how to deploy FastCGI web application built with Fano F
 
 Fano Framework can be deployed as [FastCGI](https://fastcgi-archives.github.io/FastCGI_Specification.html) web application.
 
-See [Fano SCGI](https://github.com/fanoframework/fano-scgi) for example application.
+See example application:
+
+- [Fano FastCGI](https://github.com/fanoframework/fano-fastcgi), example FastCGI application which listening on TCP host:port
+- [Fano FCGI Unix](https://github.com/fanoframework/fano-fcgi-unix), example FastCGI application which listening using Unix Domain Socket.
+- [Fano fcgid](https://github.com/fanoframework/fano-fcgid), example FastCGI application which started automatically by [Apache mod_fcgid](https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html) module.
+
 You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to easily
 create new FastCGI web application project.
 
