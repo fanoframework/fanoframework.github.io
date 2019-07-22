@@ -151,6 +151,16 @@ routeMatcher := container.get(GUIDToString(IRouteMatcher)) as IRouteMatcher;
 
 Both `router` and `routeMatcher` will point to same class instance.
 
+
+However, if you have service registered as multipe instances,
+
+```
+container.factory(GUIDToString(IRouteMatcher), TSimpleRouterFactory.create());
+```
+
+`router` and `routeMatcher` will point to different instance.
+
+
 ## Built-in dependency container
 
 Fano Framework comes with built-in dependency container, `TDependencyContainer`.
