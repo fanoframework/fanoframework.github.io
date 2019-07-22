@@ -67,7 +67,7 @@ To scaffold SCGI project structure using Fano framework, run with  `--create-pro
 $ fanocli --create-project-scgi=[project-name]
 ```
 
-For example, following command will cause a new FastCGI project created in directory name `test-fano-scgi` inside current directory.
+For example, following command will cause a new SCGI project created in directory name `test-fano-scgi` inside current directory.
 
 ```
 $ fanocli --create-project-fcgi=test-fano-scgi
