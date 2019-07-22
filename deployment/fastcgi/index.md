@@ -101,7 +101,7 @@ Proper way is setup application to run as service, set socket file to `/var/run`
 just run application using
 
 ```
-systemctl start [your-app-service-name]
+$ sudo systemctl start [your-app-service-name]
 ```
 
 ### Fedora
@@ -125,7 +125,7 @@ and ofcourse you need to have `mod_fcgid` installed and loaded.
 To install `mod_fcgid`,
 
 ```
-$ apt-get install libapache2-mod-fcgid
+$ sudo apt-get install libapache2-mod-fcgid
 ```
 
 To enable it,
