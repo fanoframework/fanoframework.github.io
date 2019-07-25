@@ -70,7 +70,7 @@ $ fanocli --create-project-scgi=[project-name]
 For example, following command will cause a new SCGI project created in directory name `test-fano-scgi` inside current directory.
 
 ```
-$ fanocli --create-project-fcgi=test-fano-scgi
+$ fanocli --create-project-scgi=test-fano-scgi
 ```
 
 Generated project files are mostly similar to `--create-project-fcgi` output but for SCGI protocol. See [Deploy as SCGI application](/deployment/scgi) for information on how to
