@@ -211,7 +211,7 @@ view := TCompositeView.create(
 
 ## Compose view from one or more view partials
 
-View partial is basically any class which implements `IViewPartial` interface. This interface has only one method `partial()` that implementor need to provide.
+View partial is basically any class which implements `IViewPartial` interface. This interface has only one method `partial()` that implementor must provide.
 
 ```
 (*!------------------------------------------------
@@ -303,12 +303,6 @@ mainView := TMainView.create(
     fileReader
 );
 
-```
-
-- For `<!--[topJs]-->`
-
-```
-var topJsPartial : IViewPartial;
 ```
 
 ## Displaying dynamic data
