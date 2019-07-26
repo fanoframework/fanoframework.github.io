@@ -209,6 +209,108 @@ view := TCompositeView.create(
 );
 ```
 
+## Compose view from one or more view partials
+
+View partial is basically any class which implements `IViewPartial` interface. This interface has only one method `partial()` that implementor need to provide.
+
+```
+(*!------------------------------------------------
+ * read template file, parse and replace its variable
+ * and output to string
+ *-----------------------------------------------
+ * @param templatePath file path of template
+ * @param viewParams instance contains view parameters
+ * @return string which all variables replaced with value from
+ *        view parameters
+ *-----------------------------------------------*)
+function partial(
+    const templatePath : string;
+    const viewParams : IViewParameters
+) : string;
+```
+
+See *Working with view parameter* for information how to work with `IViewParameters`.
+
+For example, if you have following HTML template structure
+
+`/path/to/templates/main.template.html`
+
+```
+<html>
+<head>
+    <!--[topCssJs]-->
+</head>
+<body>
+<!--[navbar]-->
+<!--[content]-->
+<!--[footerJs]-->
+</body>
+</html>
+```
+
+You can create main view class,
+
+```
+(*!------------------------------------------------
+ * render view
+ *------------------------------------------------
+ * @param viewParams view parameters
+ * @param response response instance
+ * @return response
+*-----------------------------------------------*)
+function TMainView.render(
+    const viewParams : IViewParameters;
+    const response : IResponse
+) : IResponse;
+begin
+    viewParams.setVar(
+        'topCssJs',
+        fViewPartial.partial(
+            '/path/to/templates/top.css.js.html',
+            viewParams
+        )
+    );
+
+    viewParams.setVar(
+        'navbar',
+        fViewPartial.partial(
+            '/path/to/templates/navbar.html',
+            viewParams
+        )
+    );
+
+    viewParams.setVar(
+        'footerJs',
+        fViewPartial.partial(
+            '/path/to/templates/footer.js.html',
+            viewParams
+        )
+    );
+
+    response.body().write(fTemplateParser.parse(fTemplateStr, viewParams));
+    result := response;
+end;
+
+```
+
+
+```
+var mainView : IView;
+
+mainView := TMainView.create(
+    '/path/to/templates/main.template.html'
+    templateParser,
+    fileReader
+);
+
+```
+
+- For `<!--[topJs]-->`
+
+```
+var topJsPartial : IViewPartial;
+```
+
 ## Displaying dynamic data
 
 To display dynamic data into `TView`, you will need to pass `ITemplateParser` interface instance which provide functionality to replace variable placeholder.
