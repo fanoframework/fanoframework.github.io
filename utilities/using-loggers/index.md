@@ -34,7 +34,7 @@ logger.critical('This is critical message');
 ## Built-in logger
 
 Fano Framework has several built-in loggers that developers can use or extend.
-All built-in loggers inherit from `TAbstractLogger` which provides most of method implementations except `log()` method which is an abstract method that child needs to implements. This class is mostly what developers need to extends in order to create new type of logger.
+All built-in loggers inherit from `TAbstractLogger` which provides most of method implementations except `log()` method which is an abstract method that descendant needs to implements. This class is mostly what developers need to extends in order to create new type of logger.
 
 ### Log to file
 
@@ -51,6 +51,10 @@ logger := TFileLogger.create('storages/logs/app.log');
 ### Suppress logging
 
 `TNullLogger` is logger implementation that does nothing. It is provided so developer can disable logging.
+
+### Logging to STDOUT
+
+`TStdOutLogger` is logger implementation that will output log message to STDOUT.
 
 ### Log to several medium
 
@@ -79,6 +83,41 @@ logger := TCompositeLogger.create(
 );
 ```
 
+### Separate log based on level type
+
+Sometime you may want to separate log based on level. For example, you may want
+to log non critical log message to separate file than critical one for easier
+audit. Or you need to disable logging  for non critical log message but keep critical log.
+
+`TSegregatedLogger` is logger implementation which suitable for this kind of logging scenario. This logger expects caller to provide four `ILogger` instances
+which will handle `INFO`, `DEBUG`, `WARNING` and `CRITICAL` log level respectively.
+
+```
+var logger : ILogger;
+...
+logger := TSegregatedLogger.create(
+    TFileLogger.create('storages/logs/app.info.log'),
+    TFileLogger.create('storages/logs/app.debug.log'),
+    TFileLogger.create('storages/logs/app.warning.log'),
+    TFileLogger.create('storages/logs/app.critical.log'),
+);
+```
+This way, each log type is written in separate file, thus make it easier to find,
+for example, critical log messages.
+
+Should you need to disable logging `INFO` level message, you can replace with something like follows
+
+```
+var logger : ILogger;
+...
+logger := TSegregatedLogger.create(
+    TNullLogger.create(),
+    TFileLogger.create('storages/logs/app.debug.log'),
+    TFileLogger.create('storages/logs/app.warning.log'),
+    TFileLogger.create('storages/logs/app.critical.log'),
+);
+```
+
 ## Factory class for built-in loggers
 
 Fano Framework provides some factory class for built-in loggers so they can
@@ -87,6 +126,8 @@ be registered in [dependency container](/dependency-container) easily. Following
 - `TFileLoggerFactory`, factory class for `TFileLogger`.
 - `TNullLoggerFactory`, factory class for `TNullLogger`.
 - `TCompositeLoggerFactory`, factory class for `TCompositeLogger`.
+- `TSegregatedLoggerFactory`, factory class for `TSegregatedLogger`.
+- `TStdOutLoggerFactory`, factory class for `TStdOutLogger`.
 
 For example, to register `TFileLogger` in dependency container:
 
