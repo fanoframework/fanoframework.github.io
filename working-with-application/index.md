@@ -110,6 +110,9 @@ to create FastCGI application which run independently and listen on TCP socket. 
 See [Deploy as FastCGI application](/deployment/fastcgi)for information how to
 deploy FastCGI application on various web servers.
 
+You may want to see *Scaffolding FastCGI project directory structure* section in
+[Scaffolding with Fano CLI](/scaffolding-with-fano-cli) for information how to scaffolding FastCGI web application with [Fano CLI](https://github.com/fanoframework/fano-cli).
+
 ## SCGI Application
 
 To create web application that support [SCGI (Simple Common Gateway Interface)](https://python.ca/scgi/protocol.txt) protocol, inherit from `TBaseSimpleScgiWebApplication` or one of its descendant
@@ -120,6 +123,9 @@ to create SCGI application which run independently and listen on TCP socket. See
 
 See [Deploy as SCGI application](/deployment/scgi)for information how to
 deploy SCGI application on various web servers.
+
+You may want to see *Scaffolding SCGI project directory structure* section in
+[Scaffolding with Fano CLI](/scaffolding-with-fano-cli) for information how to scaffolding SCGI web application easily.
 
 ## Apache modules Application
 
