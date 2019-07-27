@@ -1,7 +1,8 @@
 ---
-title: Using loggers
+title: Using Loggers
 description: How to use loggers in Fano Framework
 ---
+<h1 class="major">Using Loggers</h1>
 
 ## Logger and why should you care?
 
@@ -29,7 +30,6 @@ var logger : ILogger;
 ...
 logger.critical('This is critical message');
 ```
-
 
 ## Built-in logger
 
