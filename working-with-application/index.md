@@ -2,6 +2,7 @@
 title: Working with Application
 description: Tutorial on how to work with Fano Framework application class.
 ---
+<h1 class="major">Working with Application</h1>
 
 ## IWebApplication interface
 
