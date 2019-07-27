@@ -99,7 +99,7 @@ logger := TSegregatedLogger.create(
     TFileLogger.create('storages/logs/app.info.log'),
     TFileLogger.create('storages/logs/app.debug.log'),
     TFileLogger.create('storages/logs/app.warning.log'),
-    TFileLogger.create('storages/logs/app.critical.log'),
+    TFileLogger.create('storages/logs/app.critical.log')
 );
 ```
 This way, each log type is written in separate file, thus make it easier to find,
@@ -114,7 +114,22 @@ logger := TSegregatedLogger.create(
     TNullLogger.create(),
     TFileLogger.create('storages/logs/app.debug.log'),
     TFileLogger.create('storages/logs/app.warning.log'),
-    TFileLogger.create('storages/logs/app.critical.log'),
+    TFileLogger.create('storages/logs/app.critical.log')
+);
+```
+
+Or you may want to combine `INFO`, `DEBUG` into one file and `WARNING`, `CRITICAL` log message as other file.
+
+```
+var logger, infoDebug, warningCritical : ILogger;
+...
+infoDebug := TFileLogger.create('storages/logs/app.infodebug.log'),
+warningCritical := TFileLogger.create('storages/logs/app.warningcritical.log'),
+logger := TSegregatedLogger.create(
+    infoDebug,
+    infoDebug,
+    warningCritical,
+    warningCritical
 );
 ```
 
