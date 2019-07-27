@@ -107,7 +107,7 @@ to create FastCGI application which run independently and listen on TCP socket. 
  Apache with mod_fcgid module. See
 [fano-fcgid](https://github.com/fanoframework/fano-fcgid) example demo application.
 
-See [Deploy as FastCGI application](/deployment/fastcgi)for information how to
+See [Deploy as FastCGI application](/deployment/fastcgi) for information how to
 deploy FastCGI application on various web servers.
 
 You may want to see *Scaffolding FastCGI project directory structure* section in
@@ -121,7 +121,7 @@ To create web application that support [SCGI (Simple Common Gateway Interface)](
 to create SCGI application which run independently and listen on TCP socket. See
 [fano-scgi](https://github.com/fanoframework/fano-scgi) example demo application.
 
-See [Deploy as SCGI application](/deployment/scgi)for information how to
+See [Deploy as SCGI application](/deployment/scgi) for information how to
 deploy SCGI application on various web servers.
 
 You may want to see *Scaffolding SCGI project directory structure* section in
