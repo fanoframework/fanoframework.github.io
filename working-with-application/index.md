@@ -119,7 +119,7 @@ to create SCGI application which run independently and listen on TCP socket. See
 [fano-scgi](https://github.com/fanoframework/fano-scgi) example demo application.
 
 See [Deploy as SCGI application](/deployment/scgi)for information how to
-deploy FastCGI application on various web servers.
+deploy SCGI application on various web servers.
 
 ## Apache modules Application
 
