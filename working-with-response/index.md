@@ -14,6 +14,7 @@ Your route handler or controller is required to return response object. You can 
 
 `IResponse` is mostly used in conjunction with view. Read [Working with Views](/working-with-views) to learn more about view in Fano Framework.
 
+
 ## Writing response body
 
 `IResponse` interface has `body()` method which will return `IResponseStream`
@@ -21,16 +22,21 @@ interface instance. `IResponseStream` is descendant of `IStreamAdapter` interfac
 which add additional methods to simplify writing string to stream and also reading string from it.
 
 ```
-var response : IResponse;
-    respBody : IResponseStream;
-...
-respBody := response.body();
-respBody.write(
-    '<html>' +
-    '<head><title>Hello world</title></head>' +
-    '<body><p>Hello world</p></body>' +
-    '/<html>'
-);
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse
+) : IResponse;
+var respBody : IResponseStream;
+begin
+   respBody := response.body();
+   respBody.write(
+        '<html>' +
+        '<head><title>Hello world</title></head>' +
+        '<body><p>Hello world</p></body>' +
+        '/<html>'
+    )
+    result := response;
+end;
 ```
 
 Should you need, content of stream as string, you can call `read()` method.
@@ -91,7 +97,7 @@ function TMyController.handleRequest(
     const request : IRequest;
     const response : IResponse
 ) : IResponse;
-vr headers : IHeaders;
+var headers : IHeaders;
 begin
     //create new copy of current response header
     headers := response.headers().clone();
