@@ -28,7 +28,7 @@ There are two input parameters:
 
 - `viewParams` is class instance that implements `IViewParameters` interface. It
 store any variable replacement. See *Working with view parameter* section for more information.
-- `response` is class instance that implements `IResponse` interface.
+- `response` is class instance that implements `IResponse` interface. Read [Working with Response](/working-with-response) for information about `IResponse`.
 
 `render()` method expects that you will return response instance that will be used to render HTTP response.
 
