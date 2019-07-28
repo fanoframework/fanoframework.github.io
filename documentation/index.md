@@ -21,11 +21,10 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 - [About Dispatcher](/dispatcher)
 
-## Request
+## Request and Response
 
 - [Working with Request](/working-with-request)
-
-## Response
+- [Working with Response](/working-with-response)
 
 ## MVC
 
