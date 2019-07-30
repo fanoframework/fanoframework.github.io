@@ -14,6 +14,7 @@ related to current request.
 This request object is instance of `IRequest` interface that can be queried for
 data such as query strings, cookies, POST data send by client or uploaded files.
 
+Read [Working with Controllers](/working-with-controllers) for more information on hwo to work with route handler  or controller.
 
 ## Getting query parameters
 
@@ -198,3 +199,9 @@ If client does not send filename then it returns empty string.
 
 For example how to handle file upload with Fano Framework, see
 [Fano Upload](https://github.com/fanoframework/fano-upload).
+
+## Explore more
+
+- [Working with response](/working-with-response)
+- [Working with Controllers](/working-with-controllers)
+- [Working with Views](/working-with-views)
