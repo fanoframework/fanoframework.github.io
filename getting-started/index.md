@@ -224,3 +224,7 @@ and `storages` directories to your deployment machine. make sure that
 
 Read [Deployment](/deployment) for information how to deploy Fano Framework web
 application on various web server setup.
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Learn more</a></li>
+</ul>
