@@ -95,16 +95,17 @@ See [sample application](https://github.com/fanoframework/fano-app) to understan
 
 ## FastCGI Application
 
-To create web application that support FastCGI protocol, inherit from `TBaseSimpleFastCGIWebApplication` or one of its descendant
+To create web application that support FastCGI protocol, inherit from `TBaseSimpleFastCGIWebApplication` or one of its descendant. Class with `Epoll` prefix name, use [Linux epoll API](http://man7.org/linux/man-pages/man7/epoll.7.html)
+that is designed to improve performance, but they are available on Linux only.
 
-- `TSimpleFastCGIWebApplication`. This is class that you need to inherit if you want
+- `TSimpleFastCGIWebApplication` or `TEpollSimpleFastCGIWebApplication`. This is class that you need to inherit if you want
 to create FastCGI application which run independently and listen on TCP socket. See
 [fano-fastcgi](https://github.com/fanoframework/fano-fastcgi) example demo application.
 
-- `TSimpleUnixFastCGIWebApplication`. It is similar to class above but listen on unix domain socket file. See
+- `TSimpleUnixFastCGIWebApplication` or `TEpollSimpleUnixFastCGIWebApplication`. It is similar to class above but listen on unix domain socket file. See
 [fano-fcgi-unix](https://github.com/fanoframework/fano-fcgi-unix) example demo application.
 
-- `TSimpleSockFastCGIWebApplication`. This is class that you need to inherit if you want to create FastCGI application which run and managed by web server, for example
+- `TSimpleSockFastCGIWebApplication` or `TEpollSimpleSockFastCGIWebApplication`. This is class that you need to inherit if you want to create FastCGI application which run and managed by web server, for example
  Apache with mod_fcgid module. See
 [fano-fcgid](https://github.com/fanoframework/fano-fcgid) example demo application.
 
@@ -116,9 +117,9 @@ You may want to see *Scaffolding FastCGI project directory structure* section in
 
 ## SCGI Application
 
-To create web application that support [SCGI (Simple Common Gateway Interface)](https://python.ca/scgi/protocol.txt) protocol, inherit from `TBaseSimpleScgiWebApplication` or one of its descendant
+To create web application that support [SCGI (Simple Common Gateway Interface)](https://python.ca/scgi/protocol.txt) protocol, inherit from `TBaseSimpleScgiWebApplication` or one of its descendant. Same as above, class with `Epoll` prefix name, use [Linux epoll API](http://man7.org/linux/man-pages/man7/epoll.7.html).
 
-- `TSimpleScgiWebApplication`. This is class that you need to inherit if you want
+- `TSimpleScgiWebApplication` or `TEpollSimpleScgiWebApplication`. This is class that you need to inherit if you want
 to create SCGI application which run independently and listen on TCP socket. See
 [fano-scgi](https://github.com/fanoframework/fano-scgi) example demo application.
 
