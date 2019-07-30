@@ -221,3 +221,6 @@ Any `pas` or `inc` files or shell scripts is not needed in deployment machine in
 So for this repository, you will need to copy `public`, `Templates`, `config`
 and `storages` directories to your deployment machine. make sure that
 `storages` directory is writable by web server.
+
+Read [Deployment](/deployment) for information how to deploy Fano Framework web
+application on various web server setup.
