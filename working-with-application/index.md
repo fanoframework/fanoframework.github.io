@@ -143,3 +143,47 @@ Implementation of IWebApplication that implements Rack-like protocol, currently,
 
 - [Ruby Rack](https://rack.github.io/)
 - [Prack](https://github.com/piradoiv/Prack)
+
+## How to choose IWebApplication implementation?
+
+### CGI Application
+
+#### Pros
+
+- Easy to setup especially on shared-hosting where you do not posses server administrive privilege.
+
+### Cons
+
+- Not very performant compared to FastCGI or SCGI application due to how CGI protocol works.
+
+### FastCGI Application
+
+#### Pros
+
+- Performance is good compared to CGI application.
+
+### Cons
+
+- Requires server administrative privilege to setup. You can not deploy application on shared-hosting easily.
+
+### SCGI Application
+
+#### Pros
+
+- Performance is good compared to CGI application and maybe slightly better than
+FastCGI due to simpler protocol specification.
+
+### Cons
+
+- Requires server administrative privilege to setup. You can not deploy application on shared-hosting easily.
+
+## Explore more
+
+- [Deployment](/deployment)
+- [Deploy CGI Application](/deployment/cgi)
+- [Deploy FastCGI Application](/deployment/fastcgi)
+- [Deploy SCGI Application](/deployment/scgi)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>

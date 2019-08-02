@@ -79,7 +79,13 @@ function handleRequest(
 
 `TController` class provides basic implementation of this method, which is, to return view output. Fano Framework provides some built-in response class that you can use such HTML response, JSON response or binary response (for example to output image). Of course, you are free to implements your own output response.
 
+## Explore more
+
 - [Working with Request](/working-with-request)
 - [Working with Response](/working-with-response)
 - [Working with Views](/working-with-views)
 - [Working with Models](/working-with-models)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>

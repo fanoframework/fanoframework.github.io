@@ -73,3 +73,12 @@ After model read data from storage, it returns instance of `IModelResultSet` int
 ## Display model data in View
 
 See [Working with Views](/working-with-views) to understand how model can be used inside `IView` instance.
+
+## Explore more
+
+- [Working with Controllers](/working-with-controllers)
+- [Working with Views](/working-with-views)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
