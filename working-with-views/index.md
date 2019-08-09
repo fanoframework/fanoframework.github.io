@@ -359,6 +359,12 @@ Output response will be
 </html>
 ```
 
+Fano Framework provides several `IViewParameters` implementations.
+
+- `TViewParameters`, basic implementation which can set and get view parameters.
+- `TCompositeViewParameters`, class which composed from two external `IViewParameters` instances. This is mostly used to combine two view parameters as one.
+- `TNullViewParameters`, null class implements `IViewParameters` instances.
+
 ### Working with array of data
 
 Built-in implementation of template parser is basically just string manipulation operation and does not offer sophisticated template engine.
