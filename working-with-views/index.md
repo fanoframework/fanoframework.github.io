@@ -333,6 +333,11 @@ When main view is rendered by `TMyController` inherited from base class [`TContr
 type
 
     TMyController = class(TController)
+    public
+        function handleRequest(
+            const request : IRequest;
+            const response : IResponse
+        ) : IResponse; override;
     end;
 
 ...
