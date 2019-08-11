@@ -369,6 +369,14 @@ It will output HTML response as follows
 </html>
 ```
 
+## Built-in view partial implementation
+
+Fano Framework provides two `IViewPartial` interface implementation
+
+- [`TViewPartial`](https://github.com/fanoframework/fano/blob/master/src/Mvc/Views/ViewPartialImpl.pas), this class loads template from file, replace any variable placeholders and output it as string.
+- [`TStrViewPartial`](https://github.com/fanoframework/fano/blob/master/src/Mvc/Views/StrViewPartialImpl.pas), it is similar as above but loads template from string.
+
+
 ## Explore more
 
 - [Displaying Data in View](/working-with-views/displaying-data-in-view)
