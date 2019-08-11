@@ -212,6 +212,7 @@ view := TCompositeView.create(
 ## Compose view from one or more view partials
 
 View partial is basically any class which implements `IViewPartial` interface. This interface has only one method `partial()` that implementor must provide.
+Given template path and view parameters, `partial()` method implementation must returns view content as string with any variable placeholders replaced with actual values.
 
 ```
 (*!------------------------------------------------
@@ -229,7 +230,7 @@ function partial(
 ) : string;
 ```
 
-See *Working with view parameter* for information how to work with `IViewParameters`.
+See *Working with view parameter* section in [Displaying Data in View](/working-with-views/displaying-data-in-view) for information how to work with `IViewParameters`.
 
 For example, if you have following HTML template structure
 
@@ -246,6 +247,26 @@ For example, if you have following HTML template structure
 <!--[footerJs]-->
 </body>
 </html>
+```
+
+`/path/to/templates/top.css.js.html`
+
+```
+<title>Hello</title>
+```
+
+`/path/to/templates/navbar.html`
+
+```
+<ul>
+<li>Home</li>
+</ul>
+```
+
+`/path/to/templates/footer.html`
+
+```
+<div>This is Footer</div>
 ```
 
 You can create main view class,
@@ -293,6 +314,7 @@ end;
 
 ```
 
+and create main view instance as follows,
 
 ```
 var mainView : IView;
@@ -305,9 +327,47 @@ mainView := TMainView.create(
 
 ```
 
+When main view is rendered by `TMyController` inherited from base class [`TController`](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas), as follows
+
+```
+type
+
+    TMyController = class(TController)
+    end;
+
+...
+
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse
+) : IResponse;
+begin
+    viewParams.setVar('content', '<p>Hello World</p>');
+    inherited handleRequest(request, response);
+end;
+```
+
+It will output HTML response as follows
+
+```
+<html>
+<head>
+    <title>Hello</title>
+</head>
+<body>
+<ul>
+<li>Home</li>
+</ul>
+<p>Hello World</p>
+<div>This is Footer</div>
+</body>
+</html>
+```
+
 ## Explore more
 
 - [Displaying Data in View](/working-with-views/displaying-data-in-view)
+- [Working with Controllers](/working-with-controllers)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>

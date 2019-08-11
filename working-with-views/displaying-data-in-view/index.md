@@ -5,7 +5,6 @@ description: Tutorial on how to display data in view
 
 <h1 class="major">Displaying Data in View</h1>
 
-
 To display dynamic data into `TView`, you will need to pass `ITemplateParser` interface instance which provide functionality to replace variable placeholder.
 
 ## Working with view parameter
@@ -190,6 +189,8 @@ end;
 ## Explore more
 
 - [Working with Views](/working-with-views)
+- [Working with Controllers](/working-with-controllers)
+- [Working with Models](/working-with-models)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
