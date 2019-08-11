@@ -7,6 +7,8 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 - [Getting Started](/getting-started)
 - [Step-By-Step Tutorials](/tutorials)
+- [Example Applications](/examples)
+
 
 ## Application
 
