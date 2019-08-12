@@ -163,10 +163,60 @@ container.factory(GUIDToString(IRouteMatcher), TSimpleRouterFactory.create());
 
 ## Built-in dependency container
 
-Fano Framework comes with built-in dependency container, `TDependencyContainer`.
+Fano Framework comes with several built-in dependency containers,
+
+- `TDependencyContainer`, this is basic dependency container.
+- `TInitializeableContainer`, this is abstract dependency container. Descendant class must implements `initializeServices()` method.
+
+`TInitializeableContainer` is provided to allows developer to initialize service registration in a dedicated dependency container instance instead of in application `buildDependencies()` method.
+
+So instead of
+
+```
+TBootstrapApp = class(TFanoWebApplication)
+protected
+   procedure buildDependencies(const container : IDependencyContainer); override;
+   ...
+end;
+...
+procedure TBootstrapApp.buildDependencies(const container : IDependencyContainer);
+begin
+   {$INCLUDE Dependencies/dependencies.inc}
+end;
+```
+
+you create dedicated service container class
+
+```
+TServiceContainer = class(TInitializeableContainer)
+protected
+   procedure initializeServices(const container : IDependencyContainer); override;
+end;
+...
+procedure TServiceContainer.initializeServices(const container : IDependencyContainer);
+begin
+   {$INCLUDE Dependencies/dependencies.inc}
+end;
+```
+
+and in application
+
+appInstance := TBootstrapApp.create(
+   TServiceContainer.create(
+      TDependencyContainer.create(TDependencyList.create())
+   )
+);
+
 Of course, you are free to implements your own dependency container, as long as it implements `IDependencyContainer` interface.
 
 ## Auto-wire dependency
 
-Auto-wire dependency is not yet possible due Free Pascal's lack of annotation
-feature.
+Auto-wire dependency is not yet implemented.
+
+## Explore more
+
+- [Working with Application](/working-with-application)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
