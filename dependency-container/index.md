@@ -201,11 +201,13 @@ end;
 
 and in application
 
+```
 appInstance := TBootstrapApp.create(
    TServiceContainer.create(
       TDependencyContainer.create(TDependencyList.create())
    )
 );
+```
 
 Of course, you are free to implements your own dependency container, as long as it implements `IDependencyContainer` interface.
 
