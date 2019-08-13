@@ -134,8 +134,8 @@ router.post('/hi/{name}', hiController)
 
 ## Explore more
 
-- [Midleware example application](/examples)
-- [Dipatcher](/dispatcher)
+- [Middleware example application](/examples)
+- [Dispatcher](/dispatcher)
 - [Working with Router](/working-with-router)
 
 <ul class="actions">
