@@ -18,7 +18,7 @@ Single middleware instance can be attach to one or more route. This allows centr
 
 Fano Framework use simple chained middleware list. Each middleware can decide whether to pass request to next middleware or block. If middleware blocks a request, it must return response
 
-[client] <--> [bm-0] <--> [bm-1] <--> ... <--> [bm-n] <--> [controller] <--> [am-0] <--> [am-1] <--> ... <--> [am-n] 
+[client] <--> [bm-0] <--> [bm-1] <--> ... <--> [bm-n] <--> [controller] <--> [am-0] <--> [am-1] <--> ... <--> [am-n]
 
 ## Type of middlewares
 
@@ -53,23 +53,77 @@ ajaxOnly := TAjaxOnlyMiddleware.create();
 authOnly := TAuthOnlyMiddleware.create();
 ```
 
-## Attaching middleware to application
+## Attaching middleware to global middleware
+
+When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup two `IMiddlewareCollectionAware` instances. One is for global middlewares (single instance) and the other for per-route middleware (multiple instance) (See *Single vs Multiple instance* section in [Dependency Container](/depdendency-container)),
+
+As shown in following code
 
 ```
-var hiController : IRouteHandler;
-    app : IWebApplication;
+{-----------------------------------------------
+  register middleware list for application
+------------------------------------------------}
+container.add('appMiddlewares', TMiddlewareCollectionAwareFactory.create());
+
+{-----------------------------------------------
+  register middleware list for each routes
+  need to be use factory so each route will have
+  different middleware list
+------------------------------------------------}
+container.factory('routeMiddlewares', TMiddlewareCollectionAwareFactory.create());
+```
+
+In you dispatcher initialization, you need to set global middlewares collection to use by dispatcher instance.
+
+```
+{-----------------------------------------------
+  setup basic application request dispatcher
+  which support middleware
+------------------------------------------------}
+container.add(
+    'dispatcher',
+    TDispatcherFactory.create(
+        container.get('appMiddlewares') as IMiddlewareCollectionAware,
+        aRouterInst as IRouteMatcher
+    )
+);
+```
+
+and then you can register a middleware to global middlewares as follows
+
+```
+var appMiddlewares : IMiddlewareCollectionAware;
 ...
-hiController := THiController.create();
-
-app.getMiddlewares().addBefore(authOnly);
-
+appMiddlewares := container.get('appMiddlewares') as IMiddlewareCollectionAware;
+appMiddlewares.getMiddlewares().addBefore(authOnly);
 ```
 
 ## Attaching middleware to route
 
+When controller or route hander is created, you need to pass per-route middleware collection
+
+```
+function THiControllerFactory.build(const container : IDependencyContainer) : IDependency;
+var routeMiddlewares : IMiddlewareCollectionAware;
+begin
+    routeMiddlewares := container.get('routeMiddlewares') as IMiddlewareCollectionAware;
+    try
+        result := THiController.create(
+            routeMiddlewares.getBefore(),
+            routeMiddlewares.getAfter()
+        );
+    finally
+        routeMiddlewares := nil;
+    end;
+end;
+
+```
+
+and when you register the controller to route, you can add middleware as shown in following code
+
 ```
 router.get('/hi/{name}', hiController)
-    .getMiddlewares()
+        .getMiddlewares()
     .addBefore(authOnly);
 
 router.post('/hi/{name}', hiController)
@@ -77,3 +131,13 @@ router.post('/hi/{name}', hiController)
     .addBefore(ajaxOnly)
     .addBefore(authOnly);
 ```
+
+## Explore more
+
+- [Midleware example application](/examples)
+- [Dipatcher](/dispatcher)
+- [Working with Router](/working-with-router)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
