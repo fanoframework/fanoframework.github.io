@@ -42,17 +42,15 @@ Create virtual host config and add `ProxyPassMatch`, for example
      </Directory>
 
     ProxyRequests Off
-    ProxyPass /css !
-    ProxyPass /images !
-    ProxyPass /js !
+    ProxyPassMatch /(css|images|js).* !
     ProxyPassMatch ^/(.*)$ scgi://127.0.0.1:20477
 </VirtualHost>
 ```
 You may need to replace `scgi://127.0.0.1:20477` with host and port where your
 application is running.
 
-Last four line of virtual host configurations basically tell Apache to serve any
-files inside `css`, `images`, `js` directly otherwise pass it to our application.
+Two `ProxyPassMatch` lines basically tell Apache to serve any
+files inside `css`, `images`, `js` directories directly, otherwise it pass them to our application.
 
 On Debian, save it to `/etc/apache2/sites-available` for example as `fano-scgi.conf`
 
