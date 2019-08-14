@@ -1,5 +1,5 @@
 ---
-title:Creating Basic MySQL CRUD application from scratch
+title: Creating Basic MySQL CRUD application from scratch
 description: Step by step tutorial for creating basic MySQL CRUD application from scratch that enable user to manage book collection
 ---
 
