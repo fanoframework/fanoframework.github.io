@@ -7,7 +7,7 @@ description: Request dispatcher in Fano Framework
 
 ## Dispatcher task
 
-In general, task of a dispatcher is quite simple. Given request uri, it must find instance of class that will handle the request, passing all relevant information and execute it.
+In general, task of a dispatcher is quite simple. Given request URI and HTTP method, it asks router to find instance of class that will handle the request, build middlewares, passing all relevant information and execute it.
 
 A dispatcher in Fano Framework must implements `IDispatcher` interface.
 
@@ -58,3 +58,11 @@ begin
     result := container.get('dispatcher') as IDispatcher;
 end;
 ```
+
+## Explore more
+
+- [Working with Router](/working-with-router)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
