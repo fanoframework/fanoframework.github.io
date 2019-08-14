@@ -5,6 +5,37 @@ description: Tutorial on how to work with router in Fano Framework
 
 <h1 class="major">Working with Router</h1>
 
+## What is router?
+
+In Fano Framework, router is instance responsible to map a request to a code that handles it based on certain rule.
+
+It is similar to front desk staff in a building. When a customer (request) comes in to building looking for an accounting staff (URL), first, she/he checks standard operational procedure (rule) to check whether is ok for outsider to contact accounting staff. If there are rule allows it, she/he directs the customer to accounting departement.
+
+Similarly, when HTTP request is made to server, router determines code to handle request based on URL and HTTP method.
+
+## About route
+
+In Fano Framework, a route is an association rule between a request (identified by HTTP method and URL) and code that handles it.
+
+If we have following route setup
+
+```
+var
+    router : IRouter;
+    myAppHandler, anotherAppHandler : IRouteHandler;
+...
+
+//GET request
+router.get('/my/app', myAppHandler);
+
+//POST request
+router.post('/another/app', anotherAppHandler);
+```
+
+If client open `http://[app hostname]/my/app` through browser, our application will receive request `GET` method to `/my/app` resources. Router will match HTTP method and URL and returns `myAppHandler` as code that responsible to handle this request.
+
+If client open `http://[app hostname]/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will not find any match because `/another/app` is only registered for `POST` request. If this happens, exception `ERouteHandlerNotFound` will be raised.
+
 ## Create router instance
 
 Fano Framework comes with basic router implementation `TRouter` class which implements `IRouter` interface.
@@ -12,6 +43,7 @@ Fano Framework comes with basic router implementation `TRouter` class which impl
 ```
 container.add('router', TSimpleRouterFactory.create());
 ```
+
 
 ## Create route
 
