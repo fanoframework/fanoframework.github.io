@@ -37,21 +37,17 @@ returning response from `IView` instance.
 
 ## Creating TController class
 
-`TController` constructor expects 4 parameters
+`TController` constructor expects 3 parameters
 
 ```
 constructor TController.create(
-    const beforeMiddlewares : IMiddlewareCollection;
-    const afterMiddlewares : IMiddlewareCollection;
+    const aMiddlewares : IMiddlewareCollectionAware;
     const viewInst : IView;
     const viewParamsInst : IViewParameters
 );
 ```
 
-- `beforeMiddlewares`, instance of collection of middlewares that will be called
-before this controller get executed.
-- `afterMiddlewares`, instance of collection of middlewares that will be called
-after this controller get executed.
+- `aMiddlewares`, instance of collection of middlewares.
 - `viewInst`, view to be used, i.e., instance of class that implements `IView` interface.
 - `ViewParamsInst`, view parameters, i.e., instance of class that implements `IViewParameters` interface.
 
