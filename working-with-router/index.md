@@ -32,9 +32,9 @@ router.get('/my/app', myAppHandler);
 router.post('/another/app', anotherAppHandler);
 ```
 
-If client open `http://[app hostname]/my/app` through browser, our application will receive request `GET` method to `/my/app` resources. Router will match HTTP method and URL and returns `myAppHandler` as code that responsible to handle this request.
+If client opens `http://[app hostname]/my/app` through browser, our application will receive request `GET` method to `/my/app` resources. Router will match HTTP method and URL and returns `myAppHandler` as code that responsible to handle this request.
 
-If client open `http://[app hostname]/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will not find any match because `/another/app` is only registered for `POST` request. If this happens, exception `ERouteHandlerNotFound` will be raised.
+If client opens `http://[app hostname]/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will not find any match because `/another/app` is only registered for `POST` request. If this happens, exception `ERouteHandlerNotFound` will be raised.
 
 ## Create router instance
 
@@ -135,3 +135,11 @@ end;
 ```
 
 See [code example](https://github.com/fanoframework/fano-app/blob/master/app/App/Hello/Controllers/HelloController.pas) how to read route argument.
+
+## Explore more
+
+- [Dispatcher](/dispatcher)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
