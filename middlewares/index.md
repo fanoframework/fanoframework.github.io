@@ -18,7 +18,7 @@ Single middleware instance can be attach to one or more route. This allows centr
 
 Fano Framework use simple chained middleware list. Each middleware can decide whether to pass request to next middleware or block. If middleware blocks a request, it must return response
 
-[client] <--> [bm-0] <--> [bm-1] <--> ... <--> [bm-n] <--> [controller] <--> [am-0] <--> [am-1] <--> ... <--> [am-n] 
+[client] <--> [bm-0] <--> [bm-1] <--> ... <--> [bm-n] <--> [controller] <--> [am-0] <--> [am-1] <--> ... <--> [am-n]
 
 ## Type of middlewares
 
@@ -68,12 +68,15 @@ app.getMiddlewares().addBefore(authOnly);
 ## Attaching middleware to route
 
 ```
-router.get('/hi/{name}', hiController)
-    .getMiddlewares()
-    .addBefore(authOnly);
+(router.get(
+    '/hi/{name}',
+    hiController
+) as IMiddlewareCollectionAware).getMiddlewares().addBefore(authOnly);
 
-router.post('/hi/{name}', hiController)
-    .getMiddlewares()
+(router.post(
+    '/hi/{name}',
+    hiController
+) as IMiddlewareCollectionAware).getMiddlewares()
     .addBefore(ajaxOnly)
     .addBefore(authOnly);
 ```
