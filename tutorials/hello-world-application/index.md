@@ -457,7 +457,7 @@ export BUILD_TYPE="prod"
 fi
 
 if [[ -z "${USER_APP_DIR}" ]]; then
-export USER_APP_DIR="app"
+export USER_APP_DIR="src"
 fi
 
 if [[ -z "${UNIT_OUTPUT_DIR}" ]]; then
