@@ -490,6 +490,14 @@ Change add execute permission to `build.sh`
 $ chmod +x build.sh
 ```
 
+## Create application compiler configuration
+
+## Build application
+
+## Deploy application with Apache web server
+
+## Summary
+
 ## Explore more
 
 - [Step by Step Tutorials](/tutorials)
