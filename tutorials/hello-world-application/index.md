@@ -50,7 +50,7 @@ hello-world
 - `public` directory is our application document root which will contains any public assets accessible from client such CSS and JavaScript files.
 - `vendor/fano` directory will contains Fano Framework source code.
 
-## Creating git repository and add Fano Framework respository
+## Creating git repository and add Fano Framework repository
 
 After project directory structures setup, from shell terminal, change directory to `hello-world` directory and run
 
@@ -60,7 +60,7 @@ $ git submodule add https://github.com/fanoframework/fano.git vendor/fano
 ```
 
 This will initialize empty git repository and add Fano Framework to
-`hello-world/vendor/fano` directory
+`hello-world/vendor/fano` directory.
 
 ## Creating main program
 
