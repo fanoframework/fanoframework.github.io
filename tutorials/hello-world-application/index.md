@@ -8,10 +8,15 @@ description: Step by step tutorial for creating basic hello world web applicatio
 In this step by step tutorial, we are going to create a simple CGI web application
 that display greeting message from scratch.
 
+## Who is this tutorial for?
+
+This tutorial is written for anyone new to Fano Framework. It is assumed that you have proficiency with Free Pascal and its language syntax. You are familiar with  Linux command and and its shell terminal.
+
 ## Requirement
 
 - [Free Pascal >= 3.0](https://www.freepascal.org)
 - [git](https://git-scm.com/)
+- Text editor, vim, VSCode, Atom etc.
 - Root privilege.
 
 ## Application Functionalities
@@ -200,7 +205,12 @@ end;
 
 ## Create hello controller
 
-Create a file `hello-world/src/App/Hello/Controllers/HelloController.pas`
+Create a file
+```
+hello-world/src/App/Hello/Controllers/HelloController.pas
+```
+
+and put following code
 
 ```
 unit HelloController;
@@ -243,6 +253,7 @@ get displayed in view
 ## Create hello controller factory class
 
 Create new file
+
 ```
 hello-world/src/App/Hello/Controllers/Factories/HelloControllerFactory.pas
 ```
