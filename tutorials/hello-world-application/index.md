@@ -8,6 +8,11 @@ description: Step by step tutorial for creating basic hello world web applicatio
 In this step by step tutorial, we are going to create a simple CGI web application
 that display greeting message from scratch.
 
+## Requirement
+
+- [Free Pascal >= 3.0](https://www.freepascal.org)
+- [git](https://git-scm.com/)
+
 ## Application Functionalities
 
 - Page which display greeting message. If query string `name=[a value]` is set, for example `name=Jon`, we will display string 'Hello Jon' otherwise we display 'Hello everybody'.
