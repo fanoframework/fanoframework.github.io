@@ -492,7 +492,75 @@ $ chmod +x build.sh
 
 ## Create application compiler configuration
 
+### Base compiler switch configurations
+
+Create new file `hello-word/build.cfg` which will contain Free Pascal compiler switches required by application. Please consult Free Pascal documentation for
+more information about these compiler switches.
+
+```
+-Tlinux
+-Fu$USER_APP_DIR$/App/Hello/Controllers
+-Fu$USER_APP_DIR$/App/Hello/Controllers/Factories
+-Fu$USER_APP_DIR$/App/Hello/Views
+#INCLUDE build.$BUILD_TYPE$.cfg
+```
+
+### Release compiler switch configuration
+
+Create new file `hello-world/build.prod.cfg` with content as follows,
+
+```
+-Se
+-O3
+-Ooregvar
+-Oodeadvalues
+-CX
+-XX
+-Xs
+```
+
+This is compiler switches for creating release build which optimized aggresively.
+
+### Development compiler switches configuration
+
+Create new file `hello-world/build.dev.cfg` with content as follows,
+
+```
+-Sewn
+-g
+-gl
+-gh
+-Ci
+-Cr
+-Co
+-Ct
+-CR
+-Sa
+-vd
+-Vewnh
+```
+
+This are compiler switches to use during development.
+
 ## Build application
+
+To build application for production build, run
+
+```
+$ ./build.sh
+```
+
+or
+
+```
+$ BUILD_TYPE=prod ./build.sh
+```
+
+To build application for development build, run
+
+```
+$ BUILD_TYPE=dev ./build.sh
+```
 
 ## Deploy application with Apache web server
 
