@@ -171,7 +171,6 @@ registered as `helloController` in dependency container will handles it.
 
 ```
 router := container.get('router') as IRouter;
-
 ```
 code above will return valid router instance because `THelloApp` inherits from `TSimpleWebApplication` which already register router instance automatically.
 See [TSimpleWebApplication source code](https://github.com/fanoframework/fano/blob/master/src/App/Implementations/Cgi/SimpleCgi/SimpleAppImpl.pas).
