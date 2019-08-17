@@ -480,16 +480,15 @@ Create new file `hello-world/build.sh`
 #!/bin/bash
 
 export FANO_DIR="vendor/fano"
-
-if [[ -z "${BUILD_TYPE}" ]]; then
-export BUILD_TYPE="prod"
-fi
-
 export USER_APP_DIR="src"
 export UNIT_OUTPUT_DIR="bin/unit"
 export EXEC_OUTPUT_DIR="public"
 export EXEC_OUTPUT_NAME="hello.cgi"
 export SOURCE_PROGRAM_NAME="hello.pas"
+
+if [[ -z "${BUILD_TYPE}" ]]; then
+export BUILD_TYPE="prod"
+fi
 
 fpc @vendor/fano/fano.cfg @build.cfg ${USER_APP_DIR}/${SOURCE_PROGRAM_NAME}
 
