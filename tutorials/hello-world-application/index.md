@@ -619,7 +619,7 @@ hello-world
 
 ## Commit project to git
 
-From inside `hello-word` directory, add all files and commit them.
+From inside `hello-world` directory, add all files and commit them.
 
 ```
 $ git add .
@@ -630,7 +630,7 @@ If all go well, we are ready to compile the application.
 
 ## Build application
 
-To build application for production build, run
+Assuming you are inside inside `hello-world` directory, to build application for production build, run
 
 ```
 $ ./build.sh
@@ -713,7 +713,7 @@ If you are in Fedora-based, you only need to tells Apache to reload configuratio
 $ sudo systemctl reload apache2
 ```
 
-## Associate domain name with IP
+## Setup domain name
 For our development purpose, we only need to add entry to `/etc/hosts` files and
 add following line
 
