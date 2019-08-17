@@ -250,7 +250,7 @@ end.
 It reads query string `name` value or use default value of `everybdy` and pass them to view parameters which will
 get displayed in view.
 
-So for example, http://hello-world.fano?name=jon will result `greetName` variable filled with value of `jon`.
+So for example, `http://hello-world.fano?name=jon` will cause `greetName` variable to be filled with value of `jon`.
 
 ## Create hello controller factory class
 
