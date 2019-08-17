@@ -57,3 +57,11 @@ Fano Framework comes with several `IErrorHandler` implementation.
 - `TLogErrorHandler`, error handler that log error information instead of output it to client.
 - `TTemplateErrorHandler`, error handler that output error using HTML template. This class is provided to enable developer to display nicely formatted error page.
 - `TCompositeErrorHandler` error handler that is composed from two other error handler. This is provided so we combine, for example, log error to file and also displaying nicely formatter output to client.
+
+## Explore more
+
+- [Working with Views](/working-with-views)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
