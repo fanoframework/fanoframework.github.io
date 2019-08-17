@@ -604,7 +604,7 @@ bin/unit/*
 
 ## Final project directories and files
 
-This is our
+This is final our project directory structures and files.
 
 ```
 hello-world
@@ -634,6 +634,7 @@ hello-world
 --build.cfg
 --build.prod.cfg
 --build.dev.cfg
+--.gitignore
 ```
 
 ## Commit project to git
