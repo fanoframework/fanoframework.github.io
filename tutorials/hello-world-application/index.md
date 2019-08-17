@@ -471,46 +471,27 @@ end.
 
 ## Creating build script
 
-This is an optional task, but helps simplify task to compile and build application.
+This is an optional task, but helps simplify task to compile and build application
+because `vendor/fano/fano.cfg` contains some environment variables to be set.
 
 Create new file `hello-world/build.sh`
 
 ```
 #!/bin/bash
 
-if [[ -z "${FANO_DIR}" ]]; then
 export FANO_DIR="vendor/fano"
-fi
 
 if [[ -z "${BUILD_TYPE}" ]]; then
 export BUILD_TYPE="prod"
 fi
 
-if [[ -z "${USER_APP_DIR}" ]]; then
 export USER_APP_DIR="src"
-fi
-
-if [[ -z "${UNIT_OUTPUT_DIR}" ]]; then
-    export UNIT_OUTPUT_DIR="bin/unit"
-fi
-
-if [[ -z "${EXEC_OUTPUT_DIR}" ]]; then
+export UNIT_OUTPUT_DIR="bin/unit"
 export EXEC_OUTPUT_DIR="public"
-fi
+export EXEC_OUTPUT_NAME="hello.cgi"
+export SOURCE_PROGRAM_NAME="hello.pas"
 
-if [[ -z "${EXEC_OUTPUT_NAME}" ]]; then
-export EXEC_OUTPUT_NAME="app.cgi"
-fi
-
-if [[ -z "${SOURCE_PROGRAM_NAME}" ]]; then
-export SOURCE_PROGRAM_NAME="app.pas"
-fi
-
-if [[ -z "${FPC_BIN}" ]]; then
-export FPC_BIN="fpc"
-fi
-
-${FPC_BIN} @fano/fano.cfg @build.cfg ${USER_APP_DIR}/${SOURCE_PROGRAM_NAME}
+fpc @vendor/fano/fano.cfg @build.cfg ${USER_APP_DIR}/${SOURCE_PROGRAM_NAME}
 
 ```
 
@@ -611,7 +592,7 @@ hello-world
 --bin
 ----unit
 --src
-----app.pas
+----hello.pas
 ----helloapp.pas
 ----App
 ------Hello
@@ -697,12 +678,12 @@ Enter you root password and it will open vim text editor. Put following code
         AllowOverride FileInfo Indexes
         Require all granted
         AddHandler cgi-script .cgi
-        DirectoryIndex app.cgi
+        DirectoryIndex hello.cgi
 
         RewriteEngine On
         RewriteCond %{REQUEST_FILENAME} !-d
         RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteRule ^(.*)$ app.cgi [L]
+        RewriteRule ^(.*)$ hello.cgi [L]
 
      </Directory>
  </VirtualHost>
