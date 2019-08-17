@@ -611,6 +611,8 @@ hello-world
 --bin
 ----unit
 --src
+----app.pas
+----helloapp.pas
 ----App
 ------Hello
 --------Controllers
@@ -621,8 +623,6 @@ hello-world
 ----------HelloView.pas
 ----------Factories
 ------------HelloViewFactory.pas
-----app.pas
-----helloapp.pas
 --tools
 ----clean.sh
 --public
