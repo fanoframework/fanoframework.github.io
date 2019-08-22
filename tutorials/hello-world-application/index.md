@@ -16,6 +16,7 @@ This tutorial is written for anyone new to Fano Framework. It is assumed that yo
 
 - [Free Pascal >= 3.0](https://www.freepascal.org)
 - [git](https://git-scm.com/)
+- [Apache 2.4](https://httpd.apache.org/)
 - Text editor, vim, VSCode, Atom etc.
 - Root privilege.
 
@@ -654,7 +655,7 @@ If compilation goes well, we are ready to deploy it.
 
 ## Deploy application with Apache web server
 
-We will deploy our CGI application so it can be accessed from web browser via URL
+We will deploy our CGI application, so it can be accessed from web browser via URL
 `http://hello-world.fano`. It is assume here that you are login as `jon` user and our application project path is located at `/home/jon/fano-example/hello-world` directory. It is assumed that you are using Apache 2.4.
 
 ### Creating virtual host configuration
