@@ -453,7 +453,7 @@ end.
 ## Creating build script
 
 This is an optional task, but helps simplify task to compile and build application
-because `vendor/fano/fano.cfg` contains some environment variables to be set.
+because `vendor/fano/fano.cfg` contains some environment variables need to be set.
 
 Create new file `hello-world/build.sh`
 
