@@ -113,7 +113,6 @@ type
     protected
         procedure buildDependencies(const container : IDependencyContainer); override;
         procedure buildRoutes(const container : IDependencyContainer); override;
-        function initDispatcher(const container : IDependencyContainer) : IDispatcher; override;
     end;
 
 implementation
@@ -130,11 +129,6 @@ uses
     procedure THelloApp.buildRoutes(const container : IDependencyContainer);
     begin
         //TODO: implement build application routes
-    end;
-
-    function THelloApp.initDispatcher(const container : IDependencyContainer) : IDispatcher;
-    begin
-        //TODO: implement build application dispatcher
     end;
 end.
 ```
@@ -189,19 +183,6 @@ router := container.get('router') as IRouter;
 ```
 code above will return valid router instance because `THelloApp` inherits from `TSimpleWebApplication` which already register router instance automatically.
 See [TSimpleWebApplication source code](https://github.com/fanoframework/fano/blob/master/src/App/Implementations/Cgi/SimpleCgi/SimpleAppImpl.pas).
-
-## Build dispatcher instance
-
-Fill `initDispatcher()` method body as follows
-
-```
-function THelloApp.initDispatcher(const container : IDependencyContainer) : IDispatcher;
-begin
-    result := container.get('dispatcher') as IDispatcher;
-end;
-```
-
-`TSimpleWebApplication` class has registered a dispatcher instance in dependency container, so above code should suffice.
 
 ## Create hello controller
 
@@ -386,7 +367,13 @@ end.
 
 ## Register controller and view to dependency container
 
-Edit `hello-world/src/helloapp.pas` to become
+Edit `buildDependencies()` method in file
+
+```
+hello-world/src/helloapp.pas
+````
+
+to become
 
 ```
 procedure THelloApp.buildDependencies(const container : IDependencyContainer);
@@ -429,7 +416,6 @@ type
     protected
         procedure buildDependencies(const container : IDependencyContainer); override;
         procedure buildRoutes(const container : IDependencyContainer); override;
-        function initDispatcher(const container : IDependencyContainer) : IDispatcher; override;
     end;
 
 implementation
@@ -460,11 +446,6 @@ uses
         finally
             router := nil;
         end;
-    end;
-
-    function THelloApp.initDispatcher(const container : IDependencyContainer) : IDispatcher;
-    begin
-        result := container.get('dispatcher') as IDispatcher;
     end;
 end.
 ```
