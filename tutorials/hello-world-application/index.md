@@ -5,8 +5,7 @@ description: Step by step tutorial for creating basic hello world web applicatio
 
 <h1 class="major">Creating Hello World web application from scratch</h1>
 
-In this step by step tutorial, we are going to create a simple CGI web application
-that display greeting message from scratch.
+In this step by step tutorial, we are going to create a simple CGI web application from scratch which displays greeting message.
 
 ## Who is this tutorial for?
 
