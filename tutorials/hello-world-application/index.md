@@ -334,7 +334,7 @@ implementation
     var respBody : IResponseStream;
         greet : string;
     begin
-        greet := 'Hello' + viewParams.getVar('name');
+        greet := 'Hello ' + viewParams.getVar('name');
         respBody := response.body();
         respBody.write('<html><head><title>' + greet + '</title></head>');
         respBody.write('<body><p>' + greet + '</p></body></html>');
@@ -705,7 +705,7 @@ If you are in Fedora-based distribution, you may as well just put virtual host c
 If you are in Debian-based distribution, you need to enable virtual host configuration and tell Apache to reload configuration by running
 
 ```
-$ sudo a2ensite fano-hello.conf
+$ sudo a2ensite fano-hello-world.conf
 $ sudo service apache2 reload
 ```
 
