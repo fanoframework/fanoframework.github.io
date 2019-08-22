@@ -632,7 +632,7 @@ If all go well, we are ready to compile the application.
 
 ## Build application
 
-Assuming you are inside inside `hello-world` directory, to build application for production build, run
+Assuming you are inside `hello-world` directory, to build application for production build, run
 
 ```
 $ ./build.sh
