@@ -586,7 +586,7 @@ bin/unit/*
 
 ## Final project directories and files
 
-This is final our project directory structures and files.
+This is our final project directory structures and files.
 
 ```
 hello-world
