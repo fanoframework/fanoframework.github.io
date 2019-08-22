@@ -53,7 +53,7 @@ hello-world
 - `src` directory will store our application source codes.
 - `tools` directory will store helper shell scripts.
 - `public` directory is our application document root which will contains any public assets accessible from client such CSS and JavaScript files.
-- `vendor/fano` directory will contains Fano Framework source code.
+- `vendor/fano` directory will contains Fano Framework source code. This will be created automatically when we setup Fano Framework as git submodule.
 
 In this tutorial, it is assumed that absolute path of project directory is
 
@@ -62,7 +62,7 @@ then directory is `/home/jon/fano-examples/hello-world`.
 
 ## Creating git repository and add Fano Framework repository
 
-After project directory structures setup, from shell terminal, change directory to `hello-world` directory and run
+After project directory structures setup (except `vendor/fano`), from shell terminal, change directory to `hello-world` directory and run
 
 ```
 $ git init
