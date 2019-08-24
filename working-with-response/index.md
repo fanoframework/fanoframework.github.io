@@ -99,10 +99,29 @@ function TMyController.handleRequest(
 ) : IResponse;
 var headers : IHeaders;
 begin
-    //create new copy of current response header
-    headers := response.headers().clone();
-
     //redirect to fanoframework.github.io
-    result := TRedirectResponse.create(headers, 'https://fanoframework.github.io');
+    result := TRedirectResponse.create(
+        response.headers(),
+        'https://fanoframework.github.io'
+    );
 end;
 ```
+
+By default, above code will redirect browser to [https://fanoframework.github.io](https://fanoframework.github.io) with HTTP 302 status. If you need to use different HTTP status code, set it in constructor's third parameter
+
+```
+//redirect to fanoframework.github.io with HTTP 304
+result := TRedirectResponse.create(
+    response.headers(),
+    'https://fanoframework.github.io',
+    304
+);
+```
+
+## Explore more
+
+- [Working with Request](/working-with-request)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
