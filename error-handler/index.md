@@ -185,6 +185,7 @@ implementation
         writeln('Status: ', status, ' ', msg) ;
         writeln();
         writeln('Funky error message');
+        result := self;
     end;
 
 end.
