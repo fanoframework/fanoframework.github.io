@@ -13,13 +13,15 @@ This interface has one method
 
 ```
 function handleError(
+    const env : ICGIEnvironmentEnumerator;
     const exc : Exception;
     const status : integer = 500;
     const msg : string  = 'Internal Server Error'
 ) : IErrorHandler;
 ```
 
-- `exc` is exception instance to be handled,
+- `env` is environment variables enumerator.
+- `exc` is exception instance to be handled.
 - `status` is integer value of HTTP code to send to client.
 - `msg` is string value of HTTP message to send to client
 
