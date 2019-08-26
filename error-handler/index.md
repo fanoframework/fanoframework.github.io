@@ -129,7 +129,7 @@ appInstance := TMyApp.create(
 );
 ```
 
-## Logging error to file and display blank error page
+## Log error to file and display blank error page
 
 ```
 var appInstance : IWebApplication;
@@ -141,6 +141,77 @@ appInstance := TMyApp.create(
         TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
         TNullErrorHandler.create()
     )
+);
+```
+
+## Create your own error handler
+
+If you find built-in error handlers are not enough for your use case, you may create your own `IErrorHandler` implementation.
+
+```
+unit myerrorhandler;
+
+interface
+
+{$MODE OBJFPC}
+{$H+}
+
+uses
+
+    fano;
+
+type
+
+    TMyErrorHandler = class(TInterfacedObject, IErrorHandler)
+    public
+        function handleError(
+            const env : ICGIEnvironmentEnumerator;
+            const exc : Exception;
+            const status : integer = 500;
+            const msg : string  = 'Internal Server Error'
+        ) : IErrorHandler;
+    end;
+
+implementation
+
+    function TMyErrorHandler.handleError(
+        const env : ICGIEnvironmentEnumerator;
+        const exc : Exception;
+        const status : integer = 500;
+        const msg : string  = 'Internal Server Error'
+    ) : IErrorHandler;
+    begin
+        writeln('Content-Type: text/html');
+        writeln('Status: ', status, ' ', msg) ;
+        writeln();
+        writeln('Funky error message');
+    end;
+
+end.
+```
+
+Following lines are mandatory to conform with HTTP protocol.
+
+```
+writeln('Content-Type: text/html');
+writeln('Status: ', status, ' ', msg) ;
+writeln();
+```
+
+To use your own error handler
+
+```
+uses
+
+    fano,
+    myerrorhandler;
+...
+var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TMyErrorHandler.create()
 );
 ```
 
