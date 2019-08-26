@@ -34,6 +34,27 @@ not relying on dependency container is to ensure that when you create applicatio
 you must provide the error handler. It is mandatory. While when using
 dependency container, developer may forget to inject error handler instance.
 
+## Built-in error handler implementation
+
+Fano Framework comes with several `IErrorHandler` implementation.
+
+- `TErrorHandler`, basic error handler that output error in plain HTML. You use this mostly for development purpose as it displays verbose error information.
+- `TAjaxErrorHandler`, error handler that output error informations as JSON.
+- `TNullErrorHandler`, error handler that output nothing except HTTP error.
+- `THtmlAjaxErrorHandler`, composite error handler that output basic HTML error or JSON based on whether request is AJAX or not.
+- `TLogErrorHandler`, error handler that log error information instead of output it to client.
+- `TTemplateErrorHandler`, error handler that output error using HTML template. This class is provided to enable developer to display nicely formatted error page. For production setup, this is mostly what you use.
+- `TCompositeErrorHandler` error handler that is composed from two other error handler. This is provided so we combine, for example, log error to file and also displaying nicely formatted output to client.
+
+## Display verbose error message
+
+`TErrorHandler` is one of basic implementation of `IErrorHandler`, which
+display basic error information in HTML content type such as type of exception
+raised, exception message and stacktrace and environment variables.
+
+If you compile application with debugging information such as `-g` or `-gh` flag,
+stacktrace is quite detail such as line number in source file. Without debugging information, it only displays memory location.
+
 ```
 var appInstance : IWebApplication;
 ...
@@ -44,21 +65,84 @@ appInstance := TMyApp.create(
 );
 ```
 
-`TErrorHandler` is one of basic implementation of `IErrorHandler`, which
-display basic error information in HTML content type such as type of exception
-raised, exception message and stacktrace.
+## Display verbose error message as JSON
 
-## Built-in error handler implementation
+```
+var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TAjaxErrorHandler.create()
+);
+```
 
-Fano Framework comes with several `IErrorHandler` implementation.
+## Hide error message
 
-- `TErrorHandler`, basic error handler that output error in plain HTML.
-- `TAjaxErrorHandler`, error handler that output error informations as JSON.
-- `TNullErrorHandler`, error handler that output nothing except HTTP error.
-- `THtmlAjaxErrorHandler`, composite error handler that output basic HTML error or JSON based on whether request is AJAX or not.
-- `TLogErrorHandler`, error handler that log error information instead of output it to client.
-- `TTemplateErrorHandler`, error handler that output error using HTML template. This class is provided to enable developer to display nicely formatted error page.
-- `TCompositeErrorHandler` error handler that is composed from two other error handler. This is provided so we combine, for example, log error to file and also displaying nicely formatter output to client.
+```
+var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TNullErrorHandler.create()
+);
+```
+
+## Display error with html template
+
+```
+var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TTemplateErrorHandler.create('/path/to/error/template.html')
+);
+```
+
+## Log error to file
+
+```
+var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TLogErrorHandler.create(TFileLogger.create('/path/to/log/file'))
+);
+```
+You need to make sure that `/path/to/log/file` is writeable.
+
+## Log error to file and display error from template
+
+```
+var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TCompositeErrorHandler.create(
+        TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
+        TTemplateErrorHandler.create('/path/to/error/template.html')
+    )
+);
+```
+
+## Logging error to file and display blank error page
+
+```
+var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TCompositeErrorHandler.create(
+        TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
+        TNullErrorHandler.create()
+    )
+);
+```
 
 ## Explore more
 
