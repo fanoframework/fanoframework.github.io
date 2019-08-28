@@ -93,8 +93,6 @@ For example on Apache,
             RewriteRule ^(.*)$ app.cgi [L]
         </IfModule>
      </Directory>
-
-
 </VirtualHost>
 ```
 
