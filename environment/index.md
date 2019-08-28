@@ -7,7 +7,7 @@ description: Tutorial on how to work with CGI Environment
 
 ## About environment
 
-When our application is run as CGI, FastCGI or SCGI application, it will receive environment variables from web server. CGI Environment variables are part of
+When our application run as CGI, FastCGI or SCGI application, it will receive environment variables from web server. CGI Environment variables are part of
 CGI protocol. [See RFC 3875](https://tools.ietf.org/html/rfc3875) for more information about CGI environment variables.
 
 In Fano Framework, environment variable is encapsulated in `ICGIEnvironment` interface.
