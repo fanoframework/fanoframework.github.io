@@ -112,7 +112,7 @@ $ sudo systemctl restart apache2
 ```
 
 Setup domain name for example by adding DNS record or for development purpose add
-follwing entry to `/etc/hosts`
+following entry to `/etc/hosts` file.
 
 ```
 127.0.0.1 example.fano
