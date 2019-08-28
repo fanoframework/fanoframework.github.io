@@ -54,9 +54,6 @@ ipAddr := myEnv.env('REMOTE_ADDR');
 or
 
 ```
-var myEnv : ICGIEnvironment;
-    ipAddr : string;
-...
 ipAddr := myEnv.remoteAddr();
 ```
 
@@ -72,9 +69,6 @@ host := myEnv.env('HTTP_HOST');
 or
 
 ```
-var myEnv : ICGIEnvironment;
-    host : string;
-...
 host := myEnv.httpHost();
 ```
 
@@ -90,9 +84,6 @@ scheme := myEnv.env('REQUEST_SCHEME');
 or
 
 ```
-var myEnv : ICGIEnvironment;
-    scheme : string;
-...
 scheme := myEnv.requestScheme();
 ```
 For example, `scheme` will contains `https` if your application is invoked via HTTPS protocol.
@@ -109,9 +100,6 @@ method := myEnv.env('REQUEST_METHOD');
 or
 
 ```
-var myEnv : ICGIEnvironment;
-    method : string;
-...
 method := myEnv.requestMethod();
 ```
 For example, `method` will contains `GET` if your application is invoked via HTTP GET.
@@ -120,18 +108,30 @@ For example, `method` will contains `GET` if your application is invoked via HTT
 
 ```
 var myEnv : ICGIEnvironment;
-    ipAddr : string;
+    query : string;
 ...
-ipAddr := myEnv.env('QUERY_STRING');
+query := myEnv.env('QUERY_STRING');
 ```
 
 or
 
 ```
-var myEnv : ICGIEnvironment;
-    query : string;
-...
 query := myEnv.queryString();
+```
+
+### Get user agent
+
+```
+var myEnv : ICGIEnvironment;
+    browser : string;
+...
+browser := myEnv.env('HTTP_USER_AGENT');
+```
+
+or
+
+```
+browser := myEnv.httpUserAgent();
 ```
 
 ## Built-in ICGIEnvironment implementation
