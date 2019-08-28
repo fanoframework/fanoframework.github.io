@@ -97,6 +97,9 @@ For example on Apache,
 
 </VirtualHost>
 ```
+
+Change `/home/example/app/public` to actual directory of your application.
+
 On Apache, you will need to enable CGI module, such as `mod_cgi` or `mod_cgid`. If CGI module not loaded, above virtual host will cause `app.cgi` is downloaded instead of executed.
 
 Content of `<IfModule>` above basically tells Apache to serve existing files/directories directly. For any non-existing files/directories, pass them to our application.
