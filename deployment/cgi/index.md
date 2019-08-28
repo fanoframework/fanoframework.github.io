@@ -149,6 +149,7 @@ $ ./tools/simulate.run.sh
 ```
 
 or to change route to access, set `REQUEST_URI` variable.
+
 ```
 $ REQUEST_URI=/test/test ./simulate.run.sh
 ```
