@@ -150,8 +150,8 @@ To be able to enumerate all available variables, you need to use `ICGIEnvironmen
 Environment enumerator provides three methods which enables developer to iterate all environment variables.
 
 - `count()` returns number of environment variables.
-- `getKey()` return environment variable name using zero-based index.
-- `getValue()` return environment variable value using zero-based index.
+- `getKey()` returns environment variable name using zero-based index.
+- `getValue()` returns environment variable value using zero-based index.
 
 Read [ICGIEnvironmentEnumerator source](https://github.com/fanoframework/fano/blob/master/src/Environment/Contracts/EnvironmentEnumeratorIntf.pas) for more information.
 
