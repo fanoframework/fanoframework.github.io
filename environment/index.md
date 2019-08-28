@@ -134,6 +134,13 @@ var myEnv : ICGIEnvironment;
 ipAddr := myEnv.queryString();
 ```
 
+## Built-in ICGIEnvironment implementation
+
+Fano Framework provides several built-in implementation of ICGIEnvironment.
+
+- `TCGIEnvironment` class which get environment variables thorough `GetEnvironmentVariable()` function from FreePascal `SysUtils` unit. For CGI application, this is what you use.
+- `TKeyValueEnvironment` class which get environment variables thorough key value pair. For FastCGI orr SCGI application, this is what you use.
+
 ## Enumerate all environment variables
 
 Sometime you want to know all current environment variables that web server sends to application. For example `TErrorHandler` class needs to be able to dump all environment variables. See [TErrorHandler source](https://github.com/fanoframework/fano/blob/master/src/Error/ErrorHandlerImpl.pas).
