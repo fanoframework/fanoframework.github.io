@@ -119,38 +119,6 @@ following entry to `/etc/hosts` file.
 ```
 After you setup virtual host and domain name, try open application through Internet browser with URL `http://example.fano`.
 
-### Simulate run on command line
-
-```
-$ cd app/public
-$ REQUEST_METHOD=GET \
-  REQUEST_URI=/test/test \
-  SERVER_NAME=juhara.com \
-  ./app.cgi
-```
-
-`tools/simulate.run.sh` is bash script that can be used to simplify simulating run application in shell.
-
-```
-$ ./tools/simulate.run.sh
-```
-
-or to change route to access, set `REQUEST_URI` variable.
-
-```
-$ REQUEST_URI=/test/test ./simulate.run.sh
-```
-
-This is similar to simulating browser requesting this page,for example,
-
-```
-$ wget -O- http://[your fano app hostname]/test/test
-```
-
-However, running using `tools/simulate.run.sh` allows you to view output of `heaptrc`
-unit for detecting memory leak (if you enable `-gh` switch in `build.dev.cfg`).
-
-
 ## Deployment
 
 You need to deploy only executable binary and any supporting files such as HTML templates, images, css stylesheets, application config.

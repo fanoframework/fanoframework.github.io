@@ -137,4 +137,44 @@ This section explains how to deploy server that you have no full control and hav
 
 This section explains how to deploy web application as CGI application on Nginx web server.
 
-[Back to Deployment](/deployment)
+## Simulate run on command line
+
+If you use Fano CLI to generate CGI web application, it will add
+`tools/simulate.run.sh` bash script. It can be used to simplify simulating run application in shell.
+
+For example,
+
+```
+$ ./tools/simulate.run.sh
+```
+
+or to change route to access, set `REQUEST_URI` variable.
+```
+$ REQUEST_URI=/test/test ./simulate.run.sh
+```
+
+or more elaborate call,
+
+```
+$ cd app/public
+$ REQUEST_METHOD=GET \
+  REQUEST_URI=/test/test \
+  SERVER_NAME=juhara.com \
+  ./app.cgi
+```
+
+This is similar to simulating browser requesting this page,for example,
+
+```
+$ wget -O- http://[your fano app hostname]/test/test
+```
+
+However, running using `tools/simulate.run.sh` allows you to view output of `heaptrc` unit for detecting memory leak (if you enable `-gh` switch in `build.dev.cfg`).
+
+## Explore more
+
+- [Deployment](/deployment)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
