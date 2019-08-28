@@ -5,15 +5,15 @@ description: Tutorial on how to deploy CGI web application built with Fano Frame
 
 <h1 class="major">Deployment as CGI application</h1>
 
-### Apache
+## Apache
 
 This section explains how to deploy web application as CGI application on Apache web server.
 
-#### Dedicated server
+### Dedicated server
 
 This section explains how to deploy server that you have full control and administrative privilege (aka root access).
 
-##### Debian-based Linux
+#### Debian-based Linux
 
 - Create virtual host by adding Apache configuration file inside `/etc/apache2/sites-available` and put
 
@@ -69,12 +69,7 @@ So in our example, we end up with following configuration:
  </VirtualHost>
 ```
 
-You need to make sure that `app.cgi` has execution bit, if not then run
-
-```
-$ chmod 744 /home/myuser/myapp/public/app.cgi
-```
-For most uses-cases, `744` permission is suffice if your web server is run as your user account. If executable binary failed to run, try `774`
+You need to make sure that `app.cgi` has execution bit. Read *Executable binary file permission* in [Deployment](/deployment) for more information.
 
 Save it as `fano.conf` file. Note that saving data to `/etc/apache2/sites-available` directory requires administrative privilege.
 
@@ -91,13 +86,13 @@ or you can use `a2ensite` utility that comes with Debian distribution which does
 $ sudo a2ensite fano.conf
 ```
 
-- Restart Apache service
+- Reload Apache service
 
 ```
-$ sudo service apache2 restart
+$ sudo service apache2 reload
 ```
 
-If configuraton is ok, Apache will restart happily.
+If configuraton is ok, Apache will load new configuration.
 
 - Setup domain name to DNS
 
@@ -110,19 +105,35 @@ entry to `/etc/hosts` file. Open `/etc/hosts` and add following entry,
 
 `127.0.0.1` with assumption that Apache run on same machine.
 
-##### Fedora-based Linux
+#### Fedora-based Linux
 
-#### Shared-hosting
+The difference between Debian and Fedora regarding Apache mostly about default service name (Debian uses `apache2` and Fedora uses `httpd`), user which Apache run (Debian uses `www-data` user while Fedora uses `apache`) and default Apache configuration location.
+
+- Create virtual host
+
+Apache main configuration is stored in `/etc/httpd/conf/httpd.conf`. To add virtual host configuration, you can simply add entry to this file.
+
+In Centos 7 and Apache 2.4, `/etc/httpd/conf.d/` directory will be search for additional configurations. So you can just create virtual host file inside this directory.
+
+- Reload Apache service
+
+Tell Apache to load configuration by running
+
+```
+$ sudo systemctl reload httpd
+```
+
+### Shared-hosting
 
 This section explains how to deploy server that you have no full control and have very limited administrative privelege.
 
-##### Debian-based Linux
+#### Debian-based Linux
 
-##### Fedora-based Linux
+#### Fedora-based Linux
 
-##### CPanel-based server
+#### CPanel-based server
 
-### Nginx
+## Nginx
 
 This section explains how to deploy web application as CGI application on Nginx web server.
 
