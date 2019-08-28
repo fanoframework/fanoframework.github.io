@@ -20,7 +20,7 @@ function handleError(
 ) : IErrorHandler;
 ```
 
-- `env` is environment variables enumerator.
+- `env` is environment variables enumerator. Read [CGI Environment](/environment)for more information about environment variables.
 - `exc` is exception instance to be handled.
 - `status` is integer value of HTTP code to send to client.
 - `msg` is string value of HTTP message to send to client
