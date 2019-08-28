@@ -31,7 +31,7 @@ Read [Working with Controllers](/working-with-controllers) for more information 
 
 ## ICGIEnvironment interface
 
-ICGIEnvironment interface provides several methods for reading CGI environment variables but most important is `env()` method as other methods basically just
+`ICGIEnvironment` interface provides several methods for reading CGI environment variables but most important is `env()` method. Other methods basically just
 act as helper method which actually use `env()`  under the hood. Look at [ICGIEnvironment source](https://github.com/fanoframework/fano/blob/master/src/Environment/Contracts/EnvironmentIntf.pas) for more information on available methods.
 
 ```
