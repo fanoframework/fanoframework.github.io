@@ -15,7 +15,7 @@ $ chmod 744 /path/to/app.cgi
 For most uses-cases, `744` permission is suffice if your web server is run as your user account. If web server run as separate user than owner of cgi file, for example as `www-data`. You can add `www-data` as group
 
 ```
-$ sudo chown my_user:www-data /home/myuser/myapp/public/app.cgi
+$ sudo chown my_user:www-data /path/to/app.cgi
 ```
 
 and then set executable binary permission to `774`.
