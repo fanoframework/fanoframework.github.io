@@ -129,9 +129,9 @@ or
 
 ```
 var myEnv : ICGIEnvironment;
-    ipAddr : string;
+    query : string;
 ...
-ipAddr := myEnv.queryString();
+query := myEnv.queryString();
 ```
 
 ## Built-in ICGIEnvironment implementation
