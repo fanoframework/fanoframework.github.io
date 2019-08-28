@@ -132,6 +132,7 @@ application on various web server setup.
 ## Explore more
 
 - [Step by Step Tutorials](/tutorials)
+- [Deployment](/deployment)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
