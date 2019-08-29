@@ -9,7 +9,6 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Step-By-Step Tutorials](/tutorials)
 - [Example Applications](/examples)
 
-
 ## Application
 
 - [Working with Application](/working-with-application)
@@ -55,3 +54,4 @@ description: Documentation and developer's resources for Fano Framework, web app
 ## Deployment
 
 - [Deploy Fano Framework web application on various server setup](/deployment)
+- [Known Issues](/known-issues)
