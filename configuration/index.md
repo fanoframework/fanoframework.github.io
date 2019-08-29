@@ -8,9 +8,7 @@ description: Tutorial on how to work with configuration
 ## About configuration
 
 There are times when you need to avoid hard coding value in application because
-you need to change it without having to rebuild application binary.
-
-For example, you need to be able to store database credential in configuration rather than hard coding, so you can change it easily.
+you need to change it without having to rebuild application binary. For example, you need to be able to store database credential in configuration rather than hard coding, so you can change it easily.
 
 Fano Framework provides `IAppConfiguration` interface for that purpose.
 
