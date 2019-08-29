@@ -22,6 +22,7 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 - [Fano Mvc](https://github.com/fanoframework/fano-mvc)
 - [Fano App DB](https://github.com/fanoframework/fano-app-db)
 - [Fano SCGI](https://github.com/fanoframework/fano-scgi)
+- [Fano Session](https://github.com/fanoframework/fano-session)
 
 ## Explore more
 
