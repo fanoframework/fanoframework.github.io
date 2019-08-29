@@ -15,6 +15,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Working with Application](/working-with-application)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
 - [CGI Environment](/environment)
+- [Configuration](/configuration)
 
 ## Dependency Container
 
