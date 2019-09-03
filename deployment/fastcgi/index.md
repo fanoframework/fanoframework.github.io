@@ -118,7 +118,7 @@ Unlike `mod_proxy_fcgi` module where our application is run independently,
 Socket connection is already bound and listen by `mod_fcgid`. so we need to
 use `TBoundSocketSvrImpl` as socket server.
 
-and ofcourse you need to have `mod_fcgid` installed and loaded.
+and of course you need to have `mod_fcgid` installed and loaded.
 
 ### Debian
 
