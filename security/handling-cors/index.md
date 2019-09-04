@@ -68,7 +68,7 @@ globalMiddlewares.addBefore(container.get('cors') as IMiddleware);
 `TBaseCorsMiddlewareFactory` class provides several methods to help configure CORS
 settings.
 
-## Allowed origins
+### Allowed origins
 
 To allow request from `http://cors.fano` and `http://my.fano`.
 
@@ -85,7 +85,7 @@ To allow request from any origin
 factory.allowedOrigins(['*']);
 ```
 
-## Allowed origins patterns
+### Allowed origins patterns
 
 You can also configure origin to allow using regex pattern. Following code will cause
 any request coming from `http://localhost:port` where port is integer value.
@@ -97,7 +97,7 @@ factory.allowedOriginsPatterns(['http\:\/\/localhost\:[0-9]{1,5}']);
 So any requests from `http://localhost:9000` or `http://localhost:9100` are allowed but not
 `http://127.0.0.1:9000`.
 
-## Allowed methods
+### Allowed methods
 
 To allowed only HTTP GET and POST
 
@@ -111,7 +111,7 @@ To allowed all method
 factory.allowedMethods(['*']);
 ```
 
-## Allowed headers
+### Allowed headers
 
 To allowed custom HTTP header
 
@@ -125,7 +125,7 @@ To allowed all custom headers
 factory.allowedHeaders(['*']);
 ```
 
-## Exposed headers
+### Exposed headers
 
 To list HTTP headers exposed by application that browser allowed to access.
 
@@ -139,7 +139,7 @@ To expose all headers
 factory.exposedHeaders(['*']);
 ```
 
-## Credentialed request
+### Credentialed request
 
 To allow credentialed request which aware of HTTP Cookies and HTTP Authentication.
 
@@ -147,7 +147,7 @@ To allow credentialed request which aware of HTTP Cookies and HTTP Authenticatio
 factory.supportCredentials(true);
 ```
 
-## Max age
+### Max age
 
 To set number of seconds, preflight request can be cached by browser, set it as follows
 
