@@ -19,7 +19,8 @@ by sending appropriate response header.
 ## Handling CORS with middleware
 
 Fano Framework provides built-in middleware class `TCorsMiddleware` or
-`TNullCorsMiddleware` which simplify task for sending appropriate CORS headers.
+`TNullCorsMiddleware` which is to simplify task for sending appropriate CORS headers. Read [Middlewares](/middlewares) for more information about working with middlewares.
+
 `TNullCorsMiddleware` is CORS middleware implementation which simply allow all CORS request without restriction, while `TCorsMiddleware` class is implementation which can be configured to selectively apply restriction.
 
 ## Register CORS middleware with container
@@ -39,7 +40,14 @@ container.add(
 );
 ```
 
+To use `TNullCorsMiddlewareFactory`, just replace `TCorsMiddlewareFactory` above.
+
 ## Register dispatcher with support middleware
+
+Because we need to execute middlewares, we cannot use `TSimpleDispatcher` class which
+by default is already registered when we use, for example, `TSimpleWebApplication` class.
+
+So we need to use `TDispatcher` class which support middlewares.
 
 ```
 var globalMiddlewares : IMiddlewareCollectionAware;
@@ -57,7 +65,8 @@ container.add(
 
 ## Attach CORS middleware to application middleware
 
-To attach CORS middleware instance to application middleware collection
+Attach CORS middleware instance to application middleware collection to ensure
+CORS middleware is executed for all application routes.
 
 ```
 globalMiddlewares.addBefore(container.get('cors') as IMiddleware);
@@ -154,6 +163,39 @@ To set number of seconds, preflight request can be cached by browser, set it as 
 ```
 factory.maxAge(3600);
 ```
+
+## Testing CORS feature
+
+Create a simple web page to call our API via ajax, for example
+
+```
+<html>
+<head><title>CORS Test</title></head>
+<body>
+    <div id="content"></div>
+    <button id="btnLoad">Load</button>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#btnLoad').click(function(){
+                $.ajax({
+                    url: "http://fano-cors.fano/",
+                    headers: { 'x-my-custom-header': 'some value' }
+                }).then(function(resp){
+                    $('#content').text(resp.hello);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+```
+Save code above as `client.html` in your web server document root. It is assumed that our application is at `http://fano-cors.fano/`.
+
+Open browser and go to `http://localhost/client.html`, click `Load` button
+to execute ajax request to our API.
+
+Browser will send ajax request with header `Origin` equals to `http://localhost/client.html` and `Host` equals `http://fano-cors.fano/`, so request is a CORS request.
 
 ## Explore more
 
