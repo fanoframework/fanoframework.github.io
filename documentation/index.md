@@ -47,6 +47,10 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 - [Error Handler](/error-handler)
 
+## Security
+
+- [Security](/security)
+
 ## Utilities
 
 - [Using Loggers](/utilities/using-loggers)
