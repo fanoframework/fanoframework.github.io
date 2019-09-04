@@ -107,6 +107,22 @@ var handler : IRouteHandler;
 router.options('/', handler);
 ```
 
+### Creating route for multiple methods
+
+```
+var handler : IRouteHandler;
+...
+router.map(['GET', 'POST'], '/', handler);
+```
+
+### Creating route for all methods
+
+```
+var handler : IRouteHandler;
+...
+router.any('/', handler);
+```
+
 ## Getting route argument
 
 `IRouteHandler` interface provides `getArg()` to allow application to retrieve route argument.
