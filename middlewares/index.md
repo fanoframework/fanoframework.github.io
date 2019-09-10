@@ -132,9 +132,9 @@ and when you register the controller to route, you can add middleware as shown i
     .addBefore(authOnly);
 ```
 
-## Built-in middleware
+## Built-in middlewares
 
-Fano Framework provides several built-in middleware.
+Fano Framework provides several built-in middlewares.
 
 - `TNullMiddleware`, middleware class that does nothing and just pass the request.
 - `TCompositeMiddleware`, middleware class which group several middlewares as one.
