@@ -95,7 +95,7 @@ and then you can register a middleware to global middlewares as follows
 var appMiddlewares : IMiddlewareCollectionAware;
 ...
 appMiddlewares := container.get('appMiddlewares') as IMiddlewareCollectionAware;
-appMiddlewares.getMiddlewares().addBefore(authOnly);
+appMiddlewares.addBefore(authOnly);
 ```
 
 ## Attaching middleware to route
@@ -122,14 +122,78 @@ and when you register the controller to route, you can add middleware as shown i
 (router.get(
     '/hi/{name}',
     hiController
-) as IMiddlewareCollectionAware).getMiddlewares().addBefore(authOnly);
+) as IMiddlewareCollectionAware).addBefore(authOnly);
 
 (router.post(
     '/hi/{name}',
     hiController
-) as IMiddlewareCollectionAware).getMiddlewares()
+) as IMiddlewareCollectionAware)
     .addBefore(ajaxOnly)
     .addBefore(authOnly);
+```
+
+## Built-in middleware
+
+Fano Framework provides several built-in middleware.
+
+- `TNullMiddleware`, middleware class that does nothing and just pass the request.
+- `TCompositeMiddleware`, middleware class which group several middlewares as one.
+- `TRequestHandlerAsMiddleware`, adapter middleware which can turn request handler as a middleware.
+- `TCorsMiddleware`, middleware class which adds CORS header to response header. Read [Handling CORS](/security/handling-cors) for more information.
+- `TValidationMiddleware`, middleware class which validate request.
+
+### Group several middlewares as one
+
+For example if you have following route registration which each of routes is using same
+middlewares
+
+```
+(router.get(
+    '/hello/{name}',
+    helloController
+) as IMiddlewareCollectionAware)
+    .addBefore(cors)
+    .addBefore(authOnly)
+    .addBefore(ajaxOnly);
+
+(router.get(
+    '/hi/{name}',
+    hiController
+) as IMiddlewareCollectionAware)
+    .addBefore(cors)
+    .addBefore(authOnly)
+    .addBefore(ajaxOnly);
+```
+
+You can simplify it to become
+
+```
+(router.get(
+    '/hello/{name}',
+    helloController
+) as IMiddlewareCollectionAware).addBefore(corsAuthAjax);
+
+(router.get(
+    '/hi/{name}',
+    hiController
+) as IMiddlewareCollectionAware).addBefore(corsAuthAjax);
+```
+
+where `corsAuthAjax` middleware is defined as follows
+
+```
+var corsAuthAjax : IMiddleware;
+...
+corsAuthAjax := TCompositeMiddleware.create([cors, authOnly, ajaxOnly]);
+```
+
+### Use controller as a middleware
+
+```
+var helloCtrlMiddleware : IMiddleware;
+    helloContrller : IController;
+...
+helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 ```
 
 ## Explore more
