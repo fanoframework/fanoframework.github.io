@@ -139,7 +139,8 @@ Fano Framework provides several built-in middleware.
 - `TNullMiddleware`, middleware class that does nothing and just pass the request.
 - `TCompositeMiddleware`, middleware class which group several middlewares as one.
 - `TRequestHandlerAsMiddleware`, adapter middleware which can turn request handler as a middleware.
-- `TCorsMiddleware`, middleware class which adds CORS header to response header. Read [Handling CORS](/security/handling-cors) for more information.
+- `TCorsMiddleware`, middleware class which adds CORS response header. Read [Handling CORS](/security/handling-cors) for more information.
+- `TNullCorsMiddleware`, middleware class which adds response header that always allow CORS.
 - `TValidationMiddleware`, middleware class which validate request.
 
 ### Group several middlewares as one
