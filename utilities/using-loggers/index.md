@@ -126,10 +126,14 @@ which will handle `INFO`, `DEBUG`, `WARNING` and `CRITICAL` log level respective
 var logger : ILogger;
 ...
 logger := TSegregatedLogger.create(
-    TFileLogger.create('storages/logs/app.info.log'),
-    TFileLogger.create('storages/logs/app.debug.log'),
+    TFileLogger.create('storages/logs/app.emergency.log'),
+    TFileLogger.create('storages/logs/app.alert.log'),
+    TFileLogger.create('storages/logs/app.critical.log'),
+    TFileLogger.create('storages/logs/app.error.log'),
     TFileLogger.create('storages/logs/app.warning.log'),
-    TFileLogger.create('storages/logs/app.critical.log')
+    TFileLogger.create('storages/logs/app.notice.log'),
+    TFileLogger.create('storages/logs/app.info.log'),
+    TFileLogger.create('storages/logs/app.debug.log')
 );
 ```
 This way, each log type is written in separate file, thus make it easier to find,
@@ -141,10 +145,14 @@ Should you need to disable logging `INFO` level message, you can replace with so
 var logger : ILogger;
 ...
 logger := TSegregatedLogger.create(
-    TNullLogger.create(),
-    TFileLogger.create('storages/logs/app.debug.log'),
+    TFileLogger.create('storages/logs/app.emergency.log'),
+    TFileLogger.create('storages/logs/app.alert.log'),
+    TFileLogger.create('storages/logs/app.critical.log'),
+    TFileLogger.create('storages/logs/app.error.log'),
     TFileLogger.create('storages/logs/app.warning.log'),
-    TFileLogger.create('storages/logs/app.critical.log')
+    TFileLogger.create('storages/logs/app.notice.log'),
+    TNullLogger.create(),
+    TFileLogger.create('storages/logs/app.debug.log')
 );
 ```
 
@@ -156,10 +164,14 @@ var logger, infoDebug, warningCritical : ILogger;
 infoDebug := TFileLogger.create('storages/logs/app.infodebug.log'),
 warningCritical := TFileLogger.create('storages/logs/app.warningcritical.log'),
 logger := TSegregatedLogger.create(
-    infoDebug,
-    infoDebug,
+    TFileLogger.create('storages/logs/app.emergency.log'),
+    TFileLogger.create('storages/logs/app.alert.log'),
     warningCritical,
-    warningCritical
+    TFileLogger.create('storages/logs/app.error.log'),
+    warningCritical,
+    TFileLogger.create('storages/logs/app.notice.log'),
+    infoDebug,
+    infoDebug
 );
 ```
 
