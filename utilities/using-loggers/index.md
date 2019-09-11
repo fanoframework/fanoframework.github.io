@@ -12,10 +12,14 @@ what went wrong (a.k.a error logs), auditing purpose and so on.
 Fano Framework provides logging mechanism thorough `ILogger` interface. This interface exposes several methods:
 
 - `log()` to log messages in any levels.
+- `emergency()` to log emergency messages.
 - `critical()` to log critical messages.
-- `debug()` to log debug messages.
-- `info()` to log information messages.
+- `error()` to log error messages.
+- `alert()` to log alert messages.
 - `warning()` to log warning messages.
+- `debug()` to log debug messages.
+- `notice()` to log notice messages.
+- `info()` to log information messages.
 
 Except `log()` method, all methods expect two parameter, first parameter is message to log and second parameter is data related to log message. This parameter is optional. If this second parameter is given, then it must implements
 `ISerializeable` interface.
@@ -35,6 +39,32 @@ logger.critical('This is critical message');
 
 Fano Framework has several built-in loggers that developers can use or extend.
 All built-in loggers inherit from `TAbstractLogger` which provides most of method implementations except `log()` method which is an abstract method that descendant needs to implements. This class is mostly what developers need to extends in order to create new type of logger.
+
+### Log to system log
+
+`TSysLogLogger` is logger implementation which write log to system log. See [syslog(3) man page](http://man7.org/linux/man-pages/man3/syslog.3.html).
+
+```
+var logger : ILogger;
+...
+logger := TSysLogLogger.create();
+```
+
+Its constructor expects three optional parameters.
+
+```
+constructor TSysLogLogger.create(
+    const prefix : string = '';
+    const opt : integer = -1;
+    const facility : integer = -1
+);
+```
+
+- `prefix`, string that is prefixed to all log messages,
+- `opt`, integer value for option. If not set, then by default it use `LOG_NOWAIT or LOG_PID`.
+- `facility`, integer value for facility. If not set, then by default it use `LOG_USER`.
+
+See [openlog(3) man page](http://man7.org/linux/man-pages/man3/openlog.3.html) for more information.
 
 ### Log to file
 
@@ -143,6 +173,7 @@ be registered in [dependency container](/dependency-container) easily. Following
 - `TCompositeLoggerFactory`, factory class for `TCompositeLogger`.
 - `TSegregatedLoggerFactory`, factory class for `TSegregatedLogger`.
 - `TStdOutLoggerFactory`, factory class for `TStdOutLogger`.
+- `TSysLogLoggerFactory`, factory class for `TSysLogLogger`.
 
 For example, to register `TFileLogger` in dependency container:
 
@@ -169,6 +200,14 @@ container.add('logger',
 );
 ```
 
+To register `TSysLogLogger`,
+
+```
+container.add('logger',
+    (TSysLogLoggerFactory.create()).prefix('fano-app')
+);
+```
+
 After logger factory is registered, you can access logger anywhere from application as shown in following code.
 
 ```
@@ -176,3 +215,11 @@ var logger : ILogger;
 ...
 logger := container.get('logger) as ILogger;
 ```
+
+## Explore more
+
+- [Error Handler](/error-handler)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
