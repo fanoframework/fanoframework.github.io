@@ -204,7 +204,8 @@ container.add('logger', TNullLoggerFactory.create());
 To register `TCompositeLogger`,
 
 ```
-container.add('logger',
+container.add(
+    'logger',
     TCompositeLoggerFactory.create(
         TFileLoggerFactory.create('storages/logs/app.log'),
         TNullLoggerFactory.create()
@@ -215,7 +216,8 @@ container.add('logger',
 To register `TSysLogLogger`,
 
 ```
-container.add('logger',
+container.add(
+    'logger',
     (TSysLogLoggerFactory.create()).prefix('fano-app')
 );
 ```
