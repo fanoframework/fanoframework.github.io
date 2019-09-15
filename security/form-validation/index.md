@@ -148,7 +148,7 @@ begin
 end;
 ```
 
-Please note that `lastValidationResult()` return last validation status so, above example van be simplified by removing `lastValidationResult()` call as follows
+Please note that `lastValidationResult()` return last validation status so, above example can be simplified by removing `lastValidationResult()` call as follows
 
 ```
     validationRes := fValidation.validate(request);
