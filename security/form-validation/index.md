@@ -184,6 +184,66 @@ function isValidData(const dataToValidate : string) : boolean; virtual; abstract
 
 `dataToValidate` contains data need to be validated and `isValidData()` must decide if it should pass or reject by returning boolean value.
 
+For example, following code is implementation of custom validation rule which pass validation only if data being validated is registered and active user id.
+
+```
+unit ActiveUserValidatorImpl;
+
+interface
+
+{$MODE OBJFPC}
+{$H+}
+
+uses
+
+    fano;
+
+type
+
+    TActiveUserValidator = class(TBaseValidator)
+    private
+        fDatabase : IRdbms;
+    protected
+        function isValidData(const userId : string) : boolean; override;
+    public
+        constructor create(const db : IRdbms);
+        destructor destroy(); override
+    end;
+
+implementation
+
+resourcestring
+
+    sErrFieldMustBeActiveUserId = 'Field %s must be active user id';
+
+    constructor TActiveUserValidator.create(const db : IRdbms);
+    begin
+        inherited create(sErrFieldMustBeActiveUserId);
+        fDatabase := db;
+    end;
+
+    destructor TActiveUserValidator.destroy();
+    begin
+        fDatabase := nil;
+        inherited destroy();
+    end;
+
+    function TActiveUserValidator.isValidData(const userId : string) : boolean;
+    var sql : string;
+    begin
+        sql := 'SELECT user_id FROM users '+
+            'WHERE user_id = :userId AND status = :userStatus LIMIT 1';
+        result := (fDatabase
+            .prepare(sql)
+            .paramStr('userId', userId)
+            .paramStr('userStatus', 'active')
+            .execute()
+            .resultCount() > 0);
+    end;
+end.
+
+```
+
 ## Explore more
 
 - [Built-in Validation Rules](/security/form-validation/built-in-validation-rules)
