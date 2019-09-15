@@ -186,6 +186,7 @@ function isValidData(const dataToValidate : string) : boolean; virtual; abstract
 
 ## Explore more
 
+- [Built-in Validation Rules](/security/form-validation/built-in-validation-rules)
 - [Working with request](/working-with-request)
 - [Middlewares](/middlewares)
 
