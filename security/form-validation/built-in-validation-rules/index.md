@@ -313,8 +313,8 @@ rule := TNotValidator.create(
     TIntegerValidator.create()
 );
 ```
-Validation will pass as long as data is not integer value. To negate several validator,
-you can combine with `TCompositeValidator`.
+Validation will pass as long as data is not integer value. To negate several validators,
+you can combine them with `TCompositeValidator`.
 
 ```
 rule := TNotValidator.create(
