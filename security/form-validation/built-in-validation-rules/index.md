@@ -81,6 +81,8 @@ rule := TRegexValidator.create(
 );
 ```
 
+`%s` will be replaced with field name being validated.
+
 ## String length
 
 ### TEqualLengthValidator
