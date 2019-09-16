@@ -308,9 +308,24 @@ rule := TCollectiveValidator.create([
 Decorator validator class which negate other validator.
 
 ```
-rule := TNotValidator.create(TIntegerValidator.create());
+rule := TNotValidator.create(
+    'Field %s must not be integer value',
+    TIntegerValidator.create()
+);
 ```
-Validation will pass as long as data is not integer value.
+Validation will pass as long as data is not integer value. To negate several validator,
+you can combine with `TCompositeValidator`.
+
+```
+rule := TNotValidator.create(
+    'Field %s must not be integer or boolean value',
+    TCompositeValidator.create([
+        TIntegerValidator.create(),
+        TBooleanValidator.create()
+    ])
+);
+```
+Validation will pass as long as data is not integer value and not boolean value.
 
 ### TConfirmedValidator
 
