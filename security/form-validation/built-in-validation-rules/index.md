@@ -290,6 +290,19 @@ rule := TCompositeValidator.create([
 
 Please note that order of validator in array matters as validation is carried out starting from first validation rule in the array and to next rule. As soon as validator fails, next validator will not be called and error message reported is last failed validation rule error message.
 
+### TCollectiveValidator
+
+It is similar to `TCompositeValidator`, except that, instead of terminating validation process as soon as one of validation rule fails, it continues to process all validation rules and collects all failed validation rule messages.
+
+```
+rule := TCollectiveValidator.create([
+    TRequiredValidator.create(),
+    TAlphaNumDashValidator.create(TRegex.create()),
+    TMinLengthValidator.create(8),
+    TMaxLengthValidator.create(10),
+]);
+```
+
 ### TNotValidator
 
 Decorator validator class which negate other validator.
