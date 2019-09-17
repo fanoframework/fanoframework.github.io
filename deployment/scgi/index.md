@@ -79,10 +79,23 @@ $ sudo a2ensite fano-scgi.conf
 $ sudo systemctl restart apache2
 ```
 
-
 ### Fedora
 
+The difference between Debian and Fedora regarding Apache mostly about default service name (Debian uses `apache2` and Fedora uses `httpd`), user which Apache run (Debian uses `www-data` user while Fedora uses `apache`) and default Apache configuration location.
 
+- Create virtual host
+
+Apache main configuration is stored in `/etc/httpd/httpd.conf`. To add virtual host configuration, you can simply add entry to this file or prefered way is to create configuration in file `/etc/httpd/conf.d/` directory.
+
+In Fedora and Apache 2.4, `/etc/httpd/conf.d/` directory will be search for additional configurations. So you can just create virtual host file inside this directory.
+
+- Reload Apache service
+
+Tell Apache to load configuration by running
+
+```
+$ sudo systemctl reload httpd
+```
 
 ## Nginx
 
