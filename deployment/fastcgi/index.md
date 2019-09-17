@@ -18,6 +18,24 @@ See example application:
 You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to easily
 create new FastCGI web application project.
 
+## Deploy with Fano CLI
+
+Simplest way to setup Fano web application with web server is to deploy FastCGI application with [Fano CLI](https://github.com/fanoframework/fano-cli), run with `--deploy-fcgi=[domain name]` or `--deploy-fcgid=[domain name]`. The first command will setup FastCGI virtual host that works with `mod_proxy_fcgi` while the other for `mod_fcgid`.
+
+Inside Fano web application project directory, run
+
+```
+$ sudo fanocli --deploy-fcgi=myapp.me
+```
+
+Command above, will create virtual host for Apache web server, enabled virtual host configuration, reload Apache web server configuration and add entry to `myapp.me` domain in `/etc/hosts`.
+
+To setup for nginx web server add `--web-server=nginx`. Without it, it is assumed Apache web server.
+
+```
+$ sudo fanocli --deploy-fcgi=myapp.me --web-server=nginx
+```
+
 ## Apache with mod_proxy_fcgi module
 
 To deploy as FastCGI application with [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)

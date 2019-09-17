@@ -13,6 +13,24 @@ See [Working with Application](/working-with-application) for information how to
 See [Fano SCGI](https://github.com/fanoframework/fano-scgi) for example application.
 You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to easily create new SCGI web application project.
 
+## Deploy with Fano CLI
+
+Simplest way to setup Fano web application with web server is to deploy SCGI application with [Fano CLI](https://github.com/fanoframework/fano-cli), run with `--deploy-scgi=[domain name]`.
+
+Inside Fano web application project directory, run
+
+```
+$ sudo fanocli --deploy-scgi=myapp.me
+```
+
+Command above, will create virtual host for Apache web server, enabled virtual host configuration, reload Apache web server configuration and add entry to `myapp.me` domain in `/etc/hosts`.
+
+To setup for nginx web server add `--web-server=nginx`. Without it, it is assumed Apache web server.
+
+```
+$ sudo fanocli --deploy-scgi=myapp.me --web-server=nginx
+```
+
 ## Apache with mod_proxy_scgi module
 
 To deploy as SCGI application with [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html)

@@ -23,16 +23,16 @@ $ fanocli --help
 
 ## Scaffolding project directory structure
 
-To scaffold project structure using Fano framework, run with  `--create-project` command line options
+To scaffold project structure using Fano framework, run with  `--project` command line options
 
 ```
-$ fanocli --create-project=[project-name]
+$ fanocli --project=[project-name]
 ```
 
 For example, following command will cause a new project created in directory name `test-fano` inside current directory.
 
 ```
-$ fanocli --create-project=test-fano
+$ fanocli --project=test-fano
 ```
 
 This command line options creates Git repository and initial commit for you  automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse
@@ -43,25 +43,25 @@ Git repository.
 
 ## Scaffolding FastCGI project directory structure
 
-To scaffold FastCGI project structure using Fano framework, run with  `--create-project-fcgi` command line options
+To scaffold FastCGI project structure using Fano framework, run with  `--project-fcgi` command line options
 
 ```
-$ fanocli --create-project-fcgi=[project-name]
+$ fanocli --project-fcgi=[project-name]
 ```
 
 For example, following command will cause a new FastCGI project created in directory name `test-fano-fcgi` inside current directory.
 
 ```
-$ fanocli --create-project-fcgi=test-fano-fcgi
+$ fanocli --project-fcgi=test-fano-fcgi
 ```
 
-Generated project files are mostly similar to `--create-project` output, except that `src/app.pas`, and `src/bootstrap.pas` which will generate a daemon FastCGI web application.
+Generated project files are mostly similar to `--project` output, except that `src/app.pas`, and `src/bootstrap.pas` which will generate a daemon FastCGI web application.
 See [Deploy as FastCGI application](/deployment/fastcgi) for information on how to
 setup FastCGI application to work with various web server.
 
 ## Scaffolding SCGI project directory structure
 
-To scaffold SCGI project structure using Fano framework, run with  `--create-project-scgi` command line options
+To scaffold SCGI project structure using Fano framework, run with  `--project-scgi` command line options
 
 ```
 $ fanocli --create-project-scgi=[project-name]
@@ -73,15 +73,15 @@ For example, following command will cause a new SCGI project created in director
 $ fanocli --create-project-scgi=test-fano-scgi
 ```
 
-Generated project files are mostly similar to `--create-project-fcgi` output but for SCGI protocol. See [Deploy as SCGI application](/deployment/scgi) for information on how to
+Generated project files are mostly similar to `--project-fcgi` output but for SCGI protocol. See [Deploy as SCGI application](/deployment/scgi) for information on how to
 setup SCGI application to work with various web server.
 
 ## Scaffolding project directory structure with Git without initial commit
 
-To scaffold project structure using Fano framework with Git repository initialized but without creating initial commit, run with  `--create-project-no-commit` command line options
+To scaffold project structure using Fano framework with Git repository initialized but without creating initial commit, run with  `--project-no-commit` command line options
 
 ```
-$ fanocli --create-project-no-commit=test-fano
+$ fanocli --project-no-commit=test-fano
 ```
 
 This command line options is provided to enable you to commit Git repository manually. So you can merge local repository with a remote repository before
@@ -95,10 +95,10 @@ $ git commit -m "Initial commit"
 ## Scaffolding project directory structure without Git
 
 To scaffold project structure without initializing
-Git repository, run with  `--create-project-without-git` command line options
+Git repository, run with  `--project-without-git` command line options
 
 ```
-$ fanocli --create-project-without-git=test-fano
+$ fanocli --project-without-git=test-fano
 ```
 
 This command line options is provided to enable you to initialize Git repository manually.
@@ -116,11 +116,11 @@ This command line options is provided to enable you to initialize Git repository
 
 ## Creating controller
 
-After you create project structure, to scaffold controller class, run with  `--create-controller` command line options
+After you create project structure, to scaffold controller class, run with  `--controller` command line options
 
 ```
 $ cd test-fano
-$ fanocli --create-controller=Hello
+$ fanocli --controller=Hello
 ```
 
 It will create following files
@@ -150,11 +150,11 @@ wget http://[your host name]/hello
 
 ## Creating view
 
-After you create project structure, to scaffold view class, run with  `--create-view` command line options
+After you create project structure, to scaffold view class, run with  `--view` command line options
 
 ```
 $ cd test-fano
-$ fanocli --create-view=Hello
+$ fanocli --view=Hello
 ```
 
 It will create following files
@@ -175,11 +175,11 @@ test-fano/build.cfg.sample
 
 ## Creating model
 
-After you create project structure, to scaffold model class, run with  `--create-model` command line option
+After you create project structure, to scaffold model class, run with  `--model` command line option
 
 ```
 $ cd test-fano
-$ fanocli --create-model=Hello
+$ fanocli --model=Hello
 ```
 
 It will create following files
@@ -201,19 +201,37 @@ test-fano/build.cfg.sample
 ## Creating controller, view and model at same time
 
 To simplify creating controller, view and model at same time, you can use
-`--create-mvc` command line option.
+`--mvc` command line option.
 
 ```
-$ fanocli --create-mvc=Hello
+$ fanocli --mvc=Hello
 ```
 
 Command above is equal to following command
 
 ```
-$ fanocli --create-controller=Hello
-$ fanocli --create-model=Hello
-$ fanocli --create-view=Hello
+$ fanocli --controller=Hello
+$ fanocli --model=Hello
+$ fanocli --view=Hello
 ```
+
+## Deployment
+
+Fano CLI offers commands to simplify setting up Fano web application with various web server through following commands,
+
+- `--deploy-cgi`, setup Fano web application as CGI with a web server.
+- `--deploy-fcgi`, setup Fano web application as FastCGI with a web server.
+- `--deploy-fcgid`, setup Fano web application as FastCGI with a Apache web server and mod_fcgid.
+- `--deploy-scgi` , setup Fano web application as SCGI with a Apache web server.
+
+All commands above requires root privilege, so you need to run it with `sudo`.
+
+```
+$ sudo fanocli --deploy-cgi=myapp.com
+```
+
+Read [Deployment](/deployment) for more information on how to use commands above.
+
 ## Build
 
 Change active directory to new project directory after you created project and run
@@ -223,3 +241,11 @@ $ /build.sh
 ```
 
 to build application.
+
+## Explore more
+
+- [Deployment](/deployment)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>

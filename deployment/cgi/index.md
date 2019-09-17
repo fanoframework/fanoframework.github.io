@@ -5,6 +5,18 @@ description: Tutorial on how to deploy CGI web application built with Fano Frame
 
 <h1 class="major">Deployment as CGI application</h1>
 
+## Deploy with Fano CLI
+
+Simplest way to setup Fano web application with web server is to deploy CGI application with [Fano CLI](https://github.com/fanoframework/fano-cli), run with `--deploy-cgi=[domain name]`.
+
+Inside Fano web application project directory, run
+
+```
+$ sudo fanocli --deploy-cgi=myapp.me
+```
+
+Command above, will create virtual host for Apache web server, enabled virtual host configuration, reload Apache web server configuration and add entry to `myapp.me` domain in `/etc/hosts`.
+
 ## Apache
 
 This section explains how to deploy web application as CGI application on Apache web server.
@@ -175,6 +187,7 @@ However, running using `tools/simulate.run.sh` allows you to view output of `hea
 ## Explore more
 
 - [Deployment](/deployment)
+- [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
