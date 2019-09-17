@@ -27,6 +27,20 @@ Field must be present but allowed to be empty.
 rule := TPresentValidator.create();
 ```
 
+### TRequiredIfValidator
+
+Field must be present and not empty if other field passes validation.
+
+```
+var rule : IValidator;
+...
+rule := TRequiredIfValidator.create(
+    'other-field',
+    TInValidator.create(['foo', 'bar'])
+);
+```
+Field being validated becomes mandatory field only if `other-field` value is equal to `foo` or `bar`.
+
 ## Character format
 
 ### TAlphaValidator
@@ -67,6 +81,14 @@ Data must be in valid email format. This validator does not check if email addre
 
 ```
 rule := TEmailValidator.create(TRegex.create());
+```
+
+### TUrlValidator
+
+Data must be in valid URL format. This validator does not check if URL address actually exists.
+
+```
+rule := TUrlValidator.create(TRegex.create());
 ```
 
 ### TRegexValidator
@@ -338,12 +360,28 @@ rule := TConfirmedValidator.create('password_confirmation');
 ```
 Validation will pass if current data is equal to data in field `password_confirmation`.
 
+### TSameValidator
+
+This is alias for `TConfirmedValidator`. It passes validation if other field has same value as field being validated.
+
+```
+rule := TSameValidator.create('password_confirmation');
+```
+
 ### TUuidValidator
 
 Data must be in valid GUID string.
 
 ```
 rule := TUuidValidator.create();
+```
+
+### TAlwaysPassValidator
+
+Dummy validator which always make field passes validation.
+
+```
+rule := TAlwaysPassValidator.create();
 ```
 
 ### TBaseValidator
