@@ -55,6 +55,12 @@ For example, following command will cause a new FastCGI project created in direc
 $ fanocli --project-fcgi=test-fano-fcgi
 ```
 
+Additionally, you can set `--host` and `--port` where FastCGI will listen. If omitted, `127.0.0.1` and `20477` will be used as host and port respectively.
+
+```
+$ fanocli --project-fcgi=test-fano-fcgi --host=192.168.2.1 --port=4040
+```
+
 Generated project files are mostly similar to `--project` output, except that `src/app.pas`, and `src/bootstrap.pas` which will generate a daemon FastCGI web application.
 See [Deploy as FastCGI application](/deployment/fastcgi) for information on how to
 setup FastCGI application to work with various web server.
@@ -64,13 +70,19 @@ setup FastCGI application to work with various web server.
 To scaffold SCGI project structure using Fano framework, run with  `--project-scgi` command line options
 
 ```
-$ fanocli --create-project-scgi=[project-name]
+$ fanocli --project-scgi=[project-name]
 ```
 
 For example, following command will cause a new SCGI project created in directory name `test-fano-scgi` inside current directory.
 
 ```
-$ fanocli --create-project-scgi=test-fano-scgi
+$ fanocli --project-scgi=test-fano-scgi
+```
+
+Additionally, you can set `--host` and `--port` where SCGI will listen. If omitted, `127.0.0.1` and `20477` will be used as host and port respectively.
+
+```
+$ fanocli --project-scgi=test-fano-scgi --host=192.168.2.1 --port=4040
 ```
 
 Generated project files are mostly similar to `--project-fcgi` output but for SCGI protocol. See [Deploy as SCGI application](/deployment/scgi) for information on how to
