@@ -141,7 +141,7 @@ rule := TMinLengthValidator.create(10);
 
 ### TMaxLengthValidator
 
-Data must be string with its length not greter than predefined value.
+Data must be string with its length not greater than predefined value.
 
 ```
 rule := TMaxLengthValidator.create(10);
