@@ -41,6 +41,22 @@ rule := TRequiredIfValidator.create(
 ```
 Field being validated becomes mandatory field only if `other-field` value is equal to `foo` or `bar`.
 
+Complex rule can be achieved by composing several validation rules.
+
+```
+var rule : IValidator;
+...
+rule := TRequiredIfValidator.create(
+    'other-field',
+    TCompositeValidator.create([
+        TNotInValidator.create(['foo', 'bar'])
+        TMinLengthValidator.create(8)
+    ])
+);
+```
+
+Field being validated becomes mandatory field, only if `other-field` value is not equal to `foo` or `bar` and at least 8 characters.
+
 ## Character format
 
 ### TAlphaValidator
