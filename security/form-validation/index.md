@@ -179,10 +179,18 @@ If built-in validation rules do not meet your requirement, you can create your o
 To simplify, Fano Framework provides `TBaseValidator` class which developer can use to create validation rule. It is abstract class which developer required to implements its protected method `isValidData()`
 
 ```
-function isValidData(const dataToValidate : string) : boolean; virtual; abstract;
+function isValidData(
+    const dataToValidate : string;
+    const dataCollection : IList;
+    const request : IRequest
+) : boolean; virtual; abstract;
 ```
 
-`dataToValidate` contains data need to be validated and `isValidData()` must decide if it should pass or reject by returning boolean value.
+- `dataToValidate` will contain actual data of current field being validated.
+- `dataCollection` will contain list of key value pair of all query strings and POST body of request.
+- `request` will contain current request object, in case you need to more informations.
+
+Your implementation must return `true` if validation should pass or `false` otherwise.
 
 For example, following code is implementation of custom validation rule which pass validation only if data being validated is registered and active user id.
 
@@ -204,7 +212,11 @@ type
     private
         fDatabase : IRdbms;
     protected
-        function isValidData(const userId : string) : boolean; override;
+        function isValidData(
+            const userId : string;
+            const dataCollection : IList;
+            const request : IRequest
+        ) : boolean; override;
     public
         constructor create(const db : IRdbms);
         destructor destroy(); override
@@ -228,7 +240,11 @@ resourcestring
         inherited destroy();
     end;
 
-    function TActiveUserValidator.isValidData(const userId : string) : boolean;
+    function TActiveUserValidator.isValidData(
+        const userId : string;
+        const dataCollection : IList;
+        const request : IRequest
+    ) : boolean;
     var sql : string;
     begin
         sql := 'SELECT user_id FROM users '+
