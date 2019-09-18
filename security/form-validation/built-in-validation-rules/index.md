@@ -429,7 +429,7 @@ Above code will actually execute SQL as follows
 ```
 SELECT `user_id` FROM `table_users` WHERE user_id = :primaryId LIMIT 1
 ```
-where `primaryId` placeholder will be replace with actual data being validated.
+where `primaryId` placeholder will be replace with actual data being validated. Read [Working with Database](/database) for more information.
 
 ### TAlwaysPassValidator
 
