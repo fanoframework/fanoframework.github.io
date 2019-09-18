@@ -412,6 +412,25 @@ Data must be in valid GUID string.
 rule := TUuidValidator.create();
 ```
 
+### TExistsValidator
+
+Data must exist in database. Its constructor expects three parameters, instance of `IRdbms` interface representing database connection, table name and column name.
+
+```
+var db : IRdbms;
+...
+db := TMySQLDb.create('MySQL 5.7');
+db.connect('localhost', 'your_db_name', 'your_db_username', 'yoursecretpassword', 3306);
+rule := TExistsValidator.create(db, 'table_users', 'user_id');
+```
+
+Above code will actually execute SQL as follows
+
+```
+SELECT `user_id` FROM `table_users` WHERE user_id = :primaryId LIMIT 1
+```
+where `primaryId` placeholder will be replace with actual data being validated.
+
 ### TAlwaysPassValidator
 
 Dummy validator which always make field passes validation.

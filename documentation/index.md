@@ -56,6 +56,10 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 - [Using Loggers](/utilities/using-loggers)
 
+## Database
+
+- [Working with Database](/database)
+
 ## Deployment
 
 - [Deploy Fano Framework web application on various server setup](/deployment)
