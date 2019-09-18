@@ -287,6 +287,26 @@ Data must be date time and its value must be prior than predefined value.
 rule := TBeforeDateTimeValidator.create(date());
 ```
 
+### TAfterDateTimeFieldValidator
+
+This validation rule is similar to `TAfterDateTimeValidator` but it compares against other field instead of predefined value.
+
+```
+rule := TAfterDateTimeFieldValidator.create('event-start-date');
+```
+
+Above rule makes current field passes validation only if its value is later than the value in `event-start-date` field.
+
+### TBeforeDateTimeFieldValidator
+
+This validation rule is similar to `TBeforeDateTimeValidator` but it compares against other field instead of predefined value.
+
+```
+rule := TBeforeDateTimeFieldValidator.create('event-end-date');
+```
+
+Above rule makes current field passes validation only if its value is prior than the value in `event-end-date` field.
+
 ## Uploaded file
 
 ### TUploadedFileValidator
@@ -402,7 +422,36 @@ rule := TAlwaysPassValidator.create();
 
 ### TBaseValidator
 
-Base abstract class which can be use as a base class to create new custom validation rule.
+Abstract class which can be uses as a base class to create new custom validation rule. To inherit from this class, you need to implements its `isValidData()` method.
+
+```
+function isValidData(
+    const dataToValidate : string;
+    const dataCollection : IList;
+    const request : IRequest
+) : boolean; virtual; abstract;
+```
+
+- `dataToValidate` will contain actual data of current field being validated.
+- `dataCollection` will contain list of key value pair of all query strings and POST body of request.
+- `request` will contain current request object, in case you need to more informations.
+
+Your implementation must return `true` if validation should pass or `false` otherwise.
+
+### TCompareFieldValidator
+
+Abstract class which can be used as base class which has the ability to compare current field against other field. To inherit from this class, you need to implements its `compare()` method.
+
+```
+function compare(
+    const dataToValidate : string;
+    const otherFieldData : string
+) : boolean; virtual; abstract;
+```
+- `dataToValidate` will contain actual data of current field being validated.
+- `dataCollection` will contain actual data of other field being compared.
+
+Your implementation must return `true` if validation should pass or `false` otherwise.
 
 ## Explore more
 
