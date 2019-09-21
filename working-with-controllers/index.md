@@ -5,26 +5,36 @@ description: Tutorial on how to work with controllers in Fano Framework
 
 <h1 class="major">Working with Controllers</h1>
 
-## IRequestHandler and IRouteHandler interface
+## IRequestHandler interface
 
 When web application receives request from web server, it will be given
 request uri of resource that user is requesting.
 Dispatcher parses request uri to find matching route handler that will handle this request. If no handler available to handle it, HTTP 404 will be returned.
 
-Interface `IRequestHandler`, declared in unit `fano.pas`, is basis of route handler implementation in Fano Framework. It consists of `handleRequest()` method that implementor class must provide.
+Interface `IRequestHandler`, declared in unit `fano.pas`, is basis of request handler implementation in Fano Framework. It consists of `handleRequest()` method that implementor class must provide.
 
-Interface `IRouteHandler`, is extension to `IRequestHandler` interface and provide more functionality such get route argument data or set middleware for route.
+```
+function handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+```
 
-`IRouteHandler` is basis of all route handler. When you set route, you must pass instance of class that implements `IRouteHandler`.
+- `request`, current request object
+- `response`, response object
+- `args`, current route arguments
 
-Fano Framework provides `TRouteHandler` as base abstract class that implements `IRouteHandler` and also base controller in `TController` class which derived from `TRouteHandler` class.
+`handleRequest()` should return instance of response that will be used as response to request. You can return response given by dispatcher or create entirely new response instance.
 
-`TRouteHandler` is abstract class. You need to derive and implements its `handleRequest()` method to be able to use it. This class is useful, for example, in following situation:
+Fano Framework provides `TAbstractController` as base abstract class that implements `IRequestHandler` and also base controller in `TController` class which derived from `TAbstractController` class.
+
+`TAbstractController` is an abstract class. You need to derive and implements its `handleRequest()` method to be able to use it. This class is useful, for example, in following situation:
 
 - you do not need to use view
 - you prefer to compose response by yourself, for example, to output JPEG image response.
 
-`TController` is concrete class and extends `TRouteHandler` capability by adding view and view parameters to allow, for example, to use template.
+`TController` is concrete class and extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template.
 
 But of course, you are free to implements your own.
 
@@ -37,17 +47,14 @@ returning response from `IView` instance.
 
 ## Creating TController class
 
-`TController` constructor expects 3 parameters
+`TController` constructor expects 2 parameters
 
 ```
 constructor TController.create(
-    const aMiddlewares : IMiddlewareCollectionAware;
     const viewInst : IView;
     const viewParamsInst : IViewParameters
 );
 ```
-
-- `aMiddlewares`, instance of collection of middlewares. Read [middlewares documentation](/middlewares) for more information.
 - `viewInst`, view to be used, i.e., instance of class that implements `IView` interface.
 - `ViewParamsInst`, view parameters, i.e., instance of class that implements `IViewParameters` interface.
 
@@ -59,19 +66,6 @@ For more information regarding view and view parameters, read [Working with View
 
 `handleRequest()` is method that will be invoked by dispatcher to handle request, so you mostly do not call it directly.
 This method is part of `IRequestHandler` interface. Dispatcher will pass request and response instance to this method.
-
-```
-function handleRequest(
-    const request : IRequest;
-    const response : IResponse
-) : IResponse;
-```
-
-- `request` is current request instance
-- `response`, current response instance
-
-`handleRequest()` should return instance of response that will be used as response to request. You can return response given by dispatcher or create entirely new response instance.
-
 
 `TController` class provides basic implementation of this method, which is, to return view output. Fano Framework provides some built-in response class that you can use such HTML response, JSON response or binary response (for example to output image). Of course, you are free to implements your own output response.
 

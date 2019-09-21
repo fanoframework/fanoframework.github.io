@@ -141,19 +141,11 @@ dependency container. Add following code in `buildDependencies()` method
 ```
 procedure THelloApp.buildDependencies(const container : IDependencyContainer);
 begin
-    container.factory(
-        'routeMiddlewares',
-        TNullMiddlewareCollectionAwareFactory.create()
-    );
     container.add('viewParams', TViewParametersFactory.create());
 end;
 ```
 
-In code above, we register service name `routeMiddlewares` and its factory class
-which responsible to create instance of `IMiddlewareCollectionAware` interface.
-We will not use middleware yet, `TNullMiddlewareCollectionAwareFactory` creates null class which implements that interface but actually does nothing. See [Middlewares](/middlewares) for more information.
-
-We also register `IViewParameters` instance which we will be used to pass data from controller to view. See [Displaying Data in View](/working-with-views/displaying-data-in-view) for more information.
+In code above, we register service name `viewParams`, an `IViewParameters` instance which we will be used to pass data from controller to view. See [Displaying Data in View](/working-with-views/displaying-data-in-view) for more information.
 
 ## Build application routes
 
@@ -168,7 +160,7 @@ var router : IRouter;
 begin
     router := container.get('router') as IRouter;
     try
-        router.get('/', container.get('helloController') as IRouteHandler);
+        router.get('/', container.get('helloController') as IRequestHandler);
     finally
         router := nil;
     end;
@@ -208,21 +200,23 @@ type
     public
         function handleRequest(
             const request : IRequest;
-            const response : IResponse
+            const response : IResponse;
+            const args : IRouteArgsReader
         ) : IResponse; override;
     end;
 
 implementation
 
     function THelloController.handleRequest(
-          const request : IRequest;
-          const response : IResponse
+        const request : IRequest;
+        const response : IResponse;
+        const args : IRouteArgsReader
     ) : IResponse;
     var greetName : string;
     begin
         greetName := request.getQueryParam('name', 'everybody');
         viewParams.setVar('name', greetName);
-        result := inherited handleRequest(request, response);
+        result := inherited handleRequest(request, response, args);
     end;
 
 end.
@@ -269,7 +263,6 @@ uses
     function THelloControllerFactory.build(const container : IDependencyContainer) : IDependency;
     begin
         result := THelloController.create(
-            container.get('routeMiddlewares') as IMiddlewareCollectionAware,
             container.get('helloView') as IView,
             container.get('viewParams') as IViewParameters
         );
@@ -379,10 +372,6 @@ to become
 ```
 procedure THelloApp.buildDependencies(const container : IDependencyContainer);
 begin
-    container.factory(
-        'routeMiddlewares',
-        TNullMiddlewareCollectionAwareFactory.create()
-    );
     container.add('viewParams', TViewParametersFactory.create());
     container.add('helloController', THelloControllerFactory.create());
     container.add('helloView', THelloViewFactory.create());
@@ -429,10 +418,6 @@ uses
 
     procedure THelloApp.buildDependencies(const container : IDependencyContainer);
     begin
-        container.factory(
-            'routeMiddlewares',
-            TNullMiddlewareCollectionAwareFactory.create()
-        );
         container.add('viewParams', TViewParametersFactory.create());
         container.add('helloController', THelloControllerFactory.create());
         container.add('helloView', THelloViewFactory.create());
@@ -443,7 +428,7 @@ uses
     begin
         router := container.get('router') as IRouter;
         try
-            router.get('/', container.get('helloController') as IRouteHandler);
+            router.get('/', container.get('helloController') as IRequestHandler);
         finally
             router := nil;
         end;

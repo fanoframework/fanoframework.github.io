@@ -100,37 +100,27 @@ appMiddlewares.addBefore(authOnly);
 
 ## Attaching middleware to route
 
-When controller or route hander is created, you need to pass per-route middleware collection
+When you register the controller to route, you can add middleware as shown in following code
 
 ```
-function THiControllerFactory.build(const container : IDependencyContainer) : IDependency;
-var routeMiddlewares : IMiddlewareCollectionAware;
-begin
-    routeMiddlewares := container.get('routeMiddlewares') as IMiddlewareCollectionAware;
-    try
-        result := THiController.create(routeMiddlewares);
-    finally
-        routeMiddlewares := nil;
-    end;
-end;
-
-```
-
-and when you register the controller to route, you can add middleware as shown in following code
-
-```
-(router.get(
+router.get(
     '/hi/{name}',
     hiController
-) as IMiddlewareCollectionAware).addBefore(authOnly);
+).before(authOnly);
 
-(router.post(
+router.post(
     '/hi/{name}',
     hiController
-) as IMiddlewareCollectionAware)
-    .addBefore(ajaxOnly)
-    .addBefore(authOnly);
+).before(ajaxOnly)
+.before(authOnly);
 ```
+
+To attach middleware after request handler is executed, use `after()` method.
+
+router.get(
+    '/hi/{name}',
+    hiController
+).after(executionTimingMiddleware);
 
 ## Built-in middlewares
 
@@ -140,7 +130,6 @@ Fano Framework provides several built-in middlewares.
 - `TCompositeMiddleware`, middleware class which group several middlewares as one.
 - `TRequestHandlerAsMiddleware`, adapter middleware which can turn request handler as a middleware.
 - `TCorsMiddleware`, middleware class which adds CORS response header. Read [Handling CORS](/security/handling-cors) for more information.
-- `TNullCorsMiddleware`, middleware class which adds response header that always allow CORS.
 - `TValidationMiddleware`, middleware class which validate request.
 
 ### Group several middlewares as one
@@ -149,35 +138,33 @@ For example if you have following route registration which each of routes is usi
 middlewares
 
 ```
-(router.get(
+router.get(
     '/hello/{name}',
     helloController
-) as IMiddlewareCollectionAware)
-    .addBefore(cors)
-    .addBefore(authOnly)
-    .addBefore(ajaxOnly);
+).before(cors)
+.before(authOnly)
+.before(ajaxOnly);
 
-(router.get(
+router.get(
     '/hi/{name}',
     hiController
-) as IMiddlewareCollectionAware)
-    .addBefore(cors)
-    .addBefore(authOnly)
-    .addBefore(ajaxOnly);
+).before(cors)
+.before(authOnly)
+.before(ajaxOnly);
 ```
 
 You can simplify it to become
 
 ```
-(router.get(
+router.get(
     '/hello/{name}',
     helloController
-) as IMiddlewareCollectionAware).addBefore(corsAuthAjax);
+).before(corsAuthAjax);
 
-(router.get(
+router.get(
     '/hi/{name}',
     hiController
-) as IMiddlewareCollectionAware).addBefore(corsAuthAjax);
+).before(corsAuthAjax);
 ```
 
 where `corsAuthAjax` middleware is defined as follows

@@ -22,7 +22,7 @@ If we have following route setup
 ```
 var
     router : IRouter;
-    myAppHandler, anotherAppHandler : IRouteHandler;
+    myAppHandler, anotherAppHandler : IRequestHandler;
 ...
 
 //GET request
@@ -46,7 +46,6 @@ Fano Framework comes with basic router implementation `TRouter` class which impl
 container.add('router', TSimpleRouterFactory.create());
 ```
 
-
 ## Create route
 
 ### Creating route for GET method
@@ -54,101 +53,119 @@ container.add('router', TSimpleRouterFactory.create());
 ```
 var
     router : IRouter;
-    homeRouteHandler : IRouteHandler;
+    handler : IRequestHandler;
 ...
-router.get('/', homeRouteHandler);
+router.get('/', handler);
 ```
 
 ### Creating route for POST method
 
 ```
-var handler : IRouteHandler;
-...
 router.post('/submit', handler);
 ```
 
 ### Creating route for PUT method
 
 ```
-var handler : IRouteHandler;
-...
 router.put('/submit', handler);
 ```
 
 ### Creating route for DELETE method
 
 ```
-var submitHandler : IRouteHandler;
-...
-router.delete('/submit', submitHandler);
+router.delete('/submit', handler);
 ```
 
 ### Creating route for PATCH method
 
 ```
-var submitHandler : IRouteHandler;
-...
-router.patch('/submit', submitHandler);
+router.patch('/submit', handler);
 ```
 
 ### Creating route for HEAD method
 
 ```
-var handler : IRouteHandler;
-...
 router.head('/', handler);
 ```
 
 ### Creating route for OPTIONS method
 
 ```
-var handler : IRouteHandler;
-...
 router.options('/', handler);
 ```
 
 ### Creating route for multiple methods
 
 ```
-var handler : IRouteHandler;
-...
 router.map(['GET', 'POST'], '/', handler);
 ```
 
 ### Creating route for all methods
 
 ```
-var handler : IRouteHandler;
-...
 router.any('/', handler);
 ```
 
+## Set route name or middlewares with IRoute interface
+
+All methods which register request handler such as `get()`, `post()`,.. etc returns
+instance of `IRoute` interface which you can use to assign name to route or attach a middlewares. Following code lists all methods in this interface.
+
+```
+function setName(const routeName : shortstring) : IRoute;
+function getName() : shortstring;
+function before(const amiddleware : IMiddleware) : IRoute;
+function after(const amiddleware : IMiddleware) : IRoute;
+```
+
+For example to set route name and attach a middleware.
+
+```
+var authOnlyMiddleware : IMiddleware;
+...
+router.post('/user/submit', handler).setName('create-user').before(authOnlyMiddleware);
+```
+
+Read [Middlewares](/middlewares) for more information.
+
 ## Getting route argument
 
-`IRouteHandler` interface provides `getArg()` to allow application to retrieve route argument.
+Third parameter of `handleRequest()` method of `IRequestHandler` interface gives instance of `IRouteArgsReader` interface to allow application to retrieve route argument.
 
 If you have route pattern `/myroute/{name}` and you access route via URl `http://[your-host-name]/myroute/john` then you can get value of `name` parameter as follows
 
 ```
-var handler : IRouteHandler;
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var
     arg : TPlaceholder;
-...
-arg := handler.getArg('name');
-//arg.phName = 'name', arg.phValue = 'john'
+begin
+    arg := args.getArg('name');
+    //arg.name = 'name', arg.value = 'john'
+end;
 ```
 
 You can get all route arguments using `getArgs()` method,
 
 ```
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
 var placeHolders : TArrayOfPlaceholders;
     arg : TPlaceholder;
     i:integer;
-...
-placeHolders := getArgs();
-
-for i:=0 to length(placeholders)-1 do
 begin
-    arg := placeholders[i];
+    placeHolders := args.getArgs();
+
+    for i:=0 to length(placeholders)-1 do
+    begin
+        arg := placeholders[i];
+    end;
 end;
 ```
 
@@ -157,6 +174,7 @@ See [code example](https://github.com/fanoframework/fano-app/blob/master/app/App
 ## Explore more
 
 - [Dispatcher](/dispatcher)
+- [Middlewares](/middlewares)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>

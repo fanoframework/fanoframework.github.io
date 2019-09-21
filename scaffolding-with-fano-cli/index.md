@@ -138,17 +138,17 @@ $ fanocli --controller=Hello
 It will create following files
 
 ```
-test-fano/app/App/Hello/Controllers/HelloController.pas
-test-fano/app/App/Hello/Controllers/Factories/HelloControllerFactory.pas
-test-fano/app/Routes/Hello/routes.inc
+test-fano/src/App/Hello/Controllers/HelloController.pas
+test-fano/src/App/Hello/Controllers/Factories/HelloControllerFactory.pas
+test-fano/src/Routes/Hello/routes.inc
 ```
 
 and also modify following files
 
 ```
-test-fano/app/bootstrap.pas
-test-fano/app/Dependencies/controllers.dependencies.inc
-test-fano/app/Routes/routes.inc
+test-fano/src/bootstrap.pas
+test-fano/src/Dependencies/controllers.dependencies.inc
+test-fano/src/Routes/routes.inc
 test-fano/build.cfg
 test-fano/build.cfg.sample
 ```
@@ -172,15 +172,15 @@ $ fanocli --view=Hello
 It will create following files
 
 ```
-test-fano/app/App/Hello/Views/HelloView.pas
-test-fano/app/App/Hello/Views/Factories/HelloViewFactory.pas
+test-fano/src/App/Hello/Views/HelloView.pas
+test-fano/src/App/Hello/Views/Factories/HelloViewFactory.pas
 ```
 
 and also modify following files
 
 ```
-test-fano/app/bootstrap.pas
-test-fano/app/Dependencies/views.dependencies.inc
+test-fano/src/bootstrap.pas
+test-fano/src/Dependencies/views.dependencies.inc
 test-fano/build.cfg
 test-fano/build.cfg.sample
 ```
@@ -197,15 +197,15 @@ $ fanocli --model=Hello
 It will create following files
 
 ```
-test-fano/app/App/Hello/Models/HelloModel.pas
-test-fano/app/App/Hello/Models/Factories/HelloModelFactory.pas
+test-fano/src/App/Hello/Models/HelloModel.pas
+test-fano/src/App/Hello/Models/Factories/HelloModelFactory.pas
 ```
 
 and also modify following files
 
 ```
-test-fano/app/bootstrap.pas
-test-fano/app/Dependencies/models.dependencies.inc
+test-fano/src/bootstrap.pas
+test-fano/src/Dependencies/models.dependencies.inc
 test-fano/build.cfg
 test-fano/build.cfg.sample
 ```
@@ -225,6 +225,31 @@ Command above is equal to following command
 $ fanocli --controller=Hello
 $ fanocli --model=Hello
 $ fanocli --view=Hello
+```
+
+## Creating middleware
+
+To scaffold middleware class, run with  `--middleware` command line options
+
+```
+$ cd test-fano
+$ fanocli --middleware=AuthOnly
+```
+
+It will create following files
+
+```
+test-fano/src/Middlewares/AuthOnly/AuthOnlyMiddleware.pas
+test-fano/src/Middlewares/AuthOnly/Factories/AuthOnlyMiddlewareFactory.pas
+```
+
+and also modify following files
+
+```
+test-fano/app/bootstrap.pas
+test-fano/app/Dependencies/middlewares.dependencies.inc
+test-fano/build.cfg
+test-fano/build.cfg.sample
 ```
 
 ## Deployment
