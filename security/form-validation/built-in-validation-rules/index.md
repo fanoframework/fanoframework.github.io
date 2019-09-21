@@ -333,6 +333,14 @@ Field must be valid uploaded file and its file size must be less or equal predef
 rule := TUploadedSizeValidator.create(200 * 1024);
 ```
 
+### TAntivirusValidator
+
+Field must be valid uploaded file and must be free from computer virus. Current implementation only support [ClamAV](https://www.clamav.net/documents/libclamav).
+
+```
+rule := TAntivirusValidator.create(TClamAv.create());
+```
+
 ## Miscellaneous
 
 ### TCompositeValidator
