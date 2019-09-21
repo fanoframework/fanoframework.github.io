@@ -335,7 +335,13 @@ rule := TUploadedSizeValidator.create(200 * 1024);
 
 ### TAntivirusValidator
 
-Field must be valid uploaded file and must be free from computer virus. Current implementation only support [ClamAV](https://www.clamav.net/documents/libclamav).
+Field must be valid uploaded file and must be free from computer virus. Current implementation only support [ClamAV](https://www.clamav.net/documents/libclamav). You also need to define `LIBCLAMAV`
+
+```
+{$DEFINE LIBCLAMAV}
+```
+
+or through command line parameter `-dLIBCLAMAV`.
 
 ```
 rule := TAntivirusValidator.create(TClamAv.create());
