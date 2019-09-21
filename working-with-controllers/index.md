@@ -23,7 +23,7 @@ function handleRequest(
 
 - `request`, current request object
 - `response`, response object
-- `args`, current route arguments
+- `args`, current route arguments. Read [Working with Router](/working-with-router) for more information about purpose of this object.
 
 `handleRequest()` should return instance of response that will be used as response to request. You can return response given by dispatcher or create entirely new response instance.
 
@@ -75,6 +75,7 @@ This method is part of `IRequestHandler` interface. Dispatcher will pass request
 - [Working with Response](/working-with-response)
 - [Working with Views](/working-with-views)
 - [Working with Models](/working-with-models)
+- [Working with Router](/working-with-router)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
