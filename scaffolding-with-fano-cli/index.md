@@ -11,7 +11,21 @@ to help scaffolding project structure using [Fano Framework](https://github.com/
 
 ## Installation
 
-Follow installation instruction in Fano CLI [README.md](https://github.com/fanoframework/fano-cli/blob/master/README.md) document.
+Make sure Free Pascal and git is installed. Run
+
+```
+$ git clone git@github.com:fanoframework/fano-cli.git && \
+cd fano-cli && \
+./tools/config.setup.sh && \
+./build.sh
+```
+For easier typing, copy `bin/out/fanocli` executable binary to globally accessible location, for example
+
+```
+$ sudo cp bin/out/fanocli /usr/local/bin/fanocli
+```
+
+Follow installation instruction in Fano CLI [README.md](https://github.com/fanoframework/fano-cli/blob/master/README.md) document for more information.
 
 ## View Fano CLI Help
 
