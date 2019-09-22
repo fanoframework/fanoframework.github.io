@@ -20,16 +20,16 @@ description: Basic tutorial to get started with Fano Framework, web application 
 Make sure all requirements above are met. Run
 
 ```
-$ fanocli --project=Hello && \
-cd Hello && \
-fanocli --controller=Home --route=/ && \
-./build.sh && \
-sudo fanocli --deploy-cgi=hello.fano
+$ fanocli --project=Hello
+$ cd Hello
+$ fanocli --controller=Home --route=/
+$ ./build.sh
+$ sudo fanocli --deploy-cgi=hello.fano
 ```
 
 ## Run it from browser
 
-Open web browser and go to `http://hello.fano`. Contratulations, your application is working.
+Open web browser and go to `http://hello.fano`. Congratulations, your application is working.
 
 ## Explore more
 
