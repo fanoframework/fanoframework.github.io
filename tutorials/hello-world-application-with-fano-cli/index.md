@@ -51,7 +51,7 @@ Run
 $ ./build.sh
 ```
 
-Wait until compilation .is finished
+Wait until compilation is finished
 
 ## Setup web server configuration
 
