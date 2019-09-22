@@ -108,7 +108,7 @@ resultSet.next();
 
 ## Test if at end of result set
 
-`readString()` will throws exception if you try to read data when cursor is at end of file. To avoid it you need to check end of file condition with `eof()`. So to read all data in result set, you need following loop.
+`fieldByName()` method will throws exception if you try to read data when cursor is at end of file. To avoid it you need to check end of file condition with `eof()`. So to read all data in result set, you need following loop.
 
 ```
 while not resultSet.eof() do

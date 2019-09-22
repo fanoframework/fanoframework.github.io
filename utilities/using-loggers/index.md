@@ -88,29 +88,15 @@ logger := TFileLogger.create('storages/logs/app.log');
 
 ### Log to several medium
 
-`TCompositeLogger` is logger implementation that is composed from two external `ILogger` instances. It can be used to combine two or more loggers as one, thus creating more complex logging functionality. For example, to log to file and to log to RDBMS simultaneously.
+`TCompositeLogger` is logger implementation that is composed from external `ILogger` instances. It can be used to combine two or more loggers as one, thus creating more complex logging functionality. For example, to log to file and to log to RDBMS simultaneously.
 
 ```
 var logger : ILogger;
 ...
-logger := TCompositeLogger.create(
+logger := TCompositeLogger.create([
     TFileLogger.create('storages/logs/app.log'),
     TSomeLoggerThatLogToDb.create()
-);
-```
-
-`TCompositeLogger` can only accept two external loggers. To compose more than two loggers, you need to daisy-chain `TCompositeLogger` instances, for example:
-
-```
-var logger : ILogger;
-...
-logger := TCompositeLogger.create(
-    TCompositeLogger.create(
-        TFileLogger.create('storages/logs/app.log'),
-        TSomeLoggerThatLogToDb.create()
-    ),
-    TSomeMoreLogger.create()
-);
+]);
 ```
 
 ### Separate log based on level type
