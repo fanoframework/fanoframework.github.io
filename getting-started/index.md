@@ -7,132 +7,35 @@ description: Basic tutorial to get started with Fano Framework, web application 
 
 ## Requirement
 
-Main requirement is [Free Pascal](https://www.freepascal.org/) >= 3.0
+- [Free Pascal >= 3.0](https://www.freepascal.org)
+- [git](https://git-scm.com/)
+- [Apache 2.4](https://httpd.apache.org/)
+- Text editor, vim, VSCode, Atom etc.
+- [Fano CLI](https://github.com/fanoframework/fano-cli)
+- Working Internet connection.
+- Root privilege.
 
-From your shell run
+## Create application
 
-```
-$ fpc -i
-```
-
-If you see following similar output
-
-```
-Free Pascal Compiler version 3.0.4
-
-Compiler date      : 2017/10/03
-Compiler CPU target: x86_64
-...
-```
-then you are good. If not, you may not have Free Pascal installed in your system.
-In that case, you may want to take a look following resources:
-
-- [Download Free Pascal](https://www.freepascal.org/download.var)
-- [Free Pascal Documentation](https://www.freepascal.org/docs.var)
-
-## Installation
-
-### Clone from Fano App example web application
+Make sure all requirements above are met. Run
 
 ```
-$ git clone git@github.com:fanoframework/fano-app.git --recursive
+$ fanocli --project=Hello && \
+cd Hello && \
+fanocli --controller=Home --route=/ && \
+./build.sh && \
+sudo fanocli --deploy-cgi=hello.fano
 ```
 
-`--recursive` is needed so git also pull [Fano](https://github.com/fanoframework/fano) repository.
+## Run it from browser
 
-If you are missing `--recursive` when you clone, you may find that `fano` directory is empty. In this case run
-
-```
-$ git submodule update --init
-```
-
-## Copy compiler configuration
-
-Run
-
-```
-$ ./tools/config.setup.sh
-```
-
-It will setup required configuration files.
-
-## Build Application
-
-Run
-
-```
-$ ./build.sh
-```
-
-By default, it will output binary executable in `app/public` directory.
-
-## Run Application
-
-### Run with a webserver
-
-Setup a virtual host. Please consult documentation of web server you use.
-
-For example on Apache,
-
-```
-<VirtualHost *:80>
-     ServerName example.fano
-     DocumentRoot /home/example/app/public
-
-     <Directory "/home/example/app/public">
-         Options +ExecCGI
-         AllowOverride FileInfo
-         Require all granted
-         DirectoryIndex app.cgi
-         AddHandler cgi-script .cgi
-
-        <IfModule mod_rewrite.c>
-            RewriteEngine On
-            RewriteCond %{REQUEST_FILENAME} !-d
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteRule ^(.*)$ app.cgi [L]
-        </IfModule>
-     </Directory>
-</VirtualHost>
-```
-
-Change `/home/example/app/public` to actual directory of your application.
-
-On Apache, you will need to enable CGI module, such as `mod_cgi` or `mod_cgid`. If CGI module not loaded, above virtual host will cause `app.cgi` is downloaded instead of executed.
-
-Content of `<IfModule>` above basically tells Apache to serve existing files/directories directly. For any non-existing files/directories, pass them to our application.
-
-For example, on Debian, this will enable `mod_cgi` module.
-
-```
-$ sudo a2enmod cgi
-$ sudo systemctl restart apache2
-```
-
-Setup domain name for example by adding DNS record or for development purpose add
-following entry to `/etc/hosts` file.
-
-```
-127.0.0.1 example.fano
-```
-After you setup virtual host and domain name, try open application through Internet browser with URL `http://example.fano`.
-
-## Deployment
-
-You need to deploy only executable binary and any supporting files such as HTML templates, images, css stylesheets, application config.
-Any `pas` or `inc` files or shell scripts is not needed in deployment machine in order application to run.
-
-So for this repository, you will need to copy `public`, `Templates`, `config`
-and `storages` directories to your deployment machine. make sure that
-`storages` directory is writable by web server.
-
-Read [Deployment](/deployment) for information how to deploy Fano Framework web
-application on various web server setup.
+Open web browser and go to `http://hello.fano`. Contratulations, your application is working.
 
 ## Explore more
 
 - [Step by Step Tutorials](/tutorials)
-- [Deployment](/deployment)
+- [Examples](/examples)
+- [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>

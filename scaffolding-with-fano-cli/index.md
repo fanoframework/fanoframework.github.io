@@ -160,6 +160,12 @@ script, you can access `HelloController` by visiting URL
 wget http://[your host name]/hello
 ```
 
+To create controller for certain route pattern or HTTP method, add `--route` and `--method` parameter. For example to create controller which will handle POST request to `/my/hello`,
+
+```
+$ fanocli --controller=Hello --route=/my/hello --method=POST
+```
+
 ## Creating view
 
 After you create project structure, to scaffold view class, run with  `--view` command line options
