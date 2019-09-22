@@ -5,7 +5,7 @@ description: Step by step tutorial for creating basic hello world web applicatio
 
 <h1 class="major">Creating Hello World web application With Fano CLI</h1>
 
-In this step by step tutorial, we are going to create a simple CGI web application which displays greeting message.
+In this step by step tutorial, we are going to create a simple CGI web application which displays greeting message using Fano CLI. Read [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) for more information.
 
 ## Who is this tutorial for?
 
@@ -113,6 +113,7 @@ In this tutorial, you have learned how to use Fano CLI to
 ## Explore more
 
 - [Step by Step Tutorials](/tutorials)
+- [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
