@@ -23,15 +23,7 @@ This tutorial is written for anyone new to Fano Framework. It is assumed that yo
 
 ## Create Project
 
-Make sure that all requirements are met. To test if Fano CLI is installed, run
-
-```
-$ fanocli --help
-```
-
-It should output `Fano CLI, utility for Fano Framework`.
-
-To create a CGI project, run
+Make sure that all requirements are met. To create a CGI project, run
 
 ```
 $ fanocli --project=Hello
@@ -43,6 +35,8 @@ Wait until new project is created. If everything is ok, your project will be cre
 $ cd Hello
 ```
 
+All actions below is assumed to take place inside `Hello` directory.
+
 ## Build application
 
 Run
@@ -51,11 +45,11 @@ Run
 $ ./build.sh
 ```
 
-Wait until compilation is finished
+Wait until compilation is finished.
 
 ## Setup web server configuration
 
-It is assumed that active directory is `Hello` directory. Run
+Run
 
 ```
 $ sudo fanocli --deploy-cgi=hello.fano
@@ -81,7 +75,7 @@ Rebuild application by running,
 $ ./build.sh
 ```
 
-After compilation is finished, open web browser and go to `http://hello.fano/home`. You should see text `Home controller` printed. Congratulation, your application is working.
+After compilation is finished, open web browser and go to `http://hello.fano/home`. You should see text `Home controller` printed. Congratulations, your application is working.
 
 ## Creating default route
 
