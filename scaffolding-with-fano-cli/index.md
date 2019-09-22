@@ -14,7 +14,7 @@ to help scaffolding project structure using [Fano Framework](https://github.com/
 Make sure Free Pascal and git is installed. Run
 
 ```
-$ git clone git@github.com:fanoframework/fano-cli.git && \
+$ git clone https://github.com/fanoframework/fano-cli.git && \
 cd fano-cli && \
 ./tools/config.setup.sh && \
 ./build.sh
