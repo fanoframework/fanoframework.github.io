@@ -18,15 +18,16 @@ by sending appropriate response header.
 
 ## Handling CORS with middleware
 
-Fano Framework provides built-in middleware class `TCorsMiddleware` or
-`TNullCorsMiddleware` which is to simplify task for sending appropriate CORS headers. Read [Middlewares](/middlewares) for more information about working with middlewares.
+Fano Framework provides built-in middleware class `TCorsMiddleware` which is to simplify task for sending appropriate CORS headers. Read [Middlewares](/middlewares) for more information about working with middlewares.
 
-`TNullCorsMiddleware` is CORS middleware implementation which simply allow all CORS request without restriction, while `TCorsMiddleware` class is implementation which can be configured to selectively apply restriction.
+Constructor of `TCorsMiddleware` expects `ICors` interface instance which responsible to handle CORS request.
+
+`TNullCors` is `ICors` implementation which simply allow all CORS request without restriction, while `TCors` class is implementation which can be configured to selectively apply restriction.
 
 ## Register CORS middleware with container
 
 Fano Framework has `TCorsMiddlewareFactory` or `TNullCorsMiddlewareFactory` class
-which allows you to register `TCorsMiddleware` or `TNullCorsMiddleware` with service container.
+which allows you to register `TCorsMiddleware` with `TCors` or `TNullCors` with service container.
 Both factory classes are derived from `TBaseCorsMiddlewareFactory`.
 
 ```

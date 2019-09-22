@@ -7,7 +7,7 @@ description: Tutorial how to use Fano CLI to scaffold web application using Fano
 ## What is Fano CLI?
 
 [Fano CLI](https://github.com/fanoframework/fano-cli) is command line application
-to help scaffolding project structure using [Fano Framework](https://github.com/fanoframework/fano).
+to help scaffolding project structure using [Fano Framework](https://github.com/fanoframework/fano). It helps tedious tasks such as creating Fano web application project, creating controller, model, view, middleware classes and also setting up web server configuration.
 
 ## Installation
 

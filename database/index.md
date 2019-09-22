@@ -132,6 +132,8 @@ end;
 
 ## Explore more
 
+- [Working with Models](/working-with-models)
+
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
 </ul>
