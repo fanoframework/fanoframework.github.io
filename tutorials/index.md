@@ -6,4 +6,5 @@ description: Collection of step-by-step tutorial to create web application from 
 <h1 class="major">Tutorials</h1>
 
 - [Creating Hello World application](/tutorials/hello-world-application)
+- [Creating Hello World application with Fano CLI](/tutorials/hello-world-application-with-fano-cli)
 - [Creating CRUD application](/tutorials/creating-crud-application)
