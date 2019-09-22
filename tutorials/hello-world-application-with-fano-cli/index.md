@@ -29,7 +29,7 @@ Make sure that all requirements are met. To test if Fano CLI is installed, run
 $ fanocli --help
 ```
 
-It should output `Fano CLI v0.1, utility for Fano Framework`.
+It should output `Fano CLI, utility for Fano Framework`.
 
 To create a CGI project, run
 
