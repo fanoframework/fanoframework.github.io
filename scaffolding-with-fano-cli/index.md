@@ -282,6 +282,7 @@ to build application.
 ## Explore more
 
 - [Deployment](/deployment)
+- [Creating Hello World web application With Fano CLI](/hello-world-application-with-fano-cli)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
