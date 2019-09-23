@@ -36,6 +36,7 @@ Open web browser and go to `http://hello.fano`. Congratulations, your applicatio
 - [Step by Step Tutorials](/tutorials)
 - [Examples](/examples)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
+- [Creating Hello World application with Fano CLI](https://fanoframework.github.io/tutorials/hello-world-application-with-fano-cli)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
