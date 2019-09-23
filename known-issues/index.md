@@ -13,7 +13,7 @@ When running `build.sh` script, you may encounter following warning:
 /usr/bin/ld: warning: public/link.res contains output sections; did you forget -T?
 ```
 
-This is known issue between FreePascal and GNU Linker. See
+This is known issue between Free Pascal and GNU Linker. See
 [FAQ: link.res syntax error, or "did you forget -T?"](https://www.freepascal.org/faq.var#unix-ld219)
 
 However, this warning is minor and can be ignored. It does not affect output executable.
