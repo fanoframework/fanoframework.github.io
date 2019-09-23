@@ -5,6 +5,8 @@ description: Basic tutorial to get started with Fano Framework, web application 
 
 <h1 class="major">Getting Started</h1>
 
+Following document explains minimum steps required to setup a working Fano web application on development machine.
+
 ## Requirement
 
 - [Free Pascal >= 3.0](https://www.freepascal.org)
