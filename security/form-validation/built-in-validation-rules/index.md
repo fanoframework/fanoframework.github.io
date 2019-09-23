@@ -324,6 +324,7 @@ Field must be valid uploaded file and its content type must be one of predefined
 ```
 rule := TUploadedMimeValidator.create(['image/jpg', 'image/png']);
 ```
+Please not that this validation rule does not check if file uploaded is actually JPEG/PNG image.
 
 ### TUploadedSizeValidator
 
@@ -331,6 +332,31 @@ Field must be valid uploaded file and its file size must be less or equal predef
 
 ```
 rule := TUploadedSizeValidator.create(200 * 1024);
+```
+
+### TFileFormatValidator
+
+Abstract class which validate uploaded file against certain file format.
+
+### TImagePngValidator, TImageJpgValidator, TImageGifValidator
+
+Validation rules inherit from `TFileFormatValidator` which validate uploaded file against PNG, JPEG and GIF image format. Please note these classes only do fast check on first few bytes of file to determine its format and without loading whole file.
+
+Validate field that must be uploaded file with PNG image format
+```
+rule := TImagePngValidator.create();
+```
+
+Validate field that must be uploaded file with JPEG image format
+
+```
+rule := TImageJpgValidator.create();
+```
+
+Validate field that must be uploaded file with GIF image format
+
+```
+rule := TImageGifValidator.create();
 ```
 
 ### TAntivirusValidator

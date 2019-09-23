@@ -31,7 +31,7 @@ $ sudo fanocli --deploy-cgi=hello.fano
 
 ## Run it from browser
 
-Open web browser and go to `http://hello.fano`. Congratulations, your application is working.
+Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
 ## Explore more
 
