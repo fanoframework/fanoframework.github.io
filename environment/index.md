@@ -139,7 +139,7 @@ browser := myEnv.httpUserAgent();
 Fano Framework provides several built-in implementation of ICGIEnvironment.
 
 - `TCGIEnvironment` class which get environment variables thorough `GetEnvironmentVariable()` function from FreePascal `SysUtils` unit. For CGI application, this is what you use.
-- `TKeyValueEnvironment` class which get environment variables thorough key value pair. For FastCGI orr SCGI application, this is what you use.
+- `TKeyValueEnvironment` class which get environment variables thorough key value pair. For FastCGI or SCGI application, this is what you use.
 
 ## Enumerate all environment variables
 

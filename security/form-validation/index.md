@@ -121,7 +121,8 @@ For example, here we validate request inside controller
 ```
 function TMyController.handleRequest(
     const request : IRequest;
-    const response : IResponse
+    const response : IResponse;
+    const args : IRouteArgsReader
 ) : IResponse;
 var i, len : integer;
     validationRes : TValidationResult;
@@ -174,14 +175,24 @@ Fano Framework comes with several built-in validation rules, some are validation
 
 ## Writing your own validation rule
 
-If built-in validation rules do not meet your requirement, you can create your own validation rule by creating class that implements `IValidationRule`.
+If built-in validation rules do not meet your requirement, you can create your own validation rule by creating class that implements `IValidationRule`. Following methods are required to be implemented.
+
+```
+function isValid(
+    const fieldName : shortstring;
+    const dataToValidate : IReadOnlyList;
+    const request : IRequest
+) : boolean;
+
+function errorMessage(const key : shortstring) : string;
+```
 
 To simplify, Fano Framework provides `TBaseValidator` class which developer can use to create validation rule. It is abstract class which developer required to implements its protected method `isValidData()`
 
 ```
 function isValidData(
     const dataToValidate : string;
-    const dataCollection : IList;
+    const dataCollection : IReadOnlyList;
     const request : IRequest
 ) : boolean; virtual; abstract;
 ```

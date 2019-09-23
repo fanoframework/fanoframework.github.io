@@ -39,7 +39,7 @@ msg1 := request.getQueryParam('msg1', 'ok');
 To retrieve all query parameters at once, use `getQueryParams()`
 
 ```
-var params : IList;
+var params : IReadOnlyList;
 ...
 params := request.getQueryParams();
 ```
@@ -64,7 +64,7 @@ msg1 := request.getCookieParam('msg1', 'ok');
 To retrieve all cookie parameters at once, use `getCookieParams()`
 
 ```
-var cookies : IList;
+var cookies : IReadOnlyList;
 ...
 cookies := request.getCookieParams();
 ```
@@ -99,10 +99,28 @@ msg1 := request.getParsedBodyParam('msg1', 'ok');
 To retrieve all POST parameters at once, use `getParsedBodyParams()`
 
 ```
-var params : IList;
+var params : IReadOnlyList;
 ...
 params := request.getParsedBodyParams();
 ```
+
+## Get query parameters and POST data
+
+To get query string parameters and POST data as one list
+
+```
+var params : IReadOnlyList;
+...
+params := request.getParams();
+```
+
+To read single value
+
+```
+msg1 := request.getParam('msg1', 'ok');
+```
+
+Above method search query string parameter first. If it cannot find data with key `msg1`, it tries to read body parameters. If none found, default value 'ok` is returned.
 
 ## Handling file upload
 
@@ -205,3 +223,5 @@ For example how to handle file upload with Fano Framework, see
 - [Working with response](/working-with-response)
 - [Working with Controllers](/working-with-controllers)
 - [Working with Views](/working-with-views)
+- [Form Validation](/security/form-validation)
+- [Handling CORS](/security/handling-cors)
