@@ -14,10 +14,10 @@ to help scaffolding project structure using [Fano Framework](https://github.com/
 Make sure Free Pascal and git is installed. Run
 
 ```
-$ git clone https://github.com/fanoframework/fano-cli.git && \
-cd fano-cli && \
-./tools/config.setup.sh && \
-./build.sh
+$ git clone https://github.com/fanoframework/fano-cli.git
+$ cd fano-cli
+$ ./tools/config.setup.sh
+$ ./build.sh
 ```
 For easier typing, copy `bin/out/fanocli` executable binary to globally accessible location, for example
 
