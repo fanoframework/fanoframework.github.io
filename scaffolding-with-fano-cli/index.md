@@ -98,7 +98,7 @@ Generated project files are mostly similar to `--project` output, except that `s
 See [Deploy as FastCGI application](/deployment/fastcgi) for information on how to
 setup FastCGI application to work with various web server.
 
-Difference between FastCGI application created with `--project-fcgid` and `--project-fcgi` is first will be FastCGI application which its process is managed by Apache mod_fcgid module while latter must be run independently.
+Difference between FastCGI application created with `--project-fcgid` and `--project-fcgi` is first will be FastCGI application which its process is managed by Apache mod_fcgid module while latter must be run independently using Apache mod_proxy_fcgi or Nginx.
 
 ## Scaffolding SCGI project directory structure
 
