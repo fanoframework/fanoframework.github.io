@@ -49,11 +49,30 @@ For example, following command will cause a new project created in directory nam
 $ fanocli --project=test-fano
 ```
 
-This command line options creates Git repository and initial commit for you  automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse
+`--project` command is alias of `--project-cgi` and so it creates CGI web application.
+
+This command line options also creates Git repository and initial commit for you  automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse
 to merge because they have unrelated commit histories.
 
 To workaround this problem, you can run `git merge` with option `--allow-unrelated-histories` or create project directory without creating initial commit or create project directory structure without
 Git repository.
+
+## Scaffolding FastCGI project directory structure with Apache mod_fcgid module
+
+To scaffold FastCGI project structure using Fano framework that employ Apache mod_fcgid, run with  `--project-fcgid` command line options
+
+```
+$ fanocli --project-fcgid=[project-name]
+```
+
+For example, following command will cause a new FastCGI project created in directory name `test-fano-fcgi` inside current directory.
+
+```
+$ fanocli --project-fcgid=test-fano-fcgi
+```
+
+See [Deploy as FastCGI application](/deployment/fastcgi) for information on how to
+setup FastCGI application to work with various web server.
 
 ## Scaffolding FastCGI project directory structure
 
@@ -78,6 +97,8 @@ $ fanocli --project-fcgi=test-fano-fcgi --host=192.168.2.1 --port=4040
 Generated project files are mostly similar to `--project` output, except that `src/app.pas`, and `src/bootstrap.pas` which will generate a daemon FastCGI web application.
 See [Deploy as FastCGI application](/deployment/fastcgi) for information on how to
 setup FastCGI application to work with various web server.
+
+Difference between FastCGI application created with `--project-fcgid` and `--project-fcgi` is first will be FastCGI application which its process is managed by Apache mod_fcgid module while latter must be run independently.
 
 ## Scaffolding SCGI project directory structure
 

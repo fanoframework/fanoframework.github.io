@@ -36,6 +36,12 @@ To setup for nginx web server add `--web-server=nginx`. Without it, it is assume
 $ sudo fanocli --deploy-fcgi=myapp.me --web-server=nginx
 ```
 
+To deploy FastCGI web application for Apache mod_fcgid, run with `--deploy-fcgid`
+
+```
+$ sudo fanocli --deploy-fcgid=myapp.me
+```
+
 ## Apache with mod_proxy_fcgi module
 
 To deploy as FastCGI application with [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)
@@ -139,7 +145,6 @@ Tell Apache to load configuration by running
 ```
 $ sudo systemctl reload httpd
 ```
-
 
 ## Apache with mod_fcgid module
 
