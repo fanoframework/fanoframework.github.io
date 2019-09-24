@@ -175,17 +175,7 @@ Fano Framework comes with several built-in validation rules, some are validation
 
 ## Writing your own validation rule
 
-If built-in validation rules do not meet your requirement, you can create your own validation rule by creating class that implements `IValidationRule`. Following methods are required to be implemented.
-
-```
-function isValid(
-    const fieldName : shortstring;
-    const dataToValidate : IReadOnlyList;
-    const request : IRequest
-) : boolean;
-
-function errorMessage(const key : shortstring) : string;
-```
+If built-in validation rules do not meet your requirement, you can create your own validation rule by creating class that implements `IValidator`.
 
 To simplify, Fano Framework provides `TBaseValidator` class which developer can use to create validation rule. It is abstract class which developer required to implements its protected method `isValidData()`
 
