@@ -18,14 +18,15 @@ state between requests.
 
 To use session in Fano Framework, you need to use `ISessionManager` and also dispatcher instance which support session. Fano Framework provides built-in implementation for this interface.
 
-- `TJsonFileSessionManager`, session manager which store session data in JSON file.
+- `TFileSessionManager`, session manager which store session data in file.
 
 ## Create session manager instance
 
 ### Create factory class
 
-To register `TJsonFileSessionManager` instance to dependency container, Fano Framework provides `TJsonFileSessionManagerFactory` class. Factory's constructor accepts two parameters,
-name of session and path of directory where JSON files will be stored. You need to make sure that directory writeable by application.
+To register `TFileSessionManager` instance to dependency container, Fano Framework provides `TJsonFileSessionManagerFactory` class which will create session manager which store its data as JSON file.
+
+It's constructor accepts two parameters, name of session and path of directory where JSON files will be stored. You need to make sure that directory writeable by application.
 
 ```
 var sessionMgrFactory : IDependencyFactory;
@@ -199,7 +200,8 @@ If you create session manager factory as example above, `sessionName` will conta
 ## Explore more
 
 - [Dispatcher](/dispatcher)
-- [Session example applications](/examples)
+- [Example applications](/examples)
+- [Session example applications](https://github.com/fanoframework/fano-session)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
