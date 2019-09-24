@@ -167,6 +167,8 @@ factory.maxAge(3600);
 
 ## Testing CORS feature
 
+Create a backend application that handle CORS, for example, you can use [Fano Cors example application](https://github.com/fanoframework/fano-cors) as base.
+
 Create a simple web page to call our API via ajax, for example
 
 ```
@@ -202,6 +204,7 @@ Browser will send ajax request with header `Origin` equals to `http://localhost/
 
 - [Middlewares](/middlewares)
 - [Dispatcher](/dispatcher)
+- [Fano Cors example application](https://github.com/fanoframework/fano-cors)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
