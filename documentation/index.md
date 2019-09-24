@@ -64,4 +64,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 ## Deployment
 
 - [Deploy Fano Framework web application on various server setup](/deployment)
+- [Deploy as CGI application](/deployment/cgi)
+- [Deploy as FastCGI application](/deployment/fastcgi)
+- [Deploy as SCGI application](/deployment/scgi)
 - [Known Issues](/known-issues)
