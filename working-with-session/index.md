@@ -24,9 +24,9 @@ To use session in Fano Framework, you need to use `ISessionManager` and also dis
 
 ### Create factory class
 
-To register `TFileSessionManager` instance to dependency container, Fano Framework provides `TJsonFileSessionManagerFactory` class which will create session manager which store its data as JSON file.
+To register `TFileSessionManager` instance to dependency container, Fano Framework provides `TJsonFileSessionManagerFactory` and `TIniFileSessionManagerFactory` classes which will create session manager which store its data as JSON and INI file respectively.
 
-It's constructor accepts two parameters, name of session and path of directory where JSON files will be stored. You need to make sure that directory writeable by application.
+Its constructor accepts two parameters, name of session and path of directory where files will be stored. You need to make sure that directory writeable by application.
 
 ```
 var sessionMgrFactory : IDependencyFactory;
