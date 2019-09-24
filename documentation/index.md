@@ -50,7 +50,8 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Security
 
-- [Security](/security)
+- [Handling CORS](/security/handling-cors)
+- [Form Validation](/security/form-validation)
 
 ## Utilities
 
