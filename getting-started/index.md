@@ -9,6 +9,7 @@ Following document explains minimum steps required to setup a working Fano web a
 
 ## Requirement
 
+- Linux
 - [Free Pascal >= 3.0](https://www.freepascal.org)
 - [git](https://git-scm.com/)
 - [Apache 2.4](https://httpd.apache.org/)
