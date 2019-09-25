@@ -16,7 +16,7 @@ Following document explains minimum steps required to setup a working Fano web a
 - Text editor, vim, VSCode, Atom etc.
 - [Fano CLI](https://github.com/fanoframework/fano-cli)
 - Working Internet connection.
-- Root privilege.
+- Root privilege (for setting up virtual host).
 
 ## Create application
 
