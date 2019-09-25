@@ -151,7 +151,7 @@ container.add(
 and then you can register a middleware to global middlewares as follows
 
 ```
-var appMiddlewares : IMiddlewareCollectionAware;
+var appMiddlewares : IMiddlewareList;
 ...
 appMiddlewares := container.get('appMiddlewares') as IMiddlewareList;
 appMiddlewares.add(authOnly);

@@ -51,9 +51,9 @@ by default is already registered when we use, for example, `TSimpleWebApplicatio
 So we need to use `TDispatcher` class which support middlewares.
 
 ```
-var globalMiddlewares : IMiddlewareCollectionAware;
+var globalMiddlewares : IMiddlewareLinkList;
 ...
-globalMiddlewares := container.get('globalMiddlewares') as IMiddlewareCollectionAware;
+globalMiddlewares := container.get('globalMiddlewares') as IMiddlewareLinkList;
 container.add(
     GuidToString(IDispatcher),
     TDispatcherFactory.create(

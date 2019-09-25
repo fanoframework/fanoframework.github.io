@@ -59,7 +59,7 @@ It expects 6 parameters:
 container.add(
     GuidToString(IDispatcher),
     TSessionDispatcherFactory.create(
-        container.get('appMiddlewares') as IMiddlewareCollectionAware,
+        container.get('appMiddlewares') as IMiddlewareLinkList,
         container.get(GuidToString(IRouteMatcher)) as IRouteMatcher,
         TRequestResponseFactory.create(),
         container.get('sessionManager') as ISessionManager,
