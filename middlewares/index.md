@@ -20,6 +20,45 @@ Fano Framework use simple chained middleware list. Each middleware can decide wh
 
 [client] <--> [bm-0] <--> [bm-1] <--> ... <--> [bm-n] <--> [controller] <--> [am-0] <--> [am-1] <--> ... <--> [am-n]
 
+In Fano Framework, any class implements `IMiddleware` interface can be used as middleware. This interface has one methods `handleRequest()` which class must implements.
+
+```
+function handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+```
+- `request` is current request object
+- `response` is current response object
+- `args` is current route arguments
+- `next` is next middleware to execute
+
+If a middleware should continue execution, it must call `next` request handler otherwise execution is stop and current response will be response what client browser received.
+
+For example, following code will stop execution if request is not AJAX request otherwise it will continue execution.
+
+```
+function TAjaxOnlyMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    if (not request.isXhr()) then
+    begin
+        response.headers().setHeader('Status', '403 Not Ajax Request');
+        result := response;
+    end else
+    begin
+        result := next.handleRequest(request, response, args);
+    end;
+end;
+
+```
+
 ## Type of middlewares
 
 ### Based on scope
@@ -36,12 +75,39 @@ Route middleware is middleware that is attached and applied to one or more speci
 
 ### Before middleware
 
-Before middleware is any middleware that is executed *before* controller execution. This is mostly type of middleware that can be used modify request or act as gate that block or pass request to
+Before middleware is any middleware that is executed *before* controller execution. This is mostly type of middleware that can be used modify request or act as gate that block or pass request.
+
+```
+function TMyMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    doSomething();
+    result := next.handleRequest(request, response, args);
+end;
+
+```
 
 ### After middleware
 
 After middleware is any middleware that is executed *after* controller execution.
 
+```
+function TMyMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    result := next.handleRequest(request, response, args);
+    doSomething();
+end;
+
+```
 
 ## Creating middleware
 
@@ -55,7 +121,7 @@ authOnly := TAuthOnlyMiddleware.create();
 
 ## Attaching middleware to global middleware
 
-When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup two `IMiddlewareCollectionAware` instances. One is for global middlewares (single instance) and the other for per-route middleware (multiple instance) (See *Single vs Multiple instance* section in [Dependency Container](/depdendency-container)),
+When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup one global `IMiddlewareList` instances.
 
 As shown in following code
 
@@ -63,14 +129,7 @@ As shown in following code
 {-----------------------------------------------
   register middleware list for application
 ------------------------------------------------}
-container.add('appMiddlewares', TMiddlewareCollectionAwareFactory.create());
-
-{-----------------------------------------------
-  register middleware list for each routes
-  need to be use factory so each route will have
-  different middleware list
-------------------------------------------------}
-container.factory('routeMiddlewares', TMiddlewareCollectionAwareFactory.create());
+container.add('appMiddlewares', TMiddlewareListFactory.create());
 ```
 
 In you dispatcher initialization, you need to set global middlewares collection to use by dispatcher instance.
@@ -83,7 +142,7 @@ In you dispatcher initialization, you need to set global middlewares collection 
 container.add(
     'dispatcher',
     TDispatcherFactory.create(
-        container.get('appMiddlewares') as IMiddlewareCollectionAware,
+        container.get('appMiddlewares') as IMiddlewareLinkList,
         aRouterInst as IRouteMatcher
     )
 );
@@ -94,8 +153,8 @@ and then you can register a middleware to global middlewares as follows
 ```
 var appMiddlewares : IMiddlewareCollectionAware;
 ...
-appMiddlewares := container.get('appMiddlewares') as IMiddlewareCollectionAware;
-appMiddlewares.addBefore(authOnly);
+appMiddlewares := container.get('appMiddlewares') as IMiddlewareList;
+appMiddlewares.add(authOnly);
 ```
 
 ## Attaching middleware to route
@@ -106,21 +165,14 @@ When you register the controller to route, you can add middleware as shown in fo
 router.get(
     '/hi/{name}',
     hiController
-).before(authOnly);
+).add(authOnly);
 
 router.post(
     '/hi/{name}',
     hiController
-).before(ajaxOnly)
-.before(authOnly);
+).add(ajaxOnly)
+.add(authOnly);
 ```
-
-To attach middleware after request handler is executed, use `after()` method.
-
-router.get(
-    '/hi/{name}',
-    hiController
-).after(executionTimingMiddleware);
 
 ## Built-in middlewares
 
@@ -141,16 +193,16 @@ middlewares
 router.get(
     '/hello/{name}',
     helloController
-).before(cors)
-.before(authOnly)
-.before(ajaxOnly);
+).add(cors)
+.add(authOnly)
+.add(ajaxOnly);
 
 router.get(
     '/hi/{name}',
     hiController
-).before(cors)
-.before(authOnly)
-.before(ajaxOnly);
+).add(cors)
+.add(authOnly)
+.add(ajaxOnly);
 ```
 
 You can simplify it to become
@@ -159,12 +211,12 @@ You can simplify it to become
 router.get(
     '/hello/{name}',
     helloController
-).before(corsAuthAjax);
+).add(corsAuthAjax);
 
 router.get(
     '/hi/{name}',
     hiController
-).before(corsAuthAjax);
+).add(corsAuthAjax);
 ```
 
 where `corsAuthAjax` middleware is defined as follows
