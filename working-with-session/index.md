@@ -103,7 +103,8 @@ From inside controller or middleware, you can get `ISession` instance from reque
 function TAuthOnlyMiddleware.handleRequest(
         const request : IRequest;
         const response : IResponse;
-        var canContinue : boolean
+        const args : IRouteArgsReader;
+        const next : IRequestHandler
 ) : IResponse;
 var sess : ISession;
 begin
