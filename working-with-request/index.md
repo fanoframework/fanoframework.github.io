@@ -225,3 +225,7 @@ For example how to handle file upload with Fano Framework, see
 - [Working with Views](/working-with-views)
 - [Form Validation](/security/form-validation)
 - [Handling CORS](/security/handling-cors)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
