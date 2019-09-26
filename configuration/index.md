@@ -44,7 +44,7 @@ config := TIniFileConfig.create(
     'fano'
 );
 ```
-Last parameter is name of default section to use. Read *INI file configuration* section in this document for more information.
+Last parameter is name of default section to use. Read [INI file configuration](#ini-file-configuration) section in this document for more information.
 
 To be able to use `TJsonFileConfig` and `TIniFileConfig` class with [dependency container](/dependency-container), Fano Framework provides `TJsonFileConfigFactory` and `TIniFileConfigFactory` class which enables you to register above classes in container.
 
@@ -123,7 +123,7 @@ var cookieMaxAge : integer;
 cookieMaxAge := config.getInt('cookie.maxAge');
 ```
 
-## INI file configuration
+## <a name="ini-file-configuration"></a>INI file configuration
 
 `TIniFileConfig` is thin wrapper of Free Pascal `TIniFile`. `TIniFile` cannot read data from INI file that has no section. Your INI file must contain at least one section which serve as default section. The last parameter of `TIniFileConfig`'s constructor expect name of default section. If you use `TIniFileConfigFactory`, by default it uses `fano` as default section if not specified. You can specify default section by calling `setDefaultSection()` method as shown in following code.
 
