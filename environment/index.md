@@ -18,7 +18,8 @@ You can get `ICGIEnvironment` interface instance inside controller from `IReques
 ...
 function TMyController.handleRequest(
     const request : IRequest;
-    const response : IResponse
+    const response : IResponse;
+    const args : IRouteArgsReader
 ) : IResponse;
 var myEnv : ICGIEnvironment;
 begin
