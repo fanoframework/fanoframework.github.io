@@ -18,11 +18,13 @@ Fano Framework provides `IAppConfiguration` interface for that purpose.
 
 - `getString()` which accepts name and returns string value
 - `getInt()` which accept name returns integer value
+- `getBool()` which accept name returns boolean value
 
 ## Built-in IAppConfiguration implementation
 
-Fano Framework provides `TJsonFileConfig` class which loads configuration data from
-JSON file.
+Fano Framework provides `TJsonFileConfig` and `TIniFileConfig` class which loads configuration data from JSON and INI file respectively.
+
+Load config from JSON,
 
 ```
 var config : IAppConfiguration;
@@ -32,8 +34,21 @@ config := TJsonFileConfig.create(
 );
 ```
 
-To be able to use `TJsonFileConfig` class with [dependency container](/dependency-container), Fano Framework provides `TJsonFileConfigFactory` class which enables you to register `TJsonFileConfig` class in container.
+Load config from INI,
 
+```
+var config : IAppConfiguration;
+...
+config := TIniFileConfig.create(
+    getCurrentDir() + '/config/config.ini',
+    'fano'
+);
+```
+Last parameter is name of default section to use. Read *INI file configuration* section in this document for more information.
+
+To be able to use `TJsonFileConfig` and `TIniFileConfig` class with [dependency container](/dependency-container), Fano Framework provides `TJsonFileConfigFactory` and `TIniFileConfigFactory` class which enables you to register above classes in container.
+
+Register JSON config
 ```
 container.add(
     'config',
@@ -42,6 +57,17 @@ container.add(
     )
 );
 ```
+
+Register INI config
+```
+container.add(
+    'config',
+    TIniFileConfigFactory.create(
+        getCurrentDir() + '/config/config.ini'
+    )
+);
+```
+
 
 To get configuration instance
 
@@ -95,6 +121,38 @@ To get `maxAge` value,
 var cookieMaxAge : integer;
 ...
 cookieMaxAge := config.getInt('cookie.maxAge');
+```
+
+## INI file configuration
+
+`TIniFileConfig` is thin wrapper of Free Pascal `TIniFile`. `TIniFile` cannot read data from INI file that has no section. Your INI file must contain at least one section which serve as default section. The last parameter of `TIniFileConfig`'s constructor expect name of default section. If you use `TIniFileConfigFactory`, by default it uses `fano` as default section if not specified. You can specify default section by calling `setDefaultSection()` method as shown in following code.
+
+```
+container.add(
+    'config',
+    TIniFileConfigFactory.create(
+        getCurrentDir() + '/config/config.ini'
+    ).setDefaultSection('hello')
+);
+```
+
+Consider reading `cookie.maxAge` configuration in code example above. It will read `maxAge` from `cookie` section.
+
+```
+[cookie]
+maxAge=3600
+```
+
+However, because nested section are not allowed in INI file, you can only read on section. For example,
+
+```
+nestedData := config.getInt('fano.data.nested');
+```
+will read data from
+
+```
+[fano]
+data.nested=test
 ```
 
 ## Explore more
