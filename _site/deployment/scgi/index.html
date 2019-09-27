@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Deploy as SCGI application - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial on how to deploy SCGI web application built with Fano Framework to various web servers.">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Deploy as SCGI application"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/deployment/scgi/"/>
+    <meta property="og:description" content="Tutorial on how to deploy SCGI web application built with Fano Framework to various web servers."/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Deployment as SCGI application</h1>
+
+<p>Fano Framework can be deployed as <a href="https://python.ca/scgi/protocol.txt">SCGI (Simple Common Gateway Interface)</a> web application. SCGI is similar to FastCGI protocol
+but simpler to parse.</p>
+
+<p>See <a href="/working-with-application">Working with Application</a> for information how to create SCGI web application.</p>
+
+<p>See <a href="https://github.com/fanoframework/fano-scgi">Fano SCGI</a> for example application.
+You may want to look <a href="/scaffolding-with-fano-cli">Scaffolding with Fano CLI</a> to easily create new SCGI web application project.</p>
+
+<h2 id="deploy-with-fano-cli">Deploy with Fano CLI</h2>
+
+<p>Simplest way to setup Fano web application with web server is to deploy SCGI application with <a href="https://github.com/fanoframework/fano-cli">Fano CLI</a>, run with <code class="highlighter-rouge">--deploy-scgi=[domain name]</code>.</p>
+
+<p>Inside Fano web application project directory, run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo fanocli --deploy-scgi=myapp.me
+</code></pre></div></div>
+
+<p>Command above, will create virtual host for Apache web server, enabled virtual host configuration, reload Apache web server configuration and add entry to <code class="highlighter-rouge">myapp.me</code> domain in <code class="highlighter-rouge">/etc/hosts</code>.</p>
+
+<p>To setup for nginx web server add <code class="highlighter-rouge">--web-server=nginx</code>. Without it, it is assumed Apache web server.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo fanocli --deploy-scgi=myapp.me --web-server=nginx
+</code></pre></div></div>
+
+<h2 id="apache-with-mod_proxy_scgi-module">Apache with mod_proxy_scgi module</h2>
+
+<p>To deploy as SCGI application with <a href="https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html">mod_proxy_scgi</a></p>
+
+<p>You need to have <code class="highlighter-rouge">mod_proxy_scgi</code> installed and loaded. This module is Apache’s built-in module, so it is very likely that you will have it with your Apache installation. You just need to make sure it is loaded.</p>
+
+<h3 id="debian">Debian</h3>
+
+<p>For example, on Debian,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo a2enmod proxy_scgi
+$ sudo systemctl restart apache2
+</code></pre></div></div>
+
+<p>Create virtual host config and add <code class="highlighter-rouge">ProxyPassMatch</code>, for example</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;VirtualHost *:80&gt;
+     ServerName www.example.com
+     DocumentRoot /home/example/public
+
+     &lt;Directory "/home/example/public"&gt;
+         Options +ExecCGI
+         AllowOverride FileInfo
+         Require all granted
+     &lt;/Directory&gt;
+
+    ProxyRequests Off
+    ProxyPassMatch /(css|images|js).* !
+    ProxyPassMatch ^/(.*)$ scgi://127.0.0.1:20477
+&lt;/VirtualHost&gt;
+</code></pre></div></div>
+<p>You may need to replace <code class="highlighter-rouge">scgi://127.0.0.1:20477</code> with host and port where your
+application is running.</p>
+
+<p>Two <code class="highlighter-rouge">ProxyPassMatch</code> lines tell Apache to serve requests for
+files inside <code class="highlighter-rouge">css</code>, <code class="highlighter-rouge">images</code>, <code class="highlighter-rouge">js</code> directories directly. For other, pass requests to our application.</p>
+
+<p>On Debian, save it to <code class="highlighter-rouge">/etc/apache2/sites-available</code> for example as <code class="highlighter-rouge">fano-scgi.conf</code></p>
+
+<p>Enable this site and restart Apache</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo a2ensite fano-scgi.conf
+$ sudo systemctl restart apache2
+</code></pre></div></div>
+
+<h3 id="fedora">Fedora</h3>
+
+<p>The difference between Debian and Fedora regarding Apache mostly about default service name (Debian uses <code class="highlighter-rouge">apache2</code> and Fedora uses <code class="highlighter-rouge">httpd</code>), user which Apache run (Debian uses <code class="highlighter-rouge">www-data</code> user while Fedora uses <code class="highlighter-rouge">apache</code>) and default Apache configuration location.</p>
+
+<ul>
+  <li>Create virtual host</li>
+</ul>
+
+<p>Apache main configuration is stored in <code class="highlighter-rouge">/etc/httpd/httpd.conf</code>. To add virtual host configuration, you can simply add entry to this file or prefered way is to create configuration in file <code class="highlighter-rouge">/etc/httpd/conf.d/</code> directory.</p>
+
+<p>In Fedora and Apache 2.4, <code class="highlighter-rouge">/etc/httpd/conf.d/</code> directory will be search for additional configurations. So you can just create virtual host file inside this directory.</p>
+
+<ul>
+  <li>Reload Apache service</li>
+</ul>
+
+<p>Tell Apache to load configuration by running</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo systemctl reload httpd
+</code></pre></div></div>
+
+<h2 id="nginx">Nginx</h2>
+
+<h3 id="debian-1">Debian</h3>
+
+<p>Create virtual host configuration in <code class="highlighter-rouge">/etc/nginx/sites-available</code>, for example</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
+    listen 80;
+    root /home/example/public;
+    index index.html;
+    server_name example.com;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.*$ {
+        scgi_pass 127.0.0.1:20477;
+        include scgi_params;
+
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+</code></pre></div></div>
+<p>Change <code class="highlighter-rouge">scgi_pass</code> to match host and port where application is listening.</p>
+
+<p><a href="/deployment">Back to Deployment</a></p>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

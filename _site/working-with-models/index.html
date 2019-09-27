@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Working with Models - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial on how to work with models in Fano Framework">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Working with Models"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/working-with-models/"/>
+    <meta property="og:description" content="Tutorial on how to work with models in Fano Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Working with Models</h1>
+
+<h2 id="read-only-model">Read-only model</h2>
+
+<p>Model is a object that encapsulate data. In Fano framework, model that can only be used to read data is encapsulate in <code class="highlighter-rouge">IModelReader</code> interface and model that write data implements <code class="highlighter-rouge">IModelWriter</code> interface.</p>
+
+<p><code class="highlighter-rouge">IModelReader</code> has two methods that implementor class must provide:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(*!----------------------------------------------
+ * read data from storage
+ *-----------------------------------------------
+ * @param params parameter for search/filtering
+ * @return model data
+s         *-----------------------------------------------*)
+function read(const params : IModelParams = nil) : IModelResultSet;
+
+(*!----------------------------------------------
+ * return data instance after read() is execute
+ *-----------------------------------------------
+ * @return model data
+ *-----------------------------------------------*)
+function data() : IModelResultSet;
+</code></pre></div></div>
+<p>Fano Framework does not have built-in implementation of both interface as they
+may be specific to application need.</p>
+
+<h2 id="write-only-model">Write-only model</h2>
+
+<p>In Fano framework, model that can only be used to write data implements <code class="highlighter-rouge">IModelWriter</code> interface.</p>
+
+<p><code class="highlighter-rouge">IModelWriter</code> has two methods that implementor class must provide:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(*!----------------------------------------------
+ * write data to storage
+ *-----------------------------------------------
+ * @param params parameters related to data being stored
+ * @param data data being stored
+ * @return current instance
+ *-----------------------------------------------*)
+function write(const params : IModelParams; const data : IModelParams) : IModelWriter;
+</code></pre></div></div>
+<p>Fano Framework does not have built-in implementation of both interface as they
+may be specific to application need.</p>
+
+<h2 id="read-write-model">Read write model</h2>
+
+<p>To make class, can read and write data, you need to implements both interface.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type
+    TExampleModel = class(TInterfacedObject, IModelReader, IModelWriter)
+    public
+        //implements all interface methods here
+    end;
+</code></pre></div></div>
+
+<h2 id="model-result-set">Model result set</h2>
+
+<p>After model read data from storage, it returns instance of <code class="highlighter-rouge">IModelResultSet</code> interface instance. Data can be accessed through this interface which has several methods:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">count()</code> returns number of data currently in result set.</li>
+  <li><code class="highlighter-rouge">eof()</code> returns if current cursor pointer is at the end of result set.</li>
+  <li><code class="highlighter-rouge">next()</code> advances current cursor pointer to next data.</li>
+  <li><code class="highlighter-rouge">readString()</code> read data as string.</li>
+</ul>
+
+<h2 id="display-model-data-in-view">Display model data in View</h2>
+
+<p>See <a href="/working-with-views">Working with Views</a> to understand how model can be used inside <code class="highlighter-rouge">IView</code> instance.</p>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/working-with-controllers">Working with Controllers</a></li>
+  <li><a href="/working-with-views">Working with Views</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

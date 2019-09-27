@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Middlewares - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Documentation about how middlewares work in Fano Framework">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Middlewares"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/middlewares/"/>
+    <meta property="og:description" content="Documentation about how middlewares work in Fano Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Middlewares</h1>
+
+<h2 id="why-middleware">Why middleware?</h2>
+
+<p>In Fano Framework, middleware is an optional software component that is executed before or after request is passed to actual request handler. It is similar concept to firewall, in which, it can pass, block or modify request or modify response.</p>
+
+<p>For example, middleware allows developer to test if user is logged in before request reaches controller. If user is not logged in, it blocks request.
+So when controller is executed, developer can be sure that user must be logged in.</p>
+
+<p>Single middleware instance can be attach to one or more route. This allows centralized action to be taken for multiple controllers.</p>
+
+<h2 id="middleware-architecture-in-fano-framework">Middleware architecture in Fano Framework</h2>
+
+<p>Fano Framework use simple chained middleware list. Each middleware can decide whether to pass request to next middleware or block. If middleware blocks a request, it must return response</p>
+
+<p>[client] &lt;–&gt; [bm-0] &lt;–&gt; [bm-1] &lt;–&gt; … &lt;–&gt; [bm-n] &lt;–&gt; [controller] &lt;–&gt; [am-0] &lt;–&gt; [am-1] &lt;–&gt; … &lt;–&gt; [am-n]</p>
+
+<p>In Fano Framework, any class implements <code class="highlighter-rouge">IMiddleware</code> interface can be used as middleware. This interface has one methods <code class="highlighter-rouge">handleRequest()</code> which class must implements.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+</code></pre></div></div>
+<ul>
+  <li><code class="highlighter-rouge">request</code> is current request object</li>
+  <li><code class="highlighter-rouge">response</code> is current response object</li>
+  <li><code class="highlighter-rouge">args</code> is current route arguments</li>
+  <li><code class="highlighter-rouge">next</code> is next middleware to execute</li>
+</ul>
+
+<p>If a middleware should continue execution, it must call <code class="highlighter-rouge">next</code> request handler otherwise execution is stop and current response will be response what client browser received.</p>
+
+<p>For example, following code will stop execution if request is not AJAX request otherwise it will continue execution.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function TAjaxOnlyMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    if (not request.isXhr()) then
+    begin
+        response.headers().setHeader('Status', '403 Not Ajax Request');
+        result := response;
+    end else
+    begin
+        result := next.handleRequest(request, response, args);
+    end;
+end;
+
+</code></pre></div></div>
+
+<h2 id="type-of-middlewares">Type of middlewares</h2>
+
+<h3 id="based-on-scope">Based on scope</h3>
+
+<h4 id="global-middleware">Global middleware</h4>
+
+<p>Global middleware is middleware that is attached and applied globally to all routes.</p>
+
+<h4 id="route-middleware">Route middleware</h4>
+
+<p>Route middleware is middleware that is attached and applied to one or more specific routes.</p>
+
+<h3 id="based-on-order-of-execution">Based on order of execution</h3>
+
+<h3 id="before-middleware">Before middleware</h3>
+
+<p>Before middleware is any middleware that is executed <em>before</em> controller execution. This is mostly type of middleware that can be used modify request or act as gate that block or pass request.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function TMyMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    doSomething();
+    result := next.handleRequest(request, response, args);
+end;
+
+</code></pre></div></div>
+
+<h3 id="after-middleware">After middleware</h3>
+
+<p>After middleware is any middleware that is executed <em>after</em> controller execution.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function TMyMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    result := next.handleRequest(request, response, args);
+    doSomething();
+end;
+
+</code></pre></div></div>
+
+<h2 id="creating-middleware">Creating middleware</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var ajaxOnly : IMiddleware;
+    authOnly : IMiddleware;
+...
+ajaxOnly := TAjaxOnlyMiddleware.create();
+authOnly := TAuthOnlyMiddleware.create();
+</code></pre></div></div>
+
+<h2 id="attaching-middleware-to-global-middleware">Attaching middleware to global middleware</h2>
+
+<p>When you use initialize <code class="highlighter-rouge">IDispatcher</code> implementation which support middlewares, such as <code class="highlighter-rouge">TDispatcher</code> class, you are required to setup one global <code class="highlighter-rouge">IMiddlewareList</code> instances.</p>
+
+<p>As shown in following code</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{-----------------------------------------------
+  register middleware list for application
+------------------------------------------------}
+container.add('appMiddlewares', TMiddlewareListFactory.create());
+</code></pre></div></div>
+
+<p>In you dispatcher initialization, you need to set global middlewares collection to use by dispatcher instance.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{-----------------------------------------------
+  setup basic application request dispatcher
+  which support middleware
+------------------------------------------------}
+container.add(
+    'dispatcher',
+    TDispatcherFactory.create(
+        container.get('appMiddlewares') as IMiddlewareLinkList,
+        aRouterInst as IRouteMatcher
+    )
+);
+</code></pre></div></div>
+
+<p>and then you can register a middleware to global middlewares as follows</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var appMiddlewares : IMiddlewareList;
+...
+appMiddlewares := container.get('appMiddlewares') as IMiddlewareList;
+appMiddlewares.add(authOnly);
+</code></pre></div></div>
+
+<h2 id="attaching-middleware-to-route">Attaching middleware to route</h2>
+
+<p>When you register the controller to route, you can add middleware as shown in following code</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router.get(
+    '/hi/{name}',
+    hiController
+).add(authOnly);
+
+router.post(
+    '/hi/{name}',
+    hiController
+).add(ajaxOnly)
+.add(authOnly);
+</code></pre></div></div>
+
+<h2 id="built-in-middlewares">Built-in middlewares</h2>
+
+<p>Fano Framework provides several built-in middlewares.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">TNullMiddleware</code>, middleware class that does nothing and just pass the request.</li>
+  <li><code class="highlighter-rouge">TCompositeMiddleware</code>, middleware class which group several middlewares as one.</li>
+  <li><code class="highlighter-rouge">TRequestHandlerAsMiddleware</code>, adapter middleware which can turn request handler as a middleware.</li>
+  <li><code class="highlighter-rouge">TCorsMiddleware</code>, middleware class which adds CORS response header. Read <a href="/security/handling-cors">Handling CORS</a> for more information.</li>
+  <li><code class="highlighter-rouge">TValidationMiddleware</code>, middleware class which validate request.</li>
+</ul>
+
+<h3 id="group-several-middlewares-as-one">Group several middlewares as one</h3>
+
+<p>For example if you have following route registration which each of routes is using same
+middlewares</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router.get(
+    '/hello/{name}',
+    helloController
+).add(cors)
+.add(authOnly)
+.add(ajaxOnly);
+
+router.get(
+    '/hi/{name}',
+    hiController
+).add(cors)
+.add(authOnly)
+.add(ajaxOnly);
+</code></pre></div></div>
+
+<p>You can simplify it to become</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>router.get(
+    '/hello/{name}',
+    helloController
+).add(corsAuthAjax);
+
+router.get(
+    '/hi/{name}',
+    hiController
+).add(corsAuthAjax);
+</code></pre></div></div>
+
+<p>where <code class="highlighter-rouge">corsAuthAjax</code> middleware is defined as follows</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var corsAuthAjax : IMiddleware;
+...
+corsAuthAjax := TCompositeMiddleware.create([cors, authOnly, ajaxOnly]);
+</code></pre></div></div>
+
+<h3 id="use-controller-as-a-middleware">Use controller as a middleware</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var helloCtrlMiddleware : IMiddleware;
+    helloContrller : IController;
+...
+helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
+</code></pre></div></div>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/examples">Middleware example application</a></li>
+  <li><a href="/dispatcher">Dispatcher</a></li>
+  <li><a href="/working-with-router">Working with Router</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

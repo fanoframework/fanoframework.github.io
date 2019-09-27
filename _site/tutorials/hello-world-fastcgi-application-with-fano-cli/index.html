@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Creating Hello World FastCGI web application with Fano CLI - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Step by step tutorial for creating basic hello world FastCGI web application with Fano CLI">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Creating Hello World FastCGI web application with Fano CLI"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/tutorials/hello-world-fastcgi-application-with-fano-cli/"/>
+    <meta property="og:description" content="Step by step tutorial for creating basic hello world FastCGI web application with Fano CLI"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Creating Hello World FastCGI web application With Fano CLI</h1>
+
+<p>In this step by step tutorial, we are going to create a simple Fast CGI web application which displays greeting message using Fano CLI. Read <a href="/scaffolding-with-fano-cli">Scaffolding with Fano CLI</a> for more information.</p>
+
+<h2 id="who-is-this-tutorial-for">Who is this tutorial for?</h2>
+
+<p>This tutorial is written for anyone new to Fano Framework. It is assumed that you have proficiency with Free Pascal and its language syntax. You are familiar with  Linux command and and its shell terminal.</p>
+
+<h2 id="requirement">Requirement</h2>
+
+<ul>
+  <li><a href="https://www.freepascal.org">Free Pascal &gt;= 3.0</a></li>
+  <li><a href="https://git-scm.com/">git</a></li>
+  <li><a href="https://httpd.apache.org/">Apache 2.4</a></li>
+  <li><a href="https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html">Apache mod_fcgid</a></li>
+  <li>Text editor, vim, VSCode, Atom etc.</li>
+  <li><a href="https://github.com/fanoframework/fano-cli">Fano CLI</a></li>
+  <li>Working Internet connection.</li>
+  <li>Root privilege.</li>
+</ul>
+
+<h2 id="create-project">Create Project</h2>
+
+<p>Make sure that all requirements are met. To create a FastCGI project, run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-fcgid=Hello
+</code></pre></div></div>
+
+<p>Wait until new project is created. If everything is ok, your project will be created inside <code class="highlighter-rouge">Hello</code> directory. Change active directory to <code class="highlighter-rouge">Hello</code> directory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd Hello
+</code></pre></div></div>
+
+<p>All actions below is assumed to take place inside <code class="highlighter-rouge">Hello</code> directory.</p>
+
+<h2 id="build-application">Build application</h2>
+
+<p>Run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./build.sh
+</code></pre></div></div>
+
+<p>Wait until compilation is finished.</p>
+
+<h2 id="setup-web-server-configuration">Setup web server configuration</h2>
+
+<p>Run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo fanocli --deploy-fcgid=hello.fano
+</code></pre></div></div>
+
+<h2 id="run-it-from-browser">Run it from browser</h2>
+
+<p>Open web browser and go to <code class="highlighter-rouge">http://hello.fano</code>. You should see <em>Fano Application Error</em> page. It is normal as you have not create any route to handle the request.</p>
+
+<h2 id="create-a-controller">Create a controller</h2>
+
+<p>Run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --controller=Home --route=/
+</code></pre></div></div>
+
+<p>Command above will create <code class="highlighter-rouge">src/App/Home/Controllers/HomeController.pas</code> and register route <code class="highlighter-rouge">/</code> so you will be able to access it via URL <code class="highlighter-rouge">http://hello.fano/</code>. Please note that, without <code class="highlighter-rouge">--route</code> parameter, by default Fano CLI register route <code class="highlighter-rouge">/home</code>.</p>
+
+<p>Rebuild application by running,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./build.sh
+</code></pre></div></div>
+
+<p>After compilation is finished, open web browser and go to <code class="highlighter-rouge">http://hello.fano</code>. You should see text <code class="highlighter-rouge">Home controller</code> printed. Congratulations, your application is working.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this tutorial, you have learned how to use Fano CLI to</p>
+
+<ul>
+  <li>Setup FastCGI web application project directory with Fano Framework,</li>
+  <li>Deploy application with Apache web server,</li>
+  <li>Create controller,</li>
+  <li>Create default route.</li>
+</ul>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/tutorials">Step by Step Tutorials</a></li>
+  <li><a href="/scaffolding-with-fano-cli">Scaffolding with Fano CLI</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

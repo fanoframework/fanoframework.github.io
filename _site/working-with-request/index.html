@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Working with Request - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial on how to work with Request object in Fano Framework">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Working with Request"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/working-with-request/"/>
+    <meta property="og:description" content="Tutorial on how to work with Request object in Fano Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Working with Request</h1>
+
+<h2 id="about-request">About Request</h2>
+
+<p>When route handler (or controller) is executed, <a href="/dispatcher">dispatcher</a> will
+call its <code class="highlighter-rouge">handleRequest()</code> and pass request object that contains handful data
+related to current request.</p>
+
+<p>This request object is instance of <code class="highlighter-rouge">IRequest</code> interface that can be queried for
+data such as query strings, cookies, POST data send by client or uploaded files.</p>
+
+<p>Read <a href="/working-with-controllers">Working with Controllers</a> for more information on hwo to work with route handler  or controller.</p>
+
+<h2 id="getting-query-parameters">Getting query parameters</h2>
+
+<p>If you registered route <code class="highlighter-rouge">/home</code> and user open <code class="highlighter-rouge">http://[your hostname]/home?msg1=test&amp;msg2=nice</code></p>
+
+<p>To retrieve value of <code class="highlighter-rouge">msg1</code> and <code class="highlighter-rouge">msg2</code> parameters, you can use <code class="highlighter-rouge">getQueryParam()</code>
+method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var msg1, msg2 : string;
+...
+msg1 := request.getQueryParam('msg1'); //msg1 = 'test'
+msg2 := request.getQueryParam('msg2'); //msg2 = 'nice'
+</code></pre></div></div>
+
+<p>To set default value if <code class="highlighter-rouge">msg1</code> is not set,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msg1 := request.getQueryParam('msg1', 'ok');
+</code></pre></div></div>
+
+<p>To retrieve all query parameters at once, use <code class="highlighter-rouge">getQueryParams()</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var params : IReadOnlyList;
+...
+params := request.getQueryParams();
+</code></pre></div></div>
+
+<h2 id="retrieve-cookies">Retrieve cookies</h2>
+
+<p>To retrieve value of <code class="highlighter-rouge">msg1</code> and <code class="highlighter-rouge">msg2</code> parameters from cookies, you can use <code class="highlighter-rouge">getCookieParam()</code> method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var msg1, msg2 : string;
+...
+msg1 := request.getCookieParam('msg1');
+msg2 := request.getCookieParam('msg2');
+</code></pre></div></div>
+
+<p>To set default value if <code class="highlighter-rouge">msg1</code> cookie is not set,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msg1 := request.getCookieParam('msg1', 'ok');
+</code></pre></div></div>
+
+<p>To retrieve all cookie parameters at once, use <code class="highlighter-rouge">getCookieParams()</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var cookies : IReadOnlyList;
+...
+cookies := request.getCookieParams();
+</code></pre></div></div>
+
+<h2 id="get-post-data">Get POST data</h2>
+
+<p>If you have form like following snippet</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;form action="/submit" method="post"&gt;
+    &lt;input type="text" name="msg1" value="test"&gt;
+    &lt;input type="text" name="msg2" value="nice"&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></div></div>
+
+<p>To retrieve value of <code class="highlighter-rouge">msg1</code> and <code class="highlighter-rouge">msg2</code> parameters from POST data, you can use <code class="highlighter-rouge">getParsedBodyParam()</code> method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var msg1, msg2 : string;
+...
+msg1 := request.getParsedBodyParam('msg1');
+msg2 := request.getParsedBodyParam('msg2');
+</code></pre></div></div>
+
+<p>To set default value if <code class="highlighter-rouge">msg1</code> parameter is not set,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msg1 := request.getParsedBodyParam('msg1', 'ok');
+</code></pre></div></div>
+
+<p>To retrieve all POST parameters at once, use <code class="highlighter-rouge">getParsedBodyParams()</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var params : IReadOnlyList;
+...
+params := request.getParsedBodyParams();
+</code></pre></div></div>
+
+<h2 id="get-query-parameters-and-post-data">Get query parameters and POST data</h2>
+
+<p>To get query string parameters and POST data as one list</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var params : IReadOnlyList;
+...
+params := request.getParams();
+</code></pre></div></div>
+
+<p>To read single value</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msg1 := request.getParam('msg1', 'ok');
+</code></pre></div></div>
+
+<p>Above method search query string parameter first. If it cannot find data with key <code class="highlighter-rouge">msg1</code>, it tries to read body parameters. If none found, default value ‘ok` is returned.</p>
+
+<h2 id="handling-file-upload">Handling file upload</h2>
+
+<p>If you have form like following snippet</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;form action="/submit" method="post" enctype="multipart/form-data"&gt;
+    &lt;input type="text" name="username" value="test"&gt;
+    &lt;input type="file" name="myFile"&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></div></div>
+
+<p>To retrieve value of <code class="highlighter-rouge">username</code> is same as with POST data.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var username : string;
+...
+username := request.getParsedBodyParam('username');
+</code></pre></div></div>
+
+<p>To retrieve file uploaded by client, you need to call <code class="highlighter-rouge">getUploadedFile()</code>. It returns data of type <code class="highlighter-rouge">IUploadedFileArray</code> which array of <code class="highlighter-rouge">IUploadedFile</code> instance.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var myFile : IUploadedFileArray;
+...
+myFile := request.getUploadedFile('myFile');
+</code></pre></div></div>
+
+<p>Client can send one or more file with same name, for example:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;form action="/submit" method="post" enctype="multipart/form-data"&gt;
+    &lt;input type="text" name="username" value="test"&gt;
+    &lt;input type="file" name="myFile"&gt;
+    &lt;input type="file" name="myFile"&gt;
+    &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre></div></div>
+
+<p>If client upload one or more files, <code class="highlighter-rouge">length(myFile)</code> will indicates how many
+files actually uploaded.</p>
+
+<h3 id="move-uploaded-file">Move uploaded file</h3>
+
+<p>Initially, uploaded file will be stored in system temporary directory. You need to
+call <code class="highlighter-rouge">moveTo()</code> methods to move into permanent location.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (length(myFile) &gt; 0) then
+begin
+    myFile[0].moveTo(targetUploadPath);
+end;
+</code></pre></div></div>
+<p><code class="highlighter-rouge">targetUploadPath</code> is full filename (including its target directory). You must make sure that <code class="highlighter-rouge">targetUploadPath</code> is writeable. Exception <code class="highlighter-rouge">EInOutError</code> is raised when
+uploaded file can not be written to target path.</p>
+
+<h3 id="get-uploaded-file-size">Get uploaded file size</h3>
+
+<p>Size of uploaded file in octet (or bytes) can be queried with <code class="highlighter-rouge">size()</code> method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var fSize : int64;
+...
+fSize := myFile[0].size();
+</code></pre></div></div>
+
+<h3 id="get-file-mime-type">Get file MIME type</h3>
+
+<p>MIME type of uploaded file can be queried with <code class="highlighter-rouge">getClientMediaType()</code> method.
+For example, if upload JPEG image, you may get <code class="highlighter-rouge">image/jpeg</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var mime : string;
+...
+mime := myFile[0].getClientMediaType();
+</code></pre></div></div>
+
+<p>If client does not send any MIME type (aka Content Type) then it is assumed
+<code class="highlighter-rouge">application/octet-stream</code>.</p>
+
+<h3 id="get-original-file-name">Get original file name</h3>
+
+<p>To get original file name of uploaded file use <code class="highlighter-rouge">getClientFilename()</code> method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var filename : string;
+...
+filename := myFile[0].getClientFilename();
+</code></pre></div></div>
+
+<p>If client does not send filename then it returns empty string.</p>
+
+<p>For example how to handle file upload with Fano Framework, see
+<a href="https://github.com/fanoframework/fano-upload">Fano Upload</a>.</p>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/working-with-response">Working with response</a></li>
+  <li><a href="/working-with-controllers">Working with Controllers</a></li>
+  <li><a href="/working-with-views">Working with Views</a></li>
+  <li><a href="/security/form-validation">Form Validation</a></li>
+  <li><a href="/security/handling-cors">Handling CORS</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

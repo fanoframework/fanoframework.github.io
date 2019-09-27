@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Built-in validation rules - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="List of built-in validation rules in Fano Framework">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Built-in validation rules"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/security/form-validation/built-in-validation-rules/"/>
+    <meta property="og:description" content="List of built-in validation rules in Fano Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Built-in Validation Rules</h1>
+
+<h2 id="field--availability">Field  availability</h2>
+
+<p>Following validator test if field is present.</p>
+
+<h3 id="trequiredvalidator">TRequiredValidator</h3>
+
+<p>Field must be present and not empty.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var rule : IValidator;
+...
+rule := TRequiredValidator.create();
+</code></pre></div></div>
+
+<h3 id="tpresentvalidator">TPresentValidator</h3>
+
+<p>Field must be present but allowed to be empty.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TPresentValidator.create();
+</code></pre></div></div>
+
+<h3 id="trequiredifvalidator">TRequiredIfValidator</h3>
+
+<p>Field must be present and not empty if other field passes validation.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var rule : IValidator;
+...
+rule := TRequiredIfValidator.create(
+    'other-field',
+    TInValidator.create(['foo', 'bar'])
+);
+</code></pre></div></div>
+<p>Field being validated becomes mandatory field only if <code class="highlighter-rouge">other-field</code> value is equal to <code class="highlighter-rouge">foo</code> or <code class="highlighter-rouge">bar</code>.</p>
+
+<p>Complex rule can be achieved by composing several validation rules.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var rule : IValidator;
+...
+rule := TRequiredIfValidator.create(
+    'other-field',
+    TCompositeValidator.create([
+        TNotInValidator.create(['foo', 'bar'])
+        TMinLengthValidator.create(8)
+    ])
+);
+</code></pre></div></div>
+
+<p>Field being validated becomes mandatory field, only if <code class="highlighter-rouge">other-field</code> value is not equal to <code class="highlighter-rouge">foo</code> or <code class="highlighter-rouge">bar</code> and at least 8 characters.</p>
+
+<h2 id="character-format">Character format</h2>
+
+<h3 id="talphavalidator">TAlphaValidator</h3>
+
+<p>Data must be alphabet character only. This class expect instance of <code class="highlighter-rouge">IRegex</code> interface.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TAlphaValidator.create(TRegex.create());
+</code></pre></div></div>
+
+<h3 id="talphanumvalidator">TAlphaNumValidator</h3>
+
+<p>Data must be alphabet and numeric character only.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TAlphaNumValidator.create(TRegex.create());
+</code></pre></div></div>
+
+<h3 id="talphanumspacevalidator">TAlphaNumSpaceValidator</h3>
+
+<p>Data must be alphabet, numeric and space character only.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TAlphaNumSpaceValidator.create(TRegex.create());
+</code></pre></div></div>
+
+<h3 id="talphanumdashvalidator">TAlphaNumDashValidator</h3>
+
+<p>Data must be alphabet, numeric and dash character only.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TAlphaNumDashValidator.create(TRegex.create());
+</code></pre></div></div>
+
+<h3 id="temailvalidator">TEmailValidator</h3>
+
+<p>Data must be in valid email format. This validator does not check if email address actually exists.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TEmailValidator.create(TRegex.create());
+</code></pre></div></div>
+
+<h3 id="turlvalidator">TUrlValidator</h3>
+
+<p>Data must be in valid URL format. This validator does not check if URL address actually exists.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TUrlValidator.create(TRegex.create());
+</code></pre></div></div>
+
+<h3 id="tregexvalidator">TRegexValidator</h3>
+
+<p>Data must be in format as specified by regular expression pattern.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TRegexValidator.create(
+    TRegex.create(),
+    '[a-zA-Z]+',
+    'Field %s does not match regular expression'
+);
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">%s</code> will be replaced with field name being validated.</p>
+
+<h2 id="string-length">String length</h2>
+
+<h3 id="tequallengthvalidator">TEqualLengthValidator</h3>
+
+<p>Data must be string with its length is equal to predefined value. For example, data being validated must contains exacly 10 characters to pass validation.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TEqualLengthValidator.create(10);
+</code></pre></div></div>
+
+<h3 id="tminlengthvalidator">TMinLengthValidator</h3>
+
+<p>Data must be string with its length not less than predefined value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TMinLengthValidator.create(10);
+</code></pre></div></div>
+
+<h3 id="tmaxlengthvalidator">TMaxLengthValidator</h3>
+
+<p>Data must be string with its length not greater than predefined value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TMaxLengthValidator.create(10);
+</code></pre></div></div>
+
+<h2 id="numeric-data">Numeric data</h2>
+
+<h3 id="tintegervalidator">TIntegerValidator</h3>
+
+<p>Data must be integer value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TIntegerValidator.create();
+</code></pre></div></div>
+
+<h3 id="tfloatvalidator">TFloatValidator</h3>
+
+<p>Data must be float value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TFloatValidator.create();
+</code></pre></div></div>
+
+<h3 id="tcurrencyvalidator">TCurrencyValidator</h3>
+
+<p>Data must be currency value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TCurrencyValidator.create();
+</code></pre></div></div>
+
+<h3 id="tnumericvalidator">TNumericValidator</h3>
+
+<p>Data must be integer or float value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TNumericValidator.create();
+</code></pre></div></div>
+
+<h3 id="tminintegervalidator">TMinIntegerValidator</h3>
+
+<p>Data must be integer value and its value not less than predefined value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TMinIntegerValidator.create(100);
+</code></pre></div></div>
+<p>Validation will pass only if you pass integer value &gt;= 100.</p>
+
+<h3 id="tmaxintegervalidator">TMaxIntegerValidator</h3>
+
+<p>Data must be integer value and not greater than predefined value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TMaxIntegerValidator.create(100);
+</code></pre></div></div>
+<p>Validation will pass only if you pass integer value &lt;= 100.</p>
+
+<h2 id="boolean-data">Boolean data</h2>
+
+<h3 id="tbooleanvalidator">TBooleanValidator</h3>
+
+<p>Data must be boolean value</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TBooleanValidator.create();
+</code></pre></div></div>
+
+<h3 id="tacceptedvalidator">TAcceptedValidator</h3>
+
+<p>Data must be boolean value <code class="highlighter-rouge">true</code>, or integer 1 or string <code class="highlighter-rouge">yes</code> or string <code class="highlighter-rouge">on</code>. This is mostly to be used for accepting “Terms and Conditions”.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TAcceptedValidator.create();
+</code></pre></div></div>
+
+<h2 id="ranged-data">Ranged data</h2>
+
+<h3 id="tinvalidator">TInValidator</h3>
+
+<p>Data must be one of predefined values.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TInValidator.create(['foo', 'bar']);
+</code></pre></div></div>
+<p>Validation will pass only if its value is equal to <code class="highlighter-rouge">foo</code> or <code class="highlighter-rouge">bar</code>.</p>
+
+<h3 id="tnotinvalidator">TNotInValidator</h3>
+
+<p>Data must not be one of predefined values.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TNotInValidator.create(['foo', 'bar']);
+</code></pre></div></div>
+<p>Validation will pass only if its value is not equal to <code class="highlighter-rouge">foo</code> or <code class="highlighter-rouge">bar</code>.</p>
+
+<h2 id="date-and-time">Date and time</h2>
+
+<h3 id="tdatevalidator">TDateValidator</h3>
+
+<p>Data must be valid date</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TDateValidator.create();
+</code></pre></div></div>
+
+<h3 id="tdatetimevalidator">TDateTimeValidator</h3>
+
+<p>Data must be valid date time.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TDateTimeValidator.create();
+</code></pre></div></div>
+
+<h3 id="ttimevalidator">TTimeValidator</h3>
+
+<p>Data must be valid time.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TTimeValidator.create();
+</code></pre></div></div>
+
+<h3 id="tequaldatetimevalidator">TEqualDateTimeValidator</h3>
+
+<p>Data must be date time and its value must equal predefined value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TEqualDateTimeValidator.create(date());
+</code></pre></div></div>
+
+<h3 id="tafterdatetimevalidator">TAfterDateTimeValidator</h3>
+
+<p>Data must be date time and its value must be later than predefined value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TAfterDateTimeValidator.create(date());
+</code></pre></div></div>
+
+<h3 id="tbeforedatetimevalidator">TBeforeDateTimeValidator</h3>
+
+<p>Data must be date time and its value must be prior than predefined value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TBeforeDateTimeValidator.create(date());
+</code></pre></div></div>
+
+<h3 id="tafterdatetimefieldvalidator">TAfterDateTimeFieldValidator</h3>
+
+<p>This validation rule is similar to <code class="highlighter-rouge">TAfterDateTimeValidator</code> but it compares against other field instead of predefined value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TAfterDateTimeFieldValidator.create('event-start-date');
+</code></pre></div></div>
+
+<p>Above rule makes current field passes validation only if its value is later than the value in <code class="highlighter-rouge">event-start-date</code> field.</p>
+
+<h3 id="tbeforedatetimefieldvalidator">TBeforeDateTimeFieldValidator</h3>
+
+<p>This validation rule is similar to <code class="highlighter-rouge">TBeforeDateTimeValidator</code> but it compares against other field instead of predefined value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TBeforeDateTimeFieldValidator.create('event-end-date');
+</code></pre></div></div>
+
+<p>Above rule makes current field passes validation only if its value is prior than the value in <code class="highlighter-rouge">event-end-date</code> field.</p>
+
+<h2 id="uploaded-file">Uploaded file</h2>
+
+<h3 id="tuploadedfilevalidator">TUploadedFileValidator</h3>
+
+<p>Field must be valid uploaded file.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TUploadedFileValidator.create();
+</code></pre></div></div>
+
+<h3 id="tuploadedmimevalidator">TUploadedMimeValidator</h3>
+
+<p>Field must be valid uploaded file and its content type must be one of predefined MIME types.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TUploadedMimeValidator.create(['image/jpg', 'image/png']);
+</code></pre></div></div>
+<p>Please not that this validation rule does not check if file uploaded is actually JPEG/PNG image.</p>
+
+<h3 id="tuploadedsizevalidator">TUploadedSizeValidator</h3>
+
+<p>Field must be valid uploaded file and its file size must be less or equal predefined size in bytes. For example to restrict that uploaded file size must not exceed 200KB.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TUploadedSizeValidator.create(200 * 1024);
+</code></pre></div></div>
+
+<h3 id="tfileformatvalidator">TFileFormatValidator</h3>
+
+<p>Abstract class which validate uploaded file against certain file format.</p>
+
+<h3 id="timagepngvalidator-timagejpgvalidator-timagegifvalidator">TImagePngValidator, TImageJpgValidator, TImageGifValidator</h3>
+
+<p>Validation rules inherit from <code class="highlighter-rouge">TFileFormatValidator</code> which validate uploaded file against PNG, JPEG and GIF image format. Please note these classes only do fast check on first few bytes of file to determine its format and without loading whole file.</p>
+
+<p>Validate field that must be uploaded file with PNG image format</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TImagePngValidator.create();
+</code></pre></div></div>
+
+<p>Validate field that must be uploaded file with JPEG image format</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TImageJpgValidator.create();
+</code></pre></div></div>
+
+<p>Validate field that must be uploaded file with GIF image format</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TImageGifValidator.create();
+</code></pre></div></div>
+
+<h3 id="tantivirusvalidator">TAntivirusValidator</h3>
+
+<p>Field must be valid uploaded file and must be free from computer virus. Current implementation supports <a href="https://www.clamav.net/documents/libclamav">ClamAV</a> only. You need to install ClamAV antivirus on server and also define <code class="highlighter-rouge">LIBCLAMAV</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{$DEFINE LIBCLAMAV}
+</code></pre></div></div>
+
+<p>or through command line parameter <code class="highlighter-rouge">-dLIBCLAMAV</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TAntivirusValidator.create(TClamAv.create());
+</code></pre></div></div>
+
+<h2 id="miscellaneous">Miscellaneous</h2>
+
+<h3 id="tcompositevalidator">TCompositeValidator</h3>
+
+<p>Validator class which combined one or more validators as one. For example to make field to become mandatory and alpha numeric dash characters only, with length between 8 and 10,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TCompositeValidator.create([
+    TRequiredValidator.create(),
+    TAlphaNumDashValidator.create(TRegex.create()),
+    TMinLengthValidator.create(8),
+    TMaxLengthValidator.create(10),
+]);
+</code></pre></div></div>
+
+<p>Please note that order of validator in array matters as validation is carried out starting from first validation rule in the array and to next rule. As soon as validator fails, next validator will not be called and error message reported is last failed validation rule error message.</p>
+
+<h3 id="tcollectivevalidator">TCollectiveValidator</h3>
+
+<p>It is similar to <code class="highlighter-rouge">TCompositeValidator</code>, except that, instead of terminating validation process as soon as one of validation rule fails, it continues to process all validation rules and collects all failed validation rule messages.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TCollectiveValidator.create([
+    TRequiredValidator.create(),
+    TAlphaNumDashValidator.create(TRegex.create()),
+    TMinLengthValidator.create(8),
+    TMaxLengthValidator.create(10),
+]);
+</code></pre></div></div>
+
+<h3 id="tnotvalidator">TNotValidator</h3>
+
+<p>Decorator validator class which negate other validator.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TNotValidator.create(
+    'Field %s must not be integer value',
+    TIntegerValidator.create()
+);
+</code></pre></div></div>
+<p>Validation will pass as long as data is not integer value. To negate several validators,
+you can combine them with <code class="highlighter-rouge">TCompositeValidator</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TNotValidator.create(
+    'Field %s must not be integer or boolean value',
+    TCompositeValidator.create([
+        TIntegerValidator.create(),
+        TBooleanValidator.create()
+    ])
+);
+</code></pre></div></div>
+<p>Validation will pass as long as data is not integer value and not boolean value.</p>
+
+<h3 id="tconfirmedvalidator">TConfirmedValidator</h3>
+
+<p>Data must equal to other predefined field. This is mostly to be used for password confirmation.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TConfirmedValidator.create('password_confirmation');
+</code></pre></div></div>
+<p>Validation will pass if current data is equal to data in field <code class="highlighter-rouge">password_confirmation</code>.</p>
+
+<h3 id="tsamevalidator">TSameValidator</h3>
+
+<p>This is alias for <code class="highlighter-rouge">TConfirmedValidator</code>. It passes validation if other field has same value as field being validated.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TSameValidator.create('password_confirmation');
+</code></pre></div></div>
+
+<h3 id="tuuidvalidator">TUuidValidator</h3>
+
+<p>Data must be in valid GUID string.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TUuidValidator.create();
+</code></pre></div></div>
+
+<h3 id="texistsvalidator">TExistsValidator</h3>
+
+<p>Data must exist in database. Its constructor expects three parameters, instance of <code class="highlighter-rouge">IRdbms</code> interface representing database connection, table name and column name.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var db : IRdbms;
+...
+db := TMySQLDb.create('MySQL 5.7');
+db.connect('localhost', 'your_db_name', 'your_db_username', 'yoursecretpassword', 3306);
+rule := TExistsValidator.create(db, 'table_users', 'user_id');
+</code></pre></div></div>
+
+<p>Above code will actually execute SQL as follows</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT `user_id` FROM `table_users` WHERE user_id = :primaryId LIMIT 1
+</code></pre></div></div>
+<p>where <code class="highlighter-rouge">primaryId</code> placeholder will be replace with actual data being validated. Read <a href="/database">Working with Database</a> for more information.</p>
+
+<h3 id="talwayspassvalidator">TAlwaysPassValidator</h3>
+
+<p>Dummy validator which always make field passes validation.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule := TAlwaysPassValidator.create();
+</code></pre></div></div>
+
+<h3 id="tbasevalidator">TBaseValidator</h3>
+
+<p>Abstract class which can be uses as a base class to create new custom validation rule. To inherit from this class, you need to implements its <code class="highlighter-rouge">isValidData()</code> method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function isValidData(
+    const dataToValidate : string;
+    const dataCollection : IList;
+    const request : IRequest
+) : boolean; virtual; abstract;
+</code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">dataToValidate</code> will contain actual data of current field being validated.</li>
+  <li><code class="highlighter-rouge">dataCollection</code> will contain list of key value pair of all query strings and POST body of request.</li>
+  <li><code class="highlighter-rouge">request</code> will contain current request object, in case you need to more informations.</li>
+</ul>
+
+<p>Your implementation must return <code class="highlighter-rouge">true</code> if validation should pass or <code class="highlighter-rouge">false</code> otherwise.</p>
+
+<h3 id="tcomparefieldvalidator">TCompareFieldValidator</h3>
+
+<p>Abstract class which can be used as base class which has the ability to compare current field against other field. To inherit from this class, you need to implements its <code class="highlighter-rouge">compare()</code> method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function compare(
+    const dataToValidate : string;
+    const otherFieldData : string
+) : boolean; virtual; abstract;
+</code></pre></div></div>
+<ul>
+  <li><code class="highlighter-rouge">dataToValidate</code> will contain actual data of current field being validated.</li>
+  <li><code class="highlighter-rouge">dataCollection</code> will contain actual data of other field being compared.</li>
+</ul>
+
+<p>Your implementation must return <code class="highlighter-rouge">true</code> if validation should pass or <code class="highlighter-rouge">false</code> otherwise.</p>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/security/form-validation">Form Validation</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

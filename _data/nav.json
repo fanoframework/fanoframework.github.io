@@ -1,0 +1,24 @@
+[
+    {
+        "title" : "Getting Started",
+        "subitems" : [
+            {
+                "title" : "Getting Started",
+                "url" : "/getting-started"
+            },
+            {
+                "title" : "Step By Step Tutorials",
+                "url" : "/tutorials"
+            }
+        ]
+    },
+    {
+        "title" : "Basic",
+        "subitems" : [
+            {
+                "title" : "Getting Started",
+                "url" : "/getting-started"
+            }
+        ]
+    }
+]

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Scaffolding with Fano CLI - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial how to use Fano CLI to scaffold web application using Fano Framework">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Scaffolding with Fano CLI"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/scaffolding-with-fano-cli/"/>
+    <meta property="og:description" content="Tutorial how to use Fano CLI to scaffold web application using Fano Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Scaffolding with Fano CLI</h1>
+
+<h2 id="what-is-fano-cli">What is Fano CLI?</h2>
+
+<p><a href="https://github.com/fanoframework/fano-cli">Fano CLI</a> is command line application
+to help scaffolding project structure using <a href="https://github.com/fanoframework/fano">Fano Framework</a>. It helps tedious tasks such as creating Fano web application project, creating controller, model, view, middleware classes and also setting up web server configuration.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Make sure Free Pascal and git is installed. Run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git clone https://github.com/fanoframework/fano-cli.git
+$ cd fano-cli
+$ ./tools/config.setup.sh
+$ ./build.sh
+</code></pre></div></div>
+<p>For easier typing, copy <code class="highlighter-rouge">bin/out/fanocli</code> executable binary to globally accessible location, for example</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo cp bin/out/fanocli /usr/local/bin/fanocli
+</code></pre></div></div>
+
+<p>Follow installation instruction in Fano CLI <a href="https://github.com/fanoframework/fano-cli/blob/master/README.md">README.md</a> document for more information.</p>
+
+<h2 id="view-fano-cli-help">View Fano CLI Help</h2>
+
+<p>To view available command, you can run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --help
+</code></pre></div></div>
+
+<h2 id="scaffolding-project-directory-structure">Scaffolding project directory structure</h2>
+
+<p>To scaffold project structure using Fano framework, run with  <code class="highlighter-rouge">--project</code> command line options</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project=[project-name]
+</code></pre></div></div>
+
+<p>For example, following command will cause a new project created in directory name <code class="highlighter-rouge">test-fano</code> inside current directory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project=test-fano
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">--project</code> command is alias of <code class="highlighter-rouge">--project-cgi</code> and so it creates CGI web application.</p>
+
+<p>This command line options also creates Git repository and initial commit for you  automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse
+to merge because they have unrelated commit histories.</p>
+
+<p>To workaround this problem, you can run <code class="highlighter-rouge">git merge</code> with option <code class="highlighter-rouge">--allow-unrelated-histories</code> or create project directory without creating initial commit or create project directory structure without
+Git repository.</p>
+
+<h2 id="scaffolding-fastcgi-project-directory-structure-with-apache-mod_fcgid-module">Scaffolding FastCGI project directory structure with Apache mod_fcgid module</h2>
+
+<p>To scaffold FastCGI project structure using Fano framework that employ Apache mod_fcgid, run with  <code class="highlighter-rouge">--project-fcgid</code> command line options</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-fcgid=[project-name]
+</code></pre></div></div>
+
+<p>For example, following command will cause a new FastCGI project created in directory name <code class="highlighter-rouge">test-fano-fcgi</code> inside current directory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-fcgid=test-fano-fcgi
+</code></pre></div></div>
+
+<p>See <a href="/deployment/fastcgi">Deploy as FastCGI application</a> for information on how to
+setup FastCGI application to work with various web server.</p>
+
+<h2 id="scaffolding-fastcgi-project-directory-structure">Scaffolding FastCGI project directory structure</h2>
+
+<p>To scaffold FastCGI project structure using Fano framework, run with  <code class="highlighter-rouge">--project-fcgi</code> command line options</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-fcgi=[project-name]
+</code></pre></div></div>
+
+<p>For example, following command will cause a new FastCGI project created in directory name <code class="highlighter-rouge">test-fano-fcgi</code> inside current directory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-fcgi=test-fano-fcgi
+</code></pre></div></div>
+
+<p>Additionally, you can set <code class="highlighter-rouge">--host</code> and <code class="highlighter-rouge">--port</code> where FastCGI will listen. If omitted, <code class="highlighter-rouge">127.0.0.1</code> and <code class="highlighter-rouge">20477</code> will be used as host and port respectively.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-fcgi=test-fano-fcgi --host=192.168.2.1 --port=4040
+</code></pre></div></div>
+
+<p>Generated project files are mostly similar to <code class="highlighter-rouge">--project</code> output, except that <code class="highlighter-rouge">src/app.pas</code>, and <code class="highlighter-rouge">src/bootstrap.pas</code> which will generate a daemon FastCGI web application.
+See <a href="/deployment/fastcgi">Deploy as FastCGI application</a> for information on how to
+setup FastCGI application to work with various web server.</p>
+
+<p>Difference between FastCGI application created with <code class="highlighter-rouge">--project-fcgid</code> and <code class="highlighter-rouge">--project-fcgi</code> is first will be FastCGI application which its process is managed by Apache mod_fcgid module while latter must be run independently using Apache mod_proxy_fcgi or Nginx.</p>
+
+<h2 id="scaffolding-scgi-project-directory-structure">Scaffolding SCGI project directory structure</h2>
+
+<p>To scaffold SCGI project structure using Fano framework, run with  <code class="highlighter-rouge">--project-scgi</code> command line options</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-scgi=[project-name]
+</code></pre></div></div>
+
+<p>For example, following command will cause a new SCGI project created in directory name <code class="highlighter-rouge">test-fano-scgi</code> inside current directory.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-scgi=test-fano-scgi
+</code></pre></div></div>
+
+<p>Additionally, you can set <code class="highlighter-rouge">--host</code> and <code class="highlighter-rouge">--port</code> where SCGI will listen. If omitted, <code class="highlighter-rouge">127.0.0.1</code> and <code class="highlighter-rouge">20477</code> will be used as host and port respectively.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-scgi=test-fano-scgi --host=192.168.2.1 --port=4040
+</code></pre></div></div>
+
+<p>Generated project files are mostly similar to <code class="highlighter-rouge">--project-fcgi</code> output but for SCGI protocol. See <a href="/deployment/scgi">Deploy as SCGI application</a> for information on how to
+setup SCGI application to work with various web server.</p>
+
+<h2 id="scaffolding-project-directory-structure-with-git-without-initial-commit">Scaffolding project directory structure with Git without initial commit</h2>
+
+<p>To scaffold project structure using Fano framework with Git repository initialized but without creating initial commit, run with  <code class="highlighter-rouge">--project-no-commit</code> command line options</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-no-commit=test-fano
+</code></pre></div></div>
+
+<p>This command line options is provided to enable you to commit Git repository manually. So you can merge local repository with a remote repository before
+running git commit. After project directory is constructed, you need to execute following shell command,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd test-fano
+$ git commit -m "Initial commit"
+</code></pre></div></div>
+
+<h2 id="scaffolding-project-directory-structure-without-git">Scaffolding project directory structure without Git</h2>
+
+<p>To scaffold project structure without initializing
+Git repository, run with  <code class="highlighter-rouge">--project-without-git</code> command line options</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --project-without-git=test-fano
+</code></pre></div></div>
+
+<p>This command line options is provided to enable you to initialize Git repository manually.</p>
+
+<p>After project directory is constructed, you need to execute following shell command,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd test-fano
+$ git init
+$ git submodule add https://github.com/fanoframework/fano.git vendor/fano
+$ git add .
+$ git commit -m "Initial commit"
+</code></pre></div></div>
+<p>This command line options is provided to enable you to initialize Git repository manually.</p>
+
+<h2 id="creating-controller">Creating controller</h2>
+
+<p>After you create project structure, to scaffold controller class, run with  <code class="highlighter-rouge">--controller</code> command line options</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd test-fano
+$ fanocli --controller=Hello
+</code></pre></div></div>
+
+<p>It will create following files</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test-fano/src/App/Hello/Controllers/HelloController.pas
+test-fano/src/App/Hello/Controllers/Factories/HelloControllerFactory.pas
+test-fano/src/Routes/Hello/routes.inc
+</code></pre></div></div>
+
+<p>and also modify following files</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test-fano/src/bootstrap.pas
+test-fano/src/Dependencies/controllers.dependencies.inc
+test-fano/src/Routes/routes.inc
+test-fano/build.cfg
+test-fano/build.cfg.sample
+</code></pre></div></div>
+
+<p>By default, it will create GET route to <code class="highlighter-rouge">/hello</code>. So after running <code class="highlighter-rouge">build.sh</code>
+script, you can access <code class="highlighter-rouge">HelloController</code> by visiting URL</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://[your host name]/hello
+</code></pre></div></div>
+
+<p>To create controller for certain route pattern or HTTP method, add <code class="highlighter-rouge">--route</code> and <code class="highlighter-rouge">--method</code> parameter. For example to create controller which will handle POST request to <code class="highlighter-rouge">/my/hello</code>,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --controller=Hello --route=/my/hello --method=POST
+</code></pre></div></div>
+
+<h2 id="creating-view">Creating view</h2>
+
+<p>After you create project structure, to scaffold view class, run with  <code class="highlighter-rouge">--view</code> command line options</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd test-fano
+$ fanocli --view=Hello
+</code></pre></div></div>
+
+<p>It will create following files</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test-fano/src/App/Hello/Views/HelloView.pas
+test-fano/src/App/Hello/Views/Factories/HelloViewFactory.pas
+</code></pre></div></div>
+
+<p>and also modify following files</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test-fano/src/bootstrap.pas
+test-fano/src/Dependencies/views.dependencies.inc
+test-fano/build.cfg
+test-fano/build.cfg.sample
+</code></pre></div></div>
+
+<h2 id="creating-model">Creating model</h2>
+
+<p>After you create project structure, to scaffold model class, run with  <code class="highlighter-rouge">--model</code> command line option</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd test-fano
+$ fanocli --model=Hello
+</code></pre></div></div>
+
+<p>It will create following files</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test-fano/src/App/Hello/Models/HelloModel.pas
+test-fano/src/App/Hello/Models/Factories/HelloModelFactory.pas
+</code></pre></div></div>
+
+<p>and also modify following files</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test-fano/src/bootstrap.pas
+test-fano/src/Dependencies/models.dependencies.inc
+test-fano/build.cfg
+test-fano/build.cfg.sample
+</code></pre></div></div>
+
+<h2 id="creating-controller-view-and-model-at-same-time">Creating controller, view and model at same time</h2>
+
+<p>To simplify creating controller, view and model at same time, you can use
+<code class="highlighter-rouge">--mvc</code> command line option.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --mvc=Hello
+</code></pre></div></div>
+
+<p>Command above is equal to following command</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ fanocli --controller=Hello
+$ fanocli --model=Hello
+$ fanocli --view=Hello
+</code></pre></div></div>
+
+<h2 id="creating-middleware">Creating middleware</h2>
+
+<p>To scaffold middleware class, run with  <code class="highlighter-rouge">--middleware</code> command line options</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd test-fano
+$ fanocli --middleware=AuthOnly
+</code></pre></div></div>
+
+<p>It will create following files</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test-fano/src/Middlewares/AuthOnly/AuthOnlyMiddleware.pas
+test-fano/src/Middlewares/AuthOnly/Factories/AuthOnlyMiddlewareFactory.pas
+</code></pre></div></div>
+
+<p>and also modify following files</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test-fano/app/bootstrap.pas
+test-fano/app/Dependencies/middlewares.dependencies.inc
+test-fano/build.cfg
+test-fano/build.cfg.sample
+</code></pre></div></div>
+
+<h2 id="deployment">Deployment</h2>
+
+<p>Fano CLI offers commands to simplify setting up Fano web application with various web server through following commands,</p>
+
+<ul>
+  <li><code class="highlighter-rouge">--deploy-cgi</code>, setup Fano web application as CGI with a web server.</li>
+  <li><code class="highlighter-rouge">--deploy-fcgi</code>, setup Fano web application as FastCGI with a web server.</li>
+  <li><code class="highlighter-rouge">--deploy-fcgid</code>, setup Fano web application as FastCGI with a Apache web server and mod_fcgid.</li>
+  <li><code class="highlighter-rouge">--deploy-scgi</code> , setup Fano web application as SCGI with a Apache web server.</li>
+</ul>
+
+<p>All commands above requires root privilege, so you need to run it with <code class="highlighter-rouge">sudo</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo fanocli --deploy-cgi=myapp.com
+</code></pre></div></div>
+
+<p>Read <a href="/deployment">Deployment</a> for more information on how to use commands above.</p>
+
+<h2 id="build">Build</h2>
+
+<p>Change active directory to new project directory after you created project and run</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /build.sh
+</code></pre></div></div>
+
+<p>to build application.</p>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/deployment">Deployment</a></li>
+  <li><a href="/tutorials/hello-world-application-with-fano-cli">Creating Hello World web application With Fano CLI</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

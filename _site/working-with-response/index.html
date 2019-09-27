@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Working with Response - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial on how to work with Response object in Fano Framework">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Working with Response"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/working-with-response/"/>
+    <meta property="og:description" content="Tutorial on how to work with Response object in Fano Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Working with Response</h1>
+
+<h2 id="about-response">About Response</h2>
+
+<p>When route handler (or controller) is executed, <a href="/dispatcher">dispatcher</a> will
+call its <code class="highlighter-rouge">handleRequest()</code> and pass response object which instance of <code class="highlighter-rouge">IResponse</code>interface. For information about controller, read <a href="/working-with-controllers">Working with Controller</a>.</p>
+
+<p>Your route handler or controller is required to return response object. You can either return response object given by dispatcher object or create new one.</p>
+
+<p><code class="highlighter-rouge">IResponse</code> is mostly used in conjunction with view. Read <a href="/working-with-views">Working with Views</a> to learn more about view in Fano Framework.</p>
+
+<h2 id="writing-response-body">Writing response body</h2>
+
+<p><code class="highlighter-rouge">IResponse</code> interface has <code class="highlighter-rouge">body()</code> method which will return <code class="highlighter-rouge">IResponseStream</code>
+interface instance. <code class="highlighter-rouge">IResponseStream</code> is descendant of <code class="highlighter-rouge">IStreamAdapter</code> interface
+which add additional methods to simplify writing string to stream and also reading string from it.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse
+) : IResponse;
+var respBody : IResponseStream;
+begin
+   respBody := response.body();
+   respBody.write(
+        '<span class="nt">&lt;html&gt;</span>' +
+        '<span class="nt">&lt;head&gt;&lt;title&gt;</span>Hello world<span class="nt">&lt;/title&gt;&lt;/head&gt;</span>' +
+        '<span class="nt">&lt;body&gt;&lt;p&gt;</span>Hello world<span class="nt">&lt;/p&gt;&lt;/body&gt;</span>' +
+        '/<span class="nt">&lt;html&gt;</span>'
+    )
+    result := response;
+end;
+</code></pre></div></div>
+
+<p>Should you need, content of stream as string, you can call <code class="highlighter-rouge">read()</code> method.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var response : IResponse;
+    resp : string;
+...
+resp := response.body().read();
+</code></pre></div></div>
+
+<p>To output content of stream including response header, you can call <code class="highlighter-rouge">write()</code> method.
+All built-in implementations of <code class="highlighter-rouge">IResponse</code> interface are just outpur to STDOUT.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var response : IResponse;
+...
+response.write();
+</code></pre></div></div>
+
+<h2 id="setting-response-header">Setting response header</h2>
+
+<p><code class="highlighter-rouge">IResponse</code> provides collection of response header through <code class="highlighter-rouge">header()</code> method.
+It returns instance of <code class="highlighter-rouge">IHeaders</code> interface.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">setHeader()</code> method set value of a HTTP response header.</li>
+  <li><code class="highlighter-rouge">getHeader()</code> method get value of a HTTP response header.</li>
+  <li><code class="highlighter-rouge">has()</code> method test if HTTP response header is set.</li>
+  <li><code class="highlighter-rouge">writeHeaders()</code> method output all headers.</li>
+</ul>
+
+<p>For example, to set <code class="highlighter-rouge">Content-Type</code> header with value of <code class="highlighter-rouge">application/json</code>,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var response : IResponse;
+...
+response.headers().setHeader('Content-Type', 'application/json');
+</code></pre></div></div>
+
+<p>If header is already set, calling <code class="highlighter-rouge">setHeader()</code> will overwrite previous value.</p>
+
+<h2 id="built-in-iresponse-implementation">Built-in IResponse implementation</h2>
+
+<p>Fano Framework comes with several built-in <code class="highlighter-rouge">IResponse</code> implementations to simplify task regarding response.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">TResponse</code>, this class is mostly what you get from dispatcher when controller is invoked.</li>
+  <li><code class="highlighter-rouge">TJSONResponse</code>. This is response that you may use to output JSON format. It set <code class="highlighter-rouge">Content-Type</code> header to <code class="highlighter-rouge">application/json</code>.</li>
+  <li><code class="highlighter-rouge">TBinaryResponse</code>.This is response that you may need to send binary data to browser, such as image response. See <a href="https://github.com/fanoframework/fano-app-img">Fano App Image</a> demo application to see how to return binary response.</li>
+  <li><code class="highlighter-rouge">TRedirectResponse</code> is response for doing HTTP redirection. See <em>Redirection</em> section on this document.</li>
+</ul>
+
+<h2 id="redirection-response">Redirection Response</h2>
+
+<p>To simplify send redirection response, Fano Framework provides <code class="highlighter-rouge">TRedirectResponse</code>.</p>
+
+<p>For example, in controller</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse
+) : IResponse;
+var headers : IHeaders;
+begin
+    //redirect to fanoframework.github.io
+    result := TRedirectResponse.create(
+        response.headers(),
+        'https://fanoframework.github.io'
+    );
+end;
+</code></pre></div></div>
+
+<p>By default, above code will redirect browser to <a href="https://fanoframework.github.io">https://fanoframework.github.io</a> with HTTP 302 status. If you need to use different HTTP status code, set it in constructor’s third parameter</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//redirect to fanoframework.github.io with HTTP 304
+result := TRedirectResponse.create(
+    response.headers(),
+    'https://fanoframework.github.io',
+    304
+);
+</code></pre></div></div>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/working-with-request">Working with Request</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

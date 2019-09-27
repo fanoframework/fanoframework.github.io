@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Deployment - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial on how to deploy web application built with Fano Framework to various web servers.">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Deployment"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/deployment/"/>
+    <meta property="og:description" content="Tutorial on how to deploy web application built with Fano Framework to various web servers."/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Deployment</h1>
+
+<h2 id="executable-binary-file-permission">Executable binary file permission</h2>
+
+<p>You need to make sure that application executable binary has proper file permission. It needs execution bit to be set.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ chmod 744 /path/to/app.cgi
+</code></pre></div></div>
+<p>For most uses-cases, <code class="highlighter-rouge">744</code> permission is suffice if your web server is run as your user account. If web server run as separate user than owner of cgi file, for example as <code class="highlighter-rouge">www-data</code>. You can add <code class="highlighter-rouge">www-data</code> as group</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo chown my_user:www-data /path/to/app.cgi
+</code></pre></div></div>
+
+<p>and then set executable binary permission to <code class="highlighter-rouge">774</code>.</p>
+
+<p>If you do not have root privilege access, such in shared hosting environment, then use permission of <code class="highlighter-rouge">755</code>. It will make application binary executable to everyone.</p>
+
+<h2 id="deploy-to-various-setup">Deploy to various setup</h2>
+
+<ul>
+  <li><a href="/deployment/cgi">Deploy as CGI application</a></li>
+  <li><a href="/deployment/fastcgi">Deploy as FastCGI application</a></li>
+  <li><a href="/deployment/scgi">Deploy as SCGI application</a></li>
+  <li><a href="/deployment/standalone-web-server">Deploy as standalone web server</a></li>
+  <li><a href="/deployment/docker">Deploy using Docker</a></li>
+  <li><a href="/deployment/continous-integration">Deploy with Continous Integration tools</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

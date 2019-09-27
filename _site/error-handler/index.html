@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Error Handler - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial on how to handle error with Fano Framework">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Error Handler"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/error-handler/"/>
+    <meta property="og:description" content="Tutorial on how to handle error with Fano Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Error Handler</h1>
+
+<h2 id="handling-exception">Handling exception</h2>
+
+<p>In web application built with Fano Framework, exception that is raised will be handled by <code class="highlighter-rouge">IErrorHandler</code> interface instance.</p>
+
+<p>This interface has one method</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function handleError(
+    const env : ICGIEnvironmentEnumerator;
+    const exc : Exception;
+    const status : integer = 500;
+    const msg : string  = 'Internal Server Error'
+) : IErrorHandler;
+</code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">env</code> is environment variables enumerator. Read <a href="/environment">CGI Environment</a> for more information about environment variables.</li>
+  <li><code class="highlighter-rouge">exc</code> is exception instance to be handled.</li>
+  <li><code class="highlighter-rouge">status</code> is integer value of HTTP code to send to client.</li>
+  <li><code class="highlighter-rouge">msg</code> is string value of HTTP message to send to client</li>
+</ul>
+
+<p>If you take a look at Fano Framework sample applications, e.g.,
+<a href="https://github.com/fanoframework/fano-app">Fano App</a>, you can observe
+that error handler instance is injected during application instance creation.</p>
+
+<p>The reason that error handler instance is injected directly in constructor and
+not relying on dependency container is to ensure that when you create application
+you must provide the error handler. It is mandatory. While when using
+dependency container, developer may forget to inject error handler instance.</p>
+
+<h2 id="built-in-error-handler-implementation">Built-in error handler implementation</h2>
+
+<p>Fano Framework comes with several <code class="highlighter-rouge">IErrorHandler</code> implementation.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">TErrorHandler</code>, basic error handler that output error in plain HTML. You use this mostly for development purpose as it displays verbose error information.</li>
+  <li><code class="highlighter-rouge">TAjaxErrorHandler</code>, error handler that output error informations as JSON.</li>
+  <li><code class="highlighter-rouge">TNullErrorHandler</code>, error handler that output nothing except HTTP error.</li>
+  <li><code class="highlighter-rouge">THtmlAjaxErrorHandler</code>, composite error handler that output basic HTML error or JSON based on whether request is AJAX or not.</li>
+  <li><code class="highlighter-rouge">TLogErrorHandler</code>, error handler that log error information instead of output it to client.</li>
+  <li><code class="highlighter-rouge">TTemplateErrorHandler</code>, error handler that output error using HTML template. This class is provided to enable developer to display nicely formatted error page. For production setup, this is mostly what you use.</li>
+  <li><code class="highlighter-rouge">TCompositeErrorHandler</code> error handler that is composed from two other error handler. This is provided so we combine, for example, log error to file and also displaying nicely formatted output to client.</li>
+</ul>
+
+<h2 id="display-verbose-error-message">Display verbose error message</h2>
+
+<p><code class="highlighter-rouge">TErrorHandler</code> is one of basic implementation of <code class="highlighter-rouge">IErrorHandler</code>, which
+display basic error information in HTML content type such as type of exception
+raised, exception message and stacktrace and environment variables.</p>
+
+<p>If you compile application with debugging information such as <code class="highlighter-rouge">-g</code> or <code class="highlighter-rouge">-gh</code> flag,
+stacktrace is quite detail such as line number in source file. Without debugging information, it only displays memory location.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TErrorHandler.create()
+);
+</code></pre></div></div>
+
+<h2 id="display-verbose-error-message-as-json">Display verbose error message as JSON</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TAjaxErrorHandler.create()
+);
+</code></pre></div></div>
+
+<h2 id="hide-error-message">Hide error message</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TNullErrorHandler.create()
+);
+</code></pre></div></div>
+
+<h2 id="display-error-with-html-template">Display error with html template</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TTemplateErrorHandler.create('/path/to/error/template.html')
+);
+</code></pre></div></div>
+
+<h2 id="log-error-to-file">Log error to file</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TLogErrorHandler.create(TFileLogger.create('/path/to/log/file'))
+);
+</code></pre></div></div>
+<p>You need to make sure that <code class="highlighter-rouge">/path/to/log/file</code> is writeable.</p>
+
+<h2 id="log-error-to-file-and-display-error-from-template">Log error to file and display error from template</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TCompositeErrorHandler.create(
+        TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
+        TTemplateErrorHandler.create('/path/to/error/template.html')
+    )
+);
+</code></pre></div></div>
+
+<h2 id="log-error-to-file-and-display-blank-error-page">Log error to file and display blank error page</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TCompositeErrorHandler.create(
+        TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
+        TNullErrorHandler.create()
+    )
+);
+</code></pre></div></div>
+
+<h2 id="create-your-own-error-handler">Create your own error handler</h2>
+
+<p>If you find built-in error handlers are not enough for your use case, you may create your own <code class="highlighter-rouge">IErrorHandler</code> implementation.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unit myerrorhandler;
+
+interface
+
+{$MODE OBJFPC}
+{$H+}
+
+uses
+
+    fano;
+
+type
+
+    TMyErrorHandler = class(TInterfacedObject, IErrorHandler)
+    public
+        function handleError(
+            const env : ICGIEnvironmentEnumerator;
+            const exc : Exception;
+            const status : integer = 500;
+            const msg : string  = 'Internal Server Error'
+        ) : IErrorHandler;
+    end;
+
+implementation
+
+    function TMyErrorHandler.handleError(
+        const env : ICGIEnvironmentEnumerator;
+        const exc : Exception;
+        const status : integer = 500;
+        const msg : string  = 'Internal Server Error'
+    ) : IErrorHandler;
+    begin
+        writeln('Content-Type: text/html');
+        writeln('Status: ', status, ' ', msg) ;
+        writeln();
+        writeln('Funky error message');
+        result := self;
+    end;
+
+end.
+</code></pre></div></div>
+
+<p>Following lines are mandatory to conform with HTTP protocol.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>writeln('Content-Type: text/html');
+writeln('Status: ', status, ' ', msg) ;
+writeln();
+</code></pre></div></div>
+
+<p>To use your own error handler</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uses
+
+    fano,
+    myerrorhandler;
+...
+var appInstance : IWebApplication;
+...
+appInstance := TMyApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TMyErrorHandler.create()
+);
+</code></pre></div></div>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/working-with-views">Working with Views</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

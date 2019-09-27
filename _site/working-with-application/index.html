@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Working with Application - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial on how to work with Fano Framework application class.">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Working with Application"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/working-with-application/"/>
+    <meta property="og:description" content="Tutorial on how to work with Fano Framework application class."/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Working with Application</h1>
+
+<h2 id="iwebapplication-interface">IWebApplication interface</h2>
+
+<p>In Fano Framework, application must implements <code class="highlighter-rouge">IWebApplication</code> interface.
+Currently, it does not provide any method except inherit <code class="highlighter-rouge">run()</code> method from
+<code class="highlighter-rouge">IRunnable</code> interface which is its parent.</p>
+
+<p><a href="https://github.com/fanoframework/fano/blob/master/App/Contracts/AppIntf.pas">View IWebApplication source code</a>.</p>
+
+<h2 id="cgi-application">CGI Application</h2>
+
+<p><code class="highlighter-rouge">TFanoWebApplication</code> and <code class="highlighter-rouge">TSimpleWebApplication</code> is two built-in classes that implements CGI protocol. Its task is basically to read CGI environment variables that web server send and call appropriate request handler.</p>
+
+<p>Depending on how you construct the application service provider, it may pass the request to middleware layer that will reject or allow request to pass through to actual request handler.</p>
+
+<h3 id="not-so-simple-application-implementation">Not so simple application implementation.</h3>
+
+<p><code class="highlighter-rouge">TFanoWebApplication</code> is built-in implementation of <code class="highlighter-rouge">IWebApplication</code> which does not assume anything. So developers must construct its dependencies by hand, which may be quite verbose.</p>
+
+<p><code class="highlighter-rouge">TFanoWebApplication</code> constructor requires developer to pass instance of
+<code class="highlighter-rouge">IDependencyContainer</code>, <code class="highlighter-rouge">ICGIEnvironment</code> and <code class="highlighter-rouge">IErrorHandler</code> instance which serves
+as <a href="/dependency-container">service container</a>, CGI environment variable container and <a href="/error-handler">error handler</a> that handle any exception that may be triggered.</p>
+
+<p>Fano Framework provides some built-in implementations for dependency container, environment variable and error handler. For example,
+if <code class="highlighter-rouge">TBootstrapApp</code> inherits from <code class="highlighter-rouge">TFanoWebApplication</code>, you can use</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>appInstance := TBootstrapApp.create(
+    TDependencyContainer.create(TDependencyList.create()),
+    TCGIEnvironment.create(),
+    TErrorHandler.create()
+);
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">TFanoWebApplication</code> is abstract class, so developers need to implements its three abstract methods:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">buildDependencies</code> method will be called to allow developer to register any services required by application, for example router instance, dispatcher, application configuration, etc. This method has one parameter which is instance
+of dependency container.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">buildRoutes</code> method will be called to allow developer to register any routes that application need. This method has one parameter which is instance
+of dependency container which developer can use to get router instance.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">initDispatcher</code> method will be called and must return dispatcher instance to use. This method also pass dependency container which developer can use to get dispatcher instance.</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(*!-----------------------------------------------
+ * Build application dependencies
+ *------------------------------------------------
+ * @param container dependency container
+ *-----------------------------------------------*)
+procedure buildDependencies(const container : IDependencyContainer); virtual; abstract;
+
+(*!-----------------------------------------------
+ * Build application routes
+ *------------------------------------------------
+ * @param container dependency container
+ *-----------------------------------------------*)
+procedure buildRoutes(const container : IDependencyContainer); virtual; abstract;
+
+(*!-----------------------------------------------
+ * initialize application route dispatcher
+ *------------------------------------------------
+ * @param container dependency container
+ * @return dispatcher instance
+ *-----------------------------------------------*)
+function initDispatcher(const container : IDependencyContainer) : IDispatcher; virtual; abstract;
+</code></pre></div></div>
+
+<p><a href="https://github.com/fanoframework/fano/blob/master/App/Implementations/AppImpl.pas">View TFanoWebApplication source code</a>.</p>
+
+<h3 id="little-bit-simpler-application">Little bit simpler application</h3>
+
+<p><code class="highlighter-rouge">TSimpleWebApplication</code> inherits from <code class="highlighter-rouge">TFanoWebApplication</code>. It is provided to simplify setting up application instance by providing some default service
+providers.</p>
+
+<p>If you use <code class="highlighter-rouge">TSimpleWebApplication</code>, then some required default services are provided for you if not set. If not set, following classes is assumed:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">TDependencyContainer</code> instance as dependency container.</li>
+  <li><code class="highlighter-rouge">TCGIEnvironment</code> instance as CGI environment.</li>
+  <li><code class="highlighter-rouge">TErrorHandler</code> instance as CGI environment.</li>
+  <li>Router instance which support regular expression.</li>
+  <li>Simple dispatcher implementation which does not use middlewares.</li>
+</ul>
+
+<p>Also, developers only need to implements two abstract methods as
+<code class="highlighter-rouge">initDispatcher()</code> method has already been implemented.</p>
+
+<p><a href="https://github.com/fanoframework/fano/blob/master/App/Implementations/AppImpl.pas">View TSimpleWebApplication source code</a>.</p>
+
+<p>See <a href="https://github.com/fanoframework/fano-app">sample application</a> to understand how to setup application instance.</p>
+
+<h2 id="fastcgi-application">FastCGI Application</h2>
+
+<p>To create web application that support FastCGI protocol, inherit from <code class="highlighter-rouge">TBaseSimpleFastCGIWebApplication</code> or one of its descendant. Class with <code class="highlighter-rouge">Epoll</code> prefix name, use <a href="http://man7.org/linux/man-pages/man7/epoll.7.html">Linux epoll API</a>
+that is designed to improve performance, but they are available on Linux only.</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">TSimpleFastCGIWebApplication</code> or <code class="highlighter-rouge">TEpollSimpleFastCGIWebApplication</code>. This is class that you need to inherit if you want
+to create FastCGI application which run independently and listen on TCP socket. See
+<a href="https://github.com/fanoframework/fano-fastcgi">fano-fastcgi</a> example demo application.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">TSimpleUnixFastCGIWebApplication</code> or <code class="highlighter-rouge">TEpollSimpleUnixFastCGIWebApplication</code>. It is similar to class above but listen on unix domain socket file. See
+<a href="https://github.com/fanoframework/fano-fcgi-unix">fano-fcgi-unix</a> example demo application.</p>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">TSimpleSockFastCGIWebApplication</code> or <code class="highlighter-rouge">TEpollSimpleSockFastCGIWebApplication</code>. This is class that you need to inherit if you want to create FastCGI application which run and managed by web server, for example
+ Apache with mod_fcgid module. See
+<a href="https://github.com/fanoframework/fano-fcgid">fano-fcgid</a> example demo application.</p>
+  </li>
+</ul>
+
+<p>See <a href="/deployment/fastcgi">Deploy as FastCGI application</a> for information how to
+deploy FastCGI application on various web servers.</p>
+
+<p>You may want to see <em>Scaffolding FastCGI project directory structure</em> section in
+<a href="/scaffolding-with-fano-cli">Scaffolding with Fano CLI</a> for information how to scaffolding FastCGI web application with <a href="https://github.com/fanoframework/fano-cli">Fano CLI</a>.</p>
+
+<h2 id="scgi-application">SCGI Application</h2>
+
+<p>To create web application that support <a href="https://python.ca/scgi/protocol.txt">SCGI (Simple Common Gateway Interface)</a> protocol, inherit from <code class="highlighter-rouge">TBaseSimpleScgiWebApplication</code> or one of its descendant. Same as above, class with <code class="highlighter-rouge">Epoll</code> prefix name, use <a href="http://man7.org/linux/man-pages/man7/epoll.7.html">Linux epoll API</a>.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">TSimpleScgiWebApplication</code> or <code class="highlighter-rouge">TEpollSimpleScgiWebApplication</code>. This is class that you need to inherit if you want
+to create SCGI application which run independently and listen on TCP socket. See
+<a href="https://github.com/fanoframework/fano-scgi">fano-scgi</a> example demo application.</li>
+</ul>
+
+<p>See <a href="/deployment/scgi">Deploy as SCGI application</a> for information how to
+deploy SCGI application on various web servers.</p>
+
+<p>You may want to see <em>Scaffolding SCGI project directory structure</em> section in
+<a href="/scaffolding-with-fano-cli">Scaffolding with Fano CLI</a> for information how to scaffolding SCGI web application easily.</p>
+
+<h2 id="apache-modules-application">Apache modules Application</h2>
+
+<p>Implementation of IWebApplication that run as Apache modules is not yet implemented.</p>
+
+<h2 id="standalone-web-server-application">Standalone web server application</h2>
+
+<p>Implementation of IWebApplication that run as standalone web server is not yet implemented.</p>
+
+<h2 id="application-implementation-which-support-rack-like-protocol">Application implementation which support Rack-like protocol</h2>
+
+<p>Implementation of IWebApplication that implements Rack-like protocol, currently, is still under development.</p>
+
+<ul>
+  <li><a href="https://rack.github.io/">Ruby Rack</a></li>
+  <li><a href="https://github.com/piradoiv/Prack">Prack</a></li>
+</ul>
+
+<h2 id="how-to-choose-iwebapplication-implementation">How to choose IWebApplication implementation?</h2>
+
+<h3 id="cgi-application-1">CGI Application</h3>
+
+<h4 id="pros">Pros</h4>
+
+<ul>
+  <li>Easy to setup especially on shared-hosting where you do not posses server administrive privilege.</li>
+</ul>
+
+<h3 id="cons">Cons</h3>
+
+<ul>
+  <li>Not very performant compared to FastCGI or SCGI application due to how CGI protocol works.</li>
+</ul>
+
+<h3 id="fastcgi-application-1">FastCGI Application</h3>
+
+<h4 id="pros-1">Pros</h4>
+
+<ul>
+  <li>Performance is good compared to CGI application.</li>
+</ul>
+
+<h3 id="cons-1">Cons</h3>
+
+<ul>
+  <li>Requires server administrative privilege to setup. You can not deploy application on shared-hosting easily.</li>
+</ul>
+
+<h3 id="scgi-application-1">SCGI Application</h3>
+
+<h4 id="pros-2">Pros</h4>
+
+<ul>
+  <li>Performance is good compared to CGI application and maybe slightly better than
+FastCGI due to simpler protocol specification.</li>
+</ul>
+
+<h3 id="cons-2">Cons</h3>
+
+<ul>
+  <li>Requires server administrative privilege to setup. You can not deploy application on shared-hosting easily.</li>
+</ul>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/deployment">Deployment</a></li>
+  <li><a href="/deployment/cgi">Deploy CGI Application</a></li>
+  <li><a href="/deployment/fastcgi">Deploy FastCGI Application</a></li>
+  <li><a href="/deployment/scgi">Deploy SCGI Application</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

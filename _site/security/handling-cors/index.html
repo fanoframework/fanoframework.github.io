@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Handling Cross-Origin Resource Sharing (CORS) Request - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Handling CORS request in Fano Framework">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Handling Cross-Origin Resource Sharing (CORS) Request"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/security/handling-cors/"/>
+    <meta property="og:description" content="Handling CORS request in Fano Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Handling CORS</h1>
+
+<h2 id="what-is-cors-request">What is CORS request?</h2>
+
+<p>Cross-Origin Resource Sharing (CORS) request is HTTP request which <code class="highlighter-rouge">Origin</code> header
+does not same with <code class="highlighter-rouge">Host</code> header. By default browser blocks such requests due to same origin policy.</p>
+
+<p>This may pose some problem for backend API where sometime it is configured to run
+on different host or port.</p>
+
+<p>To allow such requests, backend API needs to tells browser that it acknoledges such request
+by sending appropriate response header.</p>
+
+<h2 id="handling-cors-with-middleware">Handling CORS with middleware</h2>
+
+<p>Fano Framework provides built-in middleware class <code class="highlighter-rouge">TCorsMiddleware</code> which is to simplify task for sending appropriate CORS headers. Read <a href="/middlewares">Middlewares</a> for more information about working with middlewares.</p>
+
+<p>Constructor of <code class="highlighter-rouge">TCorsMiddleware</code> expects <code class="highlighter-rouge">ICors</code> interface instance which responsible to handle CORS request.</p>
+
+<p><code class="highlighter-rouge">TNullCors</code> is <code class="highlighter-rouge">ICors</code> implementation which simply allow all CORS request without restriction, while <code class="highlighter-rouge">TCors</code> class is implementation which can be configured to selectively apply restriction.</p>
+
+<h2 id="register-cors-middleware-with-container">Register CORS middleware with container</h2>
+
+<p>Fano Framework has <code class="highlighter-rouge">TCorsMiddlewareFactory</code> or <code class="highlighter-rouge">TNullCorsMiddlewareFactory</code> class
+which allows you to register <code class="highlighter-rouge">TCorsMiddleware</code> with <code class="highlighter-rouge">TCors</code> or <code class="highlighter-rouge">TNullCors</code> with service container.
+Both factory classes are derived from <code class="highlighter-rouge">TBaseCorsMiddlewareFactory</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>container.add('globalMiddlewares', TMiddlewareCollectionAwareFactory.create());
+container.add(
+    'cors',
+    (TCorsMiddlewareFactory.create())
+        .allowedOriginsPatterns(['http\:\/\/localhost\:[0-9]{1,5}'])
+        .allowedMethods(['GET', 'POST', 'OPTIONS'])
+        .allowedHeaders(['X-My-Custom-Header'])
+);
+</code></pre></div></div>
+
+<p>To use <code class="highlighter-rouge">TNullCorsMiddlewareFactory</code>, just replace <code class="highlighter-rouge">TCorsMiddlewareFactory</code> above.</p>
+
+<h2 id="register-dispatcher-with-support-middleware">Register dispatcher with support middleware</h2>
+
+<p>Because we need to execute middlewares, we cannot use <code class="highlighter-rouge">TSimpleDispatcher</code> class which
+by default is already registered when we use, for example, <code class="highlighter-rouge">TSimpleWebApplication</code> class.</p>
+
+<p>So we need to use <code class="highlighter-rouge">TDispatcher</code> class which support middlewares.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var globalMiddlewares : IMiddlewareLinkList;
+...
+globalMiddlewares := container.get('globalMiddlewares') as IMiddlewareLinkList;
+container.add(
+    GuidToString(IDispatcher),
+    TDispatcherFactory.create(
+        globalMiddlewares,
+        container.get(GuidToString(IRouteMatcher)) as IRouteMatcher,
+        TRequestResponseFactory.create()
+    )
+);
+</code></pre></div></div>
+
+<h2 id="attach-cors-middleware-to-application-middleware">Attach CORS middleware to application middleware</h2>
+
+<p>Attach CORS middleware instance to application middleware collection to ensure
+CORS middleware is executed for all application routes.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>globalMiddlewares.addBefore(container.get('cors') as IMiddleware);
+</code></pre></div></div>
+
+<h2 id="configure-cors-settings">Configure CORS settings</h2>
+
+<p><code class="highlighter-rouge">TBaseCorsMiddlewareFactory</code> class provides several methods to help configure CORS
+settings.</p>
+
+<h3 id="allowed-origins">Allowed origins</h3>
+
+<p>To allow request from <code class="highlighter-rouge">http://cors.fano</code> and <code class="highlighter-rouge">http://my.fano</code>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var factory : TBaseCorsMiddlewareFactory;
+...
+factory := TCorsMiddlewareFactory.create();
+factory.allowedOrigins([ 'http://cors.fano', 'http://my.fano']);
+</code></pre></div></div>
+
+<p>To allow request from any origin</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory.allowedOrigins(['*']);
+</code></pre></div></div>
+
+<h3 id="allowed-origins-patterns">Allowed origins patterns</h3>
+
+<p>You can also configure origin to allow using regex pattern. Following code will cause
+any request coming from <code class="highlighter-rouge">http://localhost:port</code> where port is integer value.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory.allowedOriginsPatterns(['http\:\/\/localhost\:[0-9]{1,5}']);
+</code></pre></div></div>
+
+<p>So any requests from <code class="highlighter-rouge">http://localhost:9000</code> or <code class="highlighter-rouge">http://localhost:9100</code> are allowed but not
+<code class="highlighter-rouge">http://127.0.0.1:9000</code>.</p>
+
+<h3 id="allowed-methods">Allowed methods</h3>
+
+<p>To allowed only HTTP GET and POST</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory.allowedMethods(['GET', 'POST']);
+</code></pre></div></div>
+
+<p>To allowed all method</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory.allowedMethods(['*']);
+</code></pre></div></div>
+
+<h3 id="allowed-headers">Allowed headers</h3>
+
+<p>To allowed custom HTTP header</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory..allowedHeaders(['X-My-Custom-Header']);
+</code></pre></div></div>
+
+<p>To allowed all custom headers</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory.allowedHeaders(['*']);
+</code></pre></div></div>
+
+<h3 id="exposed-headers">Exposed headers</h3>
+
+<p>To list HTTP headers exposed by application that browser allowed to access.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory.exposedHeaders(['X-My-Custom-Header']);
+</code></pre></div></div>
+
+<p>To expose all headers</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory.exposedHeaders(['*']);
+</code></pre></div></div>
+
+<h3 id="credentialed-request">Credentialed request</h3>
+
+<p>To allow credentialed request which aware of HTTP Cookies and HTTP Authentication.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory.supportCredentials(true);
+</code></pre></div></div>
+
+<h3 id="max-age">Max age</h3>
+
+<p>To set number of seconds, preflight request can be cached by browser, set it as follows</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>factory.maxAge(3600);
+</code></pre></div></div>
+
+<h2 id="testing-cors-feature">Testing CORS feature</h2>
+
+<p>Create a backend application that handle CORS, for example, you can use <a href="https://github.com/fanoframework/fano-cors">Fano Cors example application</a> as base.</p>
+
+<p>Create a simple web page to call our API via ajax, for example</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;&lt;title&gt;</span>CORS Test<span class="nt">&lt;/title&gt;&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"content"</span><span class="nt">&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"btnLoad"</span><span class="nt">&gt;</span>Load<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://code.jquery.com/jquery-3.4.1.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+            <span class="nx">$</span><span class="p">(</span><span class="s1">'#btnLoad'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+                <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+                    <span class="na">url</span><span class="p">:</span> <span class="s2">"http://fano-cors.fano/"</span><span class="p">,</span>
+                    <span class="na">headers</span><span class="p">:</span> <span class="p">{</span> <span class="s1">'x-my-custom-header'</span><span class="p">:</span> <span class="s1">'some value'</span> <span class="p">}</span>
+                <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resp</span><span class="p">){</span>
+                    <span class="nx">$</span><span class="p">(</span><span class="s1">'#content'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">hello</span><span class="p">);</span>
+                <span class="p">});</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<p>Save code above as <code class="highlighter-rouge">client.html</code> in your web server document root. It is assumed that our application is at <code class="highlighter-rouge">http://fano-cors.fano/</code>.</p>
+
+<p>Open browser and go to <code class="highlighter-rouge">http://localhost/client.html</code>, click <code class="highlighter-rouge">Load</code> button
+to execute ajax request to our API.</p>
+
+<p>Browser will send ajax request with header <code class="highlighter-rouge">Origin</code> equals to <code class="highlighter-rouge">http://localhost/client.html</code> and <code class="highlighter-rouge">Host</code> equals <code class="highlighter-rouge">http://fano-cors.fano/</code>, so request is a CORS request.</p>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/middlewares">Middlewares</a></li>
+  <li><a href="/dispatcher">Dispatcher</a></li>
+  <li><a href="https://github.com/fanoframework/fano-cors">Fano Cors example application</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

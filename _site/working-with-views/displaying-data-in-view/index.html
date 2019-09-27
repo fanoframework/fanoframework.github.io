@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Displaying Data in View - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial on how to display data in view">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Displaying Data in View"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/working-with-views/displaying-data-in-view/"/>
+    <meta property="og:description" content="Tutorial on how to display data in view"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Displaying Data in View</h1>
+
+<p>To display dynamic data into <code class="highlighter-rouge">TView</code>, you will need to pass <code class="highlighter-rouge">ITemplateParser</code> interface instance which provide functionality to replace variable placeholder.</p>
+
+<h2 id="working-with-view-parameter">Working with view parameter</h2>
+
+<p><code class="highlighter-rouge">render()</code> method from <code class="highlighter-rouge">IView</code> interface accepts instance <code class="highlighter-rouge">IViewParameters</code> as its first parameter. Controller will be responsible to provide view parameters.</p>
+
+<p><code class="highlighter-rouge">IViewParameters</code> interface has three methods:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">getVar()</code>, method that return string value of variable name</li>
+  <li><code class="highlighter-rouge">setVar()</code>, method that set string value of variable name</li>
+  <li><code class="highlighter-rouge">vars()</code>, returns all variable name as TStrings</li>
+</ul>
+
+<p>If you set variable name such as following code:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uses fano;
+...
+var viewParams : IViewParameters;
+...
+viewParams.setVar('foo', 'Hello').setVar('bar', 'World');
+</code></pre></div></div>
+
+<p>And you have following HTML template</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span><span class="c">&lt;!--[foo]--&gt;</span><span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"foo"</span><span class="nt">&gt;</span><span class="c">&lt;!--[foo]--&gt;</span><span class="nt">&lt;div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bar"</span><span class="nt">&gt;</span><span class="c">&lt;!--[bar]--&gt;</span><span class="nt">&lt;div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>with template parser instance defined as follow</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>templateParser:= TSimpleTemplateParser.create('&lt;!--[', ']--&gt;');
+</code></pre></div></div>
+
+<p>Output response will be</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>Hello<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"foo"</span><span class="nt">&gt;</span>Hello<span class="nt">&lt;div&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bar"</span><span class="nt">&gt;</span>World<span class="nt">&lt;div&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>Fano Framework provides several <code class="highlighter-rouge">IViewParameters</code> implementations.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">TViewParameters</code>, basic implementation which can set and get view parameters.</li>
+  <li><code class="highlighter-rouge">TCompositeViewParameters</code>, class which composed from two external <code class="highlighter-rouge">IViewParameters</code> instances. This is mostly used to combine two view parameters as one.</li>
+  <li><code class="highlighter-rouge">TNullViewParameters</code>, null class implements <code class="highlighter-rouge">IViewParameters</code> instances.</li>
+</ul>
+
+<h2 id="working-with-array-of-data">Working with array of data</h2>
+
+<p>Built-in implementation of template parser is basically just string manipulation operation and does not offer sophisticated template engine.</p>
+
+<p>This should not be a problem when you need to display, for example, a list of
+items, because you can always create your own <code class="highlighter-rouge">IView</code> interface implementation
+to display that data.</p>
+
+<p>For example if we have array of <code class="highlighter-rouge">TUserData</code> which declared as follows:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type
+
+    TUserData = record
+        id : integer;
+        name : string;
+        email : string;
+    end;
+    TUserDataArr = array of TUserData;
+...
+var userData : TUserDataArr;
+</code></pre></div></div>
+
+<p>Then you can create <code class="highlighter-rouge">IView</code> implementation that dis</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(*!------------------------------------------------
+ * render view
+ *------------------------------------------------
+ * @param viewParams view parameters
+ * @param response response instance
+ * @return response
+ *-----------------------------------------------*)
+function TUserListingView.render(
+    const viewParams : IViewParameters;
+    const response : IResponse
+) : IResponse;
+var respBody : IResponseStream;
+    i : integer;
+begin
+    if (length(userData) &gt; 0) then
+    begin
+        respBody.write(
+            '&lt;table&gt;' +
+            '&lt;thead&gt;' +
+              '&lt;tr&gt;' +
+              '  &lt;th&gt;No&lt;/th&gt;' +
+              '  &lt;th&gt;Name&lt;/th&gt;' +
+              '  &lt;th&gt;Email&lt;/th&gt;' +
+              '&lt;/tr&gt;' +
+            '&lt;/thead&gt;&lt;tbody&gt;'
+        );
+        for i:=0 to length(userData)-1 do
+        begin
+            respBody.write(
+                '&lt;tr&gt;' +
+                '&lt;td&gt;' + intToStr(userData[i].id) + '&lt;/td&gt;' +
+                '&lt;td&gt;' + userData[i].name' + '&lt;/td&gt;' +
+                '&lt;td&gt;' + userData[i].email + '&lt;/td&gt;' +
+                '&lt;/tr&gt;'
+            );
+        end;
+        respBody.write('&lt;/tbody&gt;&lt;/table&gt;');
+    end;
+    result := response;
+end;
+</code></pre></div></div>
+
+<h2 id="displaying-data-from-model">Displaying data from model</h2>
+
+<p><a href="/working-with-models">Working with Models</a> explains about model that Fano Framework use.</p>
+
+<p>To work with models in view instance, what you need to do is to inject model
+instance into view</p>
+
+<p>Following snippet code is view implementation that display data from static JSON file. It is part of <a href="https://github.com/fanoframework/fano-mvc">fano-mvc</a> sample application.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(*!------------------------------------------------
+ * render view
+ *------------------------------------------------
+ * @param viewParams view parameters
+ * @param response response instance
+ * @return response
+ *-----------------------------------------------*)
+function TUserListingView.render(
+    const viewParams : IViewParameters;
+    const response : IResponse
+) : IResponse;
+var userData : IModelResultSet;
+    respBody : IResponseStream;
+begin
+    userData := userModel.data();
+    respBody := response.body();
+    if (userData.count() &gt; 0) then
+    begin
+        respBody.write(
+            '&lt;table&gt;' +
+            '&lt;thead&gt;' +
+              '&lt;tr&gt;' +
+              '  &lt;th&gt;No&lt;/th&gt;' +
+              '  &lt;th&gt;Name&lt;/th&gt;' +
+              '  &lt;th&gt;Email&lt;/th&gt;' +
+              '&lt;/tr&gt;' +
+            '&lt;/thead&gt;&lt;tbody&gt;'
+        );
+        while (not userData.eof()) do
+        begin
+            respBody.write(
+                '&lt;tr&gt;' +
+                '&lt;td&gt;' + userData.readString('id') + '&lt;/td&gt;' +
+                '&lt;td&gt;' + userData.readString('name') + '&lt;/td&gt;' +
+                '&lt;td&gt;' + userData.readString('email') + '&lt;/td&gt;' +
+                '&lt;/tr&gt;'
+            );
+            userData.next();
+        end;
+        respBody.write('&lt;/tbody&gt;&lt;/table&gt;');
+    end;
+    result := response;
+end;
+</code></pre></div></div>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/working-with-views">Working with Views</a></li>
+  <li><a href="/working-with-controllers">Working with Controllers</a></li>
+  <li><a href="/working-with-models">Working with Models</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+

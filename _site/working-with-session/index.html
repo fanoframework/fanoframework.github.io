@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--
+Hyperspace by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+<head>
+    <title>Working with Session - Fano Framework</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Tutorial on how to work with session in Fano Framework">
+    <meta name="keywords" content="fano, web application, framework, pascal, programming, language, free pascal">
+    <meta name="robots" content="index, follow"/>
+    <meta property="og:title" content="Working with Session"/>
+    <meta property="og:site_name" content="Fano Framework"/>
+    <meta property="og:url" content="http://localhost:4000/working-with-session/"/>
+    <meta property="og:description" content="Tutorial on how to work with session in Fano Framework"/>
+    <meta property="og:type" content="website"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+
+<!-- Sidebar -->
+<section id="sidebar">
+    <div class="inner">
+        <nav>
+            <ul>
+                
+                    <h3>Getting Started</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                          <li><a href="/tutorials">Step By Step Tutorials</a></li>
+                        
+                      </ul>
+                
+                    <h3>Basic</h3>
+                      <ul class="alt">
+                        
+                          <li><a href="/getting-started">Getting Started</a></li>
+                        
+                      </ul>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+
+
+<!-- Wrapper -->
+<div id="wrapper">
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <h1 class="major">Working with Session</h1>
+
+<h2 id="what-is-session">What is session?</h2>
+
+<p>HTTP protocol is stateless protocol. It does not have built-in mechanism to maintain
+state between each request.</p>
+
+<p>Session is mechanism which store request state in server. State is identified by some
+random unique id. Each request and response will exchange this identifier to maintain
+state between requests.</p>
+
+<h2 id="isessionmanager">ISessionManager</h2>
+
+<p>To use session in Fano Framework, you need to use <code class="highlighter-rouge">ISessionManager</code> and also dispatcher instance which support session. Fano Framework provides built-in implementation for this interface.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">TFileSessionManager</code>, session manager which store session data in file.</li>
+</ul>
+
+<h2 id="create-session-manager-instance">Create session manager instance</h2>
+
+<h3 id="create-factory-class">Create factory class</h3>
+
+<p>To register <code class="highlighter-rouge">TFileSessionManager</code> instance to dependency container, Fano Framework provides <code class="highlighter-rouge">TJsonFileSessionManagerFactory</code> and <code class="highlighter-rouge">TIniFileSessionManagerFactory</code> classes which will create session manager which store its data as JSON and INI file respectively.</p>
+
+<p>Its constructor accepts two parameters, name of session and path of directory where files will be stored. You need to make sure that directory writeable by application.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var sessionMgrFactory : IDependencyFactory;
+...
+sessionMgrFactory := TJsonFileSessionManagerFactory.create(
+    'fano_sess`,
+    '/home/fanoapp/storages/sessions/'
+);
+</code></pre></div></div>
+
+<h3 id="register-factory-to-dependency-container">Register factory to dependency container</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>container.add('sessionManager', sessionMgrFactory);
+</code></pre></div></div>
+
+<h2 id="create-dispatcher-instance-which-support-session">Create dispatcher instance which support session</h2>
+
+<p><code class="highlighter-rouge">TSessionDispatcherFactory</code> is factory which can create dispatcher which support session.
+It expects 6 parameters:</p>
+
+<ul>
+  <li>Instance of global middleware collection.</li>
+  <li>Instance of router matcher.</li>
+  <li>Request response factory</li>
+  <li>Instance of <code class="highlighter-rouge">ISessionManager</code> interface</li>
+  <li>Instance of <code class="highlighter-rouge">ICookieFactory</code> interface</li>
+  <li>Integer value of cookie max age in seconds</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>container.add(
+    GuidToString(IDispatcher),
+    TSessionDispatcherFactory.create(
+        container.get('appMiddlewares') as IMiddlewareLinkList,
+        container.get(GuidToString(IRouteMatcher)) as IRouteMatcher,
+        TRequestResponseFactory.create(),
+        container.get('sessionManager') as ISessionManager,
+        (TCookieFactory.create()).domain('your.app.example.com'),
+        cookieMaxAge
+    )
+);
+</code></pre></div></div>
+
+<h2 id="injecting-session-manager-instance-to-controller-or-middleware">Injecting session manager instance to controller or middleware</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type
+
+    TAuthOnlyMiddleware = class(TInjectableObject, IMiddleware)
+    private
+        fSesionManager : ISessionManager;
+        ...
+    public
+        constructor create(const session : ISessionManager);
+        ...
+    end;
+...
+
+implementation
+
+    constructor TAuthOnlyMiddleware.create(const session : ISessionManager);
+    begin
+        inherited create();
+        fSession := session;
+    end;
+    ...
+end.
+</code></pre></div></div>
+
+<h2 id="get-session-instance">Get session instance</h2>
+
+<p>From inside controller or middleware, you can get <code class="highlighter-rouge">ISession</code> instance from request using <code class="highlighter-rouge">getSession()</code> method of <code class="highlighter-rouge">ISessionManager</code> interface.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function TAuthOnlyMiddleware.handleRequest(
+        const request : IRequest;
+        const response : IResponse;
+        const args : IRouteArgsReader;
+        const next : IRequestHandler
+) : IResponse;
+var sess : ISession;
+begin
+    sess := fSession.getSession(request);
+    //do something with session instance
+end;
+</code></pre></div></div>
+
+<p>After you hold <code class="highlighter-rouge">ISession</code> instance, you can query session state using its method.</p>
+
+<h2 id="test-if-session-variable-is-set">Test if session variable is set</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var signedIn : boolean;
+...
+signedIn := sess.has('userSignedIn');
+</code></pre></div></div>
+
+<h2 id="read-session-variable-value">Read session variable value</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var userName : string;
+...
+userName := sess.getVar('username');
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">getVar()</code> raise <code class="highlighter-rouge">ESessionExpired</code> exception if session is expired.</p>
+
+<h2 id="write-session-variable-value">Write session variable value</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sess.setVar('username', 'john@doe.com');
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">setVar()</code> raise <code class="highlighter-rouge">ESessionExpired</code> exception if session is expired.</p>
+
+<h2 id="delete-session-variable">Delete session variable</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sess.delete('username');
+</code></pre></div></div>
+
+<h2 id="delete-all-session-variables">Delete all session variables</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sess.clear();
+</code></pre></div></div>
+
+<h2 id="test-if-session-is-expired">Test if session is expired</h2>
+
+<p>To avoid <code class="highlighter-rouge">ESessionExpired</code> exception when reading a value, you can test if current session is expired or not.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var userName : string;
+...
+if (not sess.expired()) then
+begin
+    userName := sess.getVar('username');
+end;
+</code></pre></div></div>
+
+<h2 id="get-expiration-datetime">Get expiration datetime</h2>
+
+<p>To get time when session is expired</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var expiresDate : TDatetime;
+...
+expiresDate := sess.expiresAt();
+</code></pre></div></div>
+
+<h2 id="get-current-session-id">Get current session id</h2>
+
+<p>To get current session id</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var sessionId : string;
+...
+sessionId := sess.id();
+</code></pre></div></div>
+
+<h2 id="get-session-name">Get session name</h2>
+
+<p>To get session name,</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>var sessionName : string;
+...
+sessionName := sess.name();
+</code></pre></div></div>
+
+<p>If you create session manager factory as example above, <code class="highlighter-rouge">sessionName</code> will contains <code class="highlighter-rouge">fano_sess</code> value.</p>
+
+<h2 id="explore-more">Explore more</h2>
+
+<ul>
+  <li><a href="/dispatcher">Dispatcher</a></li>
+  <li><a href="/examples">Example applications</a></li>
+  <li><a href="https://github.com/fanoframework/fano-session">Session example applications</a></li>
+</ul>
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
+
+        </div>
+    </section>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/jquery.scrollex.min.js"></script>
+    <script src="/assets/js/jquery.scrolly.min.js"></script>
+    <script src="/assets/js/browser.min.js"></script>
+    <script src="/assets/js/breakpoints.min.js"></script>
+    <script src="/assets/js/util.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>
+
