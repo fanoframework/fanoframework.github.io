@@ -7,3 +7,4 @@ description: Handling security issue in Fano Framework
 
 - [Handling CORS](/security/handling-cors)
 - [Form Validation](/security/form-validation)
+- [CSRF Protection](/security/csrf-protection)
