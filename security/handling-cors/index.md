@@ -31,7 +31,7 @@ which allows you to register `TCorsMiddleware` with `TCors` or `TNullCors` with 
 Both factory classes are derived from `TBaseCorsMiddlewareFactory`.
 
 ```
-container.add('globalMiddlewares', TMiddlewareCollectionAwareFactory.create());
+container.add('globalMiddlewares', TMiddlewareListFactory.create());
 container.add(
     'cors',
     (TCorsMiddlewareFactory.create())
@@ -70,7 +70,7 @@ Attach CORS middleware instance to application middleware collection to ensure
 CORS middleware is executed for all application routes.
 
 ```
-globalMiddlewares.addBefore(container.get('cors') as IMiddleware);
+globalMiddlewares.add(container.get('cors') as IMiddleware);
 ```
 
 ## Configure CORS settings

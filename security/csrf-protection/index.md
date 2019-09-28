@@ -1,0 +1,127 @@
+---
+title: Protecting against Cross-Site Request Forgery (CSRF) attack
+description: Handling Cross-Site Request Forgery (CSRF) issue in Fano Framework
+---
+
+<h1 class="major">Cross-Site Request Forgery (CSRF)</h1>
+
+## What is CSRF?
+
+According to [OWASP](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF))
+
+> Cross-Site Request Forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they're currently authenticated. CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request. With a little help of social engineering (such as sending a link via email or chat), an attacker may trick the users of a web application into executing actions of the attacker's choosing. If the victim is a normal user, a successful CSRF attack can force the user to perform state changing requests like transferring funds, changing their email address, and so forth. If the victim is an administrative account, CSRF can compromise the entire web application.
+
+## Protecting against CSRF with middleware
+
+Fano Framework provides built-in middleware class `TCsrfMiddleware` which is to simplify task for protecting against CSRF attack. Read [Middlewares](/middlewares) for more information about working with middlewares.
+
+Constructor of `TCsrfMiddleware` expects `ISessionManager` interface instance which responsible to maintain CSRF token between request, `ICsrf` instance wchich responsible to generate CSRF token and also check token in request against stored token.
+
+## Register global middleware list
+
+```
+container.add('globalMiddlewares', TMiddlewareListFactory.create());
+globalMiddlewares := container.get('globalMiddlewares') as IMiddlewareList;
+```
+
+## Register CSRF middleware with container
+
+Fano Framework has `TCsrfMiddlewareFactory` class which allows you to register `TCsrfMiddleware` service container.
+
+```
+container.add(
+    'verifyCsrfToken',
+    TCsrfMiddlewareFactory.create()
+);
+```
+
+## Register dispatcher with support middleware
+
+We need to use dispatcher class which support middlewares and sessions.
+
+```
+container.add(
+    GuidToString(IDispatcher),
+    TSessionDispatcherFactory.create(
+        globalMiddlewares as IMiddlewareLinkList,
+        container.get(GuidToString(IRouteMatcher)) as IRouteMatcher,
+        TRequestResponseFactory.create(),
+        container.get(GuidToString(ISessionManager)) as ISessionManager,
+        (TCookieFactory.create()).domain(config.getString('cookie.domain')),
+        config.getInt('cookie.maxAge')
+    )
+);
+```
+
+## Attach CSRF middleware to application middleware
+
+Attach CSRF middleware instance to application middleware collection to ensure
+CSRF middleware is executed for all application routes.
+
+```
+globalMiddlewares.add(container.get('verifyCsrfToken') as IMiddleware)
+```
+
+## Get current CSRF token
+
+When you attach `TCsrfMiddleware` middleware to application middleware list, everytime request is coming, new random token and name can be read from currnt session variable.
+
+```
+function THomeController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var sess : ISession;
+begin
+    sess := fSessionManager.getSession(request);
+    viewParams.setVar('csrfName', sess.getVar('csrf_name'));
+    viewParams.setVar('csrfToken', sess.getVar('csrf_token'));
+    result := inherited handleRequest(request, response, args);
+end;
+```
+
+By default, name and token field is `csrf_name` and `csrf_token` respectively. When you build your HTML form, you need to ensure correct name is used,
+
+```
+<form method="post" action="/">
+    <input type="hidden" name="csrf_name" value="{{csrfName}}">
+    <input type="hidden" name="csrf_token" value="{{csrfToken}}">
+...
+</form>
+```
+
+## Configure CSRF settings
+
+`TCsrfMiddlewareFactory` class provides several methods to help configure CSRF
+settings.
+
+### Change name and token field
+
+To change name and token field
+
+```
+var factory : IDependencyFactory;
+...
+factory := TCsrfMiddlewareFactory.create()
+    .nameField('my_cool_name')
+    .tokenField('my_cool_token');
+```
+You need to ensure correct name is used in HTML form.
+```
+<form method="post" action="/">
+    <input type="hidden" name="my_cool_name" value="{{csrfName}}">
+    <input type="hidden" name="my_cool_token" value="{{csrfToken}}">
+...
+</form>
+```
+
+## Explore more
+
+- [Middlewares](/middlewares)
+- [Dispatcher](/dispatcher)
+- [Fano Csrf example application](https://github.com/fanoframework/fano-csrf)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
