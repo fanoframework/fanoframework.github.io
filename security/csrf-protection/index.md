@@ -85,8 +85,8 @@ By default, name and token field is `csrf_name` and `csrf_token` respectively. W
 
 ```
 <form method="post" action="/">
-    <input type="hidden" name="csrf_name" value="{{csrfName}}">
-    <input type="hidden" name="csrf_token" value="{{csrfToken}}">
+    <input type="hidden" name="csrf_name" value="[[csrfName]]">
+    <input type="hidden" name="csrf_token" value="[[csrfToken]]">
 ...
 </form>
 ```
@@ -116,8 +116,8 @@ viewParams.setVar('csrfToken', sess.getVar('my_cool_token'));
 
 ```
 <form method="post" action="/">
-    <input type="hidden" name="my_cool_name" value="{{csrfName}}">
-    <input type="hidden" name="my_cool_token" value="{{csrfToken}}">
+    <input type="hidden" name="my_cool_name" value="[[csrfName]]">
+    <input type="hidden" name="my_cool_token" value="[[csrfToken]]">
 ...
 </form>
 ```
