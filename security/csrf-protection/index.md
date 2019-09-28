@@ -59,7 +59,7 @@ Attach CSRF middleware instance to application middleware collection to ensure
 CSRF middleware is executed for all application routes.
 
 ```
-globalMiddlewares.add(container.get('verifyCsrfToken') as IMiddleware)
+globalMiddlewares.add(container.get('verifyCsrfToken') as IMiddleware);
 ```
 
 ## Get current CSRF token
