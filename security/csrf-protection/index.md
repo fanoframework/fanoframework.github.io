@@ -64,7 +64,7 @@ globalMiddlewares.add(container.get('verifyCsrfToken') as IMiddleware)
 
 ## Get current CSRF token
 
-When you attach `TCsrfMiddleware` middleware to application middleware list, everytime request is coming, new random token and name can be read from currnt session variable.
+When you attach `TCsrfMiddleware` middleware to application middleware list, everytime request is coming, new random token and name are generated and it can be read from current session variable.
 
 ```
 function THomeController.handleRequest(
@@ -106,7 +106,14 @@ factory := TCsrfMiddlewareFactory.create()
     .nameField('my_cool_name')
     .tokenField('my_cool_token');
 ```
-You need to ensure correct name is used in HTML form.
+
+You need to ensure correct name is used in HTML form and in code that read token
+
+```
+viewParams.setVar('csrfName', sess.getVar('my_cool_name'));
+viewParams.setVar('csrfToken', sess.getVar('my_cool_token'));
+```
+
 ```
 <form method="post" action="/">
     <input type="hidden" name="my_cool_name" value="{{csrfName}}">
