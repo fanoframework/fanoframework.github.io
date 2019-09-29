@@ -24,6 +24,7 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 - [Fano SCGI](https://github.com/fanoframework/fano-scgi)
 - [Fano Session](https://github.com/fanoframework/fano-session)
 - [Fano Cors](https://github.com/fanoframework/fano-cors)
+- [Fano Csrf](https://github.com/fanoframework/fano-csrf)
 
 ## Explore more
 
