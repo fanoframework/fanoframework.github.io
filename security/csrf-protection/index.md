@@ -15,7 +15,15 @@ According to [OWASP](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_
 
 Fano Framework provides built-in middleware class `TCsrfMiddleware` which is to simplify task for protecting against CSRF attack. Read [Middlewares](/middlewares) for more information about working with middlewares.
 
-Constructor of `TCsrfMiddleware` expects `ISessionManager` interface instance which responsible to maintain CSRF token between request, `ICsrf` instance wchich responsible to generate CSRF token and also check token in request against stored token.
+Constructor of `TCsrfMiddleware` expects 5 parameters,
+
+- `ICsrf` instance which responsible to generate CSRF token and also check token validity,
+- `ISessionManager` interface instance which responsible to maintain CSRF token between request,
+- `IRequestHandler` interface instance responsible to generate response when CSRF token check is failed.
+- Optional name of field for CSRF name, if not provided `crsf_name` is assumed,
+- Optional name of field for CSRF token, if not provided `crsf_token` is assumed.
+
+Read [Working with Session](/working-with-session) for more information about `ISessionManager`.
 
 ## Register global middleware list
 
@@ -52,6 +60,8 @@ container.add(
     )
 );
 ```
+
+Read [Dispatcher](/dispatcher) and [Dependency Container](/dependency-container) for more information.
 
 ## Attach CSRF middleware to application middleware
 
@@ -90,6 +100,14 @@ By default, name and token field is `csrf_name` and `csrf_token` respectively. W
 ...
 </form>
 ```
+
+## Verify CSRF token
+
+CSRF token verification is done in CSRF middleware automatically for POST, PUT, DELETE and PATCH request by comparing `csrf_name` and `csrf_token` values in request against corresponding values stored in session.
+
+If they are matched, request is continue to next middlewares otherwise it blocks by calling failure request handler you set when creating CSRF middleware.
+
+CSRF token is for one-time use only. After token verifiction, new token and name is generated and then it is replaced old token and name in session.
 
 ## Configure CSRF middleware settings
 
@@ -180,6 +198,7 @@ factory := TCsrfMiddlewareFactory.create()
 
 - [Middlewares](/middlewares)
 - [Dispatcher](/dispatcher)
+- [Working with Session](/working-with-session)
 - [Fano Csrf example application](https://github.com/fanoframework/fano-csrf)
 
 <ul class="actions">
