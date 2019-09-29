@@ -31,7 +31,7 @@ Fano Framework has `TCsrfMiddlewareFactory` class which allows you to register `
 ```
 container.add(
     'verifyCsrfToken',
-    TCsrfMiddlewareFactory.create()
+    TCsrfMiddlewareFactory.create(config.getString('secretKey'))
 );
 ```
 
@@ -140,7 +140,7 @@ function hasValidToken(
 and then replace token generator
 
 ```
-factory := TCsrfMiddlewareFactory.create()
+factory := TCsrfMiddlewareFactory.create(config.getString('secretKey'))
     .nameField('my_cool_name')
     .tokenField('my_cool_token')
     .csrf(TMyOwnCsrf.create());
