@@ -88,12 +88,14 @@ filename := myFile[0].getClientFilename();
 
 If client does not send filename then it returns empty string.
 
-For example how to handle file upload with Fano Framework, see
-[Fano Upload](https://github.com/fanoframework/fano-upload).
-
 ## File Upload Validation
 
 Fano Framework validation feature provides several built-in validation rule that you can use to [validate against file upload](/security/form-validation/built-in-validation-rules#uploaded-file) such as to verify that field is indeed a file upload, to verify that file upload match certain MIME type or more advanced use such as antivirus scan validation or file format validation.
+
+## Example demo
+
+For example application that demonstrate how to handle file upload with Fano Framework, see
+[Fano Upload](https://github.com/fanoframework/fano-upload).
 
 ## Explore more
 
