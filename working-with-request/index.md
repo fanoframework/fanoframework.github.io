@@ -69,7 +69,7 @@ var cookies : IReadOnlyList;
 cookies := request.getCookieParams();
 ```
 
-## Get POST data
+## Get POST/PUT/PATCH data
 
 If you have form like following snippet
 
@@ -81,7 +81,7 @@ If you have form like following snippet
 </form>
 ```
 
-To retrieve value of `msg1` and `msg2` parameters from POST data, you can use `getParsedBodyParam()` method.
+To retrieve value of `msg1` and `msg2` parameters from POST/PUT/PATCH data, you can use `getParsedBodyParam()` method.
 
 ```
 var msg1, msg2 : string;
@@ -104,9 +104,9 @@ var params : IReadOnlyList;
 params := request.getParsedBodyParams();
 ```
 
-## Get query parameters and POST data
+## Get query parameters and POST/PUT/PATCH data
 
-To get query string parameters and POST data as one list
+To get query string parameters and POST/PUT/PATCH data as one list
 
 ```
 var params : IReadOnlyList;
@@ -120,7 +120,7 @@ To read single value
 msg1 := request.getParam('msg1', 'ok');
 ```
 
-Above method search query string parameter first. If it cannot find data with key `msg1`, it tries to read body parameters. If none found, default value 'ok` is returned.
+Above method search query string parameter first. If it cannot find data with key `msg1`, it tries to read body parameters. If none found, default value `ok` is returned.
 
 ## Read request header
 

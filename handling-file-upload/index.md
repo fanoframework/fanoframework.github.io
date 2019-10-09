@@ -3,24 +3,15 @@ title: Handling File Upload
 description: Tutorial on how to work with file upload in Fano Framework
 ---
 
-<h1 class="major">Handline file upload</h1>
+<h1 class="major">Handling file upload</h1>
 
 If you have form like following snippet
 
 ```
 <form action="/submit" method="post" enctype="multipart/form-data">
-    <input type="text" name="username" value="test">
     <input type="file" name="myFile">
     <button type="submit">Submit</button>
 </form>
-```
-
-To retrieve value of `username` is same as with POST data.
-
-```
-var username : string;
-...
-username := request.getParsedBodyParam('username');
 ```
 
 To retrieve file uploaded by client, you need to call `getUploadedFile()`. It returns data of type `IUploadedFileArray` which array of `IUploadedFile` instance.
@@ -36,7 +27,6 @@ Client can send one or more file with same name, for example:
 
 ```
 <form action="/submit" method="post" enctype="multipart/form-data">
-    <input type="text" name="username" value="test">
     <input type="file" name="myFile">
     <input type="file" name="myFile">
     <button type="submit">Submit</button>
@@ -59,6 +49,8 @@ end;
 ```
 `targetUploadPath` is full filename (including its target directory). You must make sure that `targetUploadPath` is writeable. Exception `EInOutError` is raised when
 uploaded file can not be written to target path.
+
+If you do not call `moveTo()`, at the end of request handling, temporary uploaded file will be deleted.
 
 ## Get uploaded file size
 
