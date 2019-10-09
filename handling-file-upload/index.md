@@ -3,7 +3,7 @@ title: Handling File Upload
 description: Tutorial on how to work with file upload in Fano Framework
 ---
 
-<h1 class="major">Handline file upload</h1>
+<h1 class="major">Handling file upload</h1>
 
 If you have form like following snippet
 
