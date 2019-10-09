@@ -28,6 +28,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 - [Working with Request](/working-with-request). It explains how to get query string parameters, read POST data and work with file upload.
 - [Working with Response](/working-with-response). It explains how to return response in various format such as HTML, JSON or binary response, for example, image.
+- [Handling File Upload](/handling-file-upload). It explains how to work with file upload.
 - [Working with Session](/working-with-session). It explains how to manage state between requests.
 
 ## MVC

@@ -69,7 +69,7 @@ var cookies : IReadOnlyList;
 cookies := request.getCookieParams();
 ```
 
-## Get POST data
+## Get POST/PUT/PATCH data
 
 If you have form like following snippet
 
@@ -81,7 +81,7 @@ If you have form like following snippet
 </form>
 ```
 
-To retrieve value of `msg1` and `msg2` parameters from POST data, you can use `getParsedBodyParam()` method.
+To retrieve value of `msg1` and `msg2` parameters from POST/PUT/PATCH data, you can use `getParsedBodyParam()` method.
 
 ```
 var msg1, msg2 : string;
@@ -104,9 +104,9 @@ var params : IReadOnlyList;
 params := request.getParsedBodyParams();
 ```
 
-## Get query parameters and POST data
+## Get query parameters and POST/PUT/PATCH data
 
-To get query string parameters and POST data as one list
+To get query string parameters and POST/PUT/PATCH data as one list
 
 ```
 var params : IReadOnlyList;
@@ -120,103 +120,27 @@ To read single value
 msg1 := request.getParam('msg1', 'ok');
 ```
 
-Above method search query string parameter first. If it cannot find data with key `msg1`, it tries to read body parameters. If none found, default value 'ok` is returned.
+Above method search query string parameter first. If it cannot find data with key `msg1`, it tries to read body parameters. If none found, default value `ok` is returned.
 
-## Handling file upload
+## Read request header
 
-If you have form like following snippet
+To get request headers, use `headers()` methods of `IRequest`. It returns instance of `IReadOnlyHeaders` interface.
 
-```
-<form action="/submit" method="post" enctype="multipart/form-data">
-    <input type="text" name="username" value="test">
-    <input type="file" name="myFile">
-    <button type="submit">Submit</button>
-</form>
-```
-
-To retrieve value of `username` is same as with POST data.
+To read request header value, call `getHeader()` method and pass header to read. For example to read `Accept-Language` header value,
 
 ```
-var username : string;
+var acceptLang : string;
 ...
-username := request.getParsedBodyParam('username');
+acceptLang := request.headers().getHeader('Accept-Language');
 ```
 
-To retrieve file uploaded by client, you need to call `getUploadedFile()`. It returns data of type `IUploadedFileArray` which array of `IUploadedFile` instance.
-
+To test availability of header, call `has()` method. For example to test if `Accept-Language` header is set,
 
 ```
-var myFile : IUploadedFileArray;
+var langAvail : boolean;
 ...
-myFile := request.getUploadedFile('myFile');
+langAvail := request.headers().has('Accept-Language');
 ```
-
-Client can send one or more file with same name, for example:
-
-```
-<form action="/submit" method="post" enctype="multipart/form-data">
-    <input type="text" name="username" value="test">
-    <input type="file" name="myFile">
-    <input type="file" name="myFile">
-    <button type="submit">Submit</button>
-</form>
-```
-
-If client upload one or more files, `length(myFile)` will indicates how many
-files actually uploaded.
-
-### Move uploaded file
-
-Initially, uploaded file will be stored in system temporary directory. You need to
-call `moveTo()` methods to move into permanent location.
-
-```
-if (length(myFile) > 0) then
-begin
-    myFile[0].moveTo(targetUploadPath);
-end;
-```
-`targetUploadPath` is full filename (including its target directory). You must make sure that `targetUploadPath` is writeable. Exception `EInOutError` is raised when
-uploaded file can not be written to target path.
-
-### Get uploaded file size
-
-Size of uploaded file in octet (or bytes) can be queried with `size()` method.
-
-```
-var fSize : int64;
-...
-fSize := myFile[0].size();
-```
-
-### Get file MIME type
-
-MIME type of uploaded file can be queried with `getClientMediaType()` method.
-For example, if upload JPEG image, you may get `image/jpeg`.
-
-```
-var mime : string;
-...
-mime := myFile[0].getClientMediaType();
-```
-
-If client does not send any MIME type (aka Content Type) then it is assumed
-`application/octet-stream`.
-
-### Get original file name
-
-To get original file name of uploaded file use `getClientFilename()` method.
-
-```
-var filename : string;
-...
-filename := myFile[0].getClientFilename();
-```
-
-If client does not send filename then it returns empty string.
-
-For example how to handle file upload with Fano Framework, see
-[Fano Upload](https://github.com/fanoframework/fano-upload).
 
 ## Explore more
 
@@ -225,6 +149,7 @@ For example how to handle file upload with Fano Framework, see
 - [Working with Views](/working-with-views)
 - [Form Validation](/security/form-validation)
 - [Handling CORS](/security/handling-cors)
+- [Handling File Upload](/handling-file-upload)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>

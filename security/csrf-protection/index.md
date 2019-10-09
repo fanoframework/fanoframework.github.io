@@ -105,7 +105,7 @@ By default, name and token field is `csrf_name` and `csrf_token` respectively. W
 
 CSRF token verification is done in CSRF middleware automatically for POST, PUT, DELETE and PATCH request by comparing `csrf_name` and `csrf_token` values in request against corresponding values stored in session.
 
-If they are matched, request is continue to next middlewares otherwise it blocks by calling failure request handler you set when creating CSRF middleware.
+If they are matched, execution continues to next middlewares otherwise it stops by calling failure request handler you set when creating CSRF middleware.
 
 CSRF token is for one-time use only. After token verifiction, new token and name is generated and then it is replaced old token and name in session.
 
