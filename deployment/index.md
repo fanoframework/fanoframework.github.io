@@ -30,3 +30,4 @@ If you do not have root privilege access, such in shared hosting environment, th
 - [Deploy as standalone web server](/deployment/standalone-web-server)
 - [Deploy using Docker](/deployment/docker)
 - [Deploy with Continous Integration tools](/deployment/continous-integration)
+- [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
