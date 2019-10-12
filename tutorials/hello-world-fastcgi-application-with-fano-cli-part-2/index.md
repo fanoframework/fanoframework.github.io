@@ -5,7 +5,7 @@ description: Step by step tutorial for creating basic hello world FastCGI web ap
 
 <h1 class="major">Creating Hello World FastCGI web application With Fano CLI (Part 2) </h1>
 
-This tutoaial is similar to [Creating Hello World FastCGI application with Fano CLI](/tutorials/hello-world-fastcgi-application-with-fano-cli) except that we use reverse proxy with Apache `mod_proxy_fcgi`. This module has no provision for starting the application process, so we need to start application manually.
+This tutorial is similar to [Creating Hello World FastCGI application with Fano CLI](/tutorials/hello-world-fastcgi-application-with-fano-cli) except that we use reverse proxy with Apache `mod_proxy_fcgi`. This module has no provision for starting the application process, so we need to start application manually.
 
 ## Who is this tutorial for?
 
