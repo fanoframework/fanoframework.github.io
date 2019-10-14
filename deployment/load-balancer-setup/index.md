@@ -47,6 +47,10 @@ $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 
 `&` is required to make sure that both applications is running in background.
 
+## Access application from browser
+
+Open `http://myapp.fano` you should see main controller is invoked. There is no visual indication compare to application running without load balancer. To know that your application are running with `mod_proxy_balancer` is availability of new environment variables, for examples `BALANCER_NAME`, `BALANCER_WORKER_NAME` and `BALANCER_WORKER_ROUTE`. Try to access route that not exist, so that environment variables are printed on the browser.
+
 ## Change number of balancer member
 
 By default, if parameter `--total-member` not set, it is assumed that you will use two application instances. Set `--total-member` according to your need.
