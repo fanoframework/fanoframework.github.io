@@ -69,4 +69,5 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Deploy as CGI application](/deployment/cgi)
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
+- [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
 - [Known Issues](/known-issues)
