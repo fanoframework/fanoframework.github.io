@@ -127,4 +127,12 @@ server {
 ```
 Change `scgi_pass` to match host and port where application is listening.
 
-[Back to Deployment](/deployment)
+## Explore more
+
+- [Deploy as FastCGI application](/deployment/fastcgi)
+- [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
+- [Back to Deployment](/deployment)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>

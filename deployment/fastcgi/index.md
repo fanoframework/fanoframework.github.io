@@ -231,4 +231,12 @@ fastcgi_pass unix:/tmp/fano-fcgi.sock;
 
 where `/tmp/fano-fcgi.sock` is socket file which application using and of course it must be writeable by nginx.
 
-[Back to Deployment](/deployment)
+## Explore more
+
+- [Deploy as SCGI application](/deployment/scgi)
+- [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
+- [Back to Deployment](/deployment)
+
+<ul class="actions">
+    <li><a href="/documentation" class="button">Documentation</a></li>
+</ul>
