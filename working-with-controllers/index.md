@@ -29,20 +29,20 @@ function handleRequest(
 
 Fano Framework provides `TAbstractController` as base abstract class that implements `IRequestHandler` and also base controller in `TController` class which derived from `TAbstractController` class.
 
-`TAbstractController` is an abstract class. You need to derive and implements its `handleRequest()` method to be able to use it. This class is useful, for example, in following situation:
+[`TAbstractController` is an abstract class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/AbstractControllerImpl.pas). You need to derive and implements its `handleRequest()` method to be able to use it. This class is useful, for example, in following situation:
 
 - you do not need to use view
 - you prefer to compose response by yourself, for example, to output JPEG image response.
 
-`TController` is concrete class and extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template.
+[`TController` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas). It extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template.
 
-But of course, you are free to implements your own.
+But of course, you are free to implements your own. In fact, you are not required to use `TAbstractController` or `TController` at all. You can use any class as long as it implements `IRequestHandler` interface.
 
 ## Using TController class
 
 `TController` class is built-in class that provides ability for route handler to works with view and middlewares.
 
-Except for simple route handler which display static view, you are very likely need to extends this class as `TController` by defaut, does few things, which is
+Except for simple route handler which display static view, very likely, you need to extend this class. `TController` by default, just calls `render()` method of `IView`, which is
 returning response from `IView` instance.
 
 ## Creating TController class
