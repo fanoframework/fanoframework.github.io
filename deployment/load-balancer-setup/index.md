@@ -50,7 +50,7 @@ Command above, will create virtual host for Apache web server that utilize `mod_
 
 Replace with `--deploy-lb-fcgi` for setting up FastCGI web application with load balancer.
 
-## Running multiple application with load balancer
+## Running multiple applications with load balancer
 
 Build the application and then run two applications at once with consecutive listening ports.
 
@@ -63,7 +63,11 @@ $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 
 ## Access application from browser
 
-Open `http://myapp.fano` you should see main controller is invoked. There is no visual indication compare to application running without load balancer. Indication that your application is running with `mod_proxy_balancer` is availability of new environment variables, for examples `BALANCER_NAME`, `BALANCER_WORKER_NAME` and `BALANCER_WORKER_ROUTE`. Try to access route that does not exist, so that environment variables are printed on the browser. It will show that load balancer distribute the load by observing value of `BALANCER_WORKER_NAME` variable.
+Open `http://myapp.fano` you should see main controller is invoked. There is no visual indication compare to application running without load balancer.
+
+Indication that your application is running with `mod_proxy_balancer` is availability of new environment variables, for examples `BALANCER_NAME`, `BALANCER_WORKER_NAME` and `BALANCER_WORKER_ROUTE`.
+
+Try to access route that does not exist, so that environment variables are printed on the browser. It will show that load balancer distribute the load by observing value of `BALANCER_WORKER_NAME` variable.
 
 ## Set balancer member
 
@@ -87,10 +91,10 @@ Developer is responsible to make sure that no other application is using those l
 
 By default, if parameter `--lbmethod` is not set, `byrequests` is assumed, which will use `mod_lbmethod_byrequests` module to distribute requests. Please refer to [mod_proxy_balancer documentation](https://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html) for available algorithms.
 
-For example, to use `mod_lbmethod_bybusiness` module,
+For example, to use `mod_lbmethod_bybusyness` module,
 
 ```
-$ sudo fanocli --deploy-lb-scgi=myapp.fano --lbmethod=bybusiness
+$ sudo fanocli --deploy-lb-scgi=myapp.fano --lbmethod=bybusyness
 ```
 
 ## Explore more
