@@ -22,6 +22,12 @@ Make sure that `mod_proxy_balancer` is enabled. For example, in Debian-based, ru
 $ sudo a2enmod proxy_balancer
 ```
 
+Also you need to enable one or more [scheduler algorithm module](/deployment/load-balancer-setup#load-balancing-scheduler-algorithm). For example,
+
+```
+$ sudo a2enmod lbmethod_byrequests
+```
+
 ## Deploy Fano Application with load balancer with Fano CLI
 
 Apart from task for [scaffolding web application](/scaffolding-with-fano-cli),
@@ -69,7 +75,7 @@ $ ./bin/app.cgi --host=127.0.0.1 --port=20000 & ./bin/app.cgi --host=localhost -
 
 Developer is responsible to make sure that no other application is using those listening ports.
 
-## Change load balancing scheduler algorithm
+## <a name="load-balancing-scheduler-algorithm"></a>Change load balancing scheduler algorithm
 
 By default, if parameter `--lbmethod` is not set, `byrequests` is assumed, which will use `mod_lbmethod_byrequests` module to distribute requests. Please refer to [mod_proxy_balancer documentation](https://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html) for available algorithms.
 
