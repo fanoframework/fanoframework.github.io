@@ -5,7 +5,7 @@ description: Tutorial on how to deploy Fano application with Apache mod_proxy_ba
 
 <h1 class="major">Deploy Fano application with Apache load balancer module</h1>
 
-Apache provides reverse proxy load balancer to distribute load to one or more application servers with goal to improve performance and scalability.
+Apache provides reverse proxy load balancer to distribute load to one or more application instances. When one application is unable to handle request, load balancer distributes load to other application instance thus improving performance, availability and scalability.
 
 ## Requirement
 
@@ -13,6 +13,7 @@ Apache provides reverse proxy load balancer to distribute load to one or more ap
 - [mod_proxy_balancer](https://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html)
 - [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html)
 - [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)
+- [Fano CLI](https://github.com/fanoframework/fano-cli)
 
 ## Setting up mod_proxy_balancer
 
@@ -22,12 +23,24 @@ Make sure that `mod_proxy_balancer` is enabled. For example, in Debian-based, ru
 $ sudo a2enmod proxy_balancer
 ```
 
+Also you need to enable one or more [scheduler algorithm module](/deployment/load-balancer-setup#load-balancing-scheduler-algorithm). For example,
+
+```
+$ sudo a2enmod lbmethod_byrequests
+```
+
 ## Deploy Fano Application with load balancer with Fano CLI
 
 Apart from task for [scaffolding web application](/scaffolding-with-fano-cli),
 [Fano CLI](https://github.com/fanoframework/fano-cli) also provides `--deploy-lb-scgi=[domain name]` and `--deploy-lb-fcgi=[domain name]` to help setup load balancer during development for SCGI and FastCGI web application, respectively.
 
-Inside Fano SCGI web application project directory, run
+After you create SCGI or FastCGI project with `--project-scgi` or `--project-fcgi`,
+
+```
+$ fanocli --project-scgi=myapp
+```
+
+From inside Fano SCGI web application project directory, run
 
 ```
 $ sudo fanocli --deploy-lb-scgi=myapp.fano
@@ -42,6 +55,7 @@ Replace with `--deploy-lb-fcgi` for setting up FastCGI web application with load
 Build the application and then run two applications at once with consecutive listening ports.
 
 ```
+$ ./build.sh
 $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 ```
 
@@ -49,41 +63,27 @@ $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 
 ## Access application from browser
 
-Open `http://myapp.fano` you should see main controller is invoked. There is no visual indication compare to application running without load balancer. Indication that your application is running with `mod_proxy_balancer` is availability of new environment variables, for examples `BALANCER_NAME`, `BALANCER_WORKER_NAME` and `BALANCER_WORKER_ROUTE`. Try to access route that does not exist, so that environment variables are printed on the browser.
+Open `http://myapp.fano` you should see main controller is invoked. There is no visual indication compare to application running without load balancer. Indication that your application is running with `mod_proxy_balancer` is availability of new environment variables, for examples `BALANCER_NAME`, `BALANCER_WORKER_NAME` and `BALANCER_WORKER_ROUTE`. Try to access route that does not exist, so that environment variables are printed on the browser. It will show that load balancer distribute the load by observing value of `BALANCER_WORKER_NAME` variable.
 
-## Change number of balancer member
+## Set balancer member
 
-By default, if parameter `--total-member` not set, it is assumed that you will use two application instances. Set `--total-member` according to your need.
+By default, if parameter `--members` not set, it is assumed that you will use two application instances, running on `127.0.0.1:20477` and `127.0.0.1:20478` respectively.
 
-```
-$ sudo fanocli --deploy-lb-scgi=myapp.fano --total-member=4
-```
-
-Run four applications at once with consecutive listening ports.
+`--members` parameter allows set multiple balancer members separated by coma.
 
 ```
-$ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 & \
-./bin/app.cgi --port=20479 & ./bin/app.cgi --port=20480 &
+$ sudo fanocli --deploy-lb-scgi=myapp.fano --members=127.0.0.1:20000,localhost:20001
 ```
 
-## Change start listening port
-
-By default, if parameter `--port` not set, 20477 is used as starting port. Set `--port` according to your need.
+Run applications at once with consecutive listening ports.
 
 ```
-$ sudo fanocli --deploy-lb-scgi=myapp.fano --port=8080 --total-member=4
-```
-
-Run four applications at once with consecutive listening ports.
-
-```
-$ ./bin/app.cgi --port=8080 & ./bin/app.cgi --port=8081 & \
-./bin/app.cgi --port=8082 & ./bin/app.cgi --port=8083 &
+$ ./bin/app.cgi --host=127.0.0.1 --port=20000 & ./bin/app.cgi --host=localhost --port=20001 &
 ```
 
 Developer is responsible to make sure that no other application is using those listening ports.
 
-## Change load balancing scheduler algorithm
+## <a name="load-balancing-scheduler-algorithm"></a>Change load balancing scheduler algorithm
 
 By default, if parameter `--lbmethod` is not set, `byrequests` is assumed, which will use `mod_lbmethod_byrequests` module to distribute requests. Please refer to [mod_proxy_balancer documentation](https://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html) for available algorithms.
 
@@ -95,6 +95,7 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano --lbmethod=bybusiness
 
 ## Explore more
 
+- [Hello World SCGI application with Fano CLI](/tutorials/hello-world-scgi-application-with-fano-cli)
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
 - [Back to Deployment](/deployment)

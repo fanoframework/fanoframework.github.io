@@ -10,10 +10,10 @@ description: Handling CORS request in Fano Framework
 Cross-Origin Resource Sharing (CORS) request is HTTP request which `Origin` header
 does not same with `Host` header. By default browser blocks such requests due to same origin policy.
 
-This may pose some problem for backend API where sometime it is configured to run
+This may pose some problem for backend API, which sometime, it is configured to run
 on different host or port.
 
-To allow such requests, backend API needs to tells browser that it acknoledges such request
+To allow such requests, backend API needs to tells browser that it acknowledges such request
 by sending appropriate response header.
 
 ## Handling CORS with middleware
