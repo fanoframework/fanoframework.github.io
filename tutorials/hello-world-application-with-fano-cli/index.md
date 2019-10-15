@@ -55,7 +55,7 @@ Run
 $ sudo fanocli --deploy-cgi=hello.fano
 ```
 
-## Run it from browser
+## Access application from browser
 
 Open web browser and go to `http://hello.fano`. You should see *Fano Application Error* page. It is normal as you have not create any route to handle the request.
 
