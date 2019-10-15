@@ -51,34 +51,20 @@ $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 
 Open `http://myapp.fano` you should see main controller is invoked. There is no visual indication compare to application running without load balancer. Indication that your application is running with `mod_proxy_balancer` is availability of new environment variables, for examples `BALANCER_NAME`, `BALANCER_WORKER_NAME` and `BALANCER_WORKER_ROUTE`. Try to access route that does not exist, so that environment variables are printed on the browser.
 
-## Change number of balancer member
+## Set balancer member
 
-By default, if parameter `--total-member` not set, it is assumed that you will use two application instances. Set `--total-member` according to your need.
+By default, if parameter `--members` not set, it is assumed that you will use two application instances, running on `127.0.0.1:20477` and `127.0.0.1:20478` repectively.
 
-```
-$ sudo fanocli --deploy-lb-scgi=myapp.fano --total-member=4
-```
-
-Run four applications at once with consecutive listening ports.
+`--members` parameter allows set multiple balancer members separated by coma.
 
 ```
-$ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 & \
-./bin/app.cgi --port=20479 & ./bin/app.cgi --port=20480 &
+$ sudo fanocli --deploy-lb-scgi=myapp.fano --members=127.0.0.1:20000,localhost:20001
 ```
 
-## Change start listening port
-
-By default, if parameter `--port` not set, 20477 is used as starting port. Set `--port` according to your need.
+Run applications at once with consecutive listening ports.
 
 ```
-$ sudo fanocli --deploy-lb-scgi=myapp.fano --port=8080 --total-member=4
-```
-
-Run four applications at once with consecutive listening ports.
-
-```
-$ ./bin/app.cgi --port=8080 & ./bin/app.cgi --port=8081 & \
-./bin/app.cgi --port=8082 & ./bin/app.cgi --port=8083 &
+$ ./bin/app.cgi --host=127.0.0.1 --port=20000 & ./bin/app.cgi --host=localhost --port=20001 &
 ```
 
 Developer is responsible to make sure that no other application is using those listening ports.
