@@ -5,7 +5,7 @@ description: Tutorial on how to deploy Fano application with Apache mod_proxy_ba
 
 <h1 class="major">Deploy Fano application with Apache load balancer module</h1>
 
-Apache provides reverse proxy load balancer to distribute load to one or more application servers with goal to improve performance and scalability.
+Apache provides reverse proxy load balancer to distribute load to one or more application instances. When one application is unable to handle request, load balancer distributes load to other application instance thus improving performance, availability and scalability.
 
 ## Requirement
 
