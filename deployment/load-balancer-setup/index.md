@@ -53,7 +53,7 @@ Open `http://myapp.fano` you should see main controller is invoked. There is no 
 
 ## Set balancer member
 
-By default, if parameter `--members` not set, it is assumed that you will use two application instances, running on `127.0.0.1:20477` and `127.0.0.1:20478` repectively.
+By default, if parameter `--members` not set, it is assumed that you will use two application instances, running on `127.0.0.1:20477` and `127.0.0.1:20478` respectively.
 
 `--members` parameter allows set multiple balancer members separated by coma.
 
