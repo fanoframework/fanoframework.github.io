@@ -73,9 +73,12 @@ For example if you have following form,
 </form>
 ```
 
-You need that both username and email are mandatory. Username is restricted to alpha numeric and dash character only. Email must conform to email address format.
+and following requirements,
 
-Following validation rules are examples to satisfy above requirement.
+- Username is mandatory and restricted to alpha numeric and dash character only.
+- Email is mandatory and it must conform to email address format.
+
+Following validation rules are examples to satisfy above requirements.
 
 ```
 validationRules
