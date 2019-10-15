@@ -37,7 +37,7 @@ Wait until new project is created. If everything is ok, your project will be cre
 $ cd Hello
 ```
 
-All actions below is assumed to take place inside `Hello` directory.
+All actions below are assumed to take place inside `Hello` directory.
 
 ## Build application
 
