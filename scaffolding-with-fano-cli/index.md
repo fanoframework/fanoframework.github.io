@@ -300,13 +300,17 @@ Fano CLI offers commands to simplify setting up Fano web application with variou
 - `--deploy-cgi`, setup Fano web application as CGI with a web server.
 - `--deploy-fcgi`, setup Fano web application as FastCGI with a web server.
 - `--deploy-fcgid`, setup Fano web application as FastCGI with a Apache web server and mod_fcgid.
-- `--deploy-scgi` , setup Fano web application as SCGI with a Apache web server.
+- `--deploy-scgi` , setup Fano web application as SCGI with a web server.
+- `--deploy-lb-scgi` , setup Fano web application as SCGI with a web server and load balancer.
+- `--deploy-lb-fcgi` , setup Fano web application as FastCGI with a web server and load balancer.
 
 All commands above requires root privilege, so you need to run it with `sudo`.
 
 ```
 $ sudo fanocli --deploy-cgi=myapp.com
 ```
+
+Developer is responsible to make sure that deployment matched project type. For example, project created with `--project-fcgi` can only be deployed with `--deploy-fcgi` or `--deploy-lb-fcgi`.
 
 Read [Deployment](/deployment) for more information on how to use commands above.
 
