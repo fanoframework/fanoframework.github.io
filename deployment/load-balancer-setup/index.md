@@ -13,6 +13,7 @@ Apache provides reverse proxy load balancer to distribute load to one or more ap
 - [mod_proxy_balancer](https://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html)
 - [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html)
 - [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)
+- [Fano CLI](https://github.com/fanoframework/fano-cli)
 
 ## Setting up mod_proxy_balancer
 
@@ -33,7 +34,13 @@ $ sudo a2enmod lbmethod_byrequests
 Apart from task for [scaffolding web application](/scaffolding-with-fano-cli),
 [Fano CLI](https://github.com/fanoframework/fano-cli) also provides `--deploy-lb-scgi=[domain name]` and `--deploy-lb-fcgi=[domain name]` to help setup load balancer during development for SCGI and FastCGI web application, respectively.
 
-Inside Fano SCGI web application project directory, run
+After you create SCGI or FastCGI project with `--project-scgi` or `--project-fcgi`,
+
+```
+$ fanocli --project-scgi=myapp
+```
+
+From inside Fano SCGI web application project directory, run
 
 ```
 $ sudo fanocli --deploy-lb-scgi=myapp.fano
@@ -48,6 +55,7 @@ Replace with `--deploy-lb-fcgi` for setting up FastCGI web application with load
 Build the application and then run two applications at once with consecutive listening ports.
 
 ```
+$ ./build.sh
 $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 ```
 
@@ -55,7 +63,7 @@ $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 
 ## Access application from browser
 
-Open `http://myapp.fano` you should see main controller is invoked. There is no visual indication compare to application running without load balancer. Indication that your application is running with `mod_proxy_balancer` is availability of new environment variables, for examples `BALANCER_NAME`, `BALANCER_WORKER_NAME` and `BALANCER_WORKER_ROUTE`. Try to access route that does not exist, so that environment variables are printed on the browser.
+Open `http://myapp.fano` you should see main controller is invoked. There is no visual indication compare to application running without load balancer. Indication that your application is running with `mod_proxy_balancer` is availability of new environment variables, for examples `BALANCER_NAME`, `BALANCER_WORKER_NAME` and `BALANCER_WORKER_ROUTE`. Try to access route that does not exist, so that environment variables are printed on the browser. It will show that load balancer distribute the load by observing value of `BALANCER_WORKER_NAME` variable.
 
 ## Set balancer member
 
@@ -87,6 +95,7 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano --lbmethod=bybusiness
 
 ## Explore more
 
+- [Hello World SCGI application with Fano CLI](/tutorials/hello-world-scgi-application-with-fano-cli)
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
 - [Back to Deployment](/deployment)
