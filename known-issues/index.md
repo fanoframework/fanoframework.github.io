@@ -18,6 +18,40 @@ This is known issue between Free Pascal and GNU Linker. See
 
 However, this warning is minor and can be ignored. It does not affect output executable.
 
+## Issue with developer tools library search path
+
+When running `build.sh` script, you may encounter following minor warning:
+
+```
+Warning: "crtbegin.o" not found, this will probably cause a linking failure
+Warning: "crtend.o" not found, this will probably cause a linking failure
+```
+
+First, you need to locate developer tools library path on your computer. Run
+
+```
+# find / -name crtbegin.o
+```
+
+For example, in Centos 7, command above will output
+
+```
+/usr/lib/gcc/x86_64-redhat-linux/8/32/crtbegin.o
+/usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o
+```
+
+Edit Free Pascal main configuration, `/etc/fpc.cfg` file and add following lines
+
+```
+#ifdef cpui386
+-Fl/usr/lib/gcc/x86_64-redhat-linux/8/32
+#endif
+
+#ifdef cpux86_64
+-Fl/usr/lib/gcc/x86_64-redhat-linux/8
+#endif
+```
+
 ## Explore more
 
 - [Getting Started](/getting-started)
