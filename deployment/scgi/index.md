@@ -164,7 +164,7 @@ Fedora, Red Hat Enterprise Linux and Centos come with SELinux enabled and with v
 
 Simple solution was to run SELinux with `permissive` mode. In permissive mode, SELinux permits all operations but log operations that would have breached in `enforcing` mode.
 
-Web server such Apache or Nginx is listed in SELinux under `httpd_t` context. Run following command as root to make add `httpd_t` to permissive mode.
+Web server such Apache or Nginx is listed in SELinux under `httpd_t` context. Run following command as root to add `httpd_t` to permissive mode.
 
 ```
 # semanage permissive -a httpd_t
