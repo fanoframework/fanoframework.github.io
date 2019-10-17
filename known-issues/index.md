@@ -5,7 +5,7 @@ description: List of some of known issues
 
 <h1 class="major">Known Issues</h1>
 
-## Issue with GNU Linker
+## <a name="issue-with-gnu-linker"></a>Issue with GNU Linker
 
 When running `build.sh` script, you may encounter following warning:
 
@@ -18,7 +18,7 @@ This is known issue between Free Pascal and GNU Linker. See
 
 However, this warning is minor and can be ignored. It does not affect output executable.
 
-## Issue with developer tools library search path
+## <a name="issue-with-gcc-library-search-path"></a>Issue with development tools library search path
 
 When running `build.sh` script, you may encounter following minor warning:
 
@@ -27,7 +27,7 @@ Warning: "crtbegin.o" not found, this will probably cause a linking failure
 Warning: "crtend.o" not found, this will probably cause a linking failure
 ```
 
-First, you need to locate developer tools library path on your computer. Run
+First, you need to locate development tools library path on your computer. Run
 
 ```
 # find / -name crtbegin.o
