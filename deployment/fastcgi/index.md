@@ -230,9 +230,13 @@ fastcgi_pass unix:/tmp/fano-fcgi.sock;
 
 where `/tmp/fano-fcgi.sock` is socket file which application using and of course it must be writeable by Nginx.
 
+## Issue with firewall
+
+In Fedora-based distribution, firewall is active by default. Read [Issue with firewall](/deployment/scgi#issue-with-firewall) for more information.
+
 ## Permission issue with SELinux
 
-Running FastCGI application may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permisson-issue-with-selinux) for more information.
+Running FastCGI application may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux) for more information.
 
 ## Explore more
 

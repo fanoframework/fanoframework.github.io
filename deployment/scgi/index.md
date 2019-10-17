@@ -125,7 +125,36 @@ Change `scgi_pass` to match host and port where application is listening.
 
 Last two `location` configurations tells Nginx to serve files directly if exists, otherwise pass it to our application.
 
-## <a name="permisson-issue-with-selinux">Permission issue with SELinux
+
+## <a name="issue-with-firewall">Issue with firewall
+
+Fedora, Red Hat Enterprise Linux and Centos come with firewalld daemon enabled which block http and https port by default. To enable http/https traffic, first we need to get active zones. Run following command as root
+
+```
+# firewall-cmd --get-active-zones
+```
+
+In my Fedora, command above output something like below (yours may be different),
+
+```
+FedoraServer
+  interfaces: enp0s3
+```
+
+To enable http and https, run
+
+```
+# firewall-cmd --zone=FedoraServer --permanent --add-service=http
+# firewall-cmd --zone=FedoraServer --permanent --add-service=https
+```
+
+Reload firewalld by running,
+
+```
+# firewall-cmd --reload
+```
+
+## <a name="permission-issue-with-selinux">Permission issue with SELinux
 
 Fedora, Red Hat Enterprise Linux and Centos come with SELinux enabled and with very strict security policy by default. This may pose permission issue when running SCGI application through reverse proxy as shown in following error log,
 
