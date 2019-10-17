@@ -33,7 +33,7 @@ First, you need to locate development tools library path on your computer. Run
 # find / -name crtbegin.o
 ```
 
-For example, in Centos 7, command above will output
+For example, in my Centos 7, command above will output (yours may be different)
 
 ```
 /usr/lib/gcc/x86_64-redhat-linux/8/32/crtbegin.o
