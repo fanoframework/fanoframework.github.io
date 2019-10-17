@@ -162,7 +162,7 @@ Fedora, Red Hat Enterprise Linux and Centos come with SELinux enabled and with v
 2019/10/17 15:17:58 [crit] 1022#0: *6 connect() to 127.0.0.1:20477 failed (13: Permission denied) while connecting to upstream, client: 192.168.0.79, server: example.fano, request: "GET / HTTP/1.1", upstream: "scgi://127.0.0.1:20477", host: "example.fano"
 ```
 
-Simple solution was to run SELinux with `permissive` mode. In permissive mode, SELinux permits all operation but log operations that would have breached in `enforcing` mode.
+Simple solution was to run SELinux with `permissive` mode. In permissive mode, SELinux permits all operations but log operations that would have breached in `enforcing` mode.
 
 Web server such Apache or Nginx is listed in SELinux under `httpd_t` context. Run following command as root to make add `httpd_t` to permissive mode.
 
