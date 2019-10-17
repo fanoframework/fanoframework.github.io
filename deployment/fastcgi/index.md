@@ -196,8 +196,6 @@ be handled by `mod_fcgid` module (identified by `fcgid-script` handler).
 
 ## Nginx
 
-## Nginx
-
 Create virtual host configuration file in `/etc/nginx/conf.d` directory, for example
 
 ```
