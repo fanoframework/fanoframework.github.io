@@ -141,7 +141,7 @@ Web server such Apache or Nginx is listed in SELinux under `httpd_t` context. Ru
 # semanage permissive -a httpd_t
 ```
 
-Nginx has detail information [how to fix issue with SELinux](https://www.nginx.com/blog/using-nginx-plus-with-selinux/).
+Nginx has detail information [how to fix issue with SELinux](https://www.nginx.com/blog/using-nginx-plus-with-selinux/). Read [Centos Wiki regarding SELinux](https://wiki.centos.org/HowTos/SELinux) for more information.
 
 ## Explore more
 
