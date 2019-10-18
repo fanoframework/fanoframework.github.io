@@ -196,32 +196,29 @@ be handled by `mod_fcgid` module (identified by `fcgid-script` handler).
 
 ## Nginx
 
-### Debian
-
-Create virtual host configuration in `/etc/nginx/sites-available`, for example
+Create virtual host configuration file in `/etc/nginx/conf.d` directory, for example
 
 ```
 server {
     listen 80;
-    root /home/example/public;
-    index index.html;
-    server_name example.com;
+    root /home/example.fano/public;
+    server_name example.fano;
+    error_log /var/log/nginx/example.fano-error.log;
+    access_log /var/log/nginx/example.fano-access.log;
 
     location / {
-        try_files $uri $uri/ =404;
+        try_files $uri @example.fano;
     }
 
-    location ~ \.*$ {
+    location @example.fano {
         fastcgi_pass 127.0.0.1:20477;
         include fastcgi_params;
-    }
-
-    location ~ /\.ht {
-        deny all;
     }
 }
 ```
 Change `fastcgi_pass` to match host and port where application is listening.
+
+Last two `location` configurations tells Nginx to serve files directly if exists, otherwise pass it to our application.
 
 If listening using unix domain socket, you need to change `fastcgi_pass` to
 
@@ -229,7 +226,15 @@ If listening using unix domain socket, you need to change `fastcgi_pass` to
 fastcgi_pass unix:/tmp/fano-fcgi.sock;
 ```
 
-where `/tmp/fano-fcgi.sock` is socket file which application using and of course it must be writeable by nginx.
+where `/tmp/fano-fcgi.sock` is socket file which application using and of course it must be writeable by Nginx.
+
+## Issue with firewall
+
+In Fedora-based distribution, firewall is active by default. Read [Issue with firewall](/deployment/scgi#issue-with-firewall) for more information.
+
+## Permission issue with SELinux
+
+Running FastCGI application may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux) for more information.
 
 ## Explore more
 
