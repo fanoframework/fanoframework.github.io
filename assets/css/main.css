@@ -3890,3 +3890,24 @@ input, select, textarea {
 			}
 
 		}
+
+.main-title {
+	position : fixed;
+	top:25px;
+}
+
+.main-title h2 {
+	font-size: 1.1em;
+	display: inline;
+}
+
+.main-title h2:before {
+	content : '';
+	display: inline-block;
+	width:48px;
+	height:48px;
+	background-size: cover;
+	background-image: url(../images/fano-framework.png);
+	vertical-align: middle;
+	margin-right : 10px;
+}
