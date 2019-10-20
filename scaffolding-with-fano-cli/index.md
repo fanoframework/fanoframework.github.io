@@ -123,6 +123,13 @@ $ fanocli --project-scgi=test-fano-scgi --host=192.168.2.1 --port=4040
 Generated project files are mostly similar to `--project-fcgi` output but for SCGI protocol. See [Deploy as SCGI application](/deployment/scgi) for information on how to
 setup SCGI application to work with various web server.
 
+## Scaffolding uwsgi project directory structure
+
+To create web application that use [uwsgi protocol](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html), use `--project-uwsgi` parameter. Other parameters are similar to SCGI or FastCGI project above.
+
+See [Deploy as uwsgi application](/deployment/uwsgi) for information on how to
+setup uwsgi application to work with various web server.
+
 ## Scaffolding project directory structure with Git without initial commit
 
 To scaffold project structure using Fano framework with Git repository initialized but without creating initial commit, run with  `--project-no-commit` command line options

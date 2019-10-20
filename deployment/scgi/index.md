@@ -175,6 +175,7 @@ Nginx has detail information [how to fix issue with SELinux](https://www.nginx.c
 ## Explore more
 
 - [Deploy as FastCGI application](/deployment/fastcgi)
+- [Deploy as uwsgi application](/deployment/uwsgi)
 - [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
 - [Back to Deployment](/deployment)
 
