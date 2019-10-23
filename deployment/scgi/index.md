@@ -172,6 +172,33 @@ Web server such Apache or Nginx is listed in SELinux under `httpd_t` context. Ru
 
 Nginx has detail information [how to fix issue with SELinux](https://www.nginx.com/blog/using-nginx-plus-with-selinux/). Read [Centos Wiki regarding SELinux](https://wiki.centos.org/HowTos/SELinux) for more information.
 
+### Install semanage utility
+`semanage` command may not be installed on your system. To find the package, run
+
+```
+$ yum provides semanage
+```
+On my system (your system may be different), output as follows,
+
+```
+Last metadata expiration check: 0:47:01 ago on Wed Oct 23 02:54:09 2019.
+policycoreutils-python-utils-2.8-16.1.el8.noarch : SELinux policy core python utilities
+Repo        : @System
+Matched from:
+Filename    : /usr/sbin/semanage
+
+policycoreutils-python-utils-2.8-16.1.el8.noarch : SELinux policy core python utilities
+Repo        : BaseOS
+Matched from:
+Filename    : /usr/sbin/semanage
+```
+
+Take a note of value `policycoreutils-python-utils-2.8-16.1.el8.noarch` and run
+
+```
+# yum install policycoreutils-python-utils-2.8-16.1.el8.noarch
+```
+
 ## Explore more
 
 - [Deploy as FastCGI application](/deployment/fastcgi)
