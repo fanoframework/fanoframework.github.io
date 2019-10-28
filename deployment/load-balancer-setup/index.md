@@ -5,7 +5,7 @@ description: Tutorial on how to deploy Fano web application with Apache or Nginx
 
 <h1 class="major">Deploy Fano web application with web server as load balancer</h1>
 
-Load balancer to distribute load to one or more application instances. When one application is unable to handle request, load balancer distributes load to other application instance thus improving performance, availability and scalability.
+Load balancer distributes load to one or more application instances. When one application is unable to handle request, load balancer distributes load to other application instance thus improving performance, availability and scalability.
 
 
 - [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup/apache)
