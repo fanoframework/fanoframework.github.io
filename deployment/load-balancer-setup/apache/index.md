@@ -48,7 +48,43 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano
 
 Command above, will create virtual host for Apache web server that utilize `mod_proxy_balancer` module, enabled virtual host configuration, reload Apache web server configuration and add entry to `myapp.fano` domain in `/etc/hosts`.
 
-Replace with `--deploy-lb-fcgi` for setting up FastCGI web application with load balancer.
+Replace with `--deploy-lb-fcgi` or `--deploy-lb-uwsgi` for setting up FastCGI or uwsgi web application respectively.
+
+## Deploy Fano Application with load balancer manually
+
+Skip this section if you deploy using Fano CLI.
+
+If you prefer setting up virtual host manually, create new file in `/etc/httpd/conf.d` or `/etc/apache/sites-available` directory for Fedora-based or Debian-based Linux respectively.
+
+Add, for example, following code,
+
+```
+<VirtualHost *:80>
+    ServerName myapp.fano
+    DocumentRoot /path/to/my/app/doc/root
+
+    ErrorLog /var/nginx/log/myapp.fano-error.log
+    CustomLog /var/nginx/log/myapp.fano-access.log combined
+
+    <Directory /path/to/my/app/doc/root>
+        Options -MultiViews -FollowSymlinks +SymlinksIfOwnerMatch +ExecCGI
+        AllowOverride FileInfo Indexes
+        Require all granted
+    </Directory>
+
+    <Proxy balancer://myapp.fano>
+        BalancerMember scgi://127.0.0.1:20477
+        BalancerMember scgi://127.0.0.1:20478
+        ProxySet lbmethod=by_requests
+    </Proxy>
+
+    ProxyRequests Off
+    ProxyPassMatch "/css|js|images|img|plugins|bower_components(.*)" !
+    ProxyPassMatch ^/(.*)$ "balancer://myapp.fano/"
+</VirtualHost>
+```
+
+Replace `BalancerMember` url according to protocol, host and port of the application. For example, replace with `fcgi://127.0.0.1:20477` or `uwsgi://127.0.0.1:20477`  for FastCGI or uwsgi protocol.
 
 ## Running multiple applications with load balancer
 

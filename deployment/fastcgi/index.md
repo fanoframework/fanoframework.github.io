@@ -239,6 +239,7 @@ Running FastCGI application may be subject to strict security policy of SELinux.
 ## Explore more
 
 - [Deploy as SCGI application](/deployment/scgi)
+- [Deploy as uwsgi application](/deployment/uwsgi)
 - [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
 - [Back to Deployment](/deployment)
 

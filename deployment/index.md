@@ -27,6 +27,7 @@ If you do not have root privilege access, such in shared hosting environment, th
 - [Deploy as CGI application](/deployment/cgi)
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
+- [Deploy as uwsgi application](/deployment/uwsgi)
 - [Deploy as standalone web server](/deployment/standalone-web-server)
 - [Deploy using Docker](/deployment/docker)
 - [Deploy with Continous Integration tools](/deployment/continous-integration)

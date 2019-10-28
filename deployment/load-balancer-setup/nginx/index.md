@@ -31,7 +31,53 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano --web-server=nginx
 
 Command above, will create virtual host for Nginx web server that utilize Nginx load balancer module, reload Nginx web server configuration and add entry to `myapp.fano` domain in `/etc/hosts`.
 
-Replace with `--deploy-lb-fcgi` for setting up FastCGI web application with load balancer.
+Replace with `--deploy-lb-fcgi` or `--deploy-lb-uwsgi` for setting up FastCGI or uswgi web application respectively.
+
+## Deploy Fano Application with load balancer manually
+
+Skip this section if you use Fano CLI to deploy application.
+
+If you prefer setting up virtual host manually, create new file in `/etc/nginx/conf.d` directory and add, for example, following code,
+
+```
+upstream my-app-load-balancer {
+    server 127.0.0.1:20477;
+    server 127.0.0.1:20478;
+}
+
+server {
+    listen 80;
+    root /path/to/my/app/doc/root;
+    server_name myapp.fano;
+
+    error_log /var/nginx/log/myapp.fano-error.log;
+    access_log /var/nginx/log/myapp.fano-access.log;
+
+    location / {
+        try_files $uri @myapp.fano;
+    }
+
+    location @myapp.fano {
+        scgi_pass my-app-load-balancer;
+        include scgi_params;
+    }
+}
+```
+
+Replace `scgi_pass` and `scgi_params` with `fastcgi_pass` and `fastcgi_params` for FastCGI or
+`uwsgi_pass` and `uwsgi_params` for uwsgi web application.
+
+Reload Nginx
+
+```
+$ sudo systemctl reload nginx
+```
+
+Add entry to `/etc/hosts` file so you can access application during development,
+
+```
+127.0.0.1 myapp.fano
+```
 
 ## Running multiple applications with load balancer
 
