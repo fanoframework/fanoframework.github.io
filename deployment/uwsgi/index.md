@@ -135,7 +135,7 @@ In Fedora-based distribution, firewall is active by default. Read [Issue with fi
 
 ## Permission issue with SELinux
 
-Running uwsgi application tghrough reverse proxy may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux) for more information.
+Running uwsgi application through reverse proxy may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux) for more information.
 
 ## Explore more
 
