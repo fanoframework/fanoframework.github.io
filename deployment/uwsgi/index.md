@@ -11,7 +11,7 @@ but simpler to parse.
 See [Working with Application](/working-with-application) for information how to create uwsgi web application.
 
 See [Fano uwsgi](https://github.com/fanoframework/fano-uwsgi) for example application.
-You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to easily create new SCGI web application project.
+You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to easily create new uwsgi web application project.
 
 ## Deploy with Fano CLI
 
