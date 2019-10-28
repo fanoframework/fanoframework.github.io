@@ -15,7 +15,7 @@ You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to 
 
 ## Deploy with Fano CLI
 
-Simplest way to setup Fano web application with web server is to deploy SCGI application with [Fano CLI](https://github.com/fanoframework/fano-cli), run with `--deploy-uwsgi=[domain name]`.
+Simplest way to setup Fano web application with web server is to deploy uwsgi application with [Fano CLI](https://github.com/fanoframework/fano-cli), run with `--deploy-uwsgi=[domain name]`.
 
 Inside Fano web application project directory, run
 
@@ -135,7 +135,7 @@ In Fedora-based distribution, firewall is active by default. Read [Issue with fi
 
 ## Permission issue with SELinux
 
-Running FastCGI application may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux) for more information.
+Running uwsgi application tghrough reverse proxy may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux) for more information.
 
 ## Explore more
 
