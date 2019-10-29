@@ -291,14 +291,15 @@ test-fano/src/Middlewares/AuthOnly/AuthOnlyMiddleware.pas
 test-fano/src/Middlewares/AuthOnly/Factories/AuthOnlyMiddlewareFactory.pas
 ```
 
-and also modify following files
+## Generate random key
+
+To generate random key, run with  `--key=[length]` command line options
 
 ```
-test-fano/app/bootstrap.pas
-test-fano/app/Dependencies/middlewares.dependencies.inc
-test-fano/build.cfg
-test-fano/build.cfg.sample
+$ fanocli --key=32
 ```
+
+If `length` is not set, it is assumed 64 bytes of random value. Output is Base64 encoded string of random bytes.
 
 ## Deployment
 

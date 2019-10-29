@@ -27,6 +27,8 @@ Warning: "crtbegin.o" not found, this will probably cause a linking failure
 Warning: "crtend.o" not found, this will probably cause a linking failure
 ```
 
+This is mostly because you install Free Pascal compiler before install development tools library.
+
 First, you need to locate development tools library path on your computer. Run
 
 ```
