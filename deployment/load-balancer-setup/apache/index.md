@@ -29,12 +29,12 @@ Also you need to enable one or more [scheduler algorithm module](/deployment/loa
 $ sudo a2enmod lbmethod_byrequests
 ```
 
-## Deploy Fano Application with load balancer with Fano CLI
+## <a name="deploy-fano-application-with-load-balancer-with-fano-cli"></a>Deploy Fano Application with load balancer with Fano CLI
 
 Apart from task for [scaffolding web application](/scaffolding-with-fano-cli),
-[Fano CLI](https://github.com/fanoframework/fano-cli) also provides `--deploy-lb-scgi=[domain name]` and `--deploy-lb-fcgi=[domain name]` to help setup load balancer during development for SCGI and FastCGI web application, respectively.
+[Fano CLI](https://github.com/fanoframework/fano-cli) also provides `--deploy-lb-scgi=[domain name]`, `--deploy-lb-fcgi=[domain name]` or `--deploy-lb-uwsgi=[domain name]` to help setup load balancer during development for SCGI, FastCGI or uwsgi web application, respectively.
 
-After you create SCGI or FastCGI project with `--project-scgi` or `--project-fcgi`,
+After you create SCGI, FastCGI or uwsgi project with `--project-scgi`, `--project-fcgi` or `--project-uwsgi`, for example
 
 ```
 $ fanocli --project-scgi=myapp
@@ -135,6 +135,7 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano --lbmethod=bybusyness
 
 ## Explore more
 
+- [Deploy Fano application with Nginx load balancer module](/deployment/load-balancer-setup/nginx)
 - [Hello World SCGI application with Fano CLI](/tutorials/hello-world-scgi-application-with-fano-cli)
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)

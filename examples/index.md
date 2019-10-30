@@ -17,14 +17,16 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 - [Fano Fcgid](https://github.com/fanoframework/fano-fcgid)
 - [Fano Fcgi Unix](https://github.com/fanoframework/fano-fcgi-unix)
 - [Fano FastCGI](https://github.com/fanoframework/fano-fastcgi)
-- [Fano Upload](https://github.com/fanoframework/fano-upload)
+- [Handling upload example](https://github.com/fanoframework/fano-upload)
 - [Fano Api](https://github.com/fanoframework/fano-api)
 - [Fano Mvc](https://github.com/fanoframework/fano-mvc)
-- [Fano App DB](https://github.com/fanoframework/fano-app-db)
-- [Fano SCGI](https://github.com/fanoframework/fano-scgi)
-- [Fano Session](https://github.com/fanoframework/fano-session)
-- [Fano Cors](https://github.com/fanoframework/fano-cors)
-- [Fano Csrf](https://github.com/fanoframework/fano-csrf)
+- [MySQL web application example](https://github.com/fanoframework/fano-app-db)
+- [Example web application using scgi protocol](https://github.com/fanoframework/fano-scgi)
+- [Example web application using uwsgi protocol](https://github.com/fanoframework/fano-uwsgi)
+- [Session example](https://github.com/fanoframework/fano-session)
+- [Cross-Origin Resource Sharing (CORS) example](https://github.com/fanoframework/fano-cors)
+- [Cross-Site Request Forgery (CSRF) protection example](https://github.com/fanoframework/fano-csrf)
+- [Form Validation example](https://github.com/fanoframework/fano-validation)
 
 ## Explore more
 

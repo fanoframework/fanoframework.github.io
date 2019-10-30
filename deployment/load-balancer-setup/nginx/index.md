@@ -14,24 +14,15 @@ Nginx provides reverse proxy load balancer to distribute load to one or more app
 
 ## Deploy Fano Application with load balancer with Fano CLI
 
-Apart from task for [scaffolding web application](/scaffolding-with-fano-cli),
-[Fano CLI](https://github.com/fanoframework/fano-cli) also provides `--deploy-lb-scgi=[domain name]` and `--deploy-lb-fcgi=[domain name]` to help setup load balancer during development for SCGI and FastCGI web application, respectively.
+This is mostly similar to [deploy Fano web application with Apache load balancer module with Fano CLI](/deployment/load-balancer-setup/apache#deploy-fano-application-with-load-balancer-with-fano-cli).
 
-After you create SCGI or FastCGI project with `--project-scgi` or `--project-fcgi`,
-
-```
-$ fanocli --project-scgi=myapp
-```
-
-From inside Fano SCGI web application project directory, run
+The difference is that you need to pass `--web-server=nginx` parameter when deploying, for example
 
 ```
 $ sudo fanocli --deploy-lb-scgi=myapp.fano --web-server=nginx
 ```
 
-Command above, will create virtual host for Nginx web server that utilize Nginx load balancer module, reload Nginx web server configuration and add entry to `myapp.fano` domain in `/etc/hosts`.
-
-Replace with `--deploy-lb-fcgi` or `--deploy-lb-uwsgi` for setting up FastCGI or uswgi web application respectively.
+Replace with `--deploy-lb-fcgi` or `--deploy-lb-uwsgi` for setting up FastCGI or uwsgi web application respectively.
 
 ## Deploy Fano Application with load balancer manually
 
@@ -124,6 +115,7 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano --lbmethod=least_conn
 
 ## Explore more
 
+- [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup/apache)
 - [Hello World SCGI application with Fano CLI](/tutorials/hello-world-scgi-application-with-fano-cli)
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
