@@ -10,13 +10,13 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 
 ## List of example applications
 
-- [Fano App](https://github.com/fanoframework/fano-app), [live example](https://fano.juhara.id/)
-- [Fano App Image](https://github.com/fanoframework/fano-app-img), [live example](https://fano-img.juhara.id/)
-- [Fano Elasticsearch](https://github.com/fanoframework/fano-elasticsearch)
-- [Fano App Middleware](https://github.com/fanoframework/fano-app-middleware)
+- [Basic CGI web application example](https://github.com/fanoframework/fano-app), [live example](https://fano.juhara.id/)
+- [Image generator CGI web application](https://github.com/fanoframework/fano-app-img), [live example](https://fano-img.juhara.id/)
+- [Example web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elasticsearch)
+- [Example web application using middleware](https://github.com/fanoframework/fano-app-middleware)
 - [Fano Fcgid](https://github.com/fanoframework/fano-fcgid)
-- [Fano Fcgi Unix](https://github.com/fanoframework/fano-fcgi-unix)
-- [Fano FastCGI](https://github.com/fanoframework/fano-fastcgi)
+- [Example FastCGI web application listen on Unix domain socket](https://github.com/fanoframework/fano-fcgi-unix)
+- [Example FastCGI web application listen on TCP port](https://github.com/fanoframework/fano-fastcgi)
 - [Handling upload example](https://github.com/fanoframework/fano-upload)
 - [Fano Api](https://github.com/fanoframework/fano-api)
 - [Fano Mvc](https://github.com/fanoframework/fano-mvc)
