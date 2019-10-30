@@ -11,8 +11,7 @@ Apache provides reverse proxy load balancer to distribute load to one or more ap
 
 - [Apache 2.4](https://httpd.apache.org/docs/2.4/)
 - [mod_proxy_balancer](https://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html)
-- [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html)
-- [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)
+- [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html), [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html) or [mod_proxy_uwsgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_uwsgi.html)
 - [Fano CLI](https://github.com/fanoframework/fano-cli)
 
 ## Setting up mod_proxy_balancer
