@@ -132,13 +132,13 @@ $ sudo systemctl start [your-app-service-name]
 
 The difference between Debian and Fedora regarding Apache mostly about default service name (Debian uses `apache2` and Fedora uses `httpd`), user which Apache run (Debian uses `www-data` user while Fedora uses `apache`) and default Apache configuration location.
 
-- Create virtual host
+#### Create virtual host
 
 Apache main configuration is stored in `/etc/httpd/httpd.conf`. To add virtual host configuration, you can simply add entry to this file or prefered way is to create configuration in file `/etc/httpd/conf.d/` directory.
 
 In Fedora and Apache 2.4, `/etc/httpd/conf.d/` directory will be search for additional configurations. So you can just create virtual host file inside this directory.
 
-- Reload Apache service
+#### Reload Apache service
 
 Tell Apache to load configuration by running
 
@@ -235,6 +235,14 @@ In Fedora-based distribution, firewall is active by default. Read [Issue with fi
 ## Permission issue with SELinux
 
 Running FastCGI application may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux) for more information.
+
+## Issue with web server limit
+
+There are configuration that affect our application. For example, in Apache, `LimitRequestBody` puts limit total in bytes of request body.
+
+If you running FastCGI web application with `mod_fcgid` module, `FcgidMaxRequestLen` limits number of bytes of request length. Since Apache 2.3.9, [its default value is 128 KB](http://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html#fcgidmaxrequestlen).
+
+If your application is handling big file upload, you may need to adjust its value, otherwise you will get HTTP 500 error if you try to upload big file.
 
 ## Explore more
 
