@@ -133,6 +133,12 @@ userName := sess.getVar('username');
 
 `getVar()` raise `ESessionExpired` exception if session is expired.
 
+You can also use simplified syntax
+
+```
+userName := sess['username'];
+```
+
 ## Write session variable value
 
 ```
@@ -140,6 +146,12 @@ sess.setVar('username', 'john@doe.com');
 ```
 
 `setVar()` raise `ESessionExpired` exception if session is expired.
+
+You can also use simplified syntax
+
+```
+sess['username'] := 'john@doe.com';
+```
 
 ## Delete session variable
 
