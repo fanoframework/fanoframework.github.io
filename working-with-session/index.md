@@ -76,17 +76,17 @@ type
 
     TAuthOnlyMiddleware = class(TInjectableObject, IMiddleware)
     private
-        fSesionManager : ISessionManager;
+        fSesionManager : IReadOnlySessionManager;
         ...
     public
-        constructor create(const session : ISessionManager);
+        constructor create(const session : IReadOnlySessionManager);
         ...
     end;
 ...
 
 implementation
 
-    constructor TAuthOnlyMiddleware.create(const session : ISessionManager);
+    constructor TAuthOnlyMiddleware.create(const session : IReadOnlySessionManager);
     begin
         inherited create();
         fSession := session;
@@ -115,6 +115,11 @@ end;
 
 After you hold `ISession` instance, you can query session state using its method.
 
+You can also use simplified syntax,
+
+```
+sess := fSession[request];
+```
 ## Test if session variable is set
 
 ```
