@@ -143,7 +143,7 @@ Consider reading `cookie.maxAge` configuration in code example above. It will re
 maxAge=3600
 ```
 
-However, because nested section are not allowed in INI file, you can only read on section. For example,
+However, because nested section are not allowed in INI file, you can only read one section. For example,
 
 ```
 nestedData := config.getInt('fano.data.nested');
