@@ -168,6 +168,18 @@ $ git commit -m "Initial commit"
 ```
 This command line options is provided to enable you to initialize Git repository manually.
 
+## Setup application configuration when creating project
+
+All command that create project, for example, `--project`, `--project-fcgi`, `--project-scgi`, etc, accept additional parameter `--config=[configType]` where `[configType]` is either `ini` or `json`.
+
+If `--config` is set, then during project creation, it generates application configuration files and register application configuration to dependency container. If `--config` is set but its value is empty string, `json` is assumed.
+
+```
+$ fanocli --project-fcgi=test-fano --config=ini
+```
+
+Read [Application Configuration](/configuration) for more information.
+
 ## Creating controller
 
 After you create project structure, to scaffold controller class, run with  `--controller` command line options
