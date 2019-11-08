@@ -20,6 +20,10 @@ To use session in Fano Framework, you need to use `ISessionManager` and also dis
 
 - `TFileSessionManager`, session manager which store session data in file.
 
+## IReadOnlySessionManager
+
+This interface is provided for getting session instance from a request. This interface if parent of `ISessionManager` interface. This interface only has one method `getSession()` which expect `IRequest` instance and returns `ISession` instance.
+
 ## Create session manager instance
 
 ### Create factory class
@@ -97,7 +101,7 @@ end.
 
 ## Get session instance
 
-From inside controller or middleware, you can get `ISession` instance from request using `getSession()` method of `ISessionManager` interface.
+From inside controller or middleware, you can get `ISession` instance from request using `getSession()` method of `ISessionManager` or `IReadOnlySessionManager` interface.
 
 ```
 function TAuthOnlyMiddleware.handleRequest(
