@@ -74,7 +74,7 @@ $ fanocli --project-fcgid=test-fano-fcgi
 See [Deploy as FastCGI application](/deployment/fastcgi) for information on how to
 setup FastCGI application to work with various web server.
 
-## Scaffolding FastCGI project directory structure
+## <a name="scaffolding-fastcgi-project"></a>Scaffolding FastCGI project directory structure
 
 To scaffold FastCGI project structure using Fano framework, run with  `--project-fcgi` command line options
 
@@ -100,7 +100,7 @@ setup FastCGI application to work with various web server.
 
 Difference between FastCGI application created with `--project-fcgid` and `--project-fcgi` is first will be FastCGI application which its process is managed by Apache mod_fcgid module while latter must be run independently using Apache mod_proxy_fcgi or Nginx.
 
-## Scaffolding SCGI project directory structure
+## <a name="scaffolding-scgi-project">Scaffolding SCGI project directory structure
 
 To scaffold SCGI project structure using Fano framework, run with  `--project-scgi` command line options
 
@@ -123,7 +123,7 @@ $ fanocli --project-scgi=test-fano-scgi --host=192.168.2.1 --port=4040
 Generated project files are mostly similar to `--project-fcgi` output but for SCGI protocol. See [Deploy as SCGI application](/deployment/scgi) for information on how to
 setup SCGI application to work with various web server.
 
-## Scaffolding uwsgi project directory structure
+## <a name="scaffolding-uwsgi-project">Scaffolding uwsgi project directory structure
 
 To create web application that use [uwsgi protocol](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html), use `--project-uwsgi` parameter. Other parameters are similar to SCGI or FastCGI project above.
 
