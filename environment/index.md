@@ -186,7 +186,7 @@ You may wanto to read [RFC 3875 Protocol-Specific Meta-Variables](https://tools.
 Fano Framework provides several built-in implementation of `ICGIEnvironment`. You do not need to create it yourself, as this will be created for you.
 
 - `TCGIEnvironment` class which get environment variables thorough `GetEnvironmentVariable()` function from Free Pascal `SysUtils` unit. For CGI application, this is what Fano Framework gives you.
-- `TKeyValueEnvironment` class which get environment variables thorough key value pair. For FastCGI or SCGI application, this is what Fano Framework gives you.
+- `TKeyValueEnvironment` class which get environment variables thorough key value pair. For [FastCGI](/scaffolding-with-fano-cli#scaffolding-fastcgi-project), [SCGI](/scaffolding-with-fano-cli#scaffolding-scgi-project) or [uwsgi](/scaffolding-with-fano-cli#scaffolding-uwsgi-project) application, this is what Fano Framework gives you.
 
 ## Enumerate all environment variables
 
