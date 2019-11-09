@@ -16,7 +16,7 @@ data such as query strings, cookies, POST data send by client or uploaded files.
 
 Read [Working with Controllers](/working-with-controllers) for more information on hwo to work with route handler  or controller.
 
-## Getting query parameters
+## <a name="getting-query-parameters"></a>Getting query parameters
 
 If you registered route `/home` and user open `http://[your hostname]/home?msg1=test&msg2=nice`
 
@@ -122,7 +122,7 @@ msg1 := request.getParam('msg1', 'ok');
 
 Above method search query string parameter first. If it cannot find data with key `msg1`, it tries to read body parameters. If none found, default value `ok` is returned.
 
-## Read request header
+## <a name="read-request-header"></a>Read request header
 
 To get request headers, use `headers()` methods of `IRequest`. It returns instance of `IReadOnlyHeaders` interface.
 

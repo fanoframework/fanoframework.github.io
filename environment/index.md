@@ -146,6 +146,8 @@ or
 query := myEnv.queryString();
 ```
 
+Please note that it returns raw query string. If you want to read a query string value you may want to use `IRequest` instance. Please read [Working with Request](/working-with-request#getting-query-parameters)
+
 ### Get user agent
 
 ```
@@ -175,8 +177,9 @@ var browser : string;
 ...
 browser := request.headers.getHeader('User-Agent');
 ```
+Read [Working with Request](/working-with-request#read-request-header) for more information on how to read request headers.
 
-Read [RFC 3875 Protocol-Specific Meta-Variables](https://tools.ietf.org/html/rfc3875#section-4.1.18) for  more information.
+You may wanto to read [RFC 3875 Protocol-Specific Meta-Variables](https://tools.ietf.org/html/rfc3875#section-4.1.18) for  more information how request header is encoded in CGI environment variables.
 
 ## Built-in ICGIEnvironment implementation
 
