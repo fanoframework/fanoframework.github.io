@@ -146,7 +146,7 @@ or
 query := myEnv.queryString();
 ```
 
-Please note that it returns raw query string. If you want to read a query string value you may want to use `IRequest` instance. Please read [Working with Request](/working-with-request#getting-query-parameters)
+Please note that it returns raw query string. If you want to read parsed query parameter value, you may want to use `IRequest` instance. Please read [Working with Request](/working-with-request#getting-query-parameters) for more information.
 
 ### Get user agent
 
