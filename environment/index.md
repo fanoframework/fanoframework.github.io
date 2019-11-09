@@ -43,13 +43,24 @@ It retrieves single environment variable value using its name.
 
 ## Retrieving environment variables
 
-### Get client IP address
+Following code examples assumes that `myEnv` declared as follows
 
 ```
 var myEnv : ICGIEnvironment;
-    ipAddr : string;
+```
+
+### Get client IP address
+
+```
+var ipAddr : string;
 ...
 ipAddr := myEnv.env('REMOTE_ADDR');
+```
+
+or
+
+```
+ipAddr := myEnv['REMOTE_ADDR'];
 ```
 
 or
@@ -61,12 +72,16 @@ ipAddr := myEnv.remoteAddr();
 ### Get host
 
 ```
-var myEnv : ICGIEnvironment;
-    ipAddr : string;
+var host : string;
 ...
 host := myEnv.env('HTTP_HOST');
 ```
 
+or
+
+```
+host := myEnv['HTTP_HOST'];
+```
 or
 
 ```
@@ -76,10 +91,14 @@ host := myEnv.httpHost();
 ### Get request scheme
 
 ```
-var myEnv : ICGIEnvironment;
-    scheme : string;
+var scheme : string;
 ...
 scheme := myEnv.env('REQUEST_SCHEME');
+```
+or
+
+```
+scheme := myEnv['REQUEST_SCHEME'];
 ```
 
 or
@@ -92,10 +111,14 @@ For example, `scheme` will contains `https` if your application is invoked via H
 ### Get request method
 
 ```
-var myEnv : ICGIEnvironment;
-    method : string;
+var method : string;
 ...
 method := myEnv.env('REQUEST_METHOD');
+```
+or
+
+```
+method := myEnv['REQUEST_METHOD'];
 ```
 
 or
@@ -108,12 +131,15 @@ For example, `method` will contains `GET` if your application is invoked via HTT
 ### Get query string
 
 ```
-var myEnv : ICGIEnvironment;
-    query : string;
+var query : string;
 ...
 query := myEnv.env('QUERY_STRING');
 ```
 
+or
+```
+query := myEnv['QUERY_STRING'];
+```
 or
 
 ```
@@ -123,10 +149,13 @@ query := myEnv.queryString();
 ### Get user agent
 
 ```
-var myEnv : ICGIEnvironment;
-    browser : string;
+var browser : string;
 ...
 browser := myEnv.env('HTTP_USER_AGENT');
+```
+or
+```
+browser := myEnv['HTTP_USER_AGENT'];
 ```
 
 or
@@ -134,6 +163,20 @@ or
 ```
 browser := myEnv.httpUserAgent();
 ```
+
+## Protocol-specific variables
+
+Any environment variables with `HTTP_` prefix are actually http request headers, so you will able to read the same information from `IRequest` interface. For example,
+
+To read user agent, you can also use
+
+```
+var browser : string;
+...
+browser := request.headers.getHeader('User-Agent');
+```
+
+Read [RFC 3875 Protocol-Specific Meta-Variables](https://tools.ietf.org/html/rfc3875#section-4.1.18) for  more information.
 
 ## Built-in ICGIEnvironment implementation
 
