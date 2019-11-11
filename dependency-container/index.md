@@ -82,6 +82,12 @@ router := container.get(GUIDToString(IRouteMatcher)) as IRouteMatcher;
 When `get()` can not find service, it raises `EDependencyNotFound` exception.
 If service is registered but with nil factory class, `EInvalidFactory` exception is raised.
 
+You can also use simplified array-like syntax, for example
+
+```
+router := container['router'] as IRouteMatcher;
+```
+
 ## Test if service is registered
 
 Dependency container provides `has()` method which return boolean value that can be used to check if particular service is registered or not.
