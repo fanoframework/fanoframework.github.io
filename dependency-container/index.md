@@ -36,6 +36,8 @@ To register a service, dependency container provides two method `add()` and `fac
 For example, following code registers service factory `TSimpleRouterFactory` with name `router`. This factory class will create `TRouter` class.
 
 ```
+var container : IDependencyContainer;
+...
 container.add('router', TSimpleRouterFactory.create());
 ```
 
