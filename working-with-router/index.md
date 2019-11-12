@@ -128,7 +128,7 @@ router.post('/user/submit', handler).setName('create-user').before(authOnlyMiddl
 
 Read [Middlewares](/middlewares) for more information.
 
-## Getting route argument
+## <a name="getting-route-argument"></a>Getting route argument
 
 Third parameter of `handleRequest()` method of `IRequestHandler` interface gives instance of `IRouteArgsReader` interface to allow application to retrieve route argument.
 

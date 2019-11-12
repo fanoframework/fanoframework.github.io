@@ -32,7 +32,7 @@ function handleRequest(
 ```
 - `request` is current request object
 - `response` is current response object
-- `args` is current route arguments
+- `args` is current route arguments, read [Working with Router](/working-with-router#getting-route-argument) for more information about route argument.
 - `next` is next middleware to execute
 
 If a middleware should continue execution, it must call `next` request handler otherwise execution is stop and current response will be response what client browser received.
@@ -182,6 +182,7 @@ Fano Framework provides several built-in middlewares.
 - `TCompositeMiddleware`, middleware class which group several middlewares as one.
 - `TRequestHandlerAsMiddleware`, adapter middleware which can turn request handler as a middleware.
 - `TCorsMiddleware`, middleware class which adds CORS response header. Read [Handling CORS](/security/handling-cors) for more information.
+- `TCsrfMiddleware`, middleware class which adds CSRF protection. Read [Cross-Site Request Forgery (CSRF)](/security/csrf-protection) for more information.
 - `TValidationMiddleware`, middleware class which validate request.
 
 ### Group several middlewares as one
