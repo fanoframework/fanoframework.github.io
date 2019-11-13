@@ -32,7 +32,7 @@ function handleRequest(
 ```
 - `request` is current request object
 - `response` is current response object
-- `args` is current route arguments, read [Working with Router](/working-with-router#getting-route-argument) for more information about route argument.
+- `args` is current route arguments. Read [Working with Router](/working-with-router#getting-route-argument) for more information about route argument.
 - `next` is next middleware to execute
 
 If a middleware should continue execution, it must call `next` request handler otherwise execution is stop and current response will be response what client browser received.

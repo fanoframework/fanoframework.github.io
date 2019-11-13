@@ -28,8 +28,10 @@ IDispatcher = interface
     ) : IResponse;
 end;
 ```
-- `env`, CGI environment variable that is given by web server.
+- `env`, CGI environment variable that is given by web server. Read [CGI Environment](/environment) for more information.
 - `stdIn`, object which capable of reading STDIN
+
+Fano Framework will pass instance of CGI environment and IStdIn instance based on protocol that your application use, for example, CGI or FastCGI.
 
 ## Built-in Dispatcher implementation
 
