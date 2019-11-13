@@ -128,7 +128,7 @@ router.post('/user/submit', handler).setName('create-user').before(authOnlyMiddl
 
 Read [Middlewares](/middlewares) for more information.
 
-## Getting route argument
+## <a name="getting-route-argument"></a>Getting route argument
 
 Third parameter of `handleRequest()` method of `IRequestHandler` interface gives instance of `IRouteArgsReader` interface to allow application to retrieve route argument.
 
@@ -146,6 +146,23 @@ begin
     arg := args.getArg('name');
     //arg.name = 'name', arg.value = 'john'
 end;
+```
+
+If you are interested only for its value, you can call `getValue()` and pass name of argument. It will return value as string.
+
+```
+writeln(args.getValue('name'));
+```
+or with simplified array-like syntax,
+
+```
+writeln(args['name']);
+```
+
+Above codes will print identical output as follows
+
+```
+writeln(args.getArg('name').value);
 ```
 
 You can get all route arguments using `getArgs()` method,
