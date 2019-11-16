@@ -54,7 +54,7 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
 );
 ```
 
-`TKeyGuidSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key concatenated with GUID.
+`TKeyGuidSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key concatenated with GUID as session id.
 
 ### Register factory to dependency container
 
