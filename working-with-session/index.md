@@ -41,6 +41,19 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
 );
 ```
 
+If not set, by default, code above will use GUID as session id (using `TGuidSessionIdGenerator` class). You can change the way session id generated setting session id generator factory by calling `sessionIdGenerator()` method, as shown in following code,
+
+```
+sessionMgrFactory := TJsonFileSessionManagerFactory.create(
+    'fano_sess`,
+    '/home/fanoapp/storages/sessions/'
+).sessionIdGenerator(
+    TKeyGuidSessionIdGeneratorFactory.create('some random string as secret key')
+);
+```
+
+`TKeyGuidSessionIdGeneratorFactory` is factory class which will create session id generator which use SHA1 hash of a secret key concatenated with GUID.
+
 ### Register factory to dependency container
 
 ```
