@@ -184,7 +184,7 @@ begin
 end;
 ```
 
-Please not that `TPDFDocument` is part of Free Pascal `fcl-pdf` library.
+Please note that `TPDFDocument` is part of Free Pascal `fcl-pdf` library.
 
 ## Explore more
 
