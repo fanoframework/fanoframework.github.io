@@ -213,7 +213,12 @@ After logger factory is registered, you can access logger anywhere from applicat
 ```
 var logger : ILogger;
 ...
-logger := container.get('logger) as ILogger;
+logger := container.get('logger') as ILogger;
+```
+or with array-like syntax
+
+```
+logger := container['logger'] as ILogger;
 ```
 
 ## Explore more
