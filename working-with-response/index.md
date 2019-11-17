@@ -159,7 +159,7 @@ begin
 end;
 ```
 
-In the code above `mem` is assume to contain PNG file binary data. `TResponseStream` is adapter class to be able to read `TStream` as string.
+In the code above `mem` is assume to contain PNG file binary data. `TResponseStream` is adapter class that implements `IResponseStream` interface to be able to read `TStream` as string.
 
 To be able to display other binary format, just pass correct `Content-Type` header. For example, to output PDF document
 
