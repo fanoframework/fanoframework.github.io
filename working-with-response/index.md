@@ -24,7 +24,8 @@ which add additional methods to simplify writing string to stream and also readi
 ```
 function TMyController.handleRequest(
     const request : IRequest;
-    const response : IResponse
+    const response : IResponse;
+    const args : IRouteArgsReader
 ) : IResponse;
 var respBody : IResponseStream;
 begin
@@ -95,7 +96,8 @@ For example, in controller
 ```
 function TMyController.handleRequest(
     const request : IRequest;
-    const response : IResponse
+    const response : IResponse;
+    const args : IRouteArgsReader
 ) : IResponse;
 var headers : IHeaders;
 begin
@@ -117,6 +119,72 @@ result := TRedirectResponse.create(
     304
 );
 ```
+
+## JSON response
+
+To simplify output JSON response, you can use `TJsonResponse` as shown in following code
+
+```
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+begin
+    result := TJsonResponse.create(
+        response.headers(),
+        '{ "foo" : "bar" }'
+    );
+end;
+```
+
+## Binary response
+
+To simplify to output binary response such as image, you can use `TBinaryResponse` as shown in followong code,
+
+```
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var mem : TStream;
+begin
+    ...
+    result := TBinaryResponse.create(
+        response.headers(),
+        'image/png',
+        TResponseStream.create(mem)
+    );
+end;
+```
+
+In the code above `mem` is assume to contain PNG file binary data. `TResponseStream` is adapter class to be able to read `TStream` as string.
+
+To be able to display other binary format, just pass correct `Content-Type` header. For example, to output PDF document
+
+```
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var mem : TStream;
+    pdf : TPDFDocument;
+begin
+    //build pdf document and create stream
+    ...
+    pdf.saveToStream(mem);
+    mem.seek(0, soFromBeginning);
+    result := TBinaryResponse.create(
+        response.headers(),
+        'application/pdf',
+        TResponseStream.create(mem)
+    );
+end;
+```
+
+Please not that `TPDFDocument` is part of Free Pascal `fcl-pdf` library.
 
 ## Explore more
 
