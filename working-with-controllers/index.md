@@ -7,7 +7,7 @@ description: Tutorial on how to work with controllers in Fano Framework
 
 ## IRequestHandler interface
 
-When web application receives request from web server, it will be given
+When web application receives [request](/working-with-request) from web server, it will be given
 request uri of resource that user is requesting.
 Dispatcher parses request uri to find matching route handler that will handle this request. If no handler available to handle it, HTTP 404 will be returned.
 
@@ -40,7 +40,7 @@ But of course, you are free to implements your own. In fact, you are not require
 
 ## Using TController class
 
-`TController` class is built-in class that provides ability for route handler to works with view and middlewares.
+`TController` class is built-in class that provides ability for route handler to works with view and view parameters.
 
 Except for simple route handler which display static view, very likely, you need to extend this class. `TController` by default, just calls `render()` method of `IView`, which is
 returning response from `IView` instance.
