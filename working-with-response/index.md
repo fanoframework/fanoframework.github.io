@@ -50,7 +50,7 @@ resp := response.body().read();
 ```
 
 To output content of stream including response header, you can call `write()` method.
-All built-in implementations of `IResponse` interface are just output to STDOUT.
+All built-in implementations of `IResponse` interface just output to STDOUT.
 
 ```
 var response : IResponse;
