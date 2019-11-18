@@ -50,7 +50,7 @@ resp := response.body().read();
 ```
 
 To output content of stream including response header, you can call `write()` method.
-All built-in implementations of `IResponse` interface are just outpur to STDOUT.
+All built-in implementations of `IResponse` interface just output to STDOUT.
 
 ```
 var response : IResponse;
@@ -140,7 +140,7 @@ end;
 
 ## Binary response
 
-To simplify to output binary response such as image, you can use `TBinaryResponse` as shown in followong code,
+To simplify to output binary response such as image, you can use `TBinaryResponse` as shown in following code,
 
 ```
 function TMyController.handleRequest(
@@ -184,7 +184,7 @@ begin
 end;
 ```
 
-Please not that `TPDFDocument` is part of Free Pascal `fcl-pdf` library.
+Please note that `TPDFDocument` is part of Free Pascal `fcl-pdf` library.
 
 ## Explore more
 
