@@ -25,7 +25,7 @@ function handleRequest(
 - `response`, response object
 - `args`, current route arguments. Read [Working with Router](/working-with-router) for more information about purpose of this object.
 
-`handleRequest()` should return instance of response that will be used as response to request. You can return response given by dispatcher or create entirely new response instance.
+`handleRequest()` should return instance of [response](/working-with-response) that will be used as response to request. You can return response given by dispatcher or create entirely new response instance.
 
 Fano Framework provides `TAbstractController` as base abstract class that implements `IRequestHandler` and also base controller in `TController` class which derived from `TAbstractController` class.
 
