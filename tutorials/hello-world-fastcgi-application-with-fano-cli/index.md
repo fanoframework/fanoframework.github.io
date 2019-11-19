@@ -68,7 +68,7 @@ Run
 $ fanocli --controller=Home --route=/
 ```
 
-Command above will create `src/App/Home/Controllers/HomeController.pas` and register route `/` so you will be able to access it via URL `http://hello.fano/`. Please note that, without `--route` parameter, by default Fano CLI register route `/home`.
+Command above will create `HomeController.pas` in `src/App/Home/Controllers` directory and register route `/` so you will be able to access it via URL `http://hello.fano/`. Please note that, without `--route` parameter, by default Fano CLI register route `/home`.
 
 Rebuild application by running,
 
