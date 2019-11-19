@@ -313,6 +313,14 @@ $ fanocli --key=32
 
 If `length` is not set, it is assumed 64 bytes of random value. Output is Base64 encoded string of random bytes.
 
+## Generate GUID
+
+To generate GUID, run with  `--guid` command line options
+
+```
+$ fanocli --guid
+```
+
 ## Deployment
 
 Fano CLI offers commands to simplify setting up Fano web application with various web server through following commands,
