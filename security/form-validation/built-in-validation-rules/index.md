@@ -403,6 +403,32 @@ rule := TCollectiveValidator.create([
 ]);
 ```
 
+### TOrValidator
+
+It is similar to `TCollectiveValidator`, except that, it uses boolean operator OR when test each validator, thus it returns false only when all external validators are failed and returns true if one or more validators are succeeded.
+
+```
+rule := TOrValidator.create([
+    TRequiredValidator.create(),
+    TAlphaNumDashValidator.create(TRegex.create()),
+    TMinLengthValidator.create(8),
+    TMaxLengthValidator.create(10),
+]);
+```
+
+### TAndValidator
+
+It is alias of `TCompositeValidator`.
+
+```
+rule := TAndValidator.create([
+    TRequiredValidator.create(),
+    TAlphaNumDashValidator.create(TRegex.create()),
+    TMinLengthValidator.create(8),
+    TMaxLengthValidator.create(10),
+]);
+```
+
 ### TNotValidator
 
 Decorator validator class which negate other validator.
