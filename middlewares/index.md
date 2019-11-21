@@ -121,7 +121,7 @@ authOnly := TAuthOnlyMiddleware.create();
 
 ## Attaching middleware to global middleware
 
-When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup one global `IMiddlewareList` instances.
+When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup one global `IMiddlewareLinkList` instances.
 
 As shown in following code
 
