@@ -89,6 +89,7 @@ container.add(
     )
 );
 ```
+Please read [Dispatcher](/dispatcher) for more information.
 
 ## Injecting session manager instance to controller or middleware
 

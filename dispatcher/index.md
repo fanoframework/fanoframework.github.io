@@ -31,7 +31,7 @@ end;
 - `env`, CGI environment variable that is given by web server. Read [CGI Environment](/environment) for more information.
 - `stdIn`, object which capable of reading STDIN
 
-Fano Framework will pass instance of CGI environment and IStdIn instance based on protocol that your application use, for example, CGI or FastCGI.
+Fano Framework will pass instance of CGI environment and `IStdIn` instance based on protocol that your application use. For example, using CGI or FastCGI protocol, will result different `IStdin` implementation. However, this should be transparent to developer.
 
 ## Built-in Dispatcher implementation
 
@@ -48,15 +48,46 @@ Creating simple dispatcher:
 ```
 var router : IRouteMatcher;
 ...
-container.add('dispatcher', TSimpleDispatcherFactory.create(router));
+container.add(
+    'dispatcher',
+    TSimpleDispatcherFactory.create(
+        router,
+        TRequestResponseFactory.create()
+    )
+);
 ```
 
-Creating basic dispatcher with middleware support
+For creating basic dispatcher with middleware support, you need to pass instance of `IMiddlewareLinkList` instance. Please read [Middlewares](/middlewares) for more information.
 
 ```
 var router : IRouteMatcher;
 ...
-container.add('dispatcher', TDispatcherFactory.create(router));
+container.add(
+    'dispatcher',
+    TDispatcherFactory.create(
+        container.get('appMiddlewares') as IMiddlewareLinkList,
+        router,
+        TRequestResponseFactory.create()
+    )
+);
+```
+
+For creating dispatcher with session support, you need to use `TSessionDispatcherFactory`.as shown in following code. Because session support in Fano Framework is implemented using  middleware infrastructure, you also need to pass instance of `IMiddlewareLinkList` instance. Please read [Working with Session](/working-with-session) for more information.
+
+```
+var router : IRouteMatcher;
+...
+container.add(
+    'dispatcher',
+    TSessionDispatcherFactory.create(
+        container.get('appMiddlewares') as IMiddlewareLinkList,
+        router,
+        TRequestResponseFactory.create(),
+        container.get('sessionManager') as ISessionManager,
+        (TCookieFactory.create()).domain(config.getString('cookie.domain')),
+        config.getInt('cookie.maxAge')
+    )
+);
 ```
 
 ## Set dispatcher
