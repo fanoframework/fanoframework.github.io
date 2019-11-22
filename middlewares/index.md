@@ -121,7 +121,7 @@ authOnly := TAuthOnlyMiddleware.create();
 
 ## Attaching middleware to global middleware
 
-When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup one global `IMiddlewareLinkList` instances.
+When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup one global `IMiddlewareLinkList` instances which stores list of middlewares applied globally to all routes. Read [Dispatcher](/dispatcher) for more information.
 
 As shown in following code
 
@@ -156,6 +156,14 @@ var appMiddlewares : IMiddlewareList;
 appMiddlewares := container.get('appMiddlewares') as IMiddlewareList;
 appMiddlewares.add(authOnly);
 ```
+
+If you do not need global middleware list, you can use null class as show in following code,
+
+```
+container.add('appMiddlewares', TNullMiddlewareListFactory.create());
+```
+
+This will create `TNullMiddlewareList` class instance which basically does nothing.
 
 ## Attaching middleware to route
 
