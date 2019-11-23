@@ -59,6 +59,12 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
 
 `TKeyRandSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key + IP address + time + random bytes from `/dev/urandom`.
 
+After that register factory to dependency container
+
+```
+container.add('sessionManager', sessionMgrFactory);
+```
+
 ### Store session data in cookie
 
 Fano Framework can store session data as encrypted cookie instead. This has advantages:
@@ -95,11 +101,6 @@ container.add(
 ```
 Code above will internally store data as JSON format, to use INI format, just replace `TJsonSessionFactory` with `TIniSessionFactory` class.
 
-### Register factory to dependency container
-
-```
-container.add('sessionManager', sessionMgrFactory);
-```
 
 ## Create dispatcher instance which support session
 
