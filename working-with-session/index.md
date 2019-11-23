@@ -59,16 +59,22 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
 
 `TKeyRandSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key + IP address + time + random bytes from `/dev/urandom`.
 
+After that register factory to dependency container
+
+```
+container.add('sessionManager', sessionMgrFactory);
+```
+
 ### Store session data in cookie
 
-Fano Framework can store session data as encrypted cookie instead. This has advantage:
+Fano Framework can store session data as encrypted cookie instead. This has advantages:
 
 - Reduce disk usage compared to store session data in file. Session data is stored in user client browser cookies.
 - Simplify session management when using load balancer running multiple application instances.
 
 However, it has drawback too:
 
-- [A single cookie have limit of 4KB in size](https://tools.ietf.org/html/rfc6265#section-6.1). You cannot store too many data and actual unencrypted data may be less due to usage of Base64 encoding.
+- [A single cookie have limit of 4KB in size](https://tools.ietf.org/html/rfc6265#section-6.1). You cannot store too many data and actual unencrypted data may be less due to usage of base64 encoding.
 
 To store session data in encrypted cookie value, you need to use `TCookieSessionManager`. You also need to create instance of `IEncrypter` and `IDecrypter` interface which responsible to encrypt and decrypt cookie value. Fano Framework provides built-in encrypter using Blowfish algorithm.
 
@@ -77,7 +83,10 @@ Following code show how to create session manager which store session data in en
 ```
 container.add(
     'encrypter',
-    TBlowfishEncrypterFactory.create().secretKey(config.getString('secretKey'))
+    TBlowfishEncrypterFactory.create()
+        .secretKey(
+            config.getString('secretKey')
+        )
 );
 
 container.add(
@@ -92,11 +101,7 @@ container.add(
 ```
 Code above will internally store data as JSON format, to use INI format, just replace `TJsonSessionFactory` with `TIniSessionFactory` class.
 
-### Register factory to dependency container
-
-```
-container.add('sessionManager', sessionMgrFactory);
-```
+See [Fano Session Cookie](https://github.com/fanoframework/fano-session-cookie), example web project to demonstrate how to use session that store its data in encrypted cookie.
 
 ## Create dispatcher instance which support session
 
@@ -276,6 +281,7 @@ If you create session manager factory as example above, `sessionName` will conta
 - [Dispatcher](/dispatcher)
 - [Example applications](/examples)
 - [Session example applications](https://github.com/fanoframework/fano-session)
+- [Session in cookie example applications](https://github.com/fanoframework/fano-session-cookie)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
