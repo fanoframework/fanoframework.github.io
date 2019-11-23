@@ -77,7 +77,10 @@ Following code show how to create session manager which store session data in en
 ```
 container.add(
     'encrypter',
-    TBlowfishEncrypterFactory.create().secretKey(config.getString('secretKey'))
+    TBlowfishEncrypterFactory.create()
+        .secretKey(
+            config.getString('secretKey')
+        )
 );
 
 container.add(
