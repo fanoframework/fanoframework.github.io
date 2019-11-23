@@ -101,6 +101,7 @@ container.add(
 ```
 Code above will internally store data as JSON format, to use INI format, just replace `TJsonSessionFactory` with `TIniSessionFactory` class.
 
+See [Fano Session Cookie](https://github.com/fanoframework/fano-session-cookie), example web project to demonstrate how to use session that store its data in encrypted cookie.
 
 ## Create dispatcher instance which support session
 
@@ -280,6 +281,7 @@ If you create session manager factory as example above, `sessionName` will conta
 - [Dispatcher](/dispatcher)
 - [Example applications](/examples)
 - [Session example applications](https://github.com/fanoframework/fano-session)
+- [Session in cookie example applications](https://github.com/fanoframework/fano-session-cookie)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>

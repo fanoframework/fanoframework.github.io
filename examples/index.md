@@ -24,6 +24,7 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 - [Example web application using scgi protocol](https://github.com/fanoframework/fano-scgi)
 - [Example web application using uwsgi protocol](https://github.com/fanoframework/fano-uwsgi)
 - [Session example](https://github.com/fanoframework/fano-session)
+- [Session in encrypted cookie example](https://github.com/fanoframework/fano-session-cookie)
 - [Cross-Origin Resource Sharing (CORS) example](https://github.com/fanoframework/fano-cors)
 - [Cross-Site Request Forgery (CSRF) protection example](https://github.com/fanoframework/fano-csrf)
 - [Form Validation example](https://github.com/fanoframework/fano-validation)
