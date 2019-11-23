@@ -19,6 +19,7 @@ state between requests.
 To use session in Fano Framework, you need to use `ISessionManager` and also dispatcher instance which support session. Fano Framework provides built-in implementation for this interface.
 
 - `TFileSessionManager`, session manager which store session data in file.
+- `TCookieSessionManager`, session manager which store session data in encrypted cookie.
 
 ## IReadOnlySessionManager
 
@@ -26,7 +27,7 @@ This interface is provided for getting session instance from a request. This int
 
 ## Create session manager instance
 
-### Create factory class
+### Store session data in file
 
 To register `TFileSessionManager` instance to dependency container, Fano Framework provides `TJsonFileSessionManagerFactory` and `TIniFileSessionManagerFactory` classes which will create session manager which store its data as JSON and INI file respectively.
 
@@ -57,6 +58,39 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
 `TKeyGuidSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key concatenated with GUID as session id.
 
 `TKeyRandSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key + IP address + time + random bytes from `/dev/urandom`.
+
+### Store session data in cookie
+
+Fano Framework can store session data as encrypted cookie instead. This has advantage:
+
+- Reduce disk usage compared to store session data in file. Session data is stored in user client browser cookies.
+- Simplify session management when using load balancer running multiple application instances.
+
+However, it has drawback too:
+
+- [A single cookie have limit of 4KB in size](https://tools.ietf.org/html/rfc6265#section-6.1). You cannot store too many data and actual unencrypted data may be less due to usage of Base64 encoding.
+
+To store session data in encrypted cookie value, you need to use `TCookieSessionManager`. You also need to create instance of `IEncrypter` and `IDecrypter` interface which responsible to encrypt and decrypt cookie value. Fano Framework provides built-in encrypter using Blowfish algorithm.
+
+Following code show how to create session manager which store session data in encrypted cookie. You need to setup a random secure secret key to be used to encrypt and decrypt.
+
+```
+container.add(
+    'encrypter',
+    TBlowfishEncrypterFactory.create().secretKey(config.getString('secretKey'))
+);
+
+container.add(
+    'sessionManager',
+    TCookieSessionManagerFactory.create(
+        TJsonSessionFactory.create(),
+        container['encrypter'] as IEncrypter,
+        container['encrypter'] as IDecrypter,
+        config.getString('session.name')
+    )
+);
+```
+Code above will internally store data as JSON format, to use INI format, just replace `TJsonSessionFactory` with `TIniSessionFactory` class.
 
 ### Register factory to dependency container
 
