@@ -101,6 +101,18 @@ container.add(
 ```
 Code above will internally store data as JSON format, to use INI format, just replace `TJsonSessionFactory` with `TIniSessionFactory` class.
 
+You can replace `TBlowfishEncrypterFactory` above with `TSha1BlowfishEncrypterFactory` or `TMd5BlowfishEncrypterFactory` which adds data integrity check using HMAC SHA1 or HMAC MD5 respectively.
+
+```
+container.add(
+    'encrypter',
+    TSha1BlowfishEncrypterFactory.create()
+        .secretKey(
+            config.getString('secretKey')
+        )
+);
+```
+
 See [Fano Session Cookie](https://github.com/fanoframework/fano-session-cookie), example web project to demonstrate how to use session that store its data in encrypted cookie.
 
 ## Create dispatcher instance which support session
