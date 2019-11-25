@@ -101,7 +101,7 @@ container.add(
 ```
 Code above will internally store data as JSON format, to use INI format, just replace `TJsonSessionFactory` with `TIniSessionFactory` class.
 
-You can replace `TBlowfishEncrypterFactory` above with `TSha1BlowfishEncrypterFactory` or `TMd5BlowfishEncrypterFactory` which adds data integrity check using HMAC SHA1 or HMAC MD5 respectively.
+You can replace `TBlowfishEncrypterFactory` above with `TSha1BlowfishEncrypterFactory` or `TMd5BlowfishEncrypterFactory` which adds encrypted cookie integrity check using HMAC SHA1 or HMAC MD5 respectively.
 
 ```
 container.add(
