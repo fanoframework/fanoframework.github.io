@@ -74,7 +74,7 @@ Fano Framework can store session data as encrypted cookie instead. This has adva
 
 However, it has drawback too:
 
-- [A single cookie have limit of 4KB in size](https://tools.ietf.org/html/rfc6265#section-6.1). You cannot store too many data and actual unencrypted data may be less due to usage of base64 encoding.
+- [A single cookie have limit of 4KB in size](https://tools.ietf.org/html/rfc6265#section-6.1). You cannot store too many data and the size of actual unencrypted data may be less due to usage of base64 encoding.
 
 To store session data in encrypted cookie value, you need to use `TCookieSessionManager`. You also need to create instance of `IEncrypter` and `IDecrypter` interface which responsible to encrypt and decrypt cookie value. Fano Framework provides built-in encrypter using Blowfish algorithm.
 
