@@ -321,6 +321,34 @@ To generate GUID, run with  `--guid` command line options
 $ fanocli --guid
 ```
 
+## Minify JavaScript files
+
+To reduce JavaScript file size, run with  `--jsmin[path]` command line options.
+
+With `[path]` empty, it will scan current directory for any JavaScript files and minify them and output as new file with name using original file name appended with `min.js`.
+
+```
+$ fanocli --jsmin
+```
+
+With `[path]` not empty. If it is directory, it will scan that directory for any JavaScript files and minify them and output as new file with name using original file name appended with `min.js`. If `[path]` is single file, it minify it and create new file with same name appended with `min.js`.
+
+```
+$ fanocli --jsmin=/path/to/js
+```
+
+If you specify optional `--output=[target-path]` parameter, then `[target-path]` will be used as its filename.
+
+```
+$ fanocli --jsmin=/path/to/js --output=/path/to/js/scripts.min.js
+```
+
+If `[target-path]` equals `stdout`, minify output is print to STDOUT.
+
+```
+$ fanocli --jsmin=/path/to/js --output=stdout
+```
+
 ## Deployment
 
 Fano CLI offers commands to simplify setting up Fano web application with various web server through following commands,
