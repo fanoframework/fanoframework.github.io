@@ -177,6 +177,16 @@ FastCGI due to simpler protocol specification.
 
 - Requires server administrative privilege to setup. You can not deploy application on shared-hosting easily.
 
+### uwsgi Application
+
+#### Pros
+
+- Performance is comparable to SCGI protocol but less network bandwidth requirement due to use of binary protocol.
+
+### Cons
+
+- Requires server administrative privilege to setup. You can not deploy application on shared-hosting easily.
+
 ## Explore more
 
 - [Deployment](/deployment)
