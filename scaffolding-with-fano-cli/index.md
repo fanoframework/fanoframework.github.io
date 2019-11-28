@@ -349,7 +349,7 @@ If `[target-path]` equals `stdout`, minify output is print to STDOUT.
 $ fanocli --jsmin=/path/to/js --output=stdout
 ```
 
-## Add session support
+## <a name="add-session-support"></a>Add session support
 
 Any project creation command `--project*` accept additional parameter `--with-session=[session storage]` where `session storage` value can be one of following value
 

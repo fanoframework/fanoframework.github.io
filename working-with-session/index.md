@@ -140,7 +140,7 @@ container.add(
     )
 );
 ```
-Please read [Dispatcher](/dispatcher) for more information.
+Please read [Dispatcher](/dispatcher) for more information or you may want to get information about [how to create Fano web application project with session using Fano CLI](/scaffolding-with-fano-cli#add-session-support).
 
 ## Injecting session manager instance to controller or middleware
 
