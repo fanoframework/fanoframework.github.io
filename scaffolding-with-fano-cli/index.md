@@ -349,6 +349,26 @@ If `[target-path]` equals `stdout`, minify output is print to STDOUT.
 $ fanocli --jsmin=/path/to/js --output=stdout
 ```
 
+## Add session support
+
+Any project creation command `--project*` accept additional parameter `--with-session=[session storage]` where `session storage` value can be one of following value
+
+- `file`, create session which stores session data in file.
+- `cookie`, create session which stores session data in encrypted cookie.
+- `db`, create session which stores session data in database. This is not implemented yet.
+
+```
+$ fanocli --project=Hello --with-session=file
+```
+For `file` and `cookie`, you can define format of session data with `--type` parameter which expect value of `json` or `ini` for JSON or INI format respectively.
+
+For example, following command will cause session support to be added to project and each session data will be stored as JSON file.
+
+```
+$ fanocli --project=Hello --with-session=file --type=ini
+```
+Please read [Working with Session](/working-with-session) for more information about session.
+
 ## Deployment
 
 Fano CLI offers commands to simplify setting up Fano web application with various web server through following commands,
