@@ -362,7 +362,7 @@ $ fanocli --project=Hello --with-session=file
 ```
 For `file` and `cookie`, you can define format of session data with `--type` parameter which expect value of `json` or `ini` for JSON or INI format respectively.
 
-For example, following command will cause session support to be added to project and each session data will be stored as JSON file.
+For example, following command will cause session support to be added to project and each session data will be stored as INI file.
 
 ```
 $ fanocli --project=Hello --with-session=file --type=ini
