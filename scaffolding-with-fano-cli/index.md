@@ -323,7 +323,7 @@ $ fanocli --guid
 
 ## Minify JavaScript files
 
-To reduce JavaScript file size, run with  `--jsmin[path]` command line options.
+To reduce JavaScript file size, run with  `--jsmin=[path]` command line options.
 
 With `[path]` empty, it will scan current directory for any JavaScript files and minify them and output as new file with name using original file name appended with `min.js`.
 
@@ -331,7 +331,7 @@ With `[path]` empty, it will scan current directory for any JavaScript files and
 $ fanocli --jsmin
 ```
 
-With `[path]` not empty. If it is directory, it will scan that directory for any JavaScript files and minify them and output as new file with name using original file name appended with `min.js`. If `[path]` is single file, it minify it and create new file with same name appended with `min.js`.
+With `[path]` not empty, if it is directory, it will scan that directory for any JavaScript files and minify them and output as new file with name using original file name appended with `min.js`. If `[path]` is single file, it minify it and create new file with same name appended with `min.js`.
 
 ```
 $ fanocli --jsmin=/path/to/js
@@ -343,7 +343,7 @@ If you specify optional `--output=[target-path]` parameter, then `[target-path]`
 $ fanocli --jsmin=/path/to/js --output=/path/to/js/scripts.min.js
 ```
 
-If `[target-path]` equals `stdout`, minify output is print to STDOUT.
+If `[target-path]` equals `stdout`, minify output is printed to STDOUT.
 
 ```
 $ fanocli --jsmin=/path/to/js --output=stdout
