@@ -47,7 +47,7 @@ $ fanocli --project=[project-name]
 
 ## Setup application configuration when creating project
 
-All command that create project, for example, `--project`, `--project-fcgi`, `--project-scgi`, etc, accept additional parameter `--config=[configType]` where `[configType]` is either `ini` or `json`.
+All commands for creating project, for example, `--project`, `--project-fcgi`, `--project-scgi`, etc, accept additional parameter `--config=[configType]` where `[configType]` is either `ini` or `json`.
 
 If `--config` is set, then during project creation, it generates application configuration files and register application configuration to [dependency container](/dependency-container). If `--config` is set but its value is empty string, `json` is assumed.
 
