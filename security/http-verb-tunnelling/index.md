@@ -1,6 +1,6 @@
 ---
-title: Protecting against Cross-Site Request Forgery (CSRF) attack
-description: Handling Cross-Site Request Forgery (CSRF) issue in Fano Framework
+title: HTTP Verb Tunnelling
+description: Handling HTTP werb tunnelling issue in Fano Framework
 ---
 
 <h1 class="major">HTTP Verb Tunnelling</h1>
