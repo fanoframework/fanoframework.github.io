@@ -17,6 +17,8 @@ Host: myapp.fano
 X-Http-Method-Override: DELETE
 ```
 
+In example above, `http://myapp.fano/delete` is assumed only handle DELETE request. Using apropriate header value, client can send as POST request which will be translated as DELETE request.
+
 ## Using HTTP verb tunnelling in Fano Framework
 
 To allow HTTP verb tunnelling, you need to use `TVerbTunnellingDispatcher` class.
