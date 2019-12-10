@@ -41,6 +41,8 @@ Fano Framework comes with two dispatcher implementation, `TSimpleDispatcher` and
 `TSimpleDispatcher` is light-weight dispatcher that does not offer middleware layer
 while the latter supports middleware.
 
+`TVerbTunnellingDispatcher` is decorator dispatcher that allows web application to serve request through [HTTP verb tunnelling](/security/http-verb-tunnelling).
+
 ## Creating dispatcher
 
 Creating simple dispatcher:
@@ -90,6 +92,19 @@ container.add(
 );
 ```
 
+To allow [HTTP verb tunnelling](/security/http-verb-tunnelling), wrap actual dispatcher factory with `TVerbTunnellingDispatcherFactory` as shown in following code,
+
+```
+container.add(
+    GuidToString(IDispatcher),
+    TVerbTunnellingDispatcherFactory.create(
+        TSimpleDispatcherFactory.create(
+            router,
+            TRequestResponseFactory.create()
+        )
+    )
+);
+```
 ## Set dispatcher
 
 Fano Framework allows application to change dispatcher implementation to use and
