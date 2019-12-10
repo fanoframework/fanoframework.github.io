@@ -92,7 +92,7 @@ container.add(
 );
 ```
 
-To allow HTTP verb tunnelling, wrap actual dispatcher factory with `TVerbTunnellingDispatcherFactory` as shown in following code,
+To allow [HTTP verb tunnelling](/security/http-verb-tunnelling), wrap actual dispatcher factory with `TVerbTunnellingDispatcherFactory` as shown in following code,
 
 ```
 container.add(
