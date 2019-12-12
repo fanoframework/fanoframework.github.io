@@ -126,7 +126,7 @@ If you need to implement your own session id generator, you need to implement `I
 - `TIpKeyGuidSessionIdGeneratorFactory` is built-in factory class which will create session id which use SHA1 hash of concatenated string of IP address + time +  secret key + GUID as session id.
 - `TKeyRandSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key + IP address + time + random bytes from `/dev/urandom`.
 
-Except `TGuidSessionIdGeneratorFactory` which its constructor does not require parameter, other built-in factory classes expect secret key to be provided when created factory class.
+Except `TGuidSessionIdGeneratorFactory` which its constructor does not require parameter, other built-in factory classes expect secret key to be provided when creating factory class.
 
 ```
 sessionMgrFactory := TJsonFileSessionManagerFactory.create(
