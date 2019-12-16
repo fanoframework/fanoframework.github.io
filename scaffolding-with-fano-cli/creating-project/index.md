@@ -4,7 +4,7 @@ description: Tutorial how to use Fano CLI to scaffold web application using Fano
 ---
 <h1 class="major">Creating Project with Fano CLI</h1>
 
-## Scaffolding CGI project directory structure
+## <a name="scaffolding-cgi-project"></a>Scaffolding CGI project directory structure
 
 To scaffold project structure using Fano framework, run with  `--project` command line options
 
@@ -26,7 +26,7 @@ to merge because they have unrelated commit histories.
 To workaround this problem, you can run `git merge` with option `--allow-unrelated-histories` or create project directory without creating initial commit or create project directory structure without
 Git repository.
 
-## Scaffolding FastCGI project directory structure with Apache mod_fcgid module
+## <a name="scaffolding-fcgid-project"></a>Scaffolding FastCGI project directory structure with Apache mod_fcgid module
 
 To scaffold FastCGI project structure using Fano framework that employ Apache mod_fcgid, run with  `--project-fcgid` command line options
 
