@@ -27,7 +27,7 @@ Its constructor method expects two parameter, instance of `IAppServiceProvider` 
 
 For CGI application, Fano Framework provides abstract class `TBasicAppServiceProvider` which you need to extend to register you application dependencies. You must implements its `register()` method.
 
-The last parameter is instance of class responsible to build application routes. Fano Framework provides base abstract class `TRouteBuilder` which you need to extend. You must implements its `buildRoutes()`.
+The last parameter is instance of class responsible to build application routes. Fano Framework provides base abstract class `TRouteBuilder` which you need to extend. You must implements its `buildRoutes()`. Please note that, you do not required to inherit from `TRouteBuilder` class. You can use any class as long as it implements `IRouteBuilder` interface.
 
 ```
 appInstance := TCgiWebApplication.create(
