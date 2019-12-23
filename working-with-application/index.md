@@ -12,122 +12,138 @@ Currently, it does not provide any method except inherit `run()` method from
 
 [View IWebApplication source code](https://github.com/fanoframework/fano/blob/master/App/Contracts/AppIntf.pas).
 
+## Built-in Implementation
+
+Fano Framework provides built-in implementations of `IWebApplication`,
+
+- `TCgiWebApplication`, CGI web application that implement CGI protocol. It is basically just shell application which run and then terminate after completing its job.
+- `TDaemonWebApplication`, is web application that run forever and listen for request until it is terminated manually. This is used mostly for FastCGI, SCGI and uwsgi web application.
+
 ## CGI Application
 
-`TFanoWebApplication` and `TSimpleWebApplication` is two built-in classes that implements CGI protocol. Its task is basically to read CGI environment variables that web server send and call appropriate request handler.
+`TCgiWebApplication` is built-in class that implements CGI protocol. Its task is basically to read CGI environment variables that web server send and call appropriate request handler.
 
-Depending on how you construct the application service provider, it may pass the request to middleware layer that will reject or allow request to pass through to actual request handler.
+Its constructor method expects two parameter, instance of `IAppServiceProvider` and `IRouteBuilder` interface. The first parameter must provide essentials services that is required by application and also register any application dependencies.
 
-### Not so simple application implementation.
+For CGI application, Fano Framework provides abstract class `TBasicAppServiceProvider` which you need to extend to register you application dependencies. You must implements its `register()` method.
 
-`TFanoWebApplication` is built-in implementation of `IWebApplication` which does not assume anything. So developers must construct its dependencies by hand, which may be quite verbose.
-
-`TFanoWebApplication` constructor requires developer to pass instance of
-`IDependencyContainer`, `ICGIEnvironment` and `IErrorHandler` instance which serves
-as [service container](/dependency-container), CGI environment variable container and [error handler](/error-handler) that handle any exception that may be triggered.
-
-Fano Framework provides some built-in implementations for dependency container, environment variable and error handler. For example,
-if `TBootstrapApp` inherits from `TFanoWebApplication`, you can use
+The last parameter is instance of class responsible to build application routes. Fano Framework provides base abstract class `TRouteBuilder` which you need to extend. You must implements its `buildRoutes()`. Please note that, you do not required to inherit from `TRouteBuilder` class. You can use any class as long as it implements `IRouteBuilder` interface.
 
 ```
-appInstance := TBootstrapApp.create(
-    TDependencyContainer.create(TDependencyList.create()),
-    TCGIEnvironment.create(),
-    TErrorHandler.create()
+appInstance := TCgiWebApplication.create(
+    TAppServiceProvider.create(),
+    TAppRoutes.create()
 );
 ```
 
-`TFanoWebApplication` is abstract class, so developers need to implements its three abstract methods:
-
-- `buildDependencies` method will be called to allow developer to register any services required by application, for example router instance, dispatcher, application configuration, etc. This method has one parameter which is instance
-of dependency container.
-
-- `buildRoutes` method will be called to allow developer to register any routes that application need. This method has one parameter which is instance
-of dependency container which developer can use to get router instance.
-
-- `initDispatcher` method will be called and must return dispatcher instance to use. This method also pass dependency container which developer can use to get dispatcher instance.
+Where `TAppServiceProvider` is declared as follow,
 
 ```
-(*!-----------------------------------------------
- * Build application dependencies
- *------------------------------------------------
- * @param container dependency container
- *-----------------------------------------------*)
-procedure buildDependencies(const container : IDependencyContainer); virtual; abstract;
-
-(*!-----------------------------------------------
- * Build application routes
- *------------------------------------------------
- * @param container dependency container
- *-----------------------------------------------*)
-procedure buildRoutes(const container : IDependencyContainer); virtual; abstract;
-
-(*!-----------------------------------------------
- * initialize application route dispatcher
- *------------------------------------------------
- * @param container dependency container
- * @return dispatcher instance
- *-----------------------------------------------*)
-function initDispatcher(const container : IDependencyContainer) : IDispatcher; virtual; abstract;
+    TAppServiceProvider = class(TDaemonAppServiceProvider)
+    public
+        procedure register(const container : IDependencyContainer); override;
+    end;
+...
+    procedure TAppServiceProvider.register(const container : IDependencyContainer);
+    begin
+        //register all application required service here
+    end;
 ```
 
-[View TFanoWebApplication source code](https://github.com/fanoframework/fano/blob/master/App/Implementations/AppImpl.pas).
+```
+    TAppRoutes = class(TRouteBuilder)
+    public
+        procedure buildRoutes(
+            const container : IDependencyContainer;
+            const router : IRouter
+        ); override;
+    end;
+...
+    procedure TAppRoutes.buildRoutes(
+        const container : IDependencyContainer;
+        const router : IRouter
+    );
+    begin
+        //register all routes here
+    end;
 
-### Little bit simpler application
+```
 
-`TSimpleWebApplication` inherits from `TFanoWebApplication`. It is provided to simplify setting up application instance by providing some default service
-providers.
-
-If you use `TSimpleWebApplication`, then some required default services are provided for you if not set. If not set, following classes is assumed:
-
-- `TDependencyContainer` instance as dependency container.
-- `TCGIEnvironment` instance as CGI environment.
-- `TErrorHandler` instance as CGI environment.
-- Router instance which support regular expression.
-- Simple dispatcher implementation which does not use middlewares.
-
-Also, developers only need to implements two abstract methods as
-`initDispatcher()` method has already been implemented.
-
-[View TSimpleWebApplication source code](https://github.com/fanoframework/fano/blob/master/App/Implementations/AppImpl.pas).
-
-See [sample application](https://github.com/fanoframework/fano-app) to understand how to setup application instance.
+[View TCgiWebApplication source code](https://github.com/fanoframework/fano/blob/master/App/Implementations/Cgi/AppImpl.pas).
 
 ## FastCGI Application
 
-To create web application that support FastCGI protocol, inherit from `TBaseSimpleFastCGIWebApplication` or one of its descendant. Class with `Epoll` prefix name, use [Linux epoll API](http://man7.org/linux/man-pages/man7/epoll.7.html)
-that is designed to improve performance, but they are available on Linux only.
+To create web application that support FastCGI protocol, create application service provider which use `TFastCgiAppServiceProvider` as shown in following code,
 
-- `TSimpleFastCGIWebApplication` or `TEpollSimpleFastCGIWebApplication`. This is class that you need to inherit if you want
-to create FastCGI application which run independently and listen on TCP socket. See
-[fano-fastcgi](https://github.com/fanoframework/fano-fastcgi) example demo application.
+```
+    appInstance := TDaemonWebApplication.create(
+        TFastCgiAppServiceProvider.create(
+            TServerAppServiceProvider.create(
+                TAppServiceProvider.create(),
+                TInetSocketSvr.create(host, port)
+            )
+        ),
+        TAppRoutes.create()
+    );
+```
+See [fano-fastcgi](https://github.com/fanoframework/fano-fastcgi) example demo application.
 
-- `TSimpleUnixFastCGIWebApplication` or `TEpollSimpleUnixFastCGIWebApplication`. It is similar to class above but listen on unix domain socket file. See
-[fano-fcgi-unix](https://github.com/fanoframework/fano-fcgi-unix) example demo application.
+You can replace `TInetSockSvr` with `TUnixSocketSvr` class if you want to use Unix Domain Socket file instead of TCP port. See [fano-fcgi-unix](https://github.com/fanoframework/fano-fcgi-unix) example demo application.
 
-- `TSimpleSockFastCGIWebApplication` or `TEpollSimpleSockFastCGIWebApplication`. This is class that you need to inherit if you want to create FastCGI application which run and managed by web server, for example
- Apache with mod_fcgid module. See
+You can replace `TInetSockSvr` with `TBoundSocketSvr` if you want to create FastCGI application which run and managed by web server, for example Apache with mod_fcgid module. See
 [fano-fcgid](https://github.com/fanoframework/fano-fcgid) example demo application.
+
+`TInetSockSvr`, `TUnixSocketSvr` and `TBoundSocketSvr` are using [select()](http://man7.org/linux/man-pages/man2/select.2.html) to monitor if socket is ready for I/O operation. To use [epoll](http://man7.org/linux/man-pages/man7/epoll.7.html), replace with `TEpollInetSocketSvr`, `TEpollUnixSocketSvr` and `TEpollBoundSocketSvr`.
 
 See [Deploy as FastCGI application](/deployment/fastcgi) for information how to
 deploy FastCGI application on various web servers.
 
-You may want to see *Scaffolding FastCGI project directory structure* section in
-[Scaffolding with Fano CLI](/scaffolding-with-fano-cli) for information how to scaffolding FastCGI web application with [Fano CLI](https://github.com/fanoframework/fano-cli).
+You may want to read [Scaffolding FastCGI project directory structure](/scaffolding-with-fano-cli/creating-project#scaffolding-fastcgi-project) for information how to scaffolding FastCGI web application with [Fano CLI](https://github.com/fanoframework/fano-cli).
 
 ## SCGI Application
 
-To create web application that support [SCGI (Simple Common Gateway Interface)](https://python.ca/scgi/protocol.txt) protocol, inherit from `TBaseSimpleScgiWebApplication` or one of its descendant. Same as above, class with `Epoll` prefix name, use [Linux epoll API](http://man7.org/linux/man-pages/man7/epoll.7.html).
+To create web application that support [SCGI (Simple Common Gateway Interface)](https://python.ca/scgi/protocol.txt) protocol, create application service provider which use `TScgiAppServiceProvider` as shown in following code,
 
-- `TSimpleScgiWebApplication` or `TEpollSimpleScgiWebApplication`. This is class that you need to inherit if you want
-to create SCGI application which run independently and listen on TCP socket. See
-[fano-scgi](https://github.com/fanoframework/fano-scgi) example demo application.
+```
+    appInstance := TDaemonWebApplication.create(
+        TScgiAppServiceProvider.create(
+            TServerAppServiceProvider.create(
+                TAppServiceProvider.create(),
+                TInetSocketSvr.create(host, port)
+            )
+        ),
+        TAppRoutes.create()
+    );
+```
+See [fano-scgi](https://github.com/fanoframework/fano-scgi) example demo application.
 
 See [Deploy as SCGI application](/deployment/scgi) for information how to
 deploy SCGI application on various web servers.
 
-You may want to see *Scaffolding SCGI project directory structure* section in
-[Scaffolding with Fano CLI](/scaffolding-with-fano-cli) for information how to scaffolding SCGI web application easily.
+You may want to read [Scaffolding SCGI project directory structure](/scaffolding-with-fano-cli/creating-project#scaffolding-scgi-project) for information how to scaffolding SCGI web application easily.
+
+## Uwsgi Application
+
+To create web application that support [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html) protocol, create application service provider which use `TUwsgiAppServiceProvider` as shown in following code,
+
+```
+    appInstance := TDaemonWebApplication.create(
+        TUwsgiAppServiceProvider.create(
+            TServerAppServiceProvider.create(
+                TAppServiceProvider.create(),
+                TInetSocketSvr.create(host, port)
+            )
+        ),
+        TAppRoutes.create()
+    );
+```
+See [fano-uwsgi](https://github.com/fanoframework/fano-uwsgi) example demo application.
+
+See [Deploy as uwsgi application](/deployment/uwsgi) for information how to
+deploy uwsgi application on various web servers.
+
+You may want to read
+[Scaffolding uwsgi project directory structure](/scaffolding-with-fano-cli/creating-project#scaffolding-uwsgi-project) for information how to scaffolding uwsgi web application easily.
 
 ## Apache modules Application
 
@@ -193,6 +209,7 @@ FastCGI due to simpler protocol specification.
 - [Deploy CGI Application](/deployment/cgi)
 - [Deploy FastCGI Application](/deployment/fastcgi)
 - [Deploy SCGI Application](/deployment/scgi)
+- [Deploy uwsgi Application](/deployment/uwsgi)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>

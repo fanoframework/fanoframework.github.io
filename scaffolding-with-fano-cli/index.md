@@ -164,6 +164,14 @@ $ fanocli --model=Hello
 $ fanocli --view=Hello
 ```
 
+## Add middleware support
+
+Any project creation commands, i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it set, then during project creation, [middleware support](/middlewares) is added to generated project.
+
+```
+$ fanocli --project=Hello --with-middleware
+```
+
 ## Creating middleware
 
 To scaffold middleware class, run with  `--middleware` command line options
@@ -228,15 +236,19 @@ $ fanocli --jsmin=/path/to/js --output=stdout
 
 ## <a name="add-session-support"></a>Add session support
 
-Any project creation command `--project*` accept additional parameter `--with-session=[session storage]` where `session storage` value can be one of following value
+Any project creation commands, i.e, `--project*` commands, accept additional parameter `--with-session=[session storage]` where `session storage` value can be one of following value
 
 - `file`, create session which stores session data in file.
 - `cookie`, create session which stores session data in encrypted cookie.
 - `db`, create session which stores session data in database. This is not implemented yet.
 
+If `[session storage]` not set then it is assumed `file`. So following commands are identical
+
 ```
 $ fanocli --project=Hello --with-session=file
+$ fanocli --project=Hello --with-session
 ```
+
 For `file` and `cookie`, you can define format of session data with `--type` parameter which expect value of `json` or `ini` for JSON or INI format respectively.
 
 For example, following command will cause session support to be added to project and each session data will be stored as INI file.
@@ -244,6 +256,14 @@ For example, following command will cause session support to be added to project
 ```
 $ fanocli --project=Hello --with-session=file --type=ini
 ```
+
+Because in Fano Framework, session support is implemented with middleware infrastructure, `--with-session` implies usage of `--with-middleware` so following command are identical
+
+```
+$ fanocli --project=Hello --with-session
+$ fanocli --project=Hello --with-session --with-middleware
+```
+
 Please read [Working with Session](/working-with-session) for more information about session.
 
 ## Deployment
