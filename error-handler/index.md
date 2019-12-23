@@ -76,8 +76,7 @@ type
     TAppServiceProvider = class(TBasicAppServiceProvider)
     protected
         function buildErrorHandler() : IErrorHandler; override;
-    public
-        procedure register(const container : IDependencyContainer); override;
+        ...
     end;
 ...
 
