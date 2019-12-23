@@ -62,7 +62,7 @@ then directory is `/home/jon/fano-examples/hello-world`.
 
 ## Creating git repository and add Fano Framework repository
 
-After project directory structures setup (except `vendor/fano`), from shell terminal, change directory to `hello-world` directory and run
+After project directory structures created (except `vendor/fano`), from shell terminal, change directory to `hello-world` directory and run
 
 ```
 $ git init
@@ -88,7 +88,10 @@ var
     appInstance : IWebApplication;
 
 begin
-    appInstance := THelloApp.create();
+    appInstance := TCgiWebApplication.create(
+        THelloAppServiceProvider.create(),
+        THelloAppRoutes.create()
+    );
     appInstance.run();
 end.
 ```
@@ -105,14 +108,22 @@ unit helloapp;
 interface
 
 uses
+
     fano;
 
 type
 
-    THelloApp = class(TSimpleWebApplication)
-    protected
-        procedure buildDependencies(const container : IDependencyContainer); override;
-        procedure buildRoutes(const container : IDependencyContainer); override;
+    THelloAppServiceProvider = class(TBasicAppServiceProvider)
+    public
+        procedure register(const container : IDependencyContainer); override;
+    end;
+
+    THelloAppRoutes = class(TRouteBuilder)
+    public
+        procedure buildRoutes(
+            const container : IDependencyContainer;
+            const router : IRouter
+        ); override;
     end;
 
 implementation
@@ -121,12 +132,15 @@ uses
 
     sysutils;
 
-    procedure THelloApp.buildDependencies(const container : IDependencyContainer);
+    procedure THelloAppServiceProvider.register(const container : IDependencyContainer);
     begin
         //TODO: implement build application dependencies
     end;
 
-    procedure THelloApp.buildRoutes(const container : IDependencyContainer);
+    procedure THelloAppRoutes.buildRoutes(
+        const container : IDependencyContainer;
+        const router : IRouter
+    );
     begin
         //TODO: implement build application routes
     end;
@@ -135,11 +149,11 @@ end.
 
 ## Build application dependencies
 
-In order to work, application needs some service to be registered into
-dependency container. Add following code in `buildDependencies()` method
+In order to work, application needs some services to be registered into
+dependency container. Add following code in `register()` method
 
 ```
-procedure THelloApp.buildDependencies(const container : IDependencyContainer);
+procedure THelloAppServiceProvider.register(const container : IDependencyContainer);
 begin
     container.add('viewParams', TViewParametersFactory.create());
 end;
@@ -155,26 +169,17 @@ Read [Working with router](/working-with-router) for more information.
 Add code to `buildRoutes()` method to register a route.
 
 ```
-procedure THelloApp.buildRoutes(const container : IDependencyContainer);
-var router : IRouter;
+procedure THelloAppRoutes.buildRoutes(
+    const container : IDependencyContainer;
+    const router : IRouter
+);
 begin
-    router := container.get('router') as IRouter;
-    try
-        router.get('/', container.get('helloController') as IRequestHandler);
-    finally
-        router := nil;
-    end;
+    router.get('/', container.get('helloController') as IRequestHandler);
 end;
 ```
 
 So when user made `GET` request to `http://[our app hostname]/`, controller
 registered as `helloController` in dependency container will handles it.
-
-```
-router := container.get('router') as IRouter;
-```
-code above will return valid router instance because `THelloApp` inherits from `TSimpleWebApplication` which already register router instance automatically.
-See [TSimpleWebApplication source code](https://github.com/fanoframework/fano/blob/master/src/App/Implementations/Cgi/SimpleCgi/SimpleAppImpl.pas).
 
 ## Create hello controller
 
@@ -361,7 +366,7 @@ end.
 
 ## Register controller and view to dependency container
 
-Edit `buildDependencies()` method in file
+Edit `register()` method in file
 
 ```
 hello-world/src/helloapp.pas
@@ -370,7 +375,7 @@ hello-world/src/helloapp.pas
 to become
 
 ```
-procedure THelloApp.buildDependencies(const container : IDependencyContainer);
+procedure THelloAppServiceProvider.register(const container : IDependencyContainer);
 begin
     container.add('viewParams', TViewParametersFactory.create());
     container.add('helloController', THelloControllerFactory.create());
@@ -398,40 +403,43 @@ unit helloapp;
 interface
 
 uses
+
     fano;
 
 type
 
-    THelloApp = class(TSimpleWebApplication)
-    protected
-        procedure buildDependencies(const container : IDependencyContainer); override;
-        procedure buildRoutes(const container : IDependencyContainer); override;
+    THelloAppServiceProvider = class(TBasicAppServiceProvider)
+    public
+        procedure register(const container : IDependencyContainer); override;
+    end;
+
+    THelloAppRoutes = class(TRouteBuilder)
+    public
+        procedure buildRoutes(
+            const container : IDependencyContainer;
+            const router : IRouter
+        ); override;
     end;
 
 implementation
 
 uses
 
-    sysutils,
-    HelloControllerFactory,
-    HelloViewFactory;
+    sysutils;
 
-    procedure THelloApp.buildDependencies(const container : IDependencyContainer);
+    procedure THelloAppServiceProvider.register(const container : IDependencyContainer);
     begin
         container.add('viewParams', TViewParametersFactory.create());
         container.add('helloController', THelloControllerFactory.create());
         container.add('helloView', THelloViewFactory.create());
     end;
 
-    procedure THelloApp.buildRoutes(const container : IDependencyContainer);
-    var router : IRouter;
+    procedure THelloAppRoutes.buildRoutes(
+        const container : IDependencyContainer;
+        const router : IRouter
+    );
     begin
-        router := container.get('router') as IRouter;
-        try
-            router.get('/', container.get('helloController') as IRequestHandler);
-        finally
-            router := nil;
-        end;
+        router.get('/', container.get('helloController') as IRequestHandler);
     end;
 end.
 ```
