@@ -45,7 +45,7 @@ $ fanocli --project=[project-name]
 
 `[project-name]` is directory where project resides and will be created by Fano CLI. Please read [Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project) for more detail explanation of each command.
 
-## Setup application configuration when creating project
+## <a name="setup-application-configuration-when-creating-project"></a>Setup application configuration when creating project
 
 All commands for creating project, for example, `--project`, `--project-fcgi`, `--project-scgi`, etc, accept additional parameter `--config=[configType]` where `[configType]` is either `ini` or `json`.
 

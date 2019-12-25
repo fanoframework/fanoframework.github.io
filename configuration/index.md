@@ -22,7 +22,7 @@ Fano Framework provides `IAppConfiguration` interface for that purpose.
 
 ## Built-in IAppConfiguration implementation
 
-Fano Framework provides `TJsonFileConfig` and `TIniFileConfig` class which loads configuration data from JSON and INI file respectively.
+Fano Framework provides `TJsonFileConfig` and `TIniFileConfig` class which loads configuration data from JSON and INI file respectively. Also available `TNullConfig` which is null class implements `IAppConfiguration` interface.
 
 Load config from JSON,
 
@@ -153,6 +153,38 @@ will read data from
 ```
 [fano]
 data.nested=test
+```
+
+## Setting up application configuration with Fano CLI
+When creating new project, you can use `--config` parameter to setup application configuration.
+Read [Setup application configuration when creating project](/scaffolding-with-fano-cli#setup-application-configuration-when-creating-project) for more information.
+
+You can also manually setting application configuration by overriding `buildAppConfig()` method of `TBasicAppServiceProvider` or `TDaemonAppServiceProvider` class as shown in following code sample.
+
+```
+TAppServiceProvider = class(TDaemonAppServiceProvider)
+protected
+    function buildAppConfig(
+        const container : IDependencyContainer
+    ) : IAppConfiguration; override;
+    ...
+end;
+
+...
+
+function TAppServiceProvider.buildAppConfig(
+    const container : IDependencyContainer
+) : IAppConfiguration;
+begin
+    container.add(
+        'config',
+        TIniFileConfigFactory.create(
+            getCurrentDir() + '/config/config.ini'
+        )
+    );
+    result := container['config'] as IAppConfiguration;
+end;
+
 ```
 
 ## Explore more
