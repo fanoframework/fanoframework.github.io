@@ -46,7 +46,55 @@ Fano Framework comes with basic router implementation `TRouter` class which impl
 container.add('router', TSimpleRouterFactory.create());
 ```
 
+If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class. This router is available thorough `buildRoutes()` method of `IRouteBuilder` interface.
+
+```
+IRouteBuilder = interface
+    ['{46016416-B249-4258-B76A-7F5B55E8348D}']
+
+    (*!----------------------------------------------
+        * build application routes
+        * ----------------------------------------------
+        * @param cntr instance of dependency container
+        * @param rtr instance of router
+        *-----------------------------------------------*)
+    procedure buildRoutes(const cntr : IDependencyContainer; const rtr : IRouter);
+end;
+```
+
+If you want to replace router with different implementation, you can override `buildRouter()` method of `TBasicAppServiceProvider`.
+
 ## Create route
+
+### Route builder
+
+To build application routes, you need to create class that implements `IRouteBuilder` interface and pass it when creating application instance as show in following code,
+
+```
+    TAppRoutes = class(TRouteBuilder)
+    public
+        procedure buildRoutes(
+            const container : IDependencyContainer;
+            const router : IRouter
+        ); override;
+    end;
+...
+    procedure TAppRoutes.buildRoutes(
+        const container : IDependencyContainer;
+        const router : IRouter
+    );
+    begin
+        //register all routes here
+    end;
+
+```
+
+```
+appInstance := TCgiWebApplication.create(
+    TAppServiceProvider.create(),
+    TAppRoutes.create()
+);
+```
 
 ### Creating route for GET method
 

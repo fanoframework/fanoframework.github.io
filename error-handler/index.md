@@ -55,93 +55,88 @@ raised, exception message and stacktrace and environment variables.
 If you compile application with debugging information such as `-g` or `-gh` flag,
 stacktrace is quite detail such as line number in source file. Without debugging information, it only displays memory location.
 
+By default, when you inherit application service provider from `TBasicAppServiceProvider`, this is what you get.
+
 ```
-var appInstance : IWebApplication;
-...
-appInstance := TMyApp.create(
-    TDependencyContainer.create(TDependencyList.create()),
-    TCGIEnvironment.create(),
-    TErrorHandler.create()
-);
+type
+
+    TAppServiceProvider = class(TBasicAppServiceProvider)
+    public
+        procedure register(const container : IDependencyContainer); override;
+    end;
 ```
+
+To register different error handler type, you need to override `buildErrorHandler()` method.
 
 ## Display verbose error message as JSON
 
 ```
-var appInstance : IWebApplication;
+type
+
+    TAppServiceProvider = class(TBasicAppServiceProvider)
+    protected
+        function buildErrorHandler() : IErrorHandler; override;
+        ...
+    end;
 ...
-appInstance := TMyApp.create(
-    TDependencyContainer.create(TDependencyList.create()),
-    TCGIEnvironment.create(),
-    TAjaxErrorHandler.create()
-);
+
+    function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+    begin
+        result := TAjaxErrorHandler.create();
+    end;
 ```
 
 ## Hide error message
 
 ```
-var appInstance : IWebApplication;
-...
-appInstance := TMyApp.create(
-    TDependencyContainer.create(TDependencyList.create()),
-    TCGIEnvironment.create(),
-    TNullErrorHandler.create()
-);
+function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+begin
+    result := TNullErrorHandler.create();
+end;
 ```
 
 ## Display error with html template
 
 ```
-var appInstance : IWebApplication;
-...
-appInstance := TMyApp.create(
-    TDependencyContainer.create(TDependencyList.create()),
-    TCGIEnvironment.create(),
-    TTemplateErrorHandler.create('/path/to/error/template.html')
-);
+function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+begin
+    result := TTemplateErrorHandler.create('/path/to/error/template.html');
+end;
 ```
 
 ## Log error to file
 
 ```
-var appInstance : IWebApplication;
-...
-appInstance := TMyApp.create(
-    TDependencyContainer.create(TDependencyList.create()),
-    TCGIEnvironment.create(),
-    TLogErrorHandler.create(TFileLogger.create('/path/to/log/file'))
-);
+function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+begin
+    result := TLogErrorHandler.create(TFileLogger.create('/path/to/log/file'));
+end;
 ```
+
 You need to make sure that `/path/to/log/file` is writeable.
 
 ## Log error to file and display error from template
 
 ```
-var appInstance : IWebApplication;
-...
-appInstance := TMyApp.create(
-    TDependencyContainer.create(TDependencyList.create()),
-    TCGIEnvironment.create(),
-    TCompositeErrorHandler.create(
+function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+begin
+    result := TCompositeErrorHandler.create(
         TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
         TTemplateErrorHandler.create('/path/to/error/template.html')
-    )
-);
+    );
+end;
 ```
 
 ## Log error to file and display blank error page
 
 ```
-var appInstance : IWebApplication;
-...
-appInstance := TMyApp.create(
-    TDependencyContainer.create(TDependencyList.create()),
-    TCGIEnvironment.create(),
-    TCompositeErrorHandler.create(
+function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+begin
+    result := TCompositeErrorHandler.create(
         TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
         TNullErrorHandler.create()
-    )
-);
+    );
+end;
 ```
 
 ## Create your own error handler
@@ -206,14 +201,11 @@ uses
 
     fano,
     myerrorhandler;
-...
-var appInstance : IWebApplication;
-...
-appInstance := TMyApp.create(
-    TDependencyContainer.create(TDependencyList.create()),
-    TCGIEnvironment.create(),
-    TMyErrorHandler.create()
-);
+
+function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+begin
+    result := TMyErrorHandler.create();
+end;
 ```
 
 ## Explore more
