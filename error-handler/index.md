@@ -252,7 +252,10 @@ uses
     fano,
     myerrorhandler;
 
-function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
 begin
     result := TMyErrorHandler.create();
 end;
