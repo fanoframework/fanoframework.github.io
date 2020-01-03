@@ -19,6 +19,70 @@ Fano Framework provides built-in implementations of `IWebApplication`,
 - `TCgiWebApplication`, CGI web application that implement CGI protocol. It is basically just shell application which run and then terminate after completing its job.
 - `TDaemonWebApplication`, is web application that run forever and listen for request until it is terminated manually. This is used mostly for FastCGI, SCGI and uwsgi web application.
 
+## IAppServiceProvider interface
+
+`TCgiWebApplication`  depends on instance of `IAppServiceProvider` interface while `TDaemonWebApplication` depends on `IDaemonAppServiceProvider`. They provide essential services for application. Following code is declaration of this interface.
+
+```
+type
+
+    IAppServiceProvider = interface(IServiceProvider)
+        ['{41032A70-F31D-45A6-AE26-574888BE4D07}']
+        function getContainer() : IDependencyContainer;
+        property container : IDependencyContainer read getContainer;
+
+        function getErrorHandler() : IErrorHandler;
+        property errorHandler : IErrorHandler read getErrorHandler;
+
+        function getDispatcher() : IDispatcher;
+        property dispatcher : IDispatcher read getDispatcher;
+
+        function getEnvironment() : ICGIEnvironment;
+        property env : ICGIEnvironment read getEnvironment;
+
+        function getRouter() : IRouter;
+        property router : IRouter read getRouter;
+
+        function getStdIn() : IStdIn;
+        property stdIn : IStdIn read getStdIn;
+    end;
+
+    IDaemonAppServiceProvider = interface(IAppServiceProvider)
+        ['{4FF6129E-171F-429C-BE5B-7A8B941D3626}']
+
+        function getServer() : IRunnableWithDataNotif;
+        property server : IRunnableWithDataNotif read getServer;
+
+        function getProtocol() : IProtocolProcessor;
+        property protocol : IProtocolProcessor read getProtocol;
+
+        function getOutputBuffer() : IOutputBuffer;
+        property outputBuffer : IOutputBuffer read getOutputBuffer;
+
+        function getStdOut() : IStdOut;
+        property stdOut : IStdOut read getStdOut;
+
+    end;
+```
+
+Fano Framework provides several built-in implementation of this interface that you can use or extend.
+
+- `TBasicAppServiceProvider`, abstract class that implements `IAppServiceProvider` interface. Most of methods already has implementation, except its `register()` method which you must implement to register your application specific dependencies. For CGI web application, this class is what you need to use.
+
+- `TDaemonAppServiceProvider`, abstract class inherits from `TBasicAppServiceProvider` class that implements `IDaemonAppServiceProvider` interface. Most of methods already has implementation, except its `register()` method which you must implement to register your application specific dependencies. For daemon web application, this class is what you need to use.
+
+- `TServerAppServiceProvider`, class which provides worker server for daemon web application.
+
+- `TFastCgiAppServiceProvider`, class which provides essentials service for FastCGI web application.
+
+- `TScgiAppServiceProvider`, class which provides essentials service for SCGI web application.
+
+- `TUwsgiAppServiceProvider`, class which provides essentials service for uwsgi web application.
+
+## IRouteBuilder interface
+
+When creating application instance, you need also to implement `IRouteBuilder` interface which responsible to setup application routes. Please read [Route Builder](/working-with-router#route-builder) section documentation for more information.
+
 ## CGI Application
 
 `TCgiWebApplication` is built-in class that implements CGI protocol. Its task is basically to read CGI environment variables that web server send and call appropriate request handler.
@@ -73,7 +137,7 @@ Where `TAppServiceProvider` is declared as follow,
 
 ## Daemon web application
 
-Web application that runs forever in background must setup service provider that inherit from `TDaemonAppServiceProvider` such as web application that utilize FastCGI, SCGI or uwsgi  protocol.
+Web application that runs forever in background must setup service provider that inherit from `TDaemonAppServiceProvider` such as web application that utilize FastCGI, SCGI or uwsgi  protocol because application depends on `IDaemonAppServiceProvider` interface.
 
 ```
     TAppServiceProvider = class(TDaemonAppServiceProvider)
