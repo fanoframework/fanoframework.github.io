@@ -39,7 +39,7 @@ appInstance := TCgiWebApplication.create(
 Where `TAppServiceProvider` is declared as follow,
 
 ```
-    TAppServiceProvider = class(TDaemonAppServiceProvider)
+    TAppServiceProvider = class(TBasicAppServiceProvider)
     public
         procedure register(const container : IDependencyContainer); override;
     end;
@@ -70,6 +70,17 @@ Where `TAppServiceProvider` is declared as follow,
 ```
 
 [View TCgiWebApplication source code](https://github.com/fanoframework/fano/blob/master/App/Implementations/Cgi/AppImpl.pas).
+
+## Daemon web application
+
+Web application that runs forever in background must setup service provider that inherit from `TDaemonAppServiceProvider` such as web application that utilize FastCGI, SCGI or uwsgi  protocol.
+
+```
+    TAppServiceProvider = class(TDaemonAppServiceProvider)
+    public
+        procedure register(const container : IDependencyContainer); override;
+    end;
+```
 
 ## FastCGI Application
 
@@ -155,7 +166,7 @@ Implementation of IWebApplication that run as standalone web server is not yet i
 
 ## Application implementation which support Rack-like protocol
 
-Implementation of IWebApplication that implements Rack-like protocol, currently, is still under development.
+Implementation of `IWebApplication` that implements Rack-like protocol, currently, is still under development.
 
 - [Ruby Rack](https://rack.github.io/)
 - [Prack](https://github.com/piradoiv/Prack)
