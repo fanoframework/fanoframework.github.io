@@ -157,6 +157,28 @@ Data must be integer value.
 rule := TIntegerValidator.create();
 ```
 
+### TInt64Validator
+
+Data must be int64 value.
+
+```
+rule := TInt64Validator.create();
+```
+### TDwordValidator
+
+Data must be dword value.
+
+```
+rule := TDwordValidator.create();
+```
+### TQwordValidator
+
+Data must be qword value.
+
+```
+rule := TQwordValidator.create();
+```
+
 ### TFloatValidator
 
 Data must be float value.
