@@ -45,6 +45,10 @@ Fano Framework comes with several `IErrorHandler` implementation.
 - `TLogErrorHandler`, error handler that log error information instead of output it to client.
 - `TTemplateErrorHandler`, error handler that output error using HTML template. This class is provided to enable developer to display nicely formatted error page. For production setup, this is mostly what you use.
 - `TCompositeErrorHandler` error handler that is composed from two other error handler. This is provided so we combine, for example, log error to file and also displaying nicely formatted output to client.
+- `TDecoratorErrorHandler` abstract error handler that is decorate other error handler.
+- `TConditionalErrorHandler` abstract error handler that is select one from two error handlers based on a condition. Descendant must implement its `condition()` abstract method.
+- `TBoolErrorHandler` error handler that is select one from two error handlers based on a condition specified in constructor parameter.
+- `TNotFoundErrorHandler` error handler that is select one from two error handlers based on a condition if the the exception is `ERouteHandlerNotFound`.
 
 ## Display verbose error message
 
@@ -75,12 +79,18 @@ type
 
     TAppServiceProvider = class(TBasicAppServiceProvider)
     protected
-        function buildErrorHandler() : IErrorHandler; override;
+        function buildErrorHandler(
+            const ctnr : IDependencyContainer;
+            const config : IAppConfiguration
+        ) : IErrorHandler; override;
         ...
     end;
 ...
 
-    function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+    function TAppServiceProvider.buildErrorHandler(
+        const ctnr : IDependencyContainer;
+        const config : IAppConfiguration
+    ) : IErrorHandler;
     begin
         result := TAjaxErrorHandler.create();
     end;
@@ -89,7 +99,10 @@ type
 ## Hide error message
 
 ```
-function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
 begin
     result := TNullErrorHandler.create();
 end;
@@ -98,7 +111,10 @@ end;
 ## Display error with html template
 
 ```
-function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
 begin
     result := TTemplateErrorHandler.create('/path/to/error/template.html');
 end;
@@ -107,7 +123,10 @@ end;
 ## Log error to file
 
 ```
-function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
 begin
     result := TLogErrorHandler.create(TFileLogger.create('/path/to/log/file'));
 end;
@@ -118,7 +137,10 @@ You need to make sure that `/path/to/log/file` is writeable.
 ## Log error to file and display error from template
 
 ```
-function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
 begin
     result := TCompositeErrorHandler.create(
         TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
@@ -130,11 +152,39 @@ end;
 ## Log error to file and display blank error page
 
 ```
-function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
 begin
     result := TCompositeErrorHandler.create(
         TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
         TNullErrorHandler.create()
+    );
+end;
+```
+
+## Select different error handler based on production or development configuration
+
+```
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
+var prodErrHandler : IErrorHandler;
+    devErrHandler : IErrorHandler;
+    isProd : boolean;
+begin
+    prodErrHandler := TCompositeErrorHandler.create(
+        TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
+        TTemplateErrorHandler.create('/path/to/error/template.html')
+    );
+    devErrHandler := TErrorHandler.create();
+    isProd := config.getBool('isProduction');
+    result := TBoolErrorHandler.create(
+        prodErrHandler,
+        devErrHandler,
+        isProd
     );
 end;
 ```
@@ -202,7 +252,10 @@ uses
     fano,
     myerrorhandler;
 
-function TAppServiceProvider.buildErrorHandler() : IErrorHandler;
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
 begin
     result := TMyErrorHandler.create();
 end;

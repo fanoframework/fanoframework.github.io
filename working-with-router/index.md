@@ -66,9 +66,9 @@ If you want to replace router with different implementation, you can override `b
 
 ## Create route
 
-### Route builder
+### <a name="route-builder"></a>Route builder
 
-To build application routes, you need to create class that implements `IRouteBuilder` interface and pass it when creating application instance as show in following code,
+To build application routes, you need to create class that implements `IRouteBuilder` interface. Fano Framework provides base abstract class `TRouteBuilder` which you can extend and implement its `buildRoutes()` method and pass it when creating application instance as shown in following code,
 
 ```
     TAppRoutes = class(TRouteBuilder)
