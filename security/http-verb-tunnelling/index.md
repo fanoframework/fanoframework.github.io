@@ -21,7 +21,7 @@ In example above, `http://myapp.fano/delete` is assumed only handle DELETE reque
 
 ## Using HTTP verb tunnelling in Fano Framework
 
-To allow HTTP verb tunnelling, you need to use `TVerbTunnellingDispatcher` class as shown in following code,
+To allow HTTP verb tunnelling, you need to use `TVerbTunnellingDispatcher` class as shown in following example code,
 
 ```
 function TAppServiceProvider.buildDispatcher(
