@@ -21,10 +21,30 @@ In example above, `http://myapp.fano/delete` is assumed only handle DELETE reque
 
 ## Using HTTP verb tunnelling in Fano Framework
 
-To allow HTTP verb tunnelling, you need to use `TVerbTunnellingDispatcher` class.
+To allow HTTP verb tunnelling, you need to use `TVerbTunnellingDispatcher` class as shown in following code,
+
+```
+function TAppServiceProvider.buildDispatcher(
+    const ctnr : IDependencyContainer;
+    const routeMatcher : IRouteMatcher;
+    const config : IAppConfiguration
+) : IDispatcher;
+begin
+    ctnr.add(
+        GuidToString(IDispatcher),
+        TVerbTunnellingDispatcherFactory.create(
+            TSimpleDispatcherFactory.create(
+                routeMatcher,
+                TRequestResponseFactory.create()
+            )
+        )
+    );
+    result := ctnr[GuidToString(IDispatcher)] as IDispatcher;
+end;
+```
 
 Using this type of dispatcher, when Fano Framework receives POST request with
-`X-Http-Method-Override` header set and it uses verb set in header value instead.
+`X-Http-Method-Override` header set, it uses verb set in header value instead.
 This new verb is tested against known HTTP verb (GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD).
 If not one of allowed methods, `EInvalidMethod` exception is raised.
 
