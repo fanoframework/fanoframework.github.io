@@ -287,6 +287,35 @@ Developer is responsible to make sure that deployment matched project type. For 
 
 Read [Deployment](/deployment) for more information on how to use commands above.
 
+## Setup daemon as service in SystemD
+
+In Linux distribution which use SystemD, such as latest Fedora or Debian, Fano CLI provides command `--daemon-sysd=[service name]` to simplify registering daemon web application with SystemD.
+
+```
+$ sudo fanocli --daemon-sysd=hello
+```
+
+After that, you can run application using following command,
+
+```
+$ sudo systemctl start hello
+```
+
+or to stop it,
+
+```
+$ sudo systemctl stop hello
+```
+
+`--daemon-sysd` command accept additional parameter,
+
+- `--user=[username]`, username whose application is run as. If not set, then current non-root user is used.
+- `--bin=[application binary path]`, absolute path to application executable binary. If not set then it is assumed absolute path of `bin/app.cgi`.
+
+```
+$ sudo fanocli --daemon-sysd=hello --user=fano --bin=/home/my.fano/bin/myapp.bin
+```
+
 ## Build
 
 Change active directory to new project directory after you created project and run
