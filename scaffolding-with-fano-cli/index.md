@@ -287,9 +287,9 @@ Developer is responsible to make sure that deployment matched project type. For 
 
 Read [Deployment](/deployment) for more information on how to use commands above.
 
-## Setup daemon as service in SystemD
+## Setup daemon as service in systemd
 
-In Linux distribution which use SystemD, such as latest Fedora or Debian, Fano CLI provides command `--daemon-sysd=[service name]` to simplify registering daemon web application with SystemD.
+In Linux distribution which use systemd, such as latest Fedora or Debian, Fano CLI provides command `--daemon-sysd=[service name]` to simplify registering daemon web application with systemd.
 
 ```
 $ sudo fanocli --daemon-sysd=hello
