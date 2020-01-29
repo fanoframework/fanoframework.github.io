@@ -96,6 +96,83 @@ appInstance := TCgiWebApplication.create(
 );
 ```
 
+If you use Fano CLI to scaffold web application, you may notice that routes is separated into one or more include files that is inserted in one class responsible to build application routes as shown in following example,
+
+```
+TAppRoutes = class(TRouteBuilder)
+public
+    procedure buildRoutes(
+        const container : IDependencyContainer;
+        const router : IRouter
+    ); override;
+end;
+...
+procedure TAppRoutes.buildRoutes(
+    const container : IDependencyContainer;
+    const router : IRouter
+);
+begin
+    {$INCLUDE Routes/routes.inc}
+end;
+```
+
+This is just convention used by Fano CLI tools because it is simple to generate.
+
+Fano Framework cares that you provide class that implements `IRouteBuilder`. It does not care how you implements it. So you are free to compose route builder class the way it suits you.
+
+For example, you can create separate `IRouteBuilder` implementation for each feature and then compose them using `TCompositeRouteBuilder` class as shown in example below
+
+```
+TUsersRoutes = class(TRouteBuilder)
+public
+    procedure buildRoutes(
+        const container : IDependencyContainer;
+        const router : IRouter
+    ); override;
+end;
+...
+procedure TUsersRoutes.buildRoutes(
+    const container : IDependencyContainer;
+    const router : IRouter
+);
+begin
+    //register users related routes here
+end;
+
+```
+
+```
+TProductRoutes = class(TRouteBuilder)
+public
+    procedure buildRoutes(
+        const container : IDependencyContainer;
+        const router : IRouter
+    ); override;
+end;
+...
+procedure TProductRoutes.buildRoutes(
+    const container : IDependencyContainer;
+    const router : IRouter
+);
+begin
+    //register products related routes here
+end;
+```
+
+And when you build application, you compose them as follows,
+
+```
+appInstance := TCgiWebApplication.create(
+    TAppServiceProvider.create(),
+    TCompositeRouteBuilder.create([
+        TUserRoutes.create(),
+        TProductRoutes.create()
+    ]);
+);
+```
+
+Please note that `TCompositeRouteBuilder` is built-in implementation of `IRouteBuilder` which composes one or more `IRouteBuilder` instances as one.
+
 ### Creating route for GET method
 
 ```
