@@ -54,6 +54,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Handling CORS](/security/handling-cors)
 - [Form Validation](/security/form-validation)
 - [CSRF Protection](/security/csrf-protection)
+- [HTTP Verb Tunnelling](/security/http-verb-tunnelling)
 
 ## Utilities
 
