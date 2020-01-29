@@ -96,7 +96,7 @@ appInstance := TCgiWebApplication.create(
 );
 ```
 
-If you use Fano CLI to scaffold web application, you may notice that routes are separated into one or more include files that are inserted in one class responsible to build application routes as shown in following example,
+If you use [Fano CLI to scaffold web application](/scaffolding-with-fano-cli), you may notice that routes are separated into one or more include files that are inserted in one class responsible to build application routes as shown in following example,
 
 ```
 TAppRoutes = class(TRouteBuilder)
