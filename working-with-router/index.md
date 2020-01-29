@@ -96,7 +96,7 @@ appInstance := TCgiWebApplication.create(
 );
 ```
 
-If you use Fano CLI to scaffold web application, you may notice that routes is separated into one or more include files that is inserted in one class responsible to build application routes as shown in following example,
+If you use Fano CLI to scaffold web application, you may notice that routes are separated into one or more include files that are inserted in one class responsible to build application routes as shown in following example,
 
 ```
 TAppRoutes = class(TRouteBuilder)
@@ -118,9 +118,9 @@ end;
 
 This is just convention used by Fano CLI tools because it is simple to generate.
 
-Fano Framework cares that you provide class that implements `IRouteBuilder`. It does not care how you implements it. So you are free to compose route builder class the way it suits you.
+Fano Framework cares that you provide class that implements `IRouteBuilder`. It does not care how you implement it. So you are free to compose route builder class the way it suits you.
 
-For example, you can create separate `IRouteBuilder` implementation for each feature and then compose them using `TCompositeRouteBuilder` class as shown in example below
+For example, you can create separate `IRouteBuilder` implementation for each feature for better code organization and then compose them using `TCompositeRouteBuilder` class as shown in example below
 
 ```
 TUsersRoutes = class(TRouteBuilder)
