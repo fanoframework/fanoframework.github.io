@@ -155,7 +155,7 @@ To create web application that support FastCGI protocol, create application serv
         TFastCgiAppServiceProvider.create(
             TServerAppServiceProvider.create(
                 TAppServiceProvider.create(),
-                TInetSocketSvr.create(host, port)
+                (TInetSvrFactory.create(host, port) as ISocketSvrFactory).build()
             )
         ),
         TAppRoutes.create()
@@ -163,12 +163,12 @@ To create web application that support FastCGI protocol, create application serv
 ```
 See [fano-fastcgi](https://github.com/fanoframework/fano-fastcgi) example demo application.
 
-You can replace `TInetSockSvr` with `TUnixSocketSvr` class if you want to use Unix Domain Socket file instead of TCP port. See [fano-fcgi-unix](https://github.com/fanoframework/fano-fcgi-unix) example demo application.
+You can replace `TInetSvrFactory` with `TUnixSvrFactory` class if you want to use Unix Domain Socket file instead of TCP port. See [fano-fcgi-unix](https://github.com/fanoframework/fano-fcgi-unix) example demo application.
 
-You can replace `TInetSockSvr` with `TBoundSocketSvr` if you want to create FastCGI application which run and managed by web server, for example Apache with mod_fcgid module. See
+You can replace `TInetSvrFactory` with `TBoundSvrFactory` if you want to create FastCGI application which run and managed by web server, for example Apache with `mod_fcgid` module. See
 [fano-fcgid](https://github.com/fanoframework/fano-fcgid) example demo application.
 
-`TInetSockSvr`, `TUnixSocketSvr` and `TBoundSocketSvr` are using [select()](http://man7.org/linux/man-pages/man2/select.2.html) to monitor if socket is ready for I/O operation. To use [epoll](http://man7.org/linux/man-pages/man7/epoll.7.html), replace with `TEpollInetSocketSvr`, `TEpollUnixSocketSvr` and `TEpollBoundSocketSvr`.
+`TInetSvrFactory`, `TUnixSvrFactory` and `TBoundSvrFactory` are using [select()](http://man7.org/linux/man-pages/man2/select.2.html) to monitor if socket is ready for I/O operation. To use [epoll](http://man7.org/linux/man-pages/man7/epoll.7.html), replace with `TEpollInetSvrFactory`, `TEpollUnixSvrFactory` and `TEpollBoundSvrFactory`.
 
 See [Deploy as FastCGI application](/deployment/fastcgi) for information how to
 deploy FastCGI application on various web servers.
