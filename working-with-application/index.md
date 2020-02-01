@@ -184,7 +184,7 @@ To create web application that support [SCGI (Simple Common Gateway Interface)](
         TScgiAppServiceProvider.create(
             TServerAppServiceProvider.create(
                 TAppServiceProvider.create(),
-                TInetSocketSvr.create(host, port)
+                (TInetSvrFactory.create(host, port) as ISocketSvrFactory).build()
             )
         ),
         TAppRoutes.create()
@@ -206,7 +206,7 @@ To create web application that support [uwsgi](https://uwsgi-docs.readthedocs.io
         TUwsgiAppServiceProvider.create(
             TServerAppServiceProvider.create(
                 TAppServiceProvider.create(),
-                TInetSocketSvr.create(host, port)
+                (TInetSvrFactory.create(host, port) as ISocketSvrFactory).build()
             )
         ),
         TAppRoutes.create()
