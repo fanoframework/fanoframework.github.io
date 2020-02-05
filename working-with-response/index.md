@@ -64,6 +64,7 @@ response.write();
 It returns instance of `IHeaders` interface.
 
 - `setHeader()` method set value of a HTTP response header.
+- `addHeader()` method add value of a HTTP response header.
 - `getHeader()` method get value of a HTTP response header.
 - `has()` method test if HTTP response header is set.
 - `writeHeaders()` method output all headers.
@@ -76,7 +77,11 @@ var response : IResponse;
 response.headers().setHeader('Content-Type', 'application/json');
 ```
 
-If header is already set, calling `setHeader()` will overwrite previous value.
+If header is already set, calling `setHeader()` will overwrite previous value. If you want to add new header and not overwriting previous value, use `addHeader()`.
+
+```
+response.headers().addHeader('Content-Type', 'application/json');
+```
 
 ## Built-in IResponse implementation
 
