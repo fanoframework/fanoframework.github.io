@@ -212,7 +212,7 @@ begin
     result := THttpCodeResponse.create(
         400,
         'Bad Request',
-        response.headers().clone()
+        response.headers().clone() as IHeaders
     );
 end;
 ```
