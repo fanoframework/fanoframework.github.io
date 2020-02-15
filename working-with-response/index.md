@@ -210,9 +210,9 @@ function TMyController.handleRequest(
 ) : IResponse;
 begin
     result := THttpCodeResponse.create(
-        404,
+        400,
         'Bad Request',
-        response.headers().clone()
+        response.headers().clone() as IHeaders
     );
 end;
 ```

@@ -8,20 +8,23 @@ description: Handling form validation in Fano Framework
 We should never trust data coming from user input. Fano Framework provides mechanism
 for web application developer to validate data.
 
-## Working with IRequestValidator and IValidationRules
+## Working with form validation
 
-`IRequestValidator` is interface for any class having capability to validate request and returns validation result.
+In Fano Framework, form validation is composed of 3 parts,
 
-While `IValidationRules` is interface for any class having capability to manage one or more validation rule.
+- *Request validator*. It is responsible to execute validation. It must implements
+`IRequestValidator` interface, which is, interface for any classes having capability to validate request and returns validation result.
+- *Validation rule manager*, an object that is having capability to manage one or more validation rule. It must implements `IValidationRules` interface.
+- *Validation rule*, an object implements `IValidator` interface and is responsible to validate individual data. It decides whether request is considered valid or not.
 
-Fano Framework provides `TValidation` class which implements both interfaces.
+Fano Framework provides `TValidation` class which implements `IRequestValidator` and `IValidationRules` interfaces and also provides several [common validation rules](#built-in-validation-rule).
 
 ```
 var requestValidator : IRequestValidator;
-    validatorRules : IValidationRules;
+    validationRules : IValidationRules;
 ...
 requestValidator := TValidation.create(THashList.create());
-validatorRules := requestValidator as IValidationRules;
+validationRules := requestValidator as IValidationRules;
 ```
 
 ## Validation rule
@@ -119,7 +122,35 @@ type
     end;
 ```
 
-For example, here we validate request inside controller
+For example, if we have `TMyController` class as follows
+
+```
+    TMyController = class(TInterfacedObject, IRequestHandler)
+    private
+        fValidation : IRequestValidator;
+        ...
+    public
+        constructor create(const validationObj : IRequestValidator);
+        ...
+        function handleRequest(
+            const request : IRequest;
+            const response : IResponse;
+            const args : IRouteArgsReader
+        ) : IResponse;
+        ...
+    end;
+```
+
+where we have internal `fValidation` variable that is injected from constructor as shown in following code,
+
+```
+constructor TMyController.create(const validationObj : IRequestValidator);
+begin
+    fValidation := validationObj;
+end;
+```
+
+Here we validate request inside controller
 
 ```
 function TMyController.handleRequest(
@@ -172,7 +203,7 @@ Please note that `lastValidationResult()` return last validation status so, abov
 
 `lastValidationResult()` method is provided so developer can execute validation in middleware and later in controller inspects last validation status and act accordingly.
 
-## Built-in validation rule
+## <a name="built-in-validation-rule"></a>Built-in validation rule
 
 Fano Framework comes with several built-in validation rules, some are validation rule mentioned in above code example. Read [Built-in Validation Rules](/security/form-validation/built-in-validation-rules) for more information.
 
