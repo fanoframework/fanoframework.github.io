@@ -9,6 +9,7 @@ description: Handling security issue in Fano Framework
 - [Form Validation](/security/form-validation)
 - [CSRF Protection](/security/csrf-protection)
 - [HTTP Verb Tunnelling](/security/http-verb-tunnelling)
+- [HTTP Authentication](/security/http-authentication)
 
 <ul class="actions">
     <li><a href="/documentation" class="button">Documentation</a></li>
