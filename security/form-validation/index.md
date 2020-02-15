@@ -128,6 +128,7 @@ For example, if we have `TMyController` class as follows
         ...
     public
         constructor create(const validationObj : IRequestValidator);
+        ...
         function handleRequest(
             const request : IRequest;
             const response : IResponse;
