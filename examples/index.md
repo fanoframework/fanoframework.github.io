@@ -29,6 +29,7 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 - [Cross-Site Request Forgery (CSRF) protection example](https://github.com/fanoframework/fano-csrf)
 - [Form Validation example](https://github.com/fanoframework/fano-validation)
 - [HTTP verb tunnelling example application](https://github.com/fanoframework/fano-verb-tunneling)
+- [HTTP Basic Authentication example application](https://github.com/fanoframework/fano-basic-auth)
 
 ## Explore more
 
