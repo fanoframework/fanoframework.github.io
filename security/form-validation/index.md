@@ -119,7 +119,34 @@ type
     end;
 ```
 
-For example, here we validate request inside controller
+For example, if we have `TMyController` class as follows
+
+```
+    TMyController = class(TInterfacedObject, IRequestHandler)
+    private
+        fValidation : IRequestValidator;
+        ...
+    public
+        constructor create(const validationObj : IRequestValidator);
+        function handleRequest(
+            const request : IRequest;
+            const response : IResponse;
+            const args : IRouteArgsReader
+        ) : IResponse;
+        ...
+    end;
+```
+
+where we have internal `fValidation` variable that is injected from constructor as shown in following code,
+
+```
+constructor TMyController.create(const validationObj : IRequestValidator);
+begin
+    fValidation := validationObj;
+end;
+```
+
+Here we validate request inside controller
 
 ```
 function TMyController.handleRequest(
