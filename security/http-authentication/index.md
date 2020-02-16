@@ -31,7 +31,19 @@ Developer can create their own custom authentication by implementing `IAuth` int
 
 Everytime a user tries to access route that is protected with `TBasicAuthMiddleware` middleware, user Internet browser, initially does not know that this route requires authentication, thus will cause our application to response with HTTP 401 error code and header `WWW-Authenticate` set with value of `Basic realm="[realm name]"`.
 
-Upon receiving this response, browser will prompt user to provide their credential. The supplied credential are then sent back to our application. If credential is valid, our middleware continues to execute next middleware and eventually controller. If credential is not valid, our middleware returns same HTTP 401 response.
+Upon receiving this response, browser will prompt user to provide their credential. The supplied credential are then sent back to our application thorough `Authorization` request header with value,
+
+```
+Authorization: Basic ["username:password" base64 encoded string]
+```
+
+For username `hello` and password `world`, Base64 encoded of string `hello:world` is `aGVsbG86d29ybGQ=`.
+
+```
+Authorization: Basic aGVsbG86d29ybGQ=
+```
+
+If credential is valid, our middleware continues to execute next middleware and eventually controller. If credential is not valid, our middleware returns same HTTP 401 response.
 
 ## Register Basic Authentication middleware with container
 
