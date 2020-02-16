@@ -14,7 +14,7 @@ When running `build.sh` script, you may encounter following warning:
 ```
 
 This is known issue between Free Pascal and GNU Linker. See
-[FAQ: link.res syntax error, or "did you forget -T?"](https://www.freepascal.org/faq.var#unix-ld219)
+[FAQ: link.res syntax error, or "did you forget -T?"](https://freepascal.org/faq.html#unix-ld219)
 
 However, this warning is minor and can be ignored. It does not affect output executable.
 
