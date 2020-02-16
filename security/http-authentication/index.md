@@ -109,9 +109,9 @@ router.get('/', container['homeController'] as IRequestHandler)
 
 Please note that because username and password is transmitted as Base64-encoded string, it is prone to man in middle attack. It is must be used in conjunction with SSL/TLS.
 
-If you running application behind reverse proxy, such as `mod_proxy_scgi` module, Apache does not pass `Authorization` header to application because of security concern.
+If your application is running behind reverse proxy, for example, with `mod_proxy_scgi` module, Apache does not pass `Authorization` header to application because of security concern.
 
-In case you are running trusted network between Apache and your application, simple solution is to transform `Authorization` header into `HTTP_AUTHORIZATION` environment variable using `mod_rewrite` module.
+In case, you have trusted network between Apache and your application, simple solution is to transform `Authorization` header into `HTTP_AUTHORIZATION` environment variable using `mod_rewrite` module.
 
 ```
 <IfModule mod_rewrite.c>
