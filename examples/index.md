@@ -8,28 +8,69 @@ description: List of example application built with Fano Framework
 Below is list of example application which you can use to get started. They are
 generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command line tools to help scaffolding web application with Fano Framework.
 
-## List of example applications
+## Hello World applications
+
+List of getting started web application for various supported protocol, i.e [CGI](https://tools.ietf.org/html/rfc3875), [FastCGI](http://www.mit.edu/~yandros/doc/specs/fcgi-spec.html), [SCGI](http://python.ca/scgi/protocol.txt) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html).
 
 - [Basic CGI web application example](https://github.com/fanoframework/fano-app), [live example](https://fano.juhara.id/)
-- [Image generator CGI web application](https://github.com/fanoframework/fano-app-img), [live example](https://fano-img.juhara.id/)
-- [Example web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elasticsearch)
-- [Example web application using middleware](https://github.com/fanoframework/fano-app-middleware)
 - [Fano Fcgid](https://github.com/fanoframework/fano-fcgid)
 - [Example FastCGI web application listen on Unix domain socket](https://github.com/fanoframework/fano-fcgi-unix)
 - [Example FastCGI web application listen on TCP port](https://github.com/fanoframework/fano-fastcgi)
-- [Handling upload example](https://github.com/fanoframework/fano-upload)
-- [Fano Api](https://github.com/fanoframework/fano-api)
-- [Fano Mvc](https://github.com/fanoframework/fano-mvc)
-- [MySQL web application example](https://github.com/fanoframework/fano-app-db)
 - [Example web application using scgi protocol](https://github.com/fanoframework/fano-scgi)
 - [Example web application using uwsgi protocol](https://github.com/fanoframework/fano-uwsgi)
-- [Session example](https://github.com/fanoframework/fano-session), [live example](https://fano.web.id/)
-- [Session in encrypted cookie example](https://github.com/fanoframework/fano-session-cookie)
-- [Cross-Origin Resource Sharing (CORS) example](https://github.com/fanoframework/fano-cors)
-- [Cross-Site Request Forgery (CSRF) protection example](https://github.com/fanoframework/fano-csrf)
-- [Form Validation example](https://github.com/fanoframework/fano-validation)
-- [HTTP verb tunnelling example application](https://github.com/fanoframework/fano-verb-tunneling)
-- [HTTP Basic Authentication example application](https://github.com/fanoframework/fano-basic-auth)
+
+## MIME types web application
+
+Following example applications show how to [work with response](/working-with-response) other than HTML page, such as image and JSON data.
+
+- [Image generator CGI web application](https://github.com/fanoframework/fano-app-img) shows how to output image that is generated on-the fly, See [live example here](https://fano-img.juhara.id/)
+- [Fano Api](https://github.com/fanoframework/fano-api) demonstrates how to return JSON response.
+
+## MVC web application
+
+[Fano Mvc](https://github.com/fanoframework/fano-mvc) demonstrate how to seperate logic of application using [Model](/working-with-models), [View](/working-with-views), [Controller](/working-with-controllers). It also demonstrates show to use HTML view template to compose application UI layout.
+
+## File upload
+
+[Handling upload example](https://github.com/fanoframework/fano-upload) shows how to [handle file upload](/handling-file-upload) in Fano Framework.
+
+## Database
+
+Following example applications show how to work with SQL and NoSQL databases by modelling data as [model](/working-with-models).
+
+- [Example web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elasticsearch)
+- [MySQL web application example](https://github.com/fanoframework/fano-app-db)
+
+## Middleware
+
+[Example web application using middleware](https://github.com/fanoframework/fano-app-middleware) demonstrates [how to use middleware](/middlewares) to protect one or more application [routes](/working-with-router).
+
+## Working with Session
+
+Following example applications demonstrate how to use session with Fano Framework.
+
+- [Session example](https://github.com/fanoframework/fano-session) demonstrates how to use session that is stored in file on server. See [live example here](https://fano.web.id/).
+- [Session in encrypted cookie example](https://github.com/fanoframework/fano-session-cookie) demonstrates session that is stored in encrypted cookie.
+
+## Cross-Origin Resource Sharing (CORS)
+
+[Cross-Origin Resource Sharing (CORS) example](https://github.com/fanoframework/fano-cors) demonstrates how to [add CORS headers](/security/handling-cors) to web application.
+
+## Cross-Site Request Forgery (CSRF) protection
+
+[Cross-Site Request Forgery (CSRF) protection example](https://github.com/fanoframework/fano-csrf) demonstrate how to [protect application from CSRF attack](/security/csrf-protection).
+
+## Form validation
+
+[Form Validation example](https://github.com/fanoframework/fano-validation) demonstrate how to use Fano Framework input [validation feature](/security/form-validation).
+
+## HTTP Verb tunneling examples
+
+[HTTP verb tunnelling example application](https://github.com/fanoframework/fano-verb-tunneling) demonstrate how to use [HTTP verb tunneling](/security/http-verb-tunneling) when application behind strict firewall policy.
+
+## HTTP Authentication examples
+
+[HTTP Basic Authentication example application](https://github.com/fanoframework/fano-basic-auth) demonstrates how to use [HTTP Basic Authentication](/security/http-authentication) (RFC 7235) in Fano Framework.
 
 ## Explore more
 
