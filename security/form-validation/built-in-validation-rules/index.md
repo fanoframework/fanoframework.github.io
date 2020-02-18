@@ -221,6 +221,38 @@ rule := TMaxIntegerValidator.create(100);
 ```
 Validation will pass only if you pass integer value <= 100.
 
+### TPositiveIntValidator
+
+Data must be positive integer value.
+
+```
+rule := TPositiveIntValidator.create();
+```
+
+### TNegativeIntValidator
+
+Data must be negative integer value.
+
+```
+rule := TNegativeIntValidator.create();
+```
+
+### TOddIntValidator
+
+Data must be odd integer value.
+
+```
+rule := TOddIntValidator.create();
+```
+
+### TEvenIntValidator
+
+Data must be even integer value.
+
+```
+rule := TEvenIntValidator.create();
+```
+
 ## Boolean data
 
 ### TBooleanValidator
