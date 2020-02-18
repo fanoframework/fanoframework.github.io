@@ -9,7 +9,7 @@ description: Handling HTTP authentication in Fano Framework
 
 Besides usual web application form-based authentication, developer can use authentication mechanism that is provided by HTTP protocol as described in [RFC 7235](https://tools.ietf.org/html/rfc7235).
 
-Currently, Fano Framework supports `Basic` type HTTP authentication only.
+Currently, Fano Framework supports `Basic` and `Digest` HTTP authentication scheme only.
 
 ## Handling Basic Authentication with middleware
 
@@ -86,6 +86,9 @@ type
     TCredential = record
         username : string;
         password : string;
+
+        //user-related data
+        data : pointer;
     end;
 
     TCredentials = array of TCredential;
@@ -117,9 +120,49 @@ router.get('/', container['homeController'] as IRequestHandler)
     .add(container['basicAuthMiddleware'] as IMiddleware);
 ```
 
+## Handling Digest Authentication with middleware
+
+Fano Framework provides implementation for digest type HTTP authentication with
+`TDigestAuthMiddleware` middleware with purpose to simplify task to protect access of certain routes using Digest HTTP authentication scheme.
+
+Constructor of `TDigestAuthMiddleware` expects three parameters,
+
+- Instance of `IRandom` interface which is responsible to generate random value.
+- Instance of `IAuth` interface which is responsible to perform actual authentication, for example, reading database for existence of credential being check.
+- String of realm name.
+
+`TDigestStaticCredentialsAuth` is built-in `IAuth` implementation which test credential against array of allowed credentials.
+
+Developer can create their own custom authentication by implementing `IAuth` interface and inject it to `TDigestAuthMiddleware` constructor.
+
+## Register Digest Authentication middleware with container
+
+Fano Framework has `TStaticCredentialsDigestAuthMiddlewareFactory` class
+which allows you to register `TDigestAuthMiddleware` using `TDigestStaticCredentialsAuth` into service container.
+
+```
+container.add(
+    'digestAuthMiddleware',
+    TStaticCredentialsDigestAuthMiddlewareFactory.create('fano-realm')
+        .addCredential('hello@fano', 'world')
+        .addCredential('hi@fano', 'nice')
+);
+```
+
+## Attach Digest Auth middleware to application routes
+
+Attach digest auth middleware instance to application routes, for example
+
+```
+router.get('/', container['homeController'] as IRequestHandler)
+    .add(container['digestAuthMiddleware'] as IMiddleware);
+```
+
 ## Security consideration
 
-Please note that because username and password is transmitted as Base64-encoded string, it is prone to man in middle attack. It is must be used in conjunction with SSL/TLS.
+For Basic HTTP authentication scheme, username and password is transmitted as Base64-encoded string. It is prone to man in middle attack and it is must be used in conjunction with SSL/TLS.
+
+Digest HTTP authentication scheme is more computation expensive but can be used with or without SSL/TLS because password and other data is sent to server as MD5 hashed value. However, because MD5 hash is not cryptographically strong, you need to be cautious when use it without SSL/TLS.
 
 If your application is running behind reverse proxy, for example, with `mod_proxy_scgi` module, Apache does not pass `Authorization` header to application because of security concern.
 
