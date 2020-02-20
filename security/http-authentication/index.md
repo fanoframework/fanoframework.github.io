@@ -7,7 +7,7 @@ description: Handling HTTP authentication in Fano Framework
 
 ## Basic Authentication
 
-Besides usual web application form-based authentication, developer can use authentication mechanism that is provided by HTTP protocol as described in [RFC 7235](https://tools.ietf.org/html/rfc7235).
+Besides usual web application form-based authentication, developer can use authentication mechanism that is provided by HTTP protocol as described in [RFC 2617](https://tools.ietf.org/html/rfc2617).
 
 Currently, Fano Framework supports `Basic` and `Digest` HTTP authentication scheme only.
 
