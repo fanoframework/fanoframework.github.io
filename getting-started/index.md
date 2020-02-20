@@ -20,7 +20,7 @@ Following document explains minimum steps required to setup a working Fano web a
 
 ## Install Fano CLI
 
-Install [Fano CLI](https://github.com/fanoframework/fano-cli) as described in [Installation](/scaffolding-with-fano-cli#installation) section of [Scaffolding with Fano CLI](/scaffolding-with-fano-cli).
+Install [Fano CLI](https://github.com/fanoframework/fano-cli) as described in [Installation](/scaffolding-with-fano-cli#installation) section of [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) documentation.
 
 ## Create application
 
