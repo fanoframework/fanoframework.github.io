@@ -578,6 +578,14 @@ Dummy validator which always make field passes validation.
 rule := TAlwaysPassValidator.create();
 ```
 
+### TIpv4Validator
+
+Data must be valid IP address (IPV4).
+
+```
+rule := TIpv4Validator.create();
+```
+
 ### TBaseValidator
 
 Abstract class which can be uses as a base class to create new custom validation rule. To inherit from this class, you need to implements its `isValidData()` method.
