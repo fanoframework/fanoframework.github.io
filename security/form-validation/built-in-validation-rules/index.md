@@ -107,6 +107,25 @@ Data must be in valid URL format. This validator does not check if URL address a
 rule := TUrlValidator.create(TRegex.create());
 ```
 
+### TSlugValidator
+
+Data must be in slug format.
+
+```
+rule := TSlugValidator.create(TRegex.create());
+```
+
+This validator will give result as shown in following example input,
+
+```
+'my-slug-title' ==> pass
+'my-slug-title-1' ==> pass
+'1-my-slug-title' ==> pass
+'-my-slug-title' ==> fail
+'my-slug-title-' ==> fail
+'my-slug--title' ==> fail
+```
+
 ### TRegexValidator
 
 Data must be in format as specified by regular expression pattern.
