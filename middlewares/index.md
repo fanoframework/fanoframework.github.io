@@ -165,6 +165,10 @@ container.add('appMiddlewares', TNullMiddlewareListFactory.create());
 
 This will create `TNullMiddlewareList` class instance which basically does nothing.
 
+## Creating middleware with Fano CLI
+
+[Fano CLI](/scaffolding-with-fano-cli) provides middleware creation command `--middleware` to simplify task for creating and setting up middleware with dependency container. Read [Creating Middleware](/scaffolding-with-fano-cli#creating-middleware) section for more information.
+
 ## Attaching middleware to route
 
 When you register the controller to route, you can add middleware as shown in following code

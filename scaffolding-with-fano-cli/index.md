@@ -172,7 +172,7 @@ Any project creation commands, i.e, `--project*` commands, accept additional par
 $ fanocli --project=Hello --with-middleware
 ```
 
-## Creating middleware
+## <a href="creating-middleware"></a>Creating middleware
 
 To scaffold middleware class, run with  `--middleware` command line options
 
