@@ -250,7 +250,3 @@ If your application is handling big file upload, you may need to adjust its valu
 - [Deploy as uwsgi application](/deployment/uwsgi)
 - [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
 - [Back to Deployment](/deployment)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

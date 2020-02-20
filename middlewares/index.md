@@ -254,7 +254,3 @@ helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 - [Middleware example application](/examples)
 - [Dispatcher](/dispatcher)
 - [Working with Router](/working-with-router)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

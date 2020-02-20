@@ -180,7 +180,3 @@ In case, you have trusted network between Apache and your application, simple so
 - [Middlewares](/middlewares)
 - [Dispatcher](/dispatcher)
 - [Fano Basic Auth example application](https://github.com/fanoframework/fano-basic-auth)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

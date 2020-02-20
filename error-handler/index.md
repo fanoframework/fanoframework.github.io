@@ -264,7 +264,3 @@ end;
 ## Explore more
 
 - [Working with Views](/working-with-views)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

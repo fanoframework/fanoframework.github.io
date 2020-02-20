@@ -191,7 +191,3 @@ end;
 
 - [Dependency Container](/dependency-container)
 - [Working with Application](/working-with-application)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

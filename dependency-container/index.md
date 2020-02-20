@@ -226,7 +226,3 @@ Auto-wire dependency is not yet implemented.
 ## Explore more
 
 - [Working with Application](/working-with-application)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

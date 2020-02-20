@@ -301,7 +301,3 @@ end.
 - [Working with request](/working-with-request)
 - [Middlewares](/middlewares)
 - [Form Validation example](https://github.com/fanoframework/fano-validation)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

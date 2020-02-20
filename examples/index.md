@@ -76,7 +76,3 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 - [Getting started](/getting-started)
 - [Step-By-Step Tutorials](/tutorials)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Learn more</a></li>
-</ul>

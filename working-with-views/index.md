@@ -381,7 +381,3 @@ Fano Framework provides two `IViewPartial` interface implementation
 
 - [Displaying Data in View](/working-with-views/displaying-data-in-view)
 - [Working with Controllers](/working-with-controllers)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

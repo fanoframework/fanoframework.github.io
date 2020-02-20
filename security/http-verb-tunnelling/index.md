@@ -55,7 +55,3 @@ If you need to use this, you need to understand security implication of [HTTP ve
 - [Dispatcher](/dispatcher)
 - [Security](/security)
 - [HTTP verb tunnelling example application](https://github.com/fanoframework/fano-verb-tunneling)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

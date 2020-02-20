@@ -330,7 +330,3 @@ to build application.
 
 - [Deployment](/deployment)
 - [Creating Hello World web application With Fano CLI](/tutorials/hello-world-application-with-fano-cli)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

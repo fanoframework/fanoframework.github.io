@@ -57,7 +57,3 @@ Edit Free Pascal main configuration, `/etc/fpc.cfg` file and add following lines
 ## Explore more
 
 - [Getting Started](/getting-started)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

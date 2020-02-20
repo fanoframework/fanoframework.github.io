@@ -285,7 +285,3 @@ FastCGI due to simpler protocol specification.
 - [Deploy FastCGI Application](/deployment/fastcgi)
 - [Deploy SCGI Application](/deployment/scgi)
 - [Deploy uwsgi Application](/deployment/uwsgi)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

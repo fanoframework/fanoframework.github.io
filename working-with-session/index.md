@@ -316,7 +316,3 @@ If you create session manager factory as example above, `sessionName` will conta
 - [Example applications](/examples)
 - [Session example applications](https://github.com/fanoframework/fano-session)
 - [Session in cookie example applications](https://github.com/fanoframework/fano-session-cookie)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

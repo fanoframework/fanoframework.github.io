@@ -718,7 +718,3 @@ In this tutorial, you have learned
 ## Explore more
 
 - [Step by Step Tutorials](/tutorials)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

@@ -614,7 +614,3 @@ Your implementation must return `true` if validation should pass or `false` othe
 ## Explore more
 
 - [Form Validation](/security/form-validation)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

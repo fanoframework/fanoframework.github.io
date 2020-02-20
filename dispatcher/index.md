@@ -121,7 +121,3 @@ end;
 ## Explore more
 
 - [Working with Router](/working-with-router)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

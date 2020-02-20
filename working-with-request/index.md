@@ -150,7 +150,3 @@ langAvail := request.headers().has('Accept-Language');
 - [Form Validation](/security/form-validation)
 - [Handling CORS](/security/handling-cors)
 - [Handling File Upload](/handling-file-upload)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

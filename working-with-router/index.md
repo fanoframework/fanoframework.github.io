@@ -311,7 +311,3 @@ See [code example](https://github.com/fanoframework/fano-app/blob/master/app/App
 
 - [Dispatcher](/dispatcher)
 - [Middlewares](/middlewares)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

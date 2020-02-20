@@ -139,7 +139,3 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano --lbmethod=bybusyness
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
 - [Back to Deployment](/deployment)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

@@ -191,7 +191,3 @@ end;
 - [Working with Views](/working-with-views)
 - [Working with Controllers](/working-with-controllers)
 - [Working with Models](/working-with-models)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>
