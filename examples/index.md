@@ -28,7 +28,7 @@ Following example applications show how to [work with response](/working-with-re
 
 ## MVC web application
 
-[Fano Mvc](https://github.com/fanoframework/fano-mvc) demonstrate how to seperate logic of application using [Model](/working-with-models), [View](/working-with-views), [Controller](/working-with-controllers). It also demonstrates show to use HTML view template to compose application UI layout.
+[Fano Mvc](https://github.com/fanoframework/fano-mvc) demonstrate how to separate logic of application using [Model](/working-with-models), [View](/working-with-views), [Controller](/working-with-controllers). It also demonstrates show to use HTML view template to compose application UI layout.
 
 ## File upload
 
