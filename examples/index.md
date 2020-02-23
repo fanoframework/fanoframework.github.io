@@ -21,10 +21,11 @@ List of getting started web application for various supported protocol, i.e [CGI
 
 ## MIME types web application
 
-Following example applications show how to [work with response](/working-with-response) other than HTML page, such as image and JSON data.
+Following example applications show how to [work with response](/working-with-response) other than HTML page, such as image, PDF and JSON data.
 
 - [Image generator CGI web application](https://github.com/fanoframework/fano-app-img) shows how to output image that is generated on-the fly, See [live example here](https://fano-img.juhara.id/)
 - [Fano Api](https://github.com/fanoframework/fano-api) demonstrates how to return JSON response.
+- [Fano Pdf](https://github.com/fanoframework/fano-pdf) demonstrates how to generate PDF document on the fly.
 
 ## MVC web application
 
