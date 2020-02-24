@@ -14,7 +14,7 @@ List of getting started web application for various supported protocol, i.e [CGI
 
 - [Basic CGI web application example](https://github.com/fanoframework/fano-app), [live example](https://fano.juhara.id/)
 - [Fano Fcgid](https://github.com/fanoframework/fano-fcgid)
-- [Example FastCGI/CGI web application which can be deploy as FastCGI with mod_fcgid or as CGI](https://github.com/fanoframework/fano-cgi-fcgi)
+- [Example FastCGI/CGI web application which can be deployed as FastCGI with mod_fcgid or as CGI](https://github.com/fanoframework/fano-cgi-fcgi)
 - [Example FastCGI web application listen on Unix domain socket](https://github.com/fanoframework/fano-fcgi-unix)
 - [Example FastCGI web application listen on TCP port](https://github.com/fanoframework/fano-fastcgi)
 - [Example web application using scgi protocol](https://github.com/fanoframework/fano-scgi)
