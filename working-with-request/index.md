@@ -14,7 +14,7 @@ related to current request.
 This request object is instance of `IRequest` interface that can be queried for
 data such as query strings, cookies, POST data send by client or uploaded files.
 
-Read [Working with Controllers](/working-with-controllers) for more information on hwo to work with route handler  or controller.
+Read [Working with Controllers](/working-with-controllers) for more information on how to work with route handler  or controller.
 
 ## <a name="getting-query-parameters"></a>Getting query parameters
 

@@ -233,8 +233,7 @@ instance of `IRoute` interface which you can use to assign name to route or atta
 ```
 function setName(const routeName : shortstring) : IRoute;
 function getName() : shortstring;
-function before(const amiddleware : IMiddleware) : IRoute;
-function after(const amiddleware : IMiddleware) : IRoute;
+function add(const amiddleware : IMiddleware) : IRoute;
 ```
 
 For example to set route name and attach a middleware.
@@ -242,7 +241,7 @@ For example to set route name and attach a middleware.
 ```
 var authOnlyMiddleware : IMiddleware;
 ...
-router.post('/user/submit', handler).setName('create-user').before(authOnlyMiddleware);
+router.post('/user/submit', handler).setName('create-user').add(authOnlyMiddleware);
 ```
 
 Read [Middlewares](/middlewares) for more information.
