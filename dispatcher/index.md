@@ -74,7 +74,7 @@ container.add(
 );
 ```
 
-For creating dispatcher with session support, you need to use `TSessionDispatcherFactory`.as shown in following code. Because session support in Fano Framework is implemented using  middleware infrastructure, you also need to pass instance of `IMiddlewareLinkList` instance. Please read [Working with Session](/working-with-session) for more information.
+For creating dispatcher with session support, you need to use `TSessionDispatcherFactory` as shown in following code. Because session support in Fano Framework is implemented using  middleware infrastructure, you also need to pass instance of `IMiddlewareLinkList` instance. Please read [Working with Session](/working-with-session) for more information.
 
 ```
 var router : IRouteMatcher;
