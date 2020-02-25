@@ -18,7 +18,7 @@ Single middleware instance can be attach to one or more route. This allows centr
 
 Fano Framework use simple chained middleware list. Each middleware can decide whether to pass request to next middleware or block. If middleware blocks a request, it must return response
 
-[client] <--> [bm-0] <--> [bm-1] <--> ... <--> [bm-n] <--> [controller] <--> [am-0] <--> [am-1] <--> ... <--> [am-n]
+<img src="/assets/images/middlewares.svg" alt="Middleware diagram">
 
 In Fano Framework, any class implements `IMiddleware` interface can be used as middleware. This interface has one methods `handleRequest()` which class must implements.
 
