@@ -65,9 +65,9 @@ end;
 
 ### Based on scope
 
-#### Global middleware
+#### Application middleware
 
-Global middleware is middleware that is attached and applied globally to all routes.
+Application middleware is middleware that is attached and applied globally to all routes.
 
 #### Route middleware
 
