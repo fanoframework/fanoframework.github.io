@@ -14,7 +14,7 @@ So when controller is executed, developer can be sure that user must be logged i
 
 Single middleware instance can be attach to one or more route. This allows centralized action to be taken for multiple controllers.
 
-So, instead of,
+So, instead of tedious check each time controller is executed,
 
 ```
 function TMy1Controller.handleRequest(
@@ -97,6 +97,8 @@ begin
     result := doSomething2WhenUserLoggedIn(request, response, args);
 end;
 ```
+
+Read [Working with Session](/working-with-session) for information about session.
 
 ## Middleware architecture in Fano Framework
 
