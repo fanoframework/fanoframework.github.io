@@ -52,7 +52,7 @@ begin
 end;
 ```
 
-You create one middleware that will check if user is logged in and attach it to any route that must be accessible only to logged in user.
+You create one middleware that will check if user is logged in and attach it to any routes that must be accessible only to logged in user.
 
 ```
 function TAuthMiddleware.handleRequest(
@@ -67,10 +67,10 @@ begin
     if session.has('loggedIn') then
     begin
         //user is logged in
-        result next.requestHandler(request, response, args);
+        result := next.requestHandler(request, response, args);
     end else
     begin
-        result doSomethingWhenUserNotLoggedIn(request, response, args);
+        result := doSomethingWhenUserNotLoggedIn(request, response, args);
     end;
 end;
 ```
