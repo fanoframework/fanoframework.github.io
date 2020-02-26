@@ -220,7 +220,3 @@ end;
 ## Explore more
 
 - [Working with Request](/working-with-request)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

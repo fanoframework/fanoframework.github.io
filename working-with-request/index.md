@@ -14,7 +14,7 @@ related to current request.
 This request object is instance of `IRequest` interface that can be queried for
 data such as query strings, cookies, POST data send by client or uploaded files.
 
-Read [Working with Controllers](/working-with-controllers) for more information on hwo to work with route handler  or controller.
+Read [Working with Controllers](/working-with-controllers) for more information on how to work with route handler  or controller.
 
 ## <a name="getting-query-parameters"></a>Getting query parameters
 
@@ -150,7 +150,3 @@ langAvail := request.headers().has('Accept-Language');
 - [Form Validation](/security/form-validation)
 - [Handling CORS](/security/handling-cors)
 - [Handling File Upload](/handling-file-upload)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

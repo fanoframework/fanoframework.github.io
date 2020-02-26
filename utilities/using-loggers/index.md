@@ -224,7 +224,3 @@ logger := container['logger'] as ILogger;
 ## Explore more
 
 - [Error Handler](/error-handler)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

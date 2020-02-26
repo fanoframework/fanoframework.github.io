@@ -205,7 +205,3 @@ Take a note of value `policycoreutils-python-utils-2.8-16.1.el8.noarch` and run
 - [Deploy as uwsgi application](/deployment/uwsgi)
 - [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
 - [Back to Deployment](/deployment)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

@@ -55,6 +55,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Form Validation](/security/form-validation)
 - [CSRF Protection](/security/csrf-protection)
 - [HTTP Verb Tunnelling](/security/http-verb-tunnelling)
+- [HTTP Authentication](/security/http-authentication)
 
 ## Utilities
 

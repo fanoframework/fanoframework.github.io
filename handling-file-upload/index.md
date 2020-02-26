@@ -102,7 +102,3 @@ For example application that demonstrate how to handle file upload with Fano Fra
 - [Working with response](/working-with-response)
 - [Working with request](/working-with-request)
 - [Form Validation](/security/form-validation)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

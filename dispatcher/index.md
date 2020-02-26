@@ -7,7 +7,7 @@ description: Request dispatcher in Fano Framework
 
 ## Dispatcher task
 
-In general, task of a dispatcher is quite simple. Given request URI and HTTP method, it asks router to find instance of class that will handle the request, build middlewares, passing all relevant information and execute it.
+In general, task of a dispatcher is quite simple. Given request URI and HTTP method, it asks [router](/working-with-router) to find instance of class that will handle the request, build [middlewares](/middlewares), passing all relevant information and execute it.
 
 A dispatcher in Fano Framework must implements `IDispatcher` interface.
 
@@ -74,7 +74,7 @@ container.add(
 );
 ```
 
-For creating dispatcher with session support, you need to use `TSessionDispatcherFactory`.as shown in following code. Because session support in Fano Framework is implemented using  middleware infrastructure, you also need to pass instance of `IMiddlewareLinkList` instance. Please read [Working with Session](/working-with-session) for more information.
+For creating dispatcher with session support, you need to use `TSessionDispatcherFactory` as shown in following code. Because session support in Fano Framework is implemented using  middleware infrastructure, you also need to pass instance of `IMiddlewareLinkList` instance. Please read [Working with Session](/working-with-session) for more information.
 
 ```
 var router : IRouteMatcher;
@@ -121,7 +121,3 @@ end;
 ## Explore more
 
 - [Working with Router](/working-with-router)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

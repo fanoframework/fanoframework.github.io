@@ -108,7 +108,3 @@ In this tutorial, you have learned how to use Fano CLI to
 
 - [Step by Step Tutorials](/tutorials)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

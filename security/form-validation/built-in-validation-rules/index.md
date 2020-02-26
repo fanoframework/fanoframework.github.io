@@ -107,6 +107,25 @@ Data must be in valid URL format. This validator does not check if URL address a
 rule := TUrlValidator.create(TRegex.create());
 ```
 
+### TSlugValidator
+
+Data must be in slug format.
+
+```
+rule := TSlugValidator.create(TRegex.create());
+```
+
+This validator will give result as shown in following example input,
+
+```
+'my-slug-title' ==> pass
+'my-slug-title-1' ==> pass
+'1-my-slug-title' ==> pass
+'-my-slug-title' ==> fail
+'my-slug-title-' ==> fail
+'my-slug--title' ==> fail
+```
+
 ### TRegexValidator
 
 Data must be in format as specified by regular expression pattern.
@@ -220,6 +239,38 @@ Data must be integer value and not greater than predefined value.
 rule := TMaxIntegerValidator.create(100);
 ```
 Validation will pass only if you pass integer value <= 100.
+
+### TPositiveIntValidator
+
+Data must be positive integer value.
+
+```
+rule := TPositiveIntValidator.create();
+```
+
+### TNegativeIntValidator
+
+Data must be negative integer value.
+
+```
+rule := TNegativeIntValidator.create();
+```
+
+### TOddIntValidator
+
+Data must be odd integer value.
+
+```
+rule := TOddIntValidator.create();
+```
+
+### TEvenIntValidator
+
+Data must be even integer value.
+
+```
+rule := TEvenIntValidator.create();
+```
 
 ## Boolean data
 
@@ -527,6 +578,14 @@ Dummy validator which always make field passes validation.
 rule := TAlwaysPassValidator.create();
 ```
 
+### TIpv4Validator
+
+Data must be valid IP address (IPV4).
+
+```
+rule := TIpv4Validator.create();
+```
+
 ### TBaseValidator
 
 Abstract class which can be uses as a base class to create new custom validation rule. To inherit from this class, you need to implements its `isValidData()` method.
@@ -563,7 +622,3 @@ Your implementation must return `true` if validation should pass or `false` othe
 ## Explore more
 
 - [Form Validation](/security/form-validation)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

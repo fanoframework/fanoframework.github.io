@@ -76,7 +76,3 @@ This method is part of `IRequestHandler` interface. Dispatcher will pass request
 - [Working with Views](/working-with-views)
 - [Working with Models](/working-with-models)
 - [Working with Router](/working-with-router)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

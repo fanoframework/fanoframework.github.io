@@ -205,7 +205,3 @@ Browser will send ajax request with header `Origin` equals to `http://localhost/
 - [Middlewares](/middlewares)
 - [Dispatcher](/dispatcher)
 - [Fano Cors example application](https://github.com/fanoframework/fano-cors)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

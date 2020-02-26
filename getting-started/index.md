@@ -18,6 +18,10 @@ Following document explains minimum steps required to setup a working Fano web a
 - Working Internet connection.
 - Root privilege (for setting up virtual host).
 
+## Install Fano CLI
+
+Install [Fano CLI](https://github.com/fanoframework/fano-cli) as described in [Installation](/scaffolding-with-fano-cli#installation) section of [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) documentation.
+
 ## Create application
 
 Make sure all requirements above are met. Run
@@ -40,7 +44,3 @@ Open web browser and go to `http://hello.fano`. You should see `Home controller`
 - [Examples](/examples)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
 - [Creating Hello World application with Fano CLI](https://fanoframework.github.io/tutorials/hello-world-application-with-fano-cli)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

@@ -221,7 +221,3 @@ end;
 
 - [Dispatcher](/dispatcher)
 - [Error Handler](/error-handler)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

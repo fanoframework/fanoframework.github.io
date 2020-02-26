@@ -78,7 +78,3 @@ See [Working with Views](/working-with-views) to understand how model can be use
 
 - [Working with Controllers](/working-with-controllers)
 - [Working with Views](/working-with-views)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

@@ -7,7 +7,7 @@ description: Handling HTTP werb tunnelling issue in Fano Framework
 
 ## What is it?
 
-HTTP verb tunnelling is actually hack. This is provided to solve situation where web application running behind strict-policy firewall which only allows GET and POST request.
+HTTP verb tunnelling (sometime called HTTP method override) is actually hack. This is provided to solve situation where web application running behind strict-policy firewall which only allows GET and POST request.
 
 To allow PUT, DELETE, OPTIONS, PATCH method to be used, developer can use POST method and `X-Http-Method-Override` request header set to appropriate method as shown in following snippet,
 
@@ -55,7 +55,3 @@ If you need to use this, you need to understand security implication of [HTTP ve
 - [Dispatcher](/dispatcher)
 - [Security](/security)
 - [HTTP verb tunnelling example application](https://github.com/fanoframework/fano-verb-tunneling)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

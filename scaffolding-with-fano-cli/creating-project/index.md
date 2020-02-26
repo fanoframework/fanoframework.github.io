@@ -141,7 +141,3 @@ This command line options is provided to enable you to initialize Git repository
 
 - [Deployment](/deployment)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

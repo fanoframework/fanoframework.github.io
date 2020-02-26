@@ -14,7 +14,7 @@ When running `build.sh` script, you may encounter following warning:
 ```
 
 This is known issue between Free Pascal and GNU Linker. See
-[FAQ: link.res syntax error, or "did you forget -T?"](https://www.freepascal.org/faq.var#unix-ld219)
+[FAQ: link.res syntax error, or "did you forget -T?"](https://freepascal.org/faq.html#unix-ld219)
 
 However, this warning is minor and can be ignored. It does not affect output executable.
 
@@ -57,7 +57,3 @@ Edit Free Pascal main configuration, `/etc/fpc.cfg` file and add following lines
 ## Explore more
 
 - [Getting Started](/getting-started)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

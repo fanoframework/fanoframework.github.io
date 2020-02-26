@@ -7,7 +7,7 @@ description: Documentation about how middlewares work in Fano Framework
 
 ## Why middleware?
 
-In Fano Framework, middleware is an optional software component that is executed before or after request is passed to actual request handler. It is similar concept to firewall, in which, it can pass, block or modify request or modify response.
+In Fano Framework, middleware is an optional software component that is executed before or after request is passed to actual request handler. It is similar concept to firewall, in which, it can pass, block or modify [request](/working-with-request) or modify [response](/working-with-response).
 
 For example, middleware allows developer to test if user is logged in before request reaches controller. If user is not logged in, it blocks request.
 So when controller is executed, developer can be sure that user must be logged in.
@@ -16,9 +16,11 @@ Single middleware instance can be attach to one or more route. This allows centr
 
 ## Middleware architecture in Fano Framework
 
-Fano Framework use simple chained middleware list. Each middleware can decide whether to pass request to next middleware or block. If middleware blocks a request, it must return response
+Fano Framework use simple chained middleware list. Each middleware can decide whether to pass request to next middleware or block. If middleware blocks a request, it must return response.
 
-[client] <--> [bm-0] <--> [bm-1] <--> ... <--> [bm-n] <--> [controller] <--> [am-0] <--> [am-1] <--> ... <--> [am-n]
+<a href="/assets/images/middlewares.svg">
+<img src="/assets/images/middlewares.svg" alt="Middleware diagram" width="100%">
+</a>
 
 In Fano Framework, any class implements `IMiddleware` interface can be used as middleware. This interface has one methods `handleRequest()` which class must implements.
 
@@ -63,9 +65,9 @@ end;
 
 ### Based on scope
 
-#### Global middleware
+#### Application middleware
 
-Global middleware is middleware that is attached and applied globally to all routes.
+Application middleware is middleware that is attached and applied globally to all routes.
 
 #### Route middleware
 
@@ -119,7 +121,7 @@ ajaxOnly := TAjaxOnlyMiddleware.create();
 authOnly := TAuthOnlyMiddleware.create();
 ```
 
-## Attaching middleware to global middleware
+## Attaching middleware to application middleware
 
 When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup one global `IMiddlewareLinkList` instances which stores list of middlewares applied globally to all routes. Read [Dispatcher](/dispatcher) for more information.
 
@@ -164,6 +166,10 @@ container.add('appMiddlewares', TNullMiddlewareListFactory.create());
 ```
 
 This will create `TNullMiddlewareList` class instance which basically does nothing.
+
+## Creating middleware with Fano CLI
+
+[Fano CLI](/scaffolding-with-fano-cli) provides middleware creation command `--middleware` to simplify task for creating and setting up middleware with dependency container. Read [Creating Middleware](/scaffolding-with-fano-cli#creating-middleware) section for more information.
 
 ## Attaching middleware to route
 
@@ -250,7 +256,3 @@ helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 - [Middleware example application](/examples)
 - [Dispatcher](/dispatcher)
 - [Working with Router](/working-with-router)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

@@ -200,7 +200,3 @@ factory := TCsrfMiddlewareFactory.create()
 - [Dispatcher](/dispatcher)
 - [Working with Session](/working-with-session)
 - [Fano Csrf example application](https://github.com/fanoframework/fano-csrf)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>

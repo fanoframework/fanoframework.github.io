@@ -13,21 +13,41 @@ To display dynamic data into `TView`, you will need to pass `ITemplateParser` in
 
 `IViewParameters` interface has three methods:
 
-- `getVar()`, method that return string value of variable name
-- `setVar()`, method that set string value of variable name
-- `vars()`, returns all variable name as TStrings
+- `getVar()`, method that return string value of variable name.
+- `setVar()`, method that set string value of variable name.
+- `putVar()`, alias to `setVar()`.
+- `has()`, method that test if variable name is set.
+- `asStrings()`, returns all variable name as TStrings.
 
-If you set variable name such as following code:
+### Writing and reading data
+
+To write data to view parameters, you call `setVar()` method as shown below
 
 ```
-uses fano;
-...
 var viewParams : IViewParameters;
 ...
 viewParams.setVar('foo', 'Hello').setVar('bar', 'World');
 ```
+or you can use array-like syntax,
 
-And you have following HTML template
+```
+viewParams['foo'] := 'Hello';
+viewParams['bar'] := 'World';
+```
+To read data, call `getVar()` method,
+
+```
+var foo : string;
+...
+foo := viewParams.getVar('foo');
+```
+or
+
+```
+foo := viewParams['foo'];
+```
+
+If you set variable name such as show in code above and you have following HTML template
 
 ```
 <html>
@@ -86,7 +106,7 @@ type
 var userData : TUserDataArr;
 ```
 
-Then you can create `IView` implementation that dis
+Then you can create `IView` implementation that display data as shown in following code,
 
 ```
 (*!------------------------------------------------
@@ -191,7 +211,3 @@ end;
 - [Working with Views](/working-with-views)
 - [Working with Controllers](/working-with-controllers)
 - [Working with Models](/working-with-models)
-
-<ul class="actions">
-    <li><a href="/documentation" class="button">Documentation</a></li>
-</ul>
