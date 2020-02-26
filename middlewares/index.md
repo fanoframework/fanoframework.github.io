@@ -14,7 +14,7 @@ So when controller is executed, developer can be sure that user must be logged i
 
 Single middleware instance can be attach to one or more route. This allows centralized action to be taken for multiple controllers.
 
-So instead of
+So, instead of,
 
 ```
 function TMy1Controller.handleRequest(
