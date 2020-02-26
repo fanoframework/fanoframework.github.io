@@ -7,7 +7,7 @@ description: Documentation about how middlewares work in Fano Framework
 
 ## Why middleware?
 
-In Fano Framework, middleware is an optional software component that is executed before or after request is passed to actual request handler. It is similar concept to firewall, in which, it can pass, block or modify [request](/working-with-request) or modify [response](/working-with-response).
+In Fano Framework, middleware is an optional software component that is executed before or after request is passed to actual request handler. It is similar concept to firewall, in which, it can pass, block or modify [request](/working-with-request) or [response](/working-with-response).
 
 For example, middleware allows developer to test if user is logged in before request reaches controller. If user is not logged in, it blocks request.
 So when controller is executed, developer can be sure that user must be logged in.
