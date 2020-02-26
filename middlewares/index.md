@@ -337,6 +337,10 @@ var helloCtrlMiddleware : IMiddleware;
 helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 ```
 
+## Performance consideration
+
+Using middleware add overhead as request must go multiple execution points before reaching actual request handler also you need to aware that each middleware will call next middleware recursively so you should limit number of middlewares in use.
+
 ## Explore more
 
 - [Middleware example application](/examples)
