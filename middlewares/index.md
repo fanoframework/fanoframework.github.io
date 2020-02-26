@@ -14,6 +14,90 @@ So when controller is executed, developer can be sure that user must be logged i
 
 Single middleware instance can be attach to one or more route. This allows centralized action to be taken for multiple controllers.
 
+So instead of
+
+```
+function TMy1Controller.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var sess : ISession;
+begin
+    sess := fSessionMgr[request];
+    if session.has('loggedIn') then
+    begin
+        result := doSomething1WhenUserLoggedIn(request, response, args);
+    end else
+    begin
+        result := doSomethingWhenUserNotLoggedIn(request, response, args);
+    end;
+end;
+...
+function TMy2Controller.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var sess : ISession;
+begin
+    sess := fSessionMgr[request];
+    if session.has('loggedIn') then
+    begin
+        result := doSomething2WhenUserLoggedIn(request, response, args);
+    end else
+    begin
+        result := doSomethingWhenUserNotLoggedIn(request, response, args);
+    end;
+end;
+```
+
+You create one middleware that will check if user is logged in and attach it to any route that must be accessible only to logged in user.
+
+```
+function TAuthMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+var sess : ISession;
+begin
+    sess := fSessionMgr[request];
+    if session.has('loggedIn') then
+    begin
+        //user is logged in
+        result next.requestHandler(request, response, args);
+    end else
+    begin
+        result doSomethingWhenUserNotLoggedIn(request, response, args);
+    end;
+end;
+```
+
+Then controllers become more simple as you can assume that when execution reach controller,
+user must be logged in.
+
+```
+function TMy1Controller.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+begin
+    result := doSomething1WhenUserLoggedIn(request, response, args);
+end;
+...
+function TMy2Controller.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+begin
+    result := doSomething2WhenUserLoggedIn(request, response, args);
+end;
+```
+
 ## Middleware architecture in Fano Framework
 
 Fano Framework use simple chained middleware list. Each middleware can decide whether to pass request to next middleware or block. If middleware blocks a request, it must return response.
@@ -150,7 +234,7 @@ container.add(
 );
 ```
 
-and then you can register a middleware to global middlewares as follows
+and then you can register a middleware to application middlewares as follows
 
 ```
 var appMiddlewares : IMiddlewareList;
@@ -159,7 +243,7 @@ appMiddlewares := container.get('appMiddlewares') as IMiddlewareList;
 appMiddlewares.add(authOnly);
 ```
 
-If you do not need global middleware list, you can use null class as show in following code,
+If you do not need application middleware list, you can use null class as shown in following code,
 
 ```
 container.add('appMiddlewares', TNullMiddlewareListFactory.create());
