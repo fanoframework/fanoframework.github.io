@@ -7,12 +7,98 @@ description: Documentation about how middlewares work in Fano Framework
 
 ## Why middleware?
 
-In Fano Framework, middleware is an optional software component that is executed before or after request is passed to actual request handler. It is similar concept to firewall, in which, it can pass, block or modify [request](/working-with-request) or modify [response](/working-with-response).
+In Fano Framework, middleware is an optional software component that is executed before or after request is passed to actual request handler. It is similar concept to firewall, in which, it can pass, block or modify [request](/working-with-request) or [response](/working-with-response).
 
 For example, middleware allows developer to test if user is logged in before request reaches controller. If user is not logged in, it blocks request.
 So when controller is executed, developer can be sure that user must be logged in.
 
 Single middleware instance can be attach to one or more route. This allows centralized action to be taken for multiple controllers.
+
+So, instead of tedious check each time controller is executed,
+
+```
+function TMy1Controller.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var sess : ISession;
+begin
+    sess := fSessionMgr[request];
+    if session.has('loggedIn') then
+    begin
+        result := doSomething1WhenUserLoggedIn(request, response, args);
+    end else
+    begin
+        result := doSomethingWhenUserNotLoggedIn(request, response, args);
+    end;
+end;
+...
+function TMy2Controller.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var sess : ISession;
+begin
+    sess := fSessionMgr[request];
+    if session.has('loggedIn') then
+    begin
+        result := doSomething2WhenUserLoggedIn(request, response, args);
+    end else
+    begin
+        result := doSomethingWhenUserNotLoggedIn(request, response, args);
+    end;
+end;
+```
+
+You create one middleware that will check if user is logged in and attach it to any routes that must be accessible only to logged in user.
+
+```
+function TAuthMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+var sess : ISession;
+begin
+    sess := fSessionMgr[request];
+    if session.has('loggedIn') then
+    begin
+        //user is logged in
+        result := next.requestHandler(request, response, args);
+    end else
+    begin
+        result := doSomethingWhenUserNotLoggedIn(request, response, args);
+    end;
+end;
+```
+
+Then controllers become more simple as you can assume that when execution reach controller,
+user must be logged in.
+
+```
+function TMy1Controller.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+begin
+    result := doSomething1WhenUserLoggedIn(request, response, args);
+end;
+...
+function TMy2Controller.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+begin
+    result := doSomething2WhenUserLoggedIn(request, response, args);
+end;
+```
+
+Read [Working with Session](/working-with-session) for information about session.
 
 ## Middleware architecture in Fano Framework
 
@@ -150,7 +236,7 @@ container.add(
 );
 ```
 
-and then you can register a middleware to global middlewares as follows
+and then you can register a middleware to application middlewares as follows
 
 ```
 var appMiddlewares : IMiddlewareList;
@@ -159,7 +245,7 @@ appMiddlewares := container.get('appMiddlewares') as IMiddlewareList;
 appMiddlewares.add(authOnly);
 ```
 
-If you do not need global middleware list, you can use null class as show in following code,
+If you do not need application middleware list, you can use null class as shown in following code,
 
 ```
 container.add('appMiddlewares', TNullMiddlewareListFactory.create());
@@ -250,6 +336,10 @@ var helloCtrlMiddleware : IMiddleware;
 ...
 helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 ```
+
+## Performance consideration
+
+Using middleware add overhead as request must go multiple execution points before reaching actual request handler also you need to aware that each middleware will call next middleware recursively so you should limit number of middlewares in use.
 
 ## Explore more
 
