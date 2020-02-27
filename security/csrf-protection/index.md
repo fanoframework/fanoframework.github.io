@@ -128,8 +128,8 @@ factory := TCsrfMiddlewareFactory.create()
 You need to ensure correct name is used in HTML form and in code that read token
 
 ```
-viewParams.setVar('csrfName', sess.getVar('my_cool_name'));
-viewParams.setVar('csrfToken', sess.getVar('my_cool_token'));
+viewParams['csrfName'] := sess['my_cool_name'];
+viewParams['csrfToken'] := sess['my_cool_token'];
 ```
 
 ```
@@ -192,7 +192,7 @@ You can set it manually if required,
 
 ```
 factory := TCsrfMiddlewareFactory.create()
-    .sessionHandler(container.get('sessMgr') as ISessionManager);
+    .sessionHandler(container['sessMgr'] as ISessionManager);
 ```
 ## Explore more
 
