@@ -79,7 +79,7 @@ Add, for example, following code,
 
     ProxyRequests Off
     ProxyPassMatch "/css|js|images|img|plugins|bower_components(.*)" !
-    ProxyPassMatch ^/(.*)$ "balancer://myapp.fano/"
+    ProxyPassMatch ^/(.*)$ "balancer://myapp.fano"
 </VirtualHost>
 ```
 
