@@ -203,5 +203,6 @@ Take a note of value `policycoreutils-python-utils-2.8-16.1.el8.noarch` and run
 
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as uwsgi application](/deployment/uwsgi)
+- [Deploy as standalone web server](/deployment/standalone-web-server)
 - [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
 - [Back to Deployment](/deployment)
