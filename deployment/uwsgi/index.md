@@ -141,5 +141,6 @@ Running uwsgi application through reverse proxy may be subject to strict securit
 
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
+- [Deploy as standalone web server](/deployment/standalone-web-server)
 - [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
 - [Back to Deployment](/deployment)

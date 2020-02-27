@@ -248,5 +248,6 @@ If your application is handling big file upload, you may need to adjust its valu
 
 - [Deploy as SCGI application](/deployment/scgi)
 - [Deploy as uwsgi application](/deployment/uwsgi)
+- [Deploy as standalone web server](/deployment/standalone-web-server)
 - [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
 - [Back to Deployment](/deployment)

@@ -99,6 +99,13 @@ To create web application that use [uwsgi protocol](https://uwsgi-docs.readthedo
 See [Deploy as uwsgi application](/deployment/uwsgi) for information on how to
 setup uwsgi application to work with various web server.
 
+## <a name="scaffolding-libmicrohttpd-project"></a>Scaffolding libmirohttpd project directory structure
+
+To create web application that use http using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/), use `--project-mhd` parameter. Other parameters are similar to SCGI, FastCGI or uwsgi project above.
+
+See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behing with various reverse proxy web server.
+
+
 ## Scaffolding project directory structure with Git without initial commit
 
 To scaffold project structure using Fano framework with Git repository initialized but without creating initial commit, run with  `--project-no-commit` command line options
