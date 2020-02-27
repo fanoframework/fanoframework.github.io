@@ -37,7 +37,7 @@ $ fanocli --help
 
 ## Creating Web Application Project
 
-Fano CLI provides several commands for scaffolding Fano Framework web application easily such as `--project`, `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi` and `--project-uwsgi` which to create web application project using CGI, FastCGI, SCGI and uwsgi protocol.
+Fano CLI provides several commands for scaffolding Fano Framework web application easily such as `--project`, `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which to create web application project using CGI, FastCGI, SCGI and uwsgi, http (using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)) protocol.
 
 ```
 $ fanocli --project=[project-name]

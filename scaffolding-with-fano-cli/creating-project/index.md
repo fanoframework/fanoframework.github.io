@@ -115,7 +115,7 @@ For Fedora-based distribution,
 $ sudo yum install libmicrohttpd-devel
 ```
 
-See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behing with various reverse proxy web server.
+See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behind various reverse proxy web server.
 
 
 ## Scaffolding project directory structure with Git without initial commit
