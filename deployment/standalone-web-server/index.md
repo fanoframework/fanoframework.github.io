@@ -116,7 +116,7 @@ server {
     }
 
     location @example.fano {
-        proxy_pass 127.0.0.1:20477;
+        proxy_pass http://127.0.0.1:20477;
     }
 }
 ```
