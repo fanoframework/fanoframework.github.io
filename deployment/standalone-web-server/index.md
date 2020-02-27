@@ -137,5 +137,5 @@ Running http application through reverse proxy may be subject to strict security
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
 - [Deploy as uwsgi application](/deployment/uwsgi)
-- [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
+- [Deploy Fano application with load balancer](/deployment/load-balancer-setup)
 - [Back to Deployment](/deployment)
