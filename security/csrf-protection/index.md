@@ -142,7 +142,11 @@ viewParams['csrfToken'] := sess['my_cool_token'];
 
 ### Change token generator
 
-`TCsrfMiddlewareFactory` class, by default, uses `TCsrf` class to generate random token and to verify token. `TCsrf` uses `createGUID()` and SHA1 hash function to generate random token which may not be adequate. If you need stronger token generator, you can replace with your own implementation by creating class which implements `ICsrf` interface and provides following methods
+`TCsrfMiddlewareFactory` class, by default, uses `TCsrf` class to generate and to verify token. `TCsrf` uses `createGUID()`. GUID and a secret key that you set is used to calculated HMACSHA1 hash which will become token.
+
+If you need stronger token generator, you can replace with `TUrandomCsrf` class which use `/dev/urandom` to generate random bytes combined with HMACSHA1 hash and secret key.
+
+You can also replace with your own implementation by creating class which implements `ICsrf` interface and provides following methods
 
 ```
 function generateToken(out tokenName : string; out tokenValue : string) : ICsrf;
