@@ -79,6 +79,8 @@ Fano Framework provides several built-in implementation of this interface that y
 
 - `TUwsgiAppServiceProvider`, class which provides essentials service for uwsgi web application.
 
+- `TMhdAppServiceProvider`, class which provides essentials service for libmicrohttpd web application.
+
 ## IRouteBuilder interface
 
 When creating application instance, you need also to implement `IRouteBuilder` interface which responsible to setup application routes. Please read [Route Builder](/working-with-router#route-builder) section documentation for more information.
@@ -220,13 +222,41 @@ deploy uwsgi application on various web servers.
 You may want to read
 [Scaffolding uwsgi project directory structure](/scaffolding-with-fano-cli/creating-project#scaffolding-uwsgi-project) for information how to scaffolding uwsgi web application easily.
 
+## Http Application
+
+To create web application that support http protocol using libmicrohttpd, create application service provider which use `TMhdAppServiceProvider` also fill web server configuration as shown in following code,
+
+```
+var
+    svrConfig : TMhdSvrConfig;
+...
+    svrConfig.host := 'example.fano';
+    svrConfig.port := 8080;
+    svrConfig.documentRoot := getCurrentDir() + '/public';
+    svrConfig.serverName := 'example.fano';
+    svrConfig.serverAdmin := 'admin@example.fano';
+    svrConfig.serverSoftware := 'Fano Framework Web App';
+    svrConfig.timeout := 120; //connection timeout in sec
+
+    appInstance := TDaemonWebApplication.create(
+        TMhdAppServiceProvider.create(
+            TAppServiceProvider.create(),
+            svrConfig
+        ),
+        TAppRoutes.create()
+    );
+```
+See [fano-http](https://github.com/fanoframework/fano-http) example demo application.
+
+See [Deploy as standalone web server](/deployment/standalone-web-server) for information how to
+deploy http application as stand alone web server or through various reverse proxy web servers.
+
+You may want to read
+[Scaffolding libmicrohttpd project directory structure](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project) for information how to scaffolding libmicrohttpd web application easily.
+
 ## Apache modules Application
 
 Implementation of IWebApplication that run as Apache modules is not yet implemented.
-
-## Standalone web server application
-
-Implementation of IWebApplication that run as standalone web server is not yet implemented.
 
 ## Application implementation which support Rack-like protocol
 
@@ -285,3 +315,4 @@ FastCGI due to simpler protocol specification.
 - [Deploy FastCGI Application](/deployment/fastcgi)
 - [Deploy SCGI Application](/deployment/scgi)
 - [Deploy uwsgi Application](/deployment/uwsgi)
+- [Deploy standalone web server](/deployment/standalone-web-server)
