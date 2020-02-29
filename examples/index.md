@@ -19,6 +19,7 @@ List of getting started web application for various supported protocol, i.e [CGI
 - [Example FastCGI web application listen on TCP port](https://github.com/fanoframework/fano-fastcgi)
 - [Example web application using scgi protocol](https://github.com/fanoframework/fano-scgi)
 - [Example web application using uwsgi protocol](https://github.com/fanoframework/fano-uwsgi)
+- [Example web application using http protocol](https://github.com/fanoframework/fano-http)
 
 ## MIME types web application
 
