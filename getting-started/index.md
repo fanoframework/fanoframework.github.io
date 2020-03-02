@@ -27,7 +27,7 @@ Install [Fano CLI](https://github.com/fanoframework/fano-cli) as described in [I
 Make sure all requirements above are met. Run
 
 ```
-$ fanocli --project=Hello
+$ fanocli --project-cgi=Hello
 $ cd Hello
 $ fanocli --controller=Home --route=/
 $ ./build.sh

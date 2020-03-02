@@ -11,7 +11,7 @@ Apache provides reverse proxy load balancer to distribute load to one or more ap
 
 - [Apache 2.4](https://httpd.apache.org/docs/2.4/)
 - [mod_proxy_balancer](https://httpd.apache.org/docs/2.4/mod/mod_proxy_balancer.html)
-- [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html), [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html) or [mod_proxy_uwsgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_uwsgi.html)
+- [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html), [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html), [mod_proxy_uwsgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_uwsgi.html) or [mod_proxy_http](https://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html)
 - [Fano CLI](https://github.com/fanoframework/fano-cli)
 
 ## Setting up mod_proxy_balancer
@@ -31,9 +31,9 @@ $ sudo a2enmod lbmethod_byrequests
 ## <a name="deploy-fano-application-with-load-balancer-with-fano-cli"></a>Deploy Fano Application with load balancer with Fano CLI
 
 Apart from task for [scaffolding web application](/scaffolding-with-fano-cli),
-[Fano CLI](https://github.com/fanoframework/fano-cli) also provides `--deploy-lb-scgi=[domain name]`, `--deploy-lb-fcgi=[domain name]` or `--deploy-lb-uwsgi=[domain name]` to help setup load balancer during development for SCGI, FastCGI or uwsgi web application, respectively.
+[Fano CLI](https://github.com/fanoframework/fano-cli) also provides `--deploy-lb-scgi=[domain name]`, `--deploy-lb-fcgi=[domain name]`, `--deploy-lb-uwsgi=[domain name]` or `--deploy-lb-http=[domain name]` to help setup load balancer during development for SCGI, FastCGI, uwsgi or http web application, respectively.
 
-After you create SCGI, FastCGI or uwsgi project with `--project-scgi`, `--project-fcgi` or `--project-uwsgi`, for example
+After you create SCGI, FastCGI, uwsgi or http project with `--project-scgi`, `--project-fcgi`, `--project-uwsgi` or `--project-mhd`, for example
 
 ```
 $ fanocli --project-scgi=myapp
@@ -47,7 +47,7 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano
 
 Command above, will create virtual host for Apache web server that utilize `mod_proxy_balancer` module, enabled virtual host configuration, reload Apache web server configuration and add entry to `myapp.fano` domain in `/etc/hosts`.
 
-Replace with `--deploy-lb-fcgi` or `--deploy-lb-uwsgi` for setting up FastCGI or uwsgi web application respectively.
+Replace with `--deploy-lb-fcgi`, `--deploy-lb-uwsgi` or `--deploy-lb-http` for setting up FastCGI, uwsgi or http web application respectively.
 
 ## Deploy Fano Application with load balancer manually
 
@@ -79,7 +79,7 @@ Add, for example, following code,
 
     ProxyRequests Off
     ProxyPassMatch "/css|js|images|img|plugins|bower_components(.*)" !
-    ProxyPassMatch ^/(.*)$ "balancer://myapp.fano/"
+    ProxyPassMatch ^/(.*)$ "balancer://myapp.fano"
 </VirtualHost>
 ```
 
@@ -138,4 +138,6 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano --lbmethod=bybusyness
 - [Hello World SCGI application with Fano CLI](/tutorials/hello-world-scgi-application-with-fano-cli)
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
+- [Deploy as uwsgi application](/deployment/uwsgi)
+- [Deploy as standalone web server](/deployment/standalone-web-server)
 - [Back to Deployment](/deployment)

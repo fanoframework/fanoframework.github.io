@@ -58,6 +58,14 @@ server {
 Replace `scgi_pass` and `scgi_params` with `fastcgi_pass` and `fastcgi_params` for FastCGI or
 `uwsgi_pass` and `uwsgi_params` for uwsgi web application.
 
+For http web application, configuration is similar except that you need to replace `location` with
+
+```
+    location @myapp.fano {
+        proxy_pass http://my-app-load-balancer;
+    }
+```
+
 Reload Nginx
 
 ```

@@ -5,7 +5,7 @@ description: Tutorial on how to deploy Fano application as stand-alone web serve
 
 <h1 class="major">Deployment as stand-alone Web Server</h1>
 
-If you create http web application such libmicrohttpd-based project using Fano CLI with `--project-mhd` command, you can simply access application directly from Internet browser using host and port where application listen, for example `http://localhost:8080`.
+If you [create http web application](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project) such libmicrohttpd-based project using Fano CLI with `--project-mhd` command, you can simply access application directly from Internet browser using host and port where application listen, for example `http://localhost:8080`.
 
 Other alternative is to run application behind reverse proxy web server such as Apache or Nginx.
 
@@ -116,7 +116,7 @@ server {
     }
 
     location @example.fano {
-        proxy_pass 127.0.0.1:20477;
+        proxy_pass http://127.0.0.1:20477;
     }
 }
 ```
@@ -137,5 +137,5 @@ Running http application through reverse proxy may be subject to strict security
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
 - [Deploy as uwsgi application](/deployment/uwsgi)
-- [Deploy Fano application with Apache load balancer module](/deployment/load-balancer-setup)
+- [Deploy Fano application with load balancer](/deployment/load-balancer-setup)
 - [Back to Deployment](/deployment)

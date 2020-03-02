@@ -37,25 +37,14 @@ $ fanocli --help
 
 ## Creating Web Application Project
 
-Fano CLI provides several commands for scaffolding Fano Framework web application easily such as `--project`, `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi` and `--project-uwsgi` which to create web application project using CGI, FastCGI, SCGI and uwsgi protocol.
+Fano CLI provides several commands for scaffolding Fano Framework web application easily such as `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which to create web application project using CGI, FastCGI, SCGI and uwsgi, http (using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)) protocol.
 
 ```
-$ fanocli --project=[project-name]
+$ fanocli --project-cgi=[project-name]
 ```
 
 `[project-name]` is directory where project resides and will be created by Fano CLI. Please read [Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project) for more detail explanation of each command.
 
-## <a name="setup-application-configuration-when-creating-project"></a>Setup application configuration when creating project
-
-All commands for creating project, for example, `--project`, `--project-fcgi`, `--project-scgi`, etc, accept additional parameter `--config=[configType]` where `[configType]` is either `ini` or `json`.
-
-If `--config` is set, then during project creation, it generates application configuration files and register application configuration to [dependency container](/dependency-container). If `--config` is set but its value is empty string, `json` is assumed.
-
-```
-$ fanocli --project-fcgi=test-fano --config=ini
-```
-
-Read [Application Configuration](/configuration) for more information.
 
 ## Creating controller
 
@@ -245,8 +234,8 @@ Any project creation commands, i.e, `--project*` commands, accept additional par
 If `[session storage]` not set then it is assumed `file`. So following commands are identical
 
 ```
-$ fanocli --project=Hello --with-session=file
-$ fanocli --project=Hello --with-session
+$ fanocli --project-cgi=Hello --with-session=file
+$ fanocli --project-cgi=Hello --with-session
 ```
 
 For `file` and `cookie`, you can define format of session data with `--type` parameter which expect value of `json` or `ini` for JSON or INI format respectively.
@@ -254,14 +243,14 @@ For `file` and `cookie`, you can define format of session data with `--type` par
 For example, following command will cause session support to be added to project and each session data will be stored as INI file.
 
 ```
-$ fanocli --project=Hello --with-session=file --type=ini
+$ fanocli --project-cgi=Hello --with-session=file --type=ini
 ```
 
 Because in Fano Framework, session support is implemented with middleware infrastructure, `--with-session` implies usage of `--with-middleware` so following command are identical
 
 ```
-$ fanocli --project=Hello --with-session
-$ fanocli --project=Hello --with-session --with-middleware
+$ fanocli --project-cgi=Hello --with-session
+$ fanocli --project-cgi=Hello --with-session --with-middleware
 ```
 
 Please read [Working with Session](/working-with-session) for more information about session.

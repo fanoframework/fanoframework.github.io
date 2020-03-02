@@ -26,7 +26,7 @@ This tutorial is written for anyone new to Fano Framework. It is assumed that yo
 Make sure that all requirements are met. To create a CGI project, run
 
 ```
-$ fanocli --project=Hello
+$ fanocli --project-cgi=Hello
 ```
 
 Wait until new project is created. If everything is ok, your project will be created inside `Hello` directory. Change active directory to `Hello` directory.
