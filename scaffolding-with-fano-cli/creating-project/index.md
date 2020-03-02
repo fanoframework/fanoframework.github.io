@@ -6,29 +6,56 @@ description: Tutorial how to use Fano CLI to scaffold web application using Fano
 
 ## <a name="scaffolding-cgi-project"></a>Scaffolding CGI project directory structure
 
-To scaffold project structure using Fano framework, run with  `--project` command line options
+To scaffold project structure using Fano framework, run with  `--project-cgi` command line options
 
 ```
-$ fanocli --project=[project-name]
+$ fanocli --project-cgi=[project-name]
 ```
 
 For example, following command will cause a new project created in directory name `test-fano` inside current directory.
 
 ```
-$ fanocli --project=test-fano
+$ fanocli --project-cgi=test-fano
 ```
 
-`--project` command is alias of `--project-cgi` and so it creates CGI web application.
+### Unrelated commit histories issue
 
-This command line options also creates Git repository and initial commit for you  automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse
-to merge because they have unrelated commit histories.
+`--project-*` command line options creates Git repository and initial commit for you automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse to merge because they have unrelated commit histories.
 
-To workaround this problem, you can run `git merge` with option `--allow-unrelated-histories` or create project directory without creating initial commit or create project directory structure without
-Git repository.
+To workaround this problem, you can run `git merge` with option `--allow-unrelated-histories`
+or create project directory structure without Git repository (`--no-git`).
 
+```
+$ fanocli --project-cgi=test-fano --no-git
+```
+
+or create project directory with Git repository but without creating initial commit (`--no-initial-commit`)
+
+```
+$ fanocli --project-cgi=test-fano --no-initial-commit
+```
+
+`--no-git` options is provided to enable you to initialize Git repository manually.
+
+After project directory is constructed, you need to execute following commands,
+
+```
+$ cd test-fano
+$ git init
+$ git submodule add https://github.com/fanoframework/fano.git vendor/fano
+$ git add .
+$ git commit -m "Initial commit"
+```
+
+`--no-initial-commit` is provided to enable you to commit Git repository manually. So you can merge local repository with a remote repository before running git commit. After project directory is constructed, you need to execute following commands,
+
+```
+$ cd test-fano
+$ git commit -m "Initial commit"
+```
 ## <a name="scaffolding-fcgid-project"></a>Scaffolding FastCGI project directory structure with Apache mod_fcgid module
 
-To scaffold FastCGI project structure using Fano framework that employ Apache mod_fcgid, run with  `--project-fcgid` command line options
+To scaffold FastCGI project structure using Fano framework that employ Apache mod_fcgid, run with `--project-fcgid` command line options
 
 ```
 $ fanocli --project-fcgid=[project-name]
@@ -39,6 +66,8 @@ For example, following command will cause a new FastCGI project created in direc
 ```
 $ fanocli --project-fcgid=test-fano-fcgi
 ```
+
+You can also add `--no-git` and `no-initial-commit` parameter.
 
 See [Deploy as FastCGI application](/deployment/fastcgi) for information on how to
 setup FastCGI application to work with various web server.
@@ -69,6 +98,8 @@ setup FastCGI application to work with various web server.
 
 Difference between FastCGI application created with `--project-fcgid` and `--project-fcgi` is first will be FastCGI application which its process is managed by Apache mod_fcgid module while latter must be run independently using Apache mod_proxy_fcgi or Nginx.
 
+You can also add `--no-git` and `no-initial-commit` parameter.
+
 ## <a name="scaffolding-scgi-project"></a>Scaffolding SCGI project directory structure
 
 To scaffold SCGI project structure using Fano framework, run with  `--project-scgi` command line options
@@ -88,6 +119,7 @@ Additionally, you can set `--host` and `--port` where SCGI will listen. If omitt
 ```
 $ fanocli --project-scgi=test-fano-scgi --host=192.168.2.1 --port=4040
 ```
+You can also add `--no-git` and `no-initial-commit` parameter.
 
 Generated project files are mostly similar to `--project-fcgi` output but for SCGI protocol. See [Deploy as SCGI application](/deployment/scgi) for information on how to
 setup SCGI application to work with various web server.
@@ -96,8 +128,11 @@ setup SCGI application to work with various web server.
 
 To create web application that use [uwsgi protocol](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html), use `--project-uwsgi` parameter. Other parameters are similar to SCGI or FastCGI project above.
 
+You can also add `--no-git` and `no-initial-commit` parameter.
+
 See [Deploy as uwsgi application](/deployment/uwsgi) for information on how to
 setup uwsgi application to work with various web server.
+
 
 ## <a name="scaffolding-libmicrohttpd-project"></a>Scaffolding libmicrohttpd project directory structure
 
@@ -115,46 +150,21 @@ For Fedora-based distribution,
 $ sudo yum install libmicrohttpd-devel
 ```
 
+You can also add `--no-git` and `no-initial-commit` parameter.
+
 See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behind various reverse proxy web server.
 
+## <a name="setup-application-configuration-when-creating-project"></a>Setup application configuration when creating project
 
-## Scaffolding project directory structure with Git without initial commit
+All commands for creating project, for example, `--project-cgi`, `--project-fcgi`, `--project-scgi`, etc, accept additional parameter `--config=[configType]` where `[configType]` is either `ini` or `json`.
 
-To scaffold project structure using Fano framework with Git repository initialized but without creating initial commit, run with  `--project-no-commit` command line options
-
-```
-$ fanocli --project-no-commit=test-fano
-```
-
-This command line options is provided to enable you to commit Git repository manually. So you can merge local repository with a remote repository before
-running git commit. After project directory is constructed, you need to execute following shell command,
+If `--config` is set, then during project creation, it generates application configuration files and register application configuration to [dependency container](/dependency-container). If `--config` is set but its value is empty string, `json` is assumed.
 
 ```
-$ cd test-fano
-$ git commit -m "Initial commit"
+$ fanocli --project-fcgi=test-fano --config=ini
 ```
 
-## Scaffolding project directory structure without Git
-
-To scaffold project structure without initializing
-Git repository, run with  `--project-without-git` command line options
-
-```
-$ fanocli --project-without-git=test-fano
-```
-
-This command line options is provided to enable you to initialize Git repository manually.
-
-After project directory is constructed, you need to execute following shell command,
-
-```
-$ cd test-fano
-$ git init
-$ git submodule add https://github.com/fanoframework/fano.git vendor/fano
-$ git add .
-$ git commit -m "Initial commit"
-```
-This command line options is provided to enable you to initialize Git repository manually.
+Read [Application Configuration](/configuration) for more information.
 
 ## Explore more
 

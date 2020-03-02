@@ -157,7 +157,7 @@ data.nested=test
 
 ## Setting up application configuration with Fano CLI
 When creating new project, you can use `--config` parameter to setup application configuration.
-Read [Setup application configuration when creating project](/scaffolding-with-fano-cli#setup-application-configuration-when-creating-project) for more information.
+Read [Setup application configuration when creating project](/scaffolding-with-fano-cli/creating-project#setup-application-configuration-when-creating-project) for more information.
 
 You can also manually setting application configuration by overriding `buildAppConfig()` method of `TBasicAppServiceProvider` or `TDaemonAppServiceProvider` class as shown in following code sample.
 
