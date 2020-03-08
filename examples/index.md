@@ -5,8 +5,8 @@ description: List of example application built with Fano Framework
 
 <h1 class="major">Example Application</h1>
 
-Below is list of example application which you can use to get started. They are
-generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command line tools to help scaffolding web application with Fano Framework.
+Below is list of example applications which you can use to get started. They are
+generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command line tools to help [scaffolding web application](/scaffolding-with-fano-cli) with Fano Framework.
 
 ## Hello World applications
 
@@ -43,6 +43,7 @@ Following example applications show how to work with SQL and NoSQL databases by 
 
 - [Example web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elasticsearch)
 - [MySQL web application example](https://github.com/fanoframework/fano-app-db)
+- [Database connection pool example](https://github.com/fanoframework/fano-db-pool)
 
 ## Middleware
 
