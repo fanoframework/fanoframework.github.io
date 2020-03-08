@@ -43,6 +43,7 @@ Following example applications show how to work with SQL and NoSQL databases by 
 
 - [Example web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elasticsearch)
 - [MySQL web application example](https://github.com/fanoframework/fano-app-db)
+- [Database connection pool example](https://github.com/fanoframework/fano-db-pool)
 
 ## Middleware
 
