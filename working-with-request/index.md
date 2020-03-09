@@ -144,7 +144,7 @@ langAvail := request.headers().has('Accept-Language');
 
 ## <a name="handling-request-with-json-body"></a>Handling request with JSON body
 
-To handle request with `application/json`, such as following shell command
+To handle request with `application/json` body, such as following shell command
 
 ```
 $ curl --header "Content-Type: application/json" \
@@ -180,7 +180,7 @@ You can read `lastLogin` data as follows,
 lastLogin := jsonRequest.getParsedBodyParam('login.lastLogin');
 ```
 
-The process of wrapping original request as `TJsonRequest` is implemented in `TJsonContentTypeMiddleware` middleware. When you attach this middleware to a route, everytime application receive method `POST`, `PUT`, `DELETE` with `Content-Type` header set to `application/json`, original request will be wrapped inside `TJsonRequest`.
+The process of wrapping original request as `TJsonRequest` is implemented in `TJsonContentTypeMiddleware` middleware. When you attach this middleware to a route, everytime application receive method `POST`, `PUT`, `PATCH` or `DELETE` with `Content-Type` header set to `application/json`, original request will be wrapped inside `TJsonRequest`.
 
 Please read [middleware documentation](/middlewares) for information how to work with middleware.
 
