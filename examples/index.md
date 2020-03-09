@@ -73,6 +73,10 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 ## HTTP Authentication examples
 
+[Fano Json Request](https://github.com/fanoframework/fano-json-request) demonstrates how to [handle request with JSON body](/working-with-request#handling-request-with-json-body).
+
+## Handling request with JSON body
+
 [HTTP Basic Authentication example application](https://github.com/fanoframework/fano-basic-auth) demonstrates how to use [HTTP Basic Authentication](/security/http-authentication) (RFC 2617) in Fano Framework.
 
 ## Explore more
