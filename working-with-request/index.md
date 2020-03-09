@@ -142,6 +142,50 @@ var langAvail : boolean;
 langAvail := request.headers().has('Accept-Language');
 ```
 
+## <a name="handling-request-with-json-body"></a>Handling request with JSON body
+
+To handle request with `application/json`, such as following shell command
+
+```
+$ curl --header "Content-Type: application/json" \
+    --request POST \
+    --data '{"username":"xyz","password":"xyz"}' \
+    http://yourapp.fano/submit
+```
+
+Fano Framework provides `TJsonRequest` class which decorate `IRequest` instance to handle such request. For example, to read `username` in request above,
+
+```
+var originalRequest, jsonRequest : IRequest;
+...
+jsonRequest := TJsonRequest.create(originalRequest);
+username := jsonRequest.getParsedBodyParam('username');
+password := jsonRequest.getParsedBodyParam('password');
+```
+
+For more complex JSON structure, you can read it using its name separated by dot. For JSON data,
+
+```
+{
+    "username" : "xyz",
+    "password" : "xyz",
+    "login" : {
+        "lastLogin" : "2020-02-10 10:10:00"
+    }
+}
+```
+You can read `lastLogin` data as follows,
+
+```
+lastLogin := jsonRequest.getParsedBodyParam('login.lastLogin');
+```
+
+The process of wrapping original request as `TJsonRequest` is implemented in `TJsonContentTypeMiddleware` middleware. When you attach this middleware to a route, everytime application receive method `POST`, `PUT`, `DELETE` with `Content-Type` header set to `application/json`, original request will be wrapped inside `TJsonRequest`.
+
+Please read [middleware documentation](/middlewares) for information how to to work with middleware.
+
+See [Fano Json Request](https://github.com/fanoframework/fano-json-request) for example how to use `TJsonContentTypeMiddleware` middleware to handle request with JSON body.
+
 ## Explore more
 
 - [Working with response](/working-with-response)

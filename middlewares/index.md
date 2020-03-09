@@ -284,6 +284,7 @@ Fano Framework provides several built-in middlewares.
 - `TCorsMiddleware`, middleware class which adds CORS response header. Read [Handling CORS](/security/handling-cors) for more information.
 - `TCsrfMiddleware`, middleware class which adds CSRF protection. Read [Cross-Site Request Forgery (CSRF)](/security/csrf-protection) for more information.
 - `TValidationMiddleware`, middleware class which validate request.
+- `TJsonContentTypeMiddleware`, middleware class which handle request with `application/json` in its header. For more information, read [Handling request with JSON body](/working-with-request#handling-request-with-json-body).
 
 ### Group several middlewares as one
 
