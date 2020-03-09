@@ -153,7 +153,7 @@ $ curl --header "Content-Type: application/json" \
     http://yourapp.fano/submit
 ```
 
-Fano Framework provides `TJsonRequest` class which decorate `IRequest` instance to handle such request. For example, to read `username` in request above,
+Fano Framework provides `TJsonRequest` class which decorates `IRequest` instance to handle such request. For example, to read `username` in request above,
 
 ```
 var originalRequest, jsonRequest : IRequest;
@@ -182,7 +182,7 @@ lastLogin := jsonRequest.getParsedBodyParam('login.lastLogin');
 
 The process of wrapping original request as `TJsonRequest` is implemented in `TJsonContentTypeMiddleware` middleware. When you attach this middleware to a route, everytime application receive method `POST`, `PUT`, `DELETE` with `Content-Type` header set to `application/json`, original request will be wrapped inside `TJsonRequest`.
 
-Please read [middleware documentation](/middlewares) for information how to to work with middleware.
+Please read [middleware documentation](/middlewares) for information how to work with middleware.
 
 See [Fano Json Request](https://github.com/fanoframework/fano-json-request) for example how to use `TJsonContentTypeMiddleware` middleware to handle request with JSON body.
 
