@@ -31,7 +31,7 @@ Following example applications show how to [work with response](/working-with-re
 
 ## MVC web application
 
-[Fano Mvc](https://github.com/fanoframework/fano-mvc) demonstrate how to separate logic of application using [Model](/working-with-models), [View](/working-with-views), [Controller](/working-with-controllers). It also demonstrates show to use HTML view template to compose application UI layout.
+[Fano Mvc](https://github.com/fanoframework/fano-mvc) demonstrate how to separate logic of application using [Model](/working-with-models), [View](/working-with-views), [Controller](/working-with-controllers). It also demonstrates how to use HTML view template to compose application UI layout.
 
 ## File upload
 
@@ -76,6 +76,10 @@ Following example applications demonstrate how to use session with Fano Framewor
 ## HTTP Authentication examples
 
 [HTTP Basic Authentication example application](https://github.com/fanoframework/fano-basic-auth) demonstrates how to use [HTTP Basic Authentication](/security/http-authentication) (RFC 2617) in Fano Framework.
+
+## Handling request with JSON body
+
+[Fano Json Request](https://github.com/fanoframework/fano-json-request) demonstrates how to [handle request with JSON body](/working-with-request#handling-request-with-json-body).
 
 ## Explore more
 

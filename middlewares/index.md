@@ -12,7 +12,7 @@ In Fano Framework, middleware is an optional software component that is executed
 For example, middleware allows developer to test if user is logged in before request reaches controller. If user is not logged in, it blocks request.
 So when controller is executed, developer can be sure that user must be logged in.
 
-Single middleware instance can be attach to one or more route. This allows centralized action to be taken for multiple controllers.
+Single middleware instance can be attached to one or more routes. This allows centralized action to be taken for multiple controllers.
 
 So, instead of tedious check each time controller is executed,
 
@@ -284,6 +284,7 @@ Fano Framework provides several built-in middlewares.
 - `TCorsMiddleware`, middleware class which adds CORS response header. Read [Handling CORS](/security/handling-cors) for more information.
 - `TCsrfMiddleware`, middleware class which adds CSRF protection. Read [Cross-Site Request Forgery (CSRF)](/security/csrf-protection) for more information.
 - `TValidationMiddleware`, middleware class which validate request.
+- `TJsonContentTypeMiddleware`, middleware class which handle request with `application/json` in its header. For more information, read [Handling request with JSON body](/working-with-request#handling-request-with-json-body).
 
 ### Group several middlewares as one
 
