@@ -291,7 +291,7 @@ Validation will pass only if you pass integer value < 100.
 Data must be integer value greater than predefined value.
 
 ```
-rule := TMaxIntegerValidator.create(100);
+rule := TGreaterThanValidator.create(100);
 ```
 Validation will pass only if you pass integer value > 100.
 
