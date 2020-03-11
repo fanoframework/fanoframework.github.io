@@ -126,6 +126,25 @@ This validator will give result as shown in following example input,
 'my-slug--title' ==> fail
 ```
 
+### TPhoneValidator
+
+Data must be in phone number format.
+
+```
+rule := TPhoneValidator.create(TRegex.create());
+```
+
+This validator will give result as shown in following example input,
+
+```
+'081123456' ==> pass
+'081-1234-56-7' ==> pass
+'(081)-1234-56-7' ==> pass
+'081-12-34-567' ==> pass
+'a0811234567' ==> fail
+'081-1234-56-7a' ==> fail
+```
+
 ### TRegexValidator
 
 Data must be in format as specified by regular expression pattern.
@@ -148,6 +167,24 @@ Data must be string with its length is equal to predefined value. For example, d
 
 ```
 rule := TEqualLengthValidator.create(10);
+```
+
+## Constant string equality
+
+### TEqualStrValidator
+
+Data must be matched predefined constant string. For example, data being validated must equals string `test` to pass validation.
+
+```
+rule := TEqualStrValidator.create('test');
+```
+
+### TCaseInsensitiveEqualStrValidator
+
+Data must be matched predefined constant string in case-insensitive manner. For example, data being validated can equal to `test`, `Test`, `teSt` to pass validation.
+
+```
+rule := TCaseInsensitiveEqualStrValidator.create('test');
 ```
 
 ### TMinLengthValidator
@@ -584,6 +621,22 @@ Data must be valid IP address (IPV4).
 
 ```
 rule := TIpv4Validator.create();
+```
+
+### TMacAddrValidator
+
+Data must be valid MAC address.
+
+```
+rule := TMAcAddrValidator.create(TRegex.create());
+```
+
+### TJsonValidator
+
+Data must be valid JSON.
+
+```
+rule := TJsonValidator.create();
 ```
 
 ### TBaseValidator
