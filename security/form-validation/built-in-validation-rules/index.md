@@ -173,7 +173,7 @@ rule := TEqualLengthValidator.create(10);
 
 ### TEqualStrValidator
 
-Data must be matched predefined constant string. For example, data being validated must equals string `test` to pass validation.
+Data must match predefined constant string. For example, data being validated must equals string `test` to pass validation.
 
 ```
 rule := TEqualStrValidator.create('test');
@@ -181,7 +181,7 @@ rule := TEqualStrValidator.create('test');
 
 ### TCaseInsensitiveEqualStrValidator
 
-Data must be matched predefined constant string in case-insensitive manner. For example, data being validated can equal to `test`, `Test`, `teSt` to pass validation.
+Data must match predefined constant string in case-insensitive manner. For example, data being validated can equal to `test`, `Test`, `teSt` to pass validation.
 
 ```
 rule := TCaseInsensitiveEqualStrValidator.create('test');
@@ -416,6 +416,24 @@ rule := TBeforeDateTimeFieldValidator.create('event-end-date');
 ```
 
 Above rule makes current field passes validation only if its value is prior than the value in `event-end-date` field.
+
+## <a name="file-directory"></a>File and Directory
+
+### TFileValidator
+
+Data must be name of file which exists.
+
+```
+rule := TFileValidator.create('images/image.jpg');
+```
+
+### TDirectoryValidator
+
+Data must be name of directory which exists.
+
+```
+rule := TDirectoryValidator.create('images');
+```
 
 ## <a name="uploaded-file"></a>Uploaded file
 
