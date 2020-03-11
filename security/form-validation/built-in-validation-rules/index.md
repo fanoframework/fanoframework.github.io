@@ -370,7 +370,7 @@ Validation will pass only if its value equals to `foo` or `bar`.
 Data must be one of predefined integer values.
 
 ```
-rule := TInValidator.create([1, 2, 3]);
+rule := TInIntValidator.create([1, 2, 3]);
 ```
 Validation will pass only if its value equals to 1, 2 or 3.
 
