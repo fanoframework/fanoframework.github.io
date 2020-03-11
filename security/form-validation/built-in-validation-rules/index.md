@@ -358,12 +358,22 @@ rule := TAcceptedValidator.create();
 
 ### TInValidator
 
-Data must be one of predefined values.
+Data must be one of predefined string values.
 
 ```
 rule := TInValidator.create(['foo', 'bar']);
 ```
-Validation will pass only if its value is equal to `foo` or `bar`.
+Validation will pass only if its value equals to `foo` or `bar`.
+
+### TInIntValidator
+
+Data must be one of predefined integer values.
+
+```
+rule := TInValidator.create([1, 2, 3]);
+```
+Validation will pass only if its value equals to 1, 2 or 3.
+
 
 ### TNotInValidator
 
