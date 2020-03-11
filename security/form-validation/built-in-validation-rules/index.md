@@ -277,6 +277,33 @@ rule := TMaxIntegerValidator.create(100);
 ```
 Validation will pass only if you pass integer value <= 100.
 
+### TLessThanValidator
+
+Data must be integer value less than predefined value.
+
+```
+rule := TLessThanValidator.create(100);
+```
+Validation will pass only if you pass integer value < 100.
+
+### TGreaterThanValidator
+
+Data must be integer value greater than predefined value.
+
+```
+rule := TGreaterThanValidator.create(100);
+```
+Validation will pass only if you pass integer value > 100.
+
+### TEqualIntValidator
+
+Data must be integer value equals predefined value.
+
+```
+rule := TEqualIntValidator.create(100);
+```
+Validation will pass only if you pass integer equals 100.
+
 ### TPositiveIntValidator
 
 Data must be positive integer value.
@@ -331,12 +358,22 @@ rule := TAcceptedValidator.create();
 
 ### TInValidator
 
-Data must be one of predefined values.
+Data must be one of predefined string values.
 
 ```
 rule := TInValidator.create(['foo', 'bar']);
 ```
-Validation will pass only if its value is equal to `foo` or `bar`.
+Validation will pass only if its value equals to `foo` or `bar`.
+
+### TInIntValidator
+
+Data must be one of predefined integer values.
+
+```
+rule := TInValidator.create([1, 2, 3]);
+```
+Validation will pass only if its value equals to 1, 2 or 3.
+
 
 ### TNotInValidator
 
