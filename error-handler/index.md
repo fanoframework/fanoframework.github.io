@@ -38,6 +38,7 @@ dependency container, developer may forget to inject error handler instance.
 
 Fano Framework comes with several `IErrorHandler` implementation.
 
+- `TFancyErrorHandler`, default basic error handler that output error in themed HTML. You use this mostly for development purpose as it displays verbose error information.
 - `TErrorHandler`, basic error handler that output error in plain HTML. You use this mostly for development purpose as it displays verbose error information.
 - `TAjaxErrorHandler`, error handler that output error informations as JSON.
 - `TNullErrorHandler`, error handler that output nothing except HTTP error.
@@ -52,14 +53,14 @@ Fano Framework comes with several `IErrorHandler` implementation.
 
 ## Display verbose error message
 
-`TErrorHandler` is one of basic implementation of `IErrorHandler`, which
+`TFancyErrorHandler` and `TErrorHandler` are basic implementation of `IErrorHandler`, which
 display basic error information in HTML content type such as type of exception
 raised, exception message and stacktrace and environment variables.
 
 If you compile application with debugging information such as `-g` or `-gh` flag,
 stacktrace is quite detail such as line number in source file. Without debugging information, it only displays memory location.
 
-By default, when you inherit application service provider from `TBasicAppServiceProvider`, this is what you get.
+By default, when you inherit application service provider from `TBasicAppServiceProvider`, you use `TFancyErrorHandler` error handler.
 
 ```
 type
