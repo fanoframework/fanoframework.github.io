@@ -159,16 +159,6 @@ rule := TRegexValidator.create(
 
 `%s` will be replaced with field name being validated.
 
-## String length
-
-### TEqualLengthValidator
-
-Data must be string with its length is equal to predefined value. For example, data being validated must contains exacly 10 characters to pass validation.
-
-```
-rule := TEqualLengthValidator.create(10);
-```
-
 ## Constant string equality
 
 ### TEqualStrValidator
@@ -185,6 +175,16 @@ Data must match predefined constant string in case-insensitive manner. For examp
 
 ```
 rule := TCaseInsensitiveEqualStrValidator.create('test');
+```
+
+## String length
+
+### TEqualLengthValidator
+
+Data must be string with its length is equal to predefined value. For example, data being validated must contains exacly 10 characters to pass validation.
+
+```
+rule := TEqualLengthValidator.create(10);
 ```
 
 ### TMinLengthValidator
