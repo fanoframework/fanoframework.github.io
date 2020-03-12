@@ -562,6 +562,7 @@ rule := TAntivirusValidator.create(
 
 Listening on TCP socket by default is disabled in configuration. You can inspect current ClamAV configuration by running `clamconf` command. Read [ClamAV configuration](https://www.clamav.net/documents/configuration) for information on how to configure it.
 
+To safely test antivirus validator, use [Eicar virus sample test file](http://www.eicar.org/download/eicar.com.txt). It does not contain actual virus so it is safe, but many anti virus vendors agree to report it as virus. ClamAV will report it with virus signature `Eicar-Test-Signature`. [Read Eicar test file for more information](https://en.wikipedia.org/wiki/EICAR_test_file).
 
 #### Null
 To use null implementation, use `TNullAv` class.
