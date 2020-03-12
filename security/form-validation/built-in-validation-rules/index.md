@@ -526,25 +526,50 @@ rule := TImageGifValidator.create();
 
 ### TAntivirusValidator
 
-Field must be valid uploaded file and must be free from computer virus. Current implementation supports [ClamAV](https://www.clamav.net/documents/libclamav) and null implementation only.
+Field must be valid uploaded file and must be free from computer virus. Current implementation supports [ClamAV](https://www.clamav.net) via [clamav-daemon](https://www.clamav.net/documents/scanning#clamd) and null implementation only.
 
-To use ClamAV, you need to install ClamAV antivirus on server and also define `LIBCLAMAV`
+#### ClamAV
+Previous implementation which uses [libclamav](https://www.clamav.net/documents/libclamav)  directly is removed due to unstable code.
 
-```
-{$DEFINE LIBCLAMAV}
-```
-
-or through command line parameter `-dLIBCLAMAV`.
+To use ClamAV, you need to install ClamAV antivirus and its daemon on server. For example
 
 ```
-rule := TAntivirusValidator.create(TClamAv.create());
+$ sudo apt-get install clamav clamav-daemon
+```
+Run `clamav-daemon` service,
+
+```
+$ sudo systemctl start clamav-daemon
 ```
 
-To use null implementation use `TNullAv` class.
+Create validator as follows,
+
+```
+rule := TAntivirusValidator.create(
+    TLocalClamdAv.create('/var/run/clamav/clamd.ctl')
+);
+```
+
+where `/var/run/clamav/clamd.ctl` is default unix domain socket file where `clamav-daemon` is listening. To listen using TCP socket, use,
+
+```
+rule := TAntivirusValidator.create(
+    TLocalClamdAv.create('127.0.0.1', 3310)
+);
+```
+
+`TLocalClamdAv` class assumes that ClamAV daemon is running on same machine as our application, thus, can read uploaded file directly. If daemon is running on different machine than application, you can not use `TLocalClamdAv`.
+
+Listening on TCP socket by default is disabled in configuration. You can inspect current ClamAV configuration by running `clamconf` command. Read [ClamAV configuration](https://www.clamav.net/documents/configuration) for information on how to configure it.
+
+
+#### Null
+To use null implementation, use `TNullAv` class.
 
 ```
 rule := TAntivirusValidator.create(TNullAv.create());
 ```
+This is provided to bypass antivirus scanning.
 
 ## Miscellaneous
 
