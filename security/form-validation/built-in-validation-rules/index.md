@@ -489,7 +489,7 @@ Field must be valid uploaded file and its content type must be one of predefined
 ```
 rule := TUploadedMimeValidator.create(['image/jpg', 'image/png']);
 ```
-Please not that this validation rule does not check if file uploaded is actually JPEG/PNG image.
+Please note that this validation rule does not check if file uploaded is actually JPEG/PNG image.
 
 ### TUploadedSizeValidator
 
@@ -526,7 +526,9 @@ rule := TImageGifValidator.create();
 
 ### TAntivirusValidator
 
-Field must be valid uploaded file and must be free from computer virus. Current implementation supports [ClamAV](https://www.clamav.net/documents/libclamav) only. You need to install ClamAV antivirus on server and also define `LIBCLAMAV`
+Field must be valid uploaded file and must be free from computer virus. Current implementation supports [ClamAV](https://www.clamav.net/documents/libclamav) and null implementation only.
+
+To use ClamAV, you need to install ClamAV antivirus on server and also define `LIBCLAMAV`
 
 ```
 {$DEFINE LIBCLAMAV}
@@ -536,6 +538,12 @@ or through command line parameter `-dLIBCLAMAV`.
 
 ```
 rule := TAntivirusValidator.create(TClamAv.create());
+```
+
+To use null implementation use `TNullAv` class.
+
+```
+rule := TAntivirusValidator.create(TNullAv.create());
 ```
 
 ## Miscellaneous
@@ -580,6 +588,10 @@ rule := TOrValidator.create([
     TMaxLengthValidator.create(10),
 ]);
 ```
+
+### TAnyOfValidator
+
+Alias of `TOrValidator`.
 
 ### TAndValidator
 
