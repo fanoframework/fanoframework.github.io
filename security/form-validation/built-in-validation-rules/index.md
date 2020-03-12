@@ -370,7 +370,7 @@ Validation will pass only if its value equals to `foo` or `bar`.
 Data must be one of predefined integer values.
 
 ```
-rule := TInValidator.create([1, 2, 3]);
+rule := TInIntValidator.create([1, 2, 3]);
 ```
 Validation will pass only if its value equals to 1, 2 or 3.
 
@@ -489,7 +489,7 @@ Field must be valid uploaded file and its content type must be one of predefined
 ```
 rule := TUploadedMimeValidator.create(['image/jpg', 'image/png']);
 ```
-Please not that this validation rule does not check if file uploaded is actually JPEG/PNG image.
+Please note that this validation rule does not check if file uploaded is actually JPEG/PNG image.
 
 ### TUploadedSizeValidator
 
@@ -526,17 +526,54 @@ rule := TImageGifValidator.create();
 
 ### TAntivirusValidator
 
-Field must be valid uploaded file and must be free from computer virus. Current implementation supports [ClamAV](https://www.clamav.net/documents/libclamav) only. You need to install ClamAV antivirus on server and also define `LIBCLAMAV`
+Field must be valid uploaded file and must be free from computer virus. Current implementation supports [ClamAV](https://www.clamav.net) via [clamav-daemon](https://www.clamav.net/documents/scanning#clamd) and null implementation only.
+
+#### ClamAV
+Previous implementation which uses [libclamav](https://www.clamav.net/documents/libclamav)  directly is removed due to unstable code.
+
+To use ClamAV, you need to install ClamAV antivirus and its daemon on server. For example
 
 ```
-{$DEFINE LIBCLAMAV}
+$ sudo apt-get install clamav clamav-daemon
+```
+Run `clamav-daemon` service,
+
+```
+$ sudo systemctl start clamav-daemon
 ```
 
-or through command line parameter `-dLIBCLAMAV`.
+Create validator as follows,
 
 ```
-rule := TAntivirusValidator.create(TClamAv.create());
+rule := TAntivirusValidator.create(
+    TLocalClamdAv.create('/var/run/clamav/clamd.ctl')
+);
 ```
+
+where `/var/run/clamav/clamd.ctl` is default unix domain socket file where `clamav-daemon` is listening. To listen using TCP socket, use,
+
+```
+rule := TAntivirusValidator.create(
+    TLocalClamdAv.create('127.0.0.1', 3310)
+);
+```
+
+`TLocalClamdAv` class assumes that ClamAV daemon is running on same machine as our application, thus, can read uploaded file directly. If daemon is running on different machine than application, you can not use `TLocalClamdAv`.
+
+Listening on TCP socket by default is disabled in configuration. You can inspect current ClamAV configuration by running `clamconf` command. Read [ClamAV configuration](https://www.clamav.net/documents/configuration) for information on how to configure it.
+
+To safely test antivirus validator, use [Eicar virus sample test file](http://www.eicar.org/download/eicar.com.txt). It does not contain actual virus so it is safe, but many anti virus vendors agree to report it as virus. ClamAV will report it with virus signature `Eicar-Test-Signature`. [Read Eicar test file for more information](https://en.wikipedia.org/wiki/EICAR_test_file).
+
+Please note that virus scanning is expensive task especially if you handle big file.
+You should think carefully about performance when using this validator.
+
+#### Null
+To use null implementation, use `TNullAv` class.
+
+```
+rule := TAntivirusValidator.create(TNullAv.create());
+```
+This is provided to bypass antivirus scanning.
 
 ## Miscellaneous
 
@@ -580,6 +617,10 @@ rule := TOrValidator.create([
     TMaxLengthValidator.create(10),
 ]);
 ```
+
+### TAnyOfValidator
+
+Alias of `TOrValidator`.
 
 ### TAndValidator
 
