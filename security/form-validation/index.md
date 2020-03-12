@@ -34,7 +34,7 @@ A validation rule is class which responsible to decide if data being processed i
 ```
 function isValid(
     const key : shortstring;
-    const dataToValidate : IList;
+    const dataToValidate : IReadOnlyList;
     const request : IRequest
 ) : boolean;
 
