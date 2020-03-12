@@ -564,6 +564,9 @@ Listening on TCP socket by default is disabled in configuration. You can inspect
 
 To safely test antivirus validator, use [Eicar virus sample test file](http://www.eicar.org/download/eicar.com.txt). It does not contain actual virus so it is safe, but many anti virus vendors agree to report it as virus. ClamAV will report it with virus signature `Eicar-Test-Signature`. [Read Eicar test file for more information](https://en.wikipedia.org/wiki/EICAR_test_file).
 
+Please note that virus scanning is expensive task especially if you handle big file.
+You should think carefully about performance when using this validator.
+
 #### Null
 To use null implementation, use `TNullAv` class.
 
