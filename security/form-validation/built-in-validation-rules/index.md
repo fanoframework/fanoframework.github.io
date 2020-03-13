@@ -558,7 +558,15 @@ rule := TAntivirusValidator.create(
 );
 ```
 
-`TLocalClamdAv` class assumes that ClamAV daemon is running on same machine as our application, thus, can read uploaded file directly. If daemon is running on different machine than application, you can not use `TLocalClamdAv`.
+`TLocalClamdAv` works by sending absolute file path. It assumes that ClamAV daemon is running on same machine as our application, thus, can read uploaded file directly.
+
+If daemon is running on different machine than application, it can not read file directly, so you can not use `TLocalClamdAv` and must use `TClamdAv`. `TClamdAv` works by sending content of file to daemon, thus more expensive in term of network operation but more flexible as it allows daemon to run on different machine than application.
+
+```
+rule := TAntivirusValidator.create(
+    TClamdAv.create('/var/run/clamav/clamd.ctl')
+);
+```
 
 Listening on TCP socket by default is disabled in configuration. You can inspect current ClamAV configuration by running `clamconf` command. Read [ClamAV configuration](https://www.clamav.net/documents/configuration) for information on how to configure it.
 
