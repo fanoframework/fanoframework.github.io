@@ -36,6 +36,7 @@ Following example applications show how to [work with response](/working-with-re
 ## File upload
 
 [Handling upload example](https://github.com/fanoframework/fano-upload) shows how to [handle file upload](/handling-file-upload) in Fano Framework.
+For example how to validate file upload, read [Form Validation](#form-validation) section below.
 
 ## Database
 
@@ -65,7 +66,7 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 [Cross-Site Request Forgery (CSRF) protection example](https://github.com/fanoframework/fano-csrf) demonstrate how to [protect application from CSRF attack](/security/csrf-protection).
 
-## Form validation
+## <a name="form-validation"></a>Form validation
 
 - [Form Validation example](https://github.com/fanoframework/fano-validation) demonstrate how to use Fano Framework input [validation feature](/security/form-validation).
 - [File upload validation example](https://github.com/fanoframework/fano-scgi-upload) demonstrate how to use Fano Framework input [validation feature](/security/form-validation) to validate [file upload](/handling-file-upload) using various validation rules.
