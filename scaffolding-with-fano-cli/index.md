@@ -189,7 +189,7 @@ $ fanocli --key=32
 
 If `length` is not set, it is assumed 64 bytes of random value. Output is Base64 encoded string of random bytes.
 
-## <a name"generate-guid"></a>Generate GUID
+## <a name="generate-guid"></a>Generate GUID
 
 To generate GUID, run with  `--guid` command line options
 
