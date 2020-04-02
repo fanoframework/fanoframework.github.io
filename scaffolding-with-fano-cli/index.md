@@ -37,7 +37,7 @@ To view available command, you can run
 $ fanocli --help
 ```
 
-## <a name"creating-project"></a>Creating Web Application Project
+## <a name="creating-project"></a>Creating Web Application Project
 
 Fano CLI provides several commands for scaffolding Fano Framework web application easily such as `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which to create web application project using CGI, FastCGI, SCGI and uwsgi, http (using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)) protocol.
 
@@ -48,7 +48,7 @@ $ fanocli --project-cgi=[project-name]
 `[project-name]` is directory where project resides and will be created by Fano CLI. Please read [Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project) for more detail explanation of each command.
 
 
-## <a name"creating-controller"></a>Creating controller
+## <a name="creating-controller"></a>Creating controller
 
 After you create project structure, to scaffold controller class, run with  `--controller` command line options
 
@@ -88,7 +88,7 @@ To create controller for certain route pattern or HTTP method, add `--route` and
 $ fanocli --controller=Hello --route=/my/hello --method=POST
 ```
 
-## <a name"creating-view"></a>Creating view
+## <a name="creating-view"></a>Creating view
 
 After you create project structure, to scaffold view class, run with  `--view` command line options
 
@@ -113,7 +113,7 @@ test-fano/build.cfg
 test-fano/build.cfg.sample
 ```
 
-## <a name"creating-model"></a>Creating model
+## <a name="creating-model"></a>Creating model
 
 After you create project structure, to scaffold model class, run with  `--model` command line option
 
@@ -163,7 +163,7 @@ Any project creation commands, i.e, `--project*` commands, accept additional par
 $ fanocli --project=Hello --with-middleware
 ```
 
-## <a href="creating-middleware"></a>Creating middleware
+## <a name="creating-middleware"></a>Creating middleware
 
 To scaffold middleware class, run with  `--middleware` command line options
 
@@ -179,7 +179,7 @@ test-fano/src/Middlewares/AuthOnly/AuthOnlyMiddleware.pas
 test-fano/src/Middlewares/AuthOnly/Factories/AuthOnlyMiddlewareFactory.pas
 ```
 
-## <a name"generate-random-key"></a>Generate random key
+## <a name="generate-random-key"></a>Generate random key
 
 To generate random key, run with  `--key=[length]` command line options
 
@@ -197,7 +197,7 @@ To generate GUID, run with  `--guid` command line options
 $ fanocli --guid
 ```
 
-## <a name"minify-javascript"></a> Minify JavaScript files
+## <a name="minify-javascript"></a> Minify JavaScript files
 
 To reduce JavaScript file size, run with  `--jsmin=[path]` command line options.
 
@@ -257,7 +257,7 @@ $ fanocli --project-cgi=Hello --with-session --with-middleware
 
 Please read [Working with Session](/working-with-session) for more information about session.
 
-## <a name"deployment"></a>Deployment
+## <a name="deployment"></a>Deployment
 
 Fano CLI offers commands to simplify setting up Fano web application with various web server through following commands,
 
