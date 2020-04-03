@@ -13,7 +13,6 @@ Following document explains minimum steps required to setup a working Fano web a
 - [Free Pascal >= 3.0](https://www.freepascal.org)
 - [git](https://git-scm.com/)
 - [Apache 2.4](https://httpd.apache.org/)
-- Text editor, vim, VSCode, Atom etc.
 - [Fano CLI](https://github.com/fanoframework/fano-cli)
 - Working Internet connection.
 - Root privilege (for setting up virtual host).

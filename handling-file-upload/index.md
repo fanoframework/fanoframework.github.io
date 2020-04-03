@@ -94,8 +94,9 @@ Fano Framework validation feature provides several built-in validation rules you
 
 ## Example demo
 
-For example application that demonstrate how to handle file upload with Fano Framework, see
+For example application that demonstrates how to handle file upload with Fano Framework, see
 [Fano Upload](https://github.com/fanoframework/fano-upload).
+While [Fano Scgi Upload example](https://github.com/fanoframework/fano-scgi-upload) shows how to validate file being uploaded using various validation rules..
 
 ## Explore more
 
