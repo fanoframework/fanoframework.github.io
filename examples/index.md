@@ -55,7 +55,7 @@ Following example applications show how to work with SQL and NoSQL databases by 
 
 Following example applications demonstrate how to use session with Fano Framework.
 
-- [Session example](https://github.com/fanoframework/fano-session) demonstrates how to use session that is stored in file on server. See [live example here](https://fano.web.id/).
+- [Session example](https://github.com/fanoframework/fano-session) demonstrates how to use session that is stored in file on server. 
 - [Session in encrypted cookie example](https://github.com/fanoframework/fano-session-cookie) demonstrates session that is stored in encrypted cookie.
 
 ## Cross-Origin Resource Sharing (CORS)
