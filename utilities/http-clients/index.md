@@ -186,4 +186,5 @@ httpGet := container['http.get'] as IHttpGetClient;
 
 ## Explore more
 
-- [Example web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elasticsearch)
+- [Example web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elasticsearch). This example use curl to call Elasticsearch API.
+- [Example SCGI web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elastic). This example use TFPHttpClient to call Elasticsearch API.
