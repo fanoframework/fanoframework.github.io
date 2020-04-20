@@ -87,7 +87,7 @@ $ ./build.sh
 $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 ```
 
-`&` is required to make sure that both applications is running in parallel.
+`&` is required to make sure that both applications are running in parallel.
 
 ## Access application from browser
 
