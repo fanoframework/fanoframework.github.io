@@ -22,7 +22,7 @@ The difference is that you need to pass `--web-server=nginx` parameter when depl
 $ sudo fanocli --deploy-lb-scgi=myapp.fano --web-server=nginx
 ```
 
-Replace with `--deploy-lb-fcgi` or `--deploy-lb-uwsgi` for setting up FastCGI or uwsgi web application respectively.
+Replace with `--deploy-lb-fcgi`, `--deploy-lb-uwsgi` or `--deploy-lb-http` for setting up FastCGI, uwsgi or http web application respectively.
 
 ## Deploy Fano Application with load balancer manually
 
@@ -87,7 +87,7 @@ $ ./build.sh
 $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 ```
 
-`&` is required to make sure that both applications is running in background.
+`&` is required to make sure that both applications are running in parallel.
 
 ## Access application from browser
 

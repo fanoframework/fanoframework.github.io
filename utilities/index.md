@@ -8,3 +8,7 @@ description: Tutorial on how to work with some utilities provided by Fano Framew
 ## Logging things in Fano Framework
 
 - [Using loggers](/utilities/using-loggers)
+
+## HTTP Clients
+
+- [Use HTTP client to call API](/utilities/http-clients)

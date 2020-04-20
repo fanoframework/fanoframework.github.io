@@ -60,6 +60,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 ## Utilities
 
 - [Using Loggers](/utilities/using-loggers)
+- [Use HTTP client to call API](/utilities/http-clients)
 
 ## Database
 

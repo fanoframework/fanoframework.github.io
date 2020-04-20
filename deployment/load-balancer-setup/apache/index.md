@@ -83,7 +83,7 @@ Add, for example, following code,
 </VirtualHost>
 ```
 
-Replace `BalancerMember` url according to protocol, host and port of the application. For example, replace with `fcgi://127.0.0.1:20477` or `uwsgi://127.0.0.1:20477`  for FastCGI or uwsgi protocol.
+Replace `BalancerMember` url according to protocol, host and port of the application. For example, replace with `fcgi://127.0.0.1:20477`, `uwsgi://127.0.0.1:20477` or `http://127.0.0.1:20477` for FastCGI, uwsgi or http protocol.
 
 ## Running multiple applications with load balancer
 
@@ -94,7 +94,7 @@ $ ./build.sh
 $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 ```
 
-`&` is required to make sure that both applications is running in background.
+`&` is required to make sure that both applicationsare running in parallel.
 
 ## Access application from browser
 

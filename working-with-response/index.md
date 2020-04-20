@@ -217,6 +217,19 @@ begin
 end;
 ```
 
+Any exceptions will be handled as HTTP 500 error except `EInvalidRequest`, `ENotFound`,  `EMethodNotAllowed` and `EInvalidMethod` exceptions which will be handled as HTTP 400, 404, 405 and 501 respectively.
+
+```
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+begin
+    raise ENotFound.create('Resource not found');
+end;
+```
+
 ## Explore more
 
 - [Working with Request](/working-with-request)

@@ -43,6 +43,7 @@ For example how to validate file upload, read [Form Validation](#form-validation
 Following example applications show how to work with SQL and NoSQL databases by modelling data as [model](/working-with-models).
 
 - [Example web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elasticsearch)
+- [Example SCGI web application that load data from Elasticsearch](https://github.com/fanoframework/fano-elastic)
 - [MySQL web application example](https://github.com/fanoframework/fano-app-db)
 - [Database connection pool example](https://github.com/fanoframework/fano-db-pool)
 - [PostgreSQL web application example](https://github.com/fanoframework/fano-postgresql)
@@ -55,7 +56,7 @@ Following example applications show how to work with SQL and NoSQL databases by 
 
 Following example applications demonstrate how to use session with Fano Framework.
 
-- [Session example](https://github.com/fanoframework/fano-session) demonstrates how to use session that is stored in file on server. See [live example here](https://fano.web.id/).
+- [Session example](https://github.com/fanoframework/fano-session) demonstrates how to use session that is stored in file on server.
 - [Session in encrypted cookie example](https://github.com/fanoframework/fano-session-cookie) demonstrates session that is stored in encrypted cookie.
 
 ## Cross-Origin Resource Sharing (CORS)
