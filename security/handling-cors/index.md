@@ -46,7 +46,7 @@ To use `TNullCorsMiddlewareFactory`, just replace `TCorsMiddlewareFactory` above
 ## Register dispatcher with support middleware
 
 Because we need to execute middlewares, we cannot use `TSimpleDispatcher` class which
-by default is already registered when we use, for example, `TBasicAppSeriveProvider` class.
+by default is already registered when we use, for example, `TBasicAppServiceProvider` class.
 
 So we need to use `TDispatcher` class which support middlewares.
 
