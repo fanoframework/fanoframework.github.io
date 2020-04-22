@@ -43,7 +43,7 @@ container.add(
 
 To use `TNullCorsMiddlewareFactory`, just replace `TCorsMiddlewareFactory` above.
 
-## Register dispatcher with support middleware
+## Register dispatcher with middleware support
 
 Because we need to execute middlewares, we cannot use `TSimpleDispatcher` class which
 by default is already registered when we use, for example, `TBasicAppServiceProvider` class.
