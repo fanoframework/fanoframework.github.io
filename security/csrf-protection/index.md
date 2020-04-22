@@ -42,10 +42,12 @@ container.add(
     TCsrfMiddlewareFactory.create(config.getString('secretKey'))
 );
 ```
+where `config` is instance of `IAppConfiguration`. Read [Configuration](/configuration) for more information on how 
+to work with application configuration.
 
-## Register dispatcher with support middleware
+## Register dispatcher with middleware and session support
 
-We need to use dispatcher class which support middlewares and sessions.
+We need to use dispatcher class which support middlewares and sessions, i.e `TSessionDispatcher`.
 
 ```
 container.add(
