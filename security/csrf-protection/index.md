@@ -69,7 +69,7 @@ Attach CSRF middleware instance to application middleware collection to ensure
 CSRF middleware is executed for all application routes.
 
 ```
-globalMiddlewares.add(container.get('verifyCsrfToken') as IMiddleware);
+globalMiddlewares.add(container['verifyCsrfToken'] as IMiddleware);
 ```
 
 ## Get current CSRF token
@@ -107,7 +107,7 @@ CSRF token verification is done in CSRF middleware automatically for POST, PUT, 
 
 If they are matched, execution continues to next middlewares otherwise it stops by calling failure request handler you set when creating CSRF middleware.
 
-CSRF token is for one-time use only. After token verifiction, new token and name is generated and then it is replaced old token and name in session.
+CSRF token is for one-time use only. After token verification, new token and name is generated and then it is replaced old token and name in session.
 
 ## Configure CSRF middleware settings
 
