@@ -91,6 +91,11 @@ You can also use simplified array-like syntax, for example
 ```
 router := container['router'] as IRouteMatcher;
 ```
+or
+
+```
+router := container.services['router'] as IRouteMatcher;
+```
 
 ## Test if service is registered
 
