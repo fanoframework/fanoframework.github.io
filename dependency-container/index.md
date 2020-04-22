@@ -33,7 +33,7 @@ For a service to be able to work with `IDependencyContainer` implementation, it 
 
 To register a service, dependency container provides two method `add()` and `factory()`. Both methods expects two parameters, shortstring value of service name and instance of
 `IDependencyFactory` responsible for creating service. You can use any value for service identifier string. If same identifier is already registered, it will overwrite previous `IDependencyFactory`.
-See "Single vs multiple instance"  section for explanation of both methods.
+See [Single vs multiple instance](#single-vs-multiple-instance) section for explanation of both methods.
 
 For example, following code registers service factory `TSimpleRouterFactory` with name `router`. This factory class will create `TRouter` class.
 
@@ -108,7 +108,7 @@ begin
 end;
 ```
 
-## Single vs multiple instance
+## <a name="single-vs-multiple-instance"></a>Single vs multiple instance
 
 When a service is registered using `add()` method, it is registered as single instance service. So every time a service is queried, container returns
 same instance.
