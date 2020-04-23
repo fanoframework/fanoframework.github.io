@@ -198,7 +198,7 @@ You can set it manually if required,
 
 ```
 factory := TCsrfMiddlewareFactory.create()
-    .sessionHandler(container['sessMgr'] as ISessionManager);
+    .sessionManager(container['sessMgr'] as ISessionManager);
 ```
 ## Explore more
 
