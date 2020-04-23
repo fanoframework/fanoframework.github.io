@@ -25,13 +25,15 @@ implementation must implements `IDependencyContainer` interface.
 The services are registered into dependency container during service registration which later can be queried to retrieve service instance.
 
 During service registration, a service name is associated with a factory class
-that must implements `IDependencyFactory` interface that will responsible to create the required service.
+that must implements `IDependencyFactory` interface that will be responsible to create the required service.
 
 For a service to be able to work with `IDependencyContainer` implementation, it must implements `IDependency` interface. Fano Framework comes with base class `TInjectableObject` that implements `IDependency` interface.
 
 ## Service registration
 
-To register a service, dependency container provides two method `add()` and `factory()`. See "Single vs multiple instance"  section for explanation.
+To register a service, dependency container provides two method `add()` and `factory()`. Both methods expects two parameters, shortstring value of service name and instance of
+`IDependencyFactory` responsible for creating service. You can use any value for service identifier string. If same identifier is already registered, it will overwrite previous `IDependencyFactory`.
+See [Single vs multiple instance](#single-vs-multiple-instance) section for explanation of both methods.
 
 For example, following code registers service factory `TSimpleRouterFactory` with name `router`. This factory class will create `TRouter` class.
 
@@ -89,6 +91,11 @@ You can also use simplified array-like syntax, for example
 ```
 router := container['router'] as IRouteMatcher;
 ```
+or
+
+```
+router := container.services['router'] as IRouteMatcher;
+```
 
 ## Test if service is registered
 
@@ -101,7 +108,7 @@ begin
 end;
 ```
 
-## Single vs multiple instance
+## <a name="single-vs-multiple-instance"></a>Single vs multiple instance
 
 When a service is registered using `add()` method, it is registered as single instance service. So every time a service is queried, container returns
 same instance.

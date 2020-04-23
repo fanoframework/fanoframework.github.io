@@ -42,10 +42,12 @@ container.add(
     TCsrfMiddlewareFactory.create(config.getString('secretKey'))
 );
 ```
+where `config` is instance of `IAppConfiguration`. Read [Configuration](/configuration) for more information on how 
+to work with application configuration.
 
-## Register dispatcher with support middleware
+## Register dispatcher with middleware and session support
 
-We need to use dispatcher class which support middlewares and sessions.
+We need to use dispatcher class which support middlewares and sessions, i.e `TSessionDispatcher`.
 
 ```
 container.add(
@@ -69,7 +71,7 @@ Attach CSRF middleware instance to application middleware collection to ensure
 CSRF middleware is executed for all application routes.
 
 ```
-globalMiddlewares.add(container.get('verifyCsrfToken') as IMiddleware);
+globalMiddlewares.add(container['verifyCsrfToken'] as IMiddleware);
 ```
 
 ## Get current CSRF token
@@ -107,7 +109,7 @@ CSRF token verification is done in CSRF middleware automatically for POST, PUT, 
 
 If they are matched, execution continues to next middlewares otherwise it stops by calling failure request handler you set when creating CSRF middleware.
 
-CSRF token is for one-time use only. After token verifiction, new token and name is generated and then it is replaced old token and name in session.
+CSRF token is for one-time use only. After token verification, new token and name is generated and replace old token and name in session.
 
 ## Configure CSRF middleware settings
 
@@ -184,7 +186,7 @@ Failure handler class must implements `IRequestHandler` interface.
 
 ### Change session manager
 
-Csrf middleware needs to get session from current request, thus requires access to `ISessionManager` interface instance. By default if not set, factory class tries to get session manager by requesting service container as down in following code
+Csrf middleware needs to get session from current request, thus requires access to `ISessionManager` interface instance. By default if not set, factory class tries to get session manager by requesting service container as shown in following code
 
 ```
 if fSessionManager = nil then
@@ -196,7 +198,7 @@ You can set it manually if required,
 
 ```
 factory := TCsrfMiddlewareFactory.create()
-    .sessionHandler(container['sessMgr'] as ISessionManager);
+    .sessionManager(container['sessMgr'] as ISessionManager);
 ```
 ## Explore more
 
