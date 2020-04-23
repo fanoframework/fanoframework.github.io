@@ -186,7 +186,7 @@ Failure handler class must implements `IRequestHandler` interface.
 
 ### Change session manager
 
-Csrf middleware needs to get session from current request, thus requires access to `ISessionManager` interface instance. By default if not set, factory class tries to get session manager by requesting service container as down in following code
+Csrf middleware needs to get session from current request, thus requires access to `ISessionManager` interface instance. By default if not set, factory class tries to get session manager by requesting service container as shown in following code
 
 ```
 if fSessionManager = nil then
