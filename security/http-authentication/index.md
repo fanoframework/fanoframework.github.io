@@ -94,7 +94,7 @@ type
     TCredentials = array of TCredential;
 
 ```
-## Register dispatcher with support middleware
+## Register dispatcher with middleware support.
 
 You need to use `TDispatcher` class which support middlewares.
 
