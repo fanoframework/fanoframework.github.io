@@ -127,6 +127,7 @@ If you need to implement your own session id generator, you need to implement `I
 - `TKeyRandSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key + client IP address + time + random bytes from `/dev/urandom`.
 
 Except `TGuidSessionIdGeneratorFactory` which its constructor does not require parameter, other built-in factory classes expect secret key to be provided when creating factory class.
+It is strongly advised that you use cryptographically strong random secret key. Fano CLI can help [generate random secret key](/scaffolding-with-fano-cli#generate-random-key) for you.
 
 ```
 sessionMgrFactory := TJsonFileSessionManagerFactory.create(
