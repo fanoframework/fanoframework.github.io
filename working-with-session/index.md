@@ -123,8 +123,8 @@ If you need to implement your own session id generator, you need to implement `I
 
 - `TGuidSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use GUID.
 - `TKeyGuidSessionIdGeneratorFactory` is built-in factory class which will create session id which use SHA1 hash of a secret key concatenated with GUID as session id.
-- `TIpKeyGuidSessionIdGeneratorFactory` is built-in factory class which will create session id which use SHA1 hash of concatenated string of IP address + time +  secret key + GUID as session id.
-- `TKeyRandSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key + IP address + time + random bytes from `/dev/urandom`.
+- `TIpKeyGuidSessionIdGeneratorFactory` is built-in factory class which will create session id which use SHA1 hash of concatenated string of client IP address + time +  secret key + GUID as session id.
+- `TKeyRandSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key + client IP address + time + random bytes from `/dev/urandom`.
 
 Except `TGuidSessionIdGeneratorFactory` which its constructor does not require parameter, other built-in factory classes expect secret key to be provided when creating factory class.
 
