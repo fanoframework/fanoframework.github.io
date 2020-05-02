@@ -255,7 +255,7 @@ This will create `TNullMiddlewareList` class instance which basically does nothi
 
 ## Creating project with middleware support with Fano CLI
 
-When creating project with [Fano CLI](/scaffolding-with-fano-cli)you can automate task to setup middleware support with `--with-middleware` command line argument. Read [Add middleware support](/scaffolding-with-fano-cli#add-middleware-support) section for more information.
+When creating project with [Fano CLI](/scaffolding-with-fano-cli), you can automate task to setup middleware support with `--with-middleware` command line argument. Read [Add middleware support](/scaffolding-with-fano-cli#add-middleware-support) section for more information.
 
 ## Creating middleware with Fano CLI
 
