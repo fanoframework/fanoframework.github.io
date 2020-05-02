@@ -182,6 +182,24 @@ lastLogin := jsonRequest.getParsedBodyParam('login.lastLogin');
 
 The process of wrapping original request as `TJsonRequest` is implemented in `TJsonContentTypeMiddleware` middleware. When you attach this middleware to a route, everytime application receive method `POST`, `PUT`, `PATCH` or `DELETE` with `Content-Type` header set to `application/json`, original request will be wrapped inside `TJsonRequest`.
 
+To register this middleware, use `TJsonContentTypeMiddlewareFactory` class.
+
+```
+container.add(
+    'jsonReq',
+    TJsonContentTypeMiddlewareFactory.create()
+);
+```
+
+In route registration, attach middleware to route, as shown in following code.
+
+```
+router.post(
+    '/submit',
+    container['submit.controller'] as IRequestHandler
+).add(container['jsonReq'] as IMiddleware);
+```
+
 Please read [middleware documentation](/middlewares) for information how to work with middleware.
 
 See [Fano Json Request](https://github.com/fanoframework/fano-json-request) for example how to use `TJsonContentTypeMiddleware` middleware to handle request with JSON body.

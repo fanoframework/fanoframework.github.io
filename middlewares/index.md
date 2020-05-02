@@ -253,6 +253,10 @@ container.add('appMiddlewares', TNullMiddlewareListFactory.create());
 
 This will create `TNullMiddlewareList` class instance which basically does nothing.
 
+## Creating project with middleware support with Fano CLI
+
+When creating project with [Fano CLI](/scaffolding-with-fano-cli)you can automate task to setup middleware support with `--with-middleware` command line argument. Read [Add middleware support](/scaffolding-with-fano-cli#add-middleware-support) section for more information.
+
 ## Creating middleware with Fano CLI
 
 [Fano CLI](/scaffolding-with-fano-cli) provides middleware creation command `--middleware` to simplify task for creating and setting up middleware with dependency container. Read [Creating Middleware](/scaffolding-with-fano-cli#creating-middleware) section for more information.
