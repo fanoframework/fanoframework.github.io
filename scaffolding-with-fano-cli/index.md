@@ -7,8 +7,8 @@ description: Tutorial how to use Fano CLI to scaffold web application using Fano
 ## What is Fano CLI?
 
 [Fano CLI](https://github.com/fanoframework/fano-cli) is command line application
-to help scaffolding project structure using [Fano Framework](https://github.com/fanoframework/fano). It helps tedious tasks such as 
-[creating Fano web application project](#creating-project), [creating controller](#creating-controller), [model](#creating-model), [view](#creating-view), [middleware](#creating-middleware) classes, 
+to help scaffolding project structure using [Fano Framework](https://github.com/fanoframework/fano). It helps tedious tasks such as
+[creating Fano web application project](#creating-project), [creating controller](#creating-controller), [model](#creating-model), [view](#creating-view), [middleware](#creating-middleware) classes,
 [generate random key](#generate-random-key) and [GUID](#generate-guid) and also [setting up web server configuration](#deployment).
 
 ## <a name="installation"></a>Installation
@@ -155,12 +155,12 @@ $ fanocli --model=Hello
 $ fanocli --view=Hello
 ```
 
-## Add middleware support
+## <a name="add-middleware-support"></a>Add middleware support
 
 Any project creation commands, i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it set, then during project creation, [middleware support](/middlewares) is added to generated project.
 
 ```
-$ fanocli --project=Hello --with-middleware
+$ fanocli --project-cgi=Hello --with-middleware
 ```
 
 ## <a name="creating-middleware"></a>Creating middleware
