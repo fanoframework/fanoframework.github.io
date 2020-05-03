@@ -289,6 +289,7 @@ Fano Framework provides several built-in middlewares.
 - `TCsrfMiddleware`, middleware class which adds CSRF protection. Read [Cross-Site Request Forgery (CSRF)](/security/csrf-protection) for more information.
 - `TValidationMiddleware`, middleware class which validate request.
 - `TJsonContentTypeMiddleware`, middleware class which handle request with `application/json` in its header. For more information, read [Handling request with JSON body](/working-with-request#handling-request-with-json-body).
+- `TCacheControlMiddleware`, middleware class which adds `Cache-Control` response header. For more information, read [Http cache header](/working-with-response#http-cache-header).
 
 ### Group several middlewares as one
 
