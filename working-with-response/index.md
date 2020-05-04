@@ -119,11 +119,11 @@ end;
 By default, above code will redirect browser to [https://fanoframework.github.io](https://fanoframework.github.io) with HTTP 302 status. If you need to use different HTTP status code, set it in constructor's third parameter
 
 ```
-//redirect to fanoframework.github.io with HTTP 304
+//redirect to fanoframework.github.io with HTTP 301
 result := TRedirectResponse.create(
     response.headers(),
     'https://fanoframework.github.io',
-    304
+    301
 );
 ```
 
@@ -234,12 +234,7 @@ end;
 ## <a name="not-modified-response"></a>Not modified response
 
 `TNotModifiedResponse` is descendant of `THttpCodeResponse` class
-which specifically for handling HTTP 304 response and used when adding http cache header.
-
-## <a name="http-cache-header"></a>Adding Http cache header
-
-To add http cache header ([RFC 7324](https://tools.ietf.org/html/rfc7234)), Fano Framework provides built-in middleware
-`TCacheControlMiddleware`.
+which is specifically for handling HTTP 304 response and used when [adding http cache header](/working-with-response/http-cache-header).
 
 ## Explore more
 
