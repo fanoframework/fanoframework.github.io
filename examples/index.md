@@ -84,6 +84,10 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 [Fano Json Request](https://github.com/fanoframework/fano-json-request) demonstrates how to [handle request with JSON body](/working-with-request#handling-request-with-json-body).
 
+## HTTP cache header examples
+
+[Fano Cache Control](https://github.com/fanoframework/fano-cache-control) demonstrates how to [add HTTP cache header](/working-with-response/http-cache-header).
+
 ## Explore more
 
 - [Getting started](/getting-started)

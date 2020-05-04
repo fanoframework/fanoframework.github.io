@@ -101,3 +101,4 @@ container.add(
 - [Working with Request](/working-with-request)
 - [Working with Response](/working-with-response)
 - [Middlewares](/middlewares)
+- [Fano Cache Control example](https://github.com/fanoframework/fano-cache-control)
