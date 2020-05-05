@@ -237,7 +237,7 @@ implementation
 end.
 ```
 
-Following lines are mandatory to conform with HTTP protocol.
+Following lines are mandatory to conform with CGI protocol.
 
 ```
 writeln('Content-Type: text/html');
