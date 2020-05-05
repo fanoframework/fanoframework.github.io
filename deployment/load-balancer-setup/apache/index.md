@@ -96,6 +96,12 @@ $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 
 `&` is required to make sure that both applications are running in parallel.
 
+To stop all servers,
+
+```
+$ pkill app.cgi
+```
+
 ## Access application from browser
 
 Open `http://myapp.fano` you should see main controller is invoked. There is no visual indication compare to application running without load balancer.
