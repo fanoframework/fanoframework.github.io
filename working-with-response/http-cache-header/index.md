@@ -5,7 +5,7 @@ description: Tutorial on how to work with HTTP Cache Response header in Fano Fra
 
 <h1 class="major">HTTP Cache Header</h1>
 
-## Adding HttP Cache Header
+## Adding HTTP Cache Header
 
 To add http cache header ([RFC 7324](https://tools.ietf.org/html/rfc7234)), Fano Framework provides built-in [middleware](/middlewares)
 `TCacheControlMiddleware`.
