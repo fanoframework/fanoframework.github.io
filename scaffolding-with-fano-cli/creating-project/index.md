@@ -1,6 +1,6 @@
 ---
 title: Creating Project with Fano CLI
-description: Tutorial how to use Fano CLI to scaffold web application using Fano Framework
+description: Tutorial how to use Fano CLI to scaffold web application project using Fano Framework
 ---
 <h1 class="major">Creating Project with Fano CLI</h1>
 
@@ -88,11 +88,8 @@ setup SCGI application to work with various web server.
 
 To create web application that use [uwsgi protocol](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html), use `--project-uwsgi` parameter. Other parameters are similar to SCGI or FastCGI project above.
 
-You can also add `--no-git` and `no-initial-commit` parameter.
-
 See [Deploy as uwsgi application](/deployment/uwsgi) for information on how to
 setup uwsgi application to work with various web server.
-
 
 ## <a name="scaffolding-libmicrohttpd-project"></a>Scaffolding libmicrohttpd project directory structure
 
@@ -159,6 +156,7 @@ $ git commit -m "Initial commit"
 $ cd test-fano
 $ git commit -m "Initial commit"
 ```
+
 ## Explore more
 
 - [Deployment](/deployment)
