@@ -89,7 +89,7 @@ $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 
 `&` is required to make sure that both applications are running in parallel.
 
-To stop all servers,
+To stop all applications,
 
 ```
 $ pkill app.cgi
