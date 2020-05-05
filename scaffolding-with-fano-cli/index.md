@@ -157,7 +157,7 @@ $ fanocli --view=Hello
 
 ## <a name="add-middleware-support"></a>Add middleware support
 
-Any [project creation commands](/scaffolding-with-fano-cli/create-project), i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it set, then during project creation, [middleware support](/middlewares) is added to generated project.
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it set, then during project creation, [middleware support](/middlewares) is added to generated project.
 
 ```
 $ fanocli --project-cgi=Hello --with-middleware
@@ -227,7 +227,7 @@ $ fanocli --jsmin=/path/to/js --output=stdout
 
 ## <a name="add-session-support"></a>Add session support
 
-Any [project creation commands](/scaffolding-with-fano-cli/create-project), i.e, `--project*` commands, accept additional parameter `--with-session=[session storage]` where `session storage` value can be one of following value
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-session=[session storage]` where `session storage` value can be one of following value
 
 - `file`, create session which stores session data in file.
 - `cookie`, create session which stores session data in encrypted cookie.
