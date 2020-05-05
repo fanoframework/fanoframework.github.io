@@ -55,7 +55,7 @@ Additionally, you can set `--host` and `--port` where FastCGI will listen. If om
 $ fanocli --project-fcgi=test-fano-fcgi --host=192.168.2.1 --port=4040
 ```
 
-Generated project files are mostly similar to `--project` output, except that `src/app.pas`, and `src/bootstrap.pas` which will generate a daemon FastCGI web application.
+Generated project files are mostly similar to `--project-cgi` output, except that `src/app.pas`, and `src/bootstrap.pas` which will generate a daemon FastCGI web application.
 See [Deploy as FastCGI application](/deployment/fastcgi) for information on how to
 setup FastCGI application to work with various web server.
 
