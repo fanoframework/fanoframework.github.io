@@ -5,7 +5,7 @@ description: Tutorial on how to work with views in Fano Framework
 
 <h1 class="major">Working with Views</h1>
 
-View is term we used to describe a piece of code that has job to handle presentation logic. In Fano Framework, it is mostly related with HTML presentation but not always as it aslo can be used to generate other presentation such XML, JSON, image or PDF document.
+View is term we used to describe a piece of code that has job to handle presentation logic. In Fano Framework, it is mostly related with HTML presentation but not always, as it also can be used to generate other presentation such XML, JSON, image or PDF document.
 
 ## IView interface
 
