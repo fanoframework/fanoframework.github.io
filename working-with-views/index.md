@@ -391,7 +391,7 @@ Fano Framework provides two `IViewPartial` interface implementation
 
 ## View for non HTML presentation
 
-While moany built-in implementations of `IView` interface are related to HTML presentation, you can use it to generate other presentation such as JSON or PDF document.
+While many built-in implementations of `IView` interface are related to HTML presentation, you can use it to generate other presentation such as JSON or PDF document.
 
 [THomePdfView](https://github.com/fanoframework/fano-pdf/blob/master/src/App/Home/Views/HomePdfView.pas) from [Fano Pdf example](https://github.com/fanoframework/fano-pdf) demonstrates implementation of IView interface to generate PDF document at runtime.
 
