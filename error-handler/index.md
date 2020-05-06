@@ -7,7 +7,7 @@ description: Tutorial on how to handle error with Fano Framework
 
 ## Handling exception
 
-In web application built with Fano Framework, exception that is raised will be handled by `IErrorHandler` interface instance.
+In web application built with Fano Framework, any unhandled exceptions that are raised will be handled by `IErrorHandler` interface instance.
 
 This interface has one method
 
@@ -237,7 +237,7 @@ implementation
 end.
 ```
 
-Following lines are mandatory to conform with HTTP protocol.
+Following lines are mandatory to conform with CGI protocol.
 
 ```
 writeln('Content-Type: text/html');
