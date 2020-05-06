@@ -338,7 +338,7 @@ corsAuthAjax := TCompositeMiddleware.create([cors, authOnly, ajaxOnly]);
 
 ```
 var helloCtrlMiddleware : IMiddleware;
-    helloContrller : IController;
+    helloController : IRequestHandler;
 ...
 helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 ```
