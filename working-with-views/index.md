@@ -38,8 +38,9 @@ Fano provides some built-in classes implementing `IView` interface which you can
 
 - `TView`, class that display view from HTML template string.
 - `TTemplateView`, class that display view from HTML template file.
-- `TCompositeView`, class that display view from two other `IView` instance. This is provided so we can compose several views as one. For example display
-template consist of header, main content and footer.
+- `TCompositeView`, class that display view from two other `IView` instances. This is provided so we can compose several views as one. For example display
+template consist of header, main content and footer. To compose more than two views, you need to daisy-chain them.
+- `TGroupView` is similar to `TCompositeView` class but it can compose more than two other `IView` instances. So it is more flexible as you do not need to daisy-chain views.
 - `TNullView` class implements `IView` but does nothing. This class is provide
 mostly in conjunction with TCompositeView
 
@@ -196,7 +197,7 @@ contentView := TView.create(
 
 ### Composed view
 
-`TCompositeView` supports composing two views. To compose more than two views you need to daisy-chained them, for example:
+`TCompositeView` supports composing two views. To compose more than two views you need to daisy-chain them, for example:
 
 ```
 uses fano;
@@ -207,6 +208,16 @@ view := TCompositeView.create(
     TCompositeView.create(headerView, contentView)
     footerView
 );
+```
+
+### Compose more than two views without daisy chain
+
+`TGroupView` is provided to avoid complex daisy chain if more than two views involved. Code above can be simplified as shown in following code
+
+```
+var view : IView;
+...
+view := TGroupView.create([headerView, contentView, footerView]);
 ```
 
 ## Compose view from one or more view partials
