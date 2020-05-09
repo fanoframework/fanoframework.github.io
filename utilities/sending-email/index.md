@@ -35,10 +35,15 @@ amailer.send();
 
 ## Setting up ssmtp library
 
-To install ssmtp in Debian,
+To install ssmtp in Debian-based distribution,
 
 ```
 $ sudo apt install ssmtp
+```
+or Fedora-based,
+
+```
+$ sudo yum install ssmtp
 ```
 
 Edit `/etc/ssmtp/ssmtp.conf` and add following lines,
