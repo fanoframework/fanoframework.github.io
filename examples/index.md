@@ -88,6 +88,10 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 [Fano Cache Control](https://github.com/fanoframework/fano-cache-control) demonstrates how to [add HTTP cache header](/working-with-response/http-cache-header).
 
+## Send email examples
+
+[Fano Email](https://github.com/fanoframework/fano-email) demonstrates how to [send email](/utilities/sending-email).
+
 ## Explore more
 
 - [Getting started](/getting-started)
