@@ -126,7 +126,7 @@ db.beginTransaction();
 try
     //do multiple database operations
 finally
-    db.endTransaction();
+    db.commit();
 end;
 ```
 
