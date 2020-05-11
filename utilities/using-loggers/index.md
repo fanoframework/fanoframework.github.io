@@ -294,3 +294,4 @@ logger := container['logger'] as ILogger;
 
 - [Error Handler](/error-handler)
 - [Database](/database)
+- [Example web application that log messages to MySQL database](https://github.com/fanoframework/fano-db-logger)

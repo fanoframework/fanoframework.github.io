@@ -47,6 +47,7 @@ Following example applications show how to work with SQL and NoSQL databases by 
 - [MySQL web application example](https://github.com/fanoframework/fano-app-db)
 - [Database connection pool example](https://github.com/fanoframework/fano-db-pool)
 - [PostgreSQL web application example](https://github.com/fanoframework/fano-postgresql)
+- [Example web application that log messages to MySQL database](https://github.com/fanoframework/fano-db-logger)
 
 ## Middleware
 
