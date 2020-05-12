@@ -16,7 +16,7 @@ To abstract away mail sender implementation, `IMailer` interface is provided. It
 
 ## Sending email with sendmail
 
-Current implementation of `IMailer` interface only supports sending email using sendmail binary from [ssmtp library](https://linux.die.net/man/8/ssmtp) thorough class `TSendmailMailer`. To use it, register its factory class with container.
+Current implementation of `IMailer` interface only supports sending email using sendmail binary, from [ssmtp library](https://linux.die.net/man/8/ssmtp) thorough class `TSendmailMailer`. To use it, register its factory class with [container](/dependency-container).
 
 ```
 container.add('mailer', TSendmailMailerFactory.create());
