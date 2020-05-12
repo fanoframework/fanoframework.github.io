@@ -92,6 +92,7 @@ Fano Framework comes with several built-in `IResponse` implementations to simpli
 - `TBinaryResponse`.This is response that you may need to send binary data to browser, such as image response. See [Fano App Image](https://github.com/fanoframework/fano-app-img) demo application to see how to return binary response.
 - `TRedirectResponse` is response for doing HTTP redirection. Read [Redirection](#redirection-response) section on this document.
 - `THttpCodeResponse` is response for setting up HTTP status manually. Read [Response with HTTP Status Code](#response-with-status-code) for more information.
+- `TNotModifiedResponse` is response for HTTP 304. Read [Not modified response](#not-modified-response) for more information.
 
 ## <a name="redirection-response"></a>Redirection Response
 
@@ -118,11 +119,11 @@ end;
 By default, above code will redirect browser to [https://fanoframework.github.io](https://fanoframework.github.io) with HTTP 302 status. If you need to use different HTTP status code, set it in constructor's third parameter
 
 ```
-//redirect to fanoframework.github.io with HTTP 304
+//redirect to fanoframework.github.io with HTTP 301
 result := TRedirectResponse.create(
     response.headers(),
     'https://fanoframework.github.io',
-    304
+    301
 );
 ```
 
@@ -229,6 +230,11 @@ begin
     raise ENotFound.create('Resource not found');
 end;
 ```
+
+## <a name="not-modified-response"></a>Not modified response
+
+`TNotModifiedResponse` is descendant of `THttpCodeResponse` class
+which is specifically for handling HTTP 304 response and used when [adding http cache header](/working-with-response/http-cache-header).
 
 ## Explore more
 

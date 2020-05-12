@@ -12,3 +12,7 @@ description: Tutorial on how to work with some utilities provided by Fano Framew
 ## HTTP Clients
 
 - [Use HTTP client to call API](/utilities/http-clients)
+
+## Sending email
+
+- [Send email message](/utilities/sending-email)

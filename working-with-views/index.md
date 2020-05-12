@@ -5,6 +5,8 @@ description: Tutorial on how to work with views in Fano Framework
 
 <h1 class="major">Working with Views</h1>
 
+View is term we used to describe a piece of code that has job to handle presentation logic. In Fano Framework, it is mostly related with HTML presentation but not always, as it also can be used to generate other presentation such XML, JSON, image or PDF document.
+
 ## IView interface
 
 Interface `IView`, declared in unit `fano.pas`, is basis of view implementation in Fano Framework. It consists of `render()` method that implementor class must provide.
@@ -38,8 +40,9 @@ Fano provides some built-in classes implementing `IView` interface which you can
 
 - `TView`, class that display view from HTML template string.
 - `TTemplateView`, class that display view from HTML template file.
-- `TCompositeView`, class that display view from two other `IView` instance. This is provided so we can compose several views as one. For example display
-template consist of header, main content and footer.
+- `TCompositeView`, class that display view from two other `IView` instances. This is provided so we can compose several views as one. For example display
+template consist of header, main content and footer. To compose more than two views, you need to daisy-chain them.
+- `TGroupView` is similar to `TCompositeView` class but it can compose more than two other `IView` instances. So it is more flexible as you do not need to daisy-chain views.
 - `TNullView` class implements `IView` but does nothing. This class is provide
 mostly in conjunction with TCompositeView
 
@@ -196,7 +199,7 @@ contentView := TView.create(
 
 ### Composed view
 
-`TCompositeView` supports composing two views. To compose more than two views you need to daisy-chained them, for example:
+`TCompositeView` supports composing two views. To compose more than two views you need to daisy-chain them, for example:
 
 ```
 uses fano;
@@ -207,6 +210,16 @@ view := TCompositeView.create(
     TCompositeView.create(headerView, contentView)
     footerView
 );
+```
+
+### Compose more than two views without daisy chain
+
+`TGroupView` is provided to avoid complex daisy chain if more than two views involved. Code above can be simplified as shown in following code
+
+```
+var view : IView;
+...
+view := TGroupView.create([headerView, contentView, footerView]);
 ```
 
 ## Compose view from one or more view partials
@@ -376,6 +389,11 @@ Fano Framework provides two `IViewPartial` interface implementation
 - [`TViewPartial`](https://github.com/fanoframework/fano/blob/master/src/Mvc/Views/ViewPartialImpl.pas), this class loads template from file, replace any variable placeholders and output it as string.
 - [`TStrViewPartial`](https://github.com/fanoframework/fano/blob/master/src/Mvc/Views/StrViewPartialImpl.pas), it is similar as above but loads template from string.
 
+## View for non HTML presentation
+
+While many built-in implementations of `IView` interface are related to HTML presentation, you can use it to generate other presentation such as JSON or PDF document.
+
+[THomePdfView](https://github.com/fanoframework/fano-pdf/blob/master/src/App/Home/Views/HomePdfView.pas) from [Fano Pdf example](https://github.com/fanoframework/fano-pdf) demonstrates implementation of IView interface to generate PDF document at runtime.
 
 ## Explore more
 

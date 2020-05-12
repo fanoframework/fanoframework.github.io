@@ -255,7 +255,7 @@ This will create `TNullMiddlewareList` class instance which basically does nothi
 
 ## Creating project with middleware support with Fano CLI
 
-When creating project with [Fano CLI](/scaffolding-with-fano-cli)you can automate task to setup middleware support with `--with-middleware` command line argument. Read [Add middleware support](/scaffolding-with-fano-cli#add-middleware-support) section for more information.
+When creating project with [Fano CLI](/scaffolding-with-fano-cli), you can automate task to setup middleware support with `--with-middleware` command line argument. Read [Add middleware support](/scaffolding-with-fano-cli#add-middleware-support) section for more information.
 
 ## Creating middleware with Fano CLI
 
@@ -287,8 +287,9 @@ Fano Framework provides several built-in middlewares.
 - `TRequestHandlerAsMiddleware`, adapter middleware which can turn request handler as a middleware.
 - `TCorsMiddleware`, middleware class which adds CORS response header. Read [Handling CORS](/security/handling-cors) for more information.
 - `TCsrfMiddleware`, middleware class which adds CSRF protection. Read [Cross-Site Request Forgery (CSRF)](/security/csrf-protection) for more information.
-- `TValidationMiddleware`, middleware class which validate request.
+- `TValidationMiddleware`, middleware class which validate request. Read [Form Validation](/security/form-validation) for more information.
 - `TJsonContentTypeMiddleware`, middleware class which handle request with `application/json` in its header. For more information, read [Handling request with JSON body](/working-with-request#handling-request-with-json-body).
+- `TCacheControlMiddleware`, middleware class which adds `Cache-Control` response header. For more information, read [Http cache header](/working-with-response/http-cache-header).
 
 ### Group several middlewares as one
 
@@ -337,7 +338,7 @@ corsAuthAjax := TCompositeMiddleware.create([cors, authOnly, ajaxOnly]);
 
 ```
 var helloCtrlMiddleware : IMiddleware;
-    helloContrller : IController;
+    helloController : IRequestHandler;
 ...
 helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 ```

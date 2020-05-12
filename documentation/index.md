@@ -61,6 +61,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 - [Using Loggers](/utilities/using-loggers)
 - [Use HTTP client to call API](/utilities/http-clients)
+- [Sending email](/utilities/sending-email)
 
 ## Database
 
@@ -73,6 +74,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Deploy as FastCGI application](/deployment/fastcgi)
 - [Deploy as SCGI application](/deployment/scgi)
 - [Deploy as uwsgi application](/deployment/uwsgi)
+- [Deploy as http application](/deployment/standalone-web-server)
 - [Deploy Fano web application with web server as load balancer](/deployment/load-balancer-setup)
 
 ## Known Issue

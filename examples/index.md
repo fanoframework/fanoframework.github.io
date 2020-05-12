@@ -47,6 +47,7 @@ Following example applications show how to work with SQL and NoSQL databases by 
 - [MySQL web application example](https://github.com/fanoframework/fano-app-db)
 - [Database connection pool example](https://github.com/fanoframework/fano-db-pool)
 - [PostgreSQL web application example](https://github.com/fanoframework/fano-postgresql)
+- [Example web application that log messages to MySQL database](https://github.com/fanoframework/fano-db-logger)
 
 ## Middleware
 
@@ -83,6 +84,14 @@ Following example applications demonstrate how to use session with Fano Framewor
 ## Handling request with JSON body
 
 [Fano Json Request](https://github.com/fanoframework/fano-json-request) demonstrates how to [handle request with JSON body](/working-with-request#handling-request-with-json-body).
+
+## HTTP cache header examples
+
+[Fano Cache Control](https://github.com/fanoframework/fano-cache-control) demonstrates how to [add HTTP cache header](/working-with-response/http-cache-header).
+
+## Send email examples
+
+[Fano Email](https://github.com/fanoframework/fano-email) demonstrates how to [send email](/utilities/sending-email).
 
 ## Explore more
 

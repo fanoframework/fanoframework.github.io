@@ -94,7 +94,13 @@ $ ./build.sh
 $ ./bin/app.cgi --port=20477 & ./bin/app.cgi --port=20478 &
 ```
 
-`&` is required to make sure that both applicationsare running in parallel.
+`&` is required to make sure that both applications are running in parallel.
+
+To stop all applications,
+
+```
+$ pkill app.cgi
+```
 
 ## Access application from browser
 

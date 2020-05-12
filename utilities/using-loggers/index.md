@@ -86,6 +86,35 @@ logger := TFileLogger.create('storages/logs/app.log');
 
 `TStdOutLogger` is logger implementation that will output log message to STDOUT.
 
+### Logging to Database
+
+`TDbLogger` is logger implementation that will output log message to database. It requires instance of `IRdbms` which responsible to do database operation. Read [Database](/database) section for more information.
+
+To be able to use this logger, you need to create a table with at least four columns to store level, message, log datetime and associated data related to log entry. For example,
+
+```
+CREATE TABLE logs
+(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    level VARCHAR(20) NOT NULL,
+    msg VARCHAR(400) NOT NULL,
+    created_at DATETIME NOT NULL,
+    context TEXT NOT NULL
+)
+```
+When create `TDbLogger` instance, you need to tell about table name  and required fields,
+
+```
+logger := TDbLogger.create(
+    rdbms,
+    'logs', //table name
+    'level', //level column name
+    'msg', //message column name
+    'created_at', //log datetime
+    'context' //context column name
+);
+```
+
 ### Log to several medium
 
 `TCompositeLogger` is logger implementation that is composed from external `ILogger` instances. It can be used to combine two or more loggers as one, thus creating more complex logging functionality. For example, to log to file and to log to RDBMS simultaneously.
@@ -172,6 +201,9 @@ be registered in [dependency container](/dependency-container) easily. Following
 - `TSegregatedLoggerFactory`, factory class for `TSegregatedLogger`.
 - `TStdOutLoggerFactory`, factory class for `TStdOutLogger`.
 - `TSysLogLoggerFactory`, factory class for `TSysLogLogger`.
+- `TDbLoggerFactory`, factory class for `TDbLogger`.
+
+### Register TFileLogger
 
 For example, to register `TFileLogger` in dependency container:
 
@@ -181,11 +213,14 @@ var container : IDependencyContainer;
 container.add('logger', TFileLoggerFactory.create('storages/logs/app.log'));
 ```
 
+### Register TNullLogger
+
 To register `TNullLogger`,
 
 ```
 container.add('logger', TNullLoggerFactory.create());
 ```
+### Register TCompositeLogger
 
 To register `TCompositeLogger`,
 
@@ -198,6 +233,7 @@ container.add(
     )
 );
 ```
+### Register TSysLogLogger
 
 To register `TSysLogLogger`,
 
@@ -207,6 +243,39 @@ container.add(
     (TSysLogLoggerFactory.create()).prefix('fano-app')
 );
 ```
+### Register TDbLogger
+
+To register `TDbLogger`,
+
+```
+container.add('db', TMySqlDbFactory.create(
+    'mysql 5.7',
+    '127.0.0.1',
+    '[replace with database name]',
+    '[replace with username]',
+    '[replace with password]',
+    3306
+));
+container.add('logger', TDbLoggerFactory.create().rdbmsSvcName('db'));
+```
+`rdbmsSvcName()` is used to tell factory where to look for `IRdbms`  instance.
+
+Code above assume using table name `logs`, with column `level`, `msg`, `created_at` and `context`.
+
+To use different table name or column names,
+```
+container.add(
+    'logger',
+    TDbLoggerFactory.create()
+        .rdbmsSvcName('db')
+        .tableName('mylogs')
+        .levelField('mylevel')
+        .msgField('mymsg')
+        .createdAtField('my_created_at')
+        .contextField('my_context')
+);
+```
+### Retrieve ILogger instance from container
 
 After logger factory is registered, you can access logger anywhere from application as shown in following code.
 
@@ -224,3 +293,5 @@ logger := container['logger'] as ILogger;
 ## Explore more
 
 - [Error Handler](/error-handler)
+- [Database](/database)
+- [Example web application that log messages to MySQL database](https://github.com/fanoframework/fano-db-logger)

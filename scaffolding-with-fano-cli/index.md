@@ -9,7 +9,7 @@ description: Tutorial how to use Fano CLI to scaffold web application using Fano
 [Fano CLI](https://github.com/fanoframework/fano-cli) is command line application
 to help scaffolding project structure using [Fano Framework](https://github.com/fanoframework/fano). It helps tedious tasks such as
 [creating Fano web application project](#creating-project), [creating controller](#creating-controller), [model](#creating-model), [view](#creating-view), [middleware](#creating-middleware) classes,
-[generate random key](#generate-random-key) and [GUID](#generate-guid) and also [setting up web server configuration](#deployment).
+[generate random key](#generate-random-key) and [GUID](#generate-guid), [minify JavaScript files](#minify-javascript) and also [setting up web server configuration](#deployment).
 
 ## <a name="installation"></a>Installation
 
@@ -157,7 +157,7 @@ $ fanocli --view=Hello
 
 ## <a name="add-middleware-support"></a>Add middleware support
 
-Any project creation commands, i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it set, then during project creation, [middleware support](/middlewares) is added to generated project.
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it set, then during project creation, [middleware support](/middlewares) is added to generated project.
 
 ```
 $ fanocli --project-cgi=Hello --with-middleware
@@ -227,7 +227,7 @@ $ fanocli --jsmin=/path/to/js --output=stdout
 
 ## <a name="add-session-support"></a>Add session support
 
-Any project creation commands, i.e, `--project*` commands, accept additional parameter `--with-session=[session storage]` where `session storage` value can be one of following value
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-session=[session storage]` where `session storage` value can be one of following value
 
 - `file`, create session which stores session data in file.
 - `cookie`, create session which stores session data in encrypted cookie.
