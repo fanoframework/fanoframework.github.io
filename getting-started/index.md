@@ -37,6 +37,26 @@ $ sudo fanocli --deploy-cgi=hello.fano
 
 Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
+## Project directory
+Fano CLI creates several files and directories.
+
+### Directories
+- `src`, application project source code directory
+- `bin`, compiled binaries output directory,
+- `config`, application configuration directory
+- `resources`, application resources directory, such as HTML templates, SCSS, etc.
+- `storages`, application runtime-generated files directory, such as session files, logs etc.
+- `tools`, helper shell scripts directory, such as scripts to clean compiled binaries.
+- `public`, application document root directory where public resources resides such as images, cascade stylesheets, JavaScripts files.
+
+### Files
+
+- Main program source code is `src/app.pas`.
+- Main unit `src/bootstrap.pas` glues all modules.
+- Home controller `src/App/Home/Controllers/HomeController.pas` is code that prints `Home controller` text.
+- Include file `src/Routes/Home/route.inc` associates default URL `/` with home controller.
+- Include file `src/Dependencies/controllers.dependencies.inc` registers factory class for home controller.
+
 ## Explore more
 
 - [Step by Step Tutorials](/tutorials)
