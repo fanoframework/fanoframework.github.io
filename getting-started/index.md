@@ -54,7 +54,7 @@ Fano CLI creates several files and directories.
 - Main program source code is `src/app.pas`.
 - Main unit `src/bootstrap.pas` glues all modules.
 - Home controller `src/App/Home/Controllers/HomeController.pas` is code that prints `Home controller` text.
-- Include file `src/Routes/Home/route.inc` associates URL `/` with home controller.
+- Include file `src/Routes/Home/route.inc` associates default URL `/` with home controller.
 - Include file `src/Dependencies/controllers.dependencies.inc` registers factory class for home controller.
 
 ## Explore more
