@@ -38,7 +38,9 @@ $ sudo fanocli --deploy-cgi=hello.fano
 Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
 ## Project directory walkthrough
-Fano CLI creates several files and directories.
+Fano Framework has no opinion about your project directory structure. 
+You can structure your project directories and files the way you like.
+However, Fano CLI creates several files and directories that follows certain assumptions.
 
 ### Directories
 - `src`, application project source code directory
