@@ -58,7 +58,7 @@ constructor TController.create(
 - `viewInst`, view to be used, i.e., instance of class that implements `IView` interface.
 - `ViewParamsInst`, view parameters, i.e., instance of class that implements `IViewParameters` interface.
 
-`viewInst` and `viewParamsInst` that you pass during class construction, will be available from inherited class as `fView` and `fViewParams` field respectively.
+`viewInst` and `viewParamsInst` that you pass during class construction, will be available from inherited class as `fView` and `fViewParams` fields, respectively.
 
 For more information regarding view and view parameters, read [Working with Views](/working-with-views).
 
