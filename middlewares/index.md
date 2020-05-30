@@ -163,7 +163,7 @@ Route middleware is middleware that is attached and applied to one or more speci
 
 ### Before middleware
 
-Before middleware is any middleware that is executed *before* controller execution. This is mostly type of middleware that can be used modify request or act as gate that block or pass request.
+Before middleware is any middleware that is executed *before* controller execution. This is mostly type of middleware that can be used to modify request or to act as gate that block or pass request.
 
 ```
 function TMyMiddleware.handleRequest(
@@ -194,7 +194,6 @@ begin
     result := next.handleRequest(request, response, args);
     doSomething();
 end;
-
 ```
 
 ## Creating middleware
