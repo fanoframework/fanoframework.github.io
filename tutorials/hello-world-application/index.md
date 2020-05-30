@@ -220,7 +220,7 @@ implementation
     var greetName : string;
     begin
         greetName := request.getQueryParam('name', 'everybody');
-        viewParams.setVar('name', greetName);
+        fViewParams.setVar('name', greetName);
         result := inherited handleRequest(request, response, args);
     end;
 
