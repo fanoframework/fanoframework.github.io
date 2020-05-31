@@ -181,13 +181,14 @@ test-fano/src/Middlewares/AuthOnly/Factories/AuthOnlyMiddlewareFactory.pas
 
 ## <a name="generate-random-key"></a>Generate random key
 
-To generate random key, run with  `--key=[length]` command line options
+To generate random key (for example, encryption secret key), run with  `--key=[length]` command line options
 
 ```
 $ fanocli --key=32
 ```
 
-If `length` is not set, it is assumed 64 bytes of random value. Output is Base64 encoded string of random bytes.
+If `length` is not set, it is assumed 64 bytes of random value. Output is Base64 encoded string of random bytes. 
+In unix or Linux, it reads from `/dev/urandom`. In Windows, it uses CryptoAPI.
 
 ## <a name="generate-guid"></a>Generate GUID
 
