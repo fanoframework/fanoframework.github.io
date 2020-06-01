@@ -197,7 +197,7 @@ Circular dependency issue arises when a service depends on itself, directly or i
 
 This causes unterminated recursion. Fano Framework will raise `ECircularDependency` exception to prevent such condition.
 
-Following example shows circular dependency condition, which will trigger `ECircularDepedency` exception.
+Following example shows circular dependency condition, which will trigger `ECircularDependency` exception.
 
 ```
 function THomeCtrlFactory.build(const cntr : IDependencyContainer) : IDependency;
