@@ -25,7 +25,7 @@ function TMy1Controller.handleRequest(
 var sess : ISession;
 begin
     sess := fSessionMgr[request];
-    if session.has('loggedIn') then
+    if sess.has('loggedIn') then
     begin
         result := doSomething1WhenUserLoggedIn(request, response, args);
     end else
@@ -42,7 +42,7 @@ function TMy2Controller.handleRequest(
 var sess : ISession;
 begin
     sess := fSessionMgr[request];
-    if session.has('loggedIn') then
+    if sess.has('loggedIn') then
     begin
         result := doSomething2WhenUserLoggedIn(request, response, args);
     end else
@@ -64,7 +64,7 @@ function TAuthMiddleware.handleRequest(
 var sess : ISession;
 begin
     sess := fSessionMgr[request];
-    if session.has('loggedIn') then
+    if sess.has('loggedIn') then
     begin
         //user is logged in
         result := next.requestHandler(request, response, args);

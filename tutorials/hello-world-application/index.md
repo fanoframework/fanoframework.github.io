@@ -220,7 +220,7 @@ implementation
     var greetName : string;
     begin
         greetName := request.getQueryParam('name', 'everybody');
-        viewParams.setVar('name', greetName);
+        fViewParams.setVar('name', greetName);
         result := inherited handleRequest(request, response, args);
     end;
 
@@ -231,7 +231,7 @@ It reads query string `name` value or use default value of `everybody` and pass 
 
 So for example, `http://hello-world.fano?name=jon` will cause `greetName` variable to be filled with value of `jon`.
 
-`viewParams` is protected internal variable of type `IViewParameters` which is defined inside `TController` class.
+`fViewParams` is protected internal variable of type `IViewParameters` which is defined inside `TController` class.
 
 ## Create hello controller factory class
 
