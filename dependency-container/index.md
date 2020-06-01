@@ -202,7 +202,7 @@ Following example shows circular dependency condition, which will trigger `ECirc
 ```
 function THomeCtrlFactory.build(const cntr : IDependencyContainer) : IDependency;
 begin
-      result := cntr['homeCtrl'];
+    result := cntr['homeCtrl'];
 end;
 ...
 container.add('homeCtrl', THomeCtrlFactory.create());
