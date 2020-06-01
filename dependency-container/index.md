@@ -27,7 +27,7 @@ The services are registered into dependency container during service registratio
 During service registration, a service name is associated with a factory class
 that must implements `IDependencyFactory` interface that will be responsible to create the required service.
 
-For a service to be able to work with `IDependencyContainer` implementation, it must implements `IDependency` interface. 
+For a service to be able to work with `IDependencyContainer` implementation, it must implements `IDependency` interface.
 `IDependency` does not declare any methods. So following declaration is suffice.
 
 ```
@@ -190,6 +190,27 @@ Fano Framework comes with built-in dependency container,
 - `TDependencyContainer`, this is basic dependency container which store service registration in hash list.
 
 Of course, you are free to implements your own dependency container, as long as it implements `IDependencyContainer` interface.
+
+## Circular dependency issue
+
+Circular dependency issue arises when a service depends on itself, directly or indirectly. For example, A needs B, B needs C, C needs A.
+
+This causes unterminated recursion. Fano Framework will raise `ECircularDependency` exception to prevent such condition.
+
+Following example shows circular dependency condition, which will trigger `ECircularDepedency` exception.
+
+```
+function THomeCtrlFactory.build(const cntr : IDependencyContainer) : IDependency;
+begin
+      result := cntr['homeCtrl'];
+end;
+...
+container.add('homeCtrl', THomeCtrlFactory.create());
+...
+router.get('/', container['homeCtrl'] as IRequestHandler);
+```
+
+If you are in circular dependency situation, you need to rethink about your application architecture.
 
 ## Auto-wire dependency
 
