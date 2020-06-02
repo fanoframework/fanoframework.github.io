@@ -57,13 +57,13 @@ To allow from certain domain,
 router.get(
     '/',
     homeController
-).add(TFrameGuardMiddleware.create('ALLOW-FROM example.com'));
+).add(TFrameGuardMiddleware.create('ALLOW-FROM http://example.com'));
 ```
 
 ```
 container.add(
     'xssFilter',
-    TXssFilterMiddlewareFactory.create().allowFrom('example.com')
+    TXssFilterMiddlewareFactory.create().allowFrom('http://example.com')
 );
 ```
 
