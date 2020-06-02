@@ -195,7 +195,23 @@ begin
     doSomething();
 end;
 ```
+### Before and after middleware
 
+Combination of both, before and after,
+
+```
+function TMyMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    doSomething1();
+    result := next.handleRequest(request, response, args);
+    doSomething2();
+end;
+```
 ## Creating middleware
 
 ```

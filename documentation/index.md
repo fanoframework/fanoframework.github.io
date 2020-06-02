@@ -56,6 +56,8 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [CSRF Protection](/security/csrf-protection)
 - [HTTP Verb Tunnelling](/security/http-verb-tunnelling)
 - [HTTP Authentication](/security/http-authentication)
+- [XSS Protection](/security/xss-protection)
+- [Clickjacking Protection](/security/clickjacking-protection)
 
 ## Utilities
 

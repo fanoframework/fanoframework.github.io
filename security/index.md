@@ -10,3 +10,5 @@ description: Handling security issue in Fano Framework
 - [CSRF Protection](/security/csrf-protection)
 - [HTTP Verb Tunnelling](/security/http-verb-tunnelling)
 - [HTTP Authentication](/security/http-authentication)
+- [XSS Protection](/security/xss-protection)
+- [Clickjacking Protection](/security/clickjacking-protection)
