@@ -83,6 +83,34 @@ If header is already set, calling `setHeader()` will overwrite previous value. I
 response.headers().addHeader('Content-Type', 'application/json');
 ```
 
+### Set Cookie header
+To add cookie to response, you can add `Set-Cookie` header.
+
+```
+response.headers().addHeader('Set-Cookie', 'mycookie=cookieisnice');
+```
+
+You can also use `TCookie` helper class which can build cookie header for you. `TCookieFactory` class is factory class for `TCookie`.
+
+```
+var acookie : ICookie;
+....
+acookie :=TCookieFactory.create()
+    .name('mycookie')
+    .value('cookieisnice')
+    .domain('.myapp.fano')
+    .maxAge(60 * 60)
+    .secure(true)
+    .httpOnly(true)
+    .sameSite('Strict')
+    .build();
+response.headers().addHeader(
+    'Set-Cookie',
+    acookie.serialize()
+);
+```
+
+
 ## Built-in IResponse implementation
 
 Fano Framework comes with several built-in `IResponse` implementations to simplify task regarding response.

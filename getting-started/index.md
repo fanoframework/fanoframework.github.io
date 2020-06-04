@@ -37,8 +37,10 @@ $ sudo fanocli --deploy-cgi=hello.fano
 
 Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
-## Project directory
-Fano CLI creates several files and directories.
+## Project directory walkthrough
+Fano Framework has no opinion about your project directory structure. 
+You can structure your project directories and files the way you like.
+However, Fano CLI creates several files and directories that follows certain assumptions.
 
 ### Directories
 - `src`, application project source code directory
@@ -53,9 +55,9 @@ Fano CLI creates several files and directories.
 
 - Main program source code is `src/app.pas`.
 - Main unit `src/bootstrap.pas` glues all modules.
-- Home controller `src/App/Home/Controllers/HomeController.pas` is code that prints `Home controller` text.
+- Home controller `HomeController.pas` in `src/App/Home/Controllers` is code that prints `Home controller` text.
 - Include file `src/Routes/Home/route.inc` associates default URL `/` with home controller.
-- Include file `src/Dependencies/controllers.dependencies.inc` registers factory class for home controller.
+- Include file `controllers.dependencies.inc` in `src/Dependencies` directory, registers factory class for home controller.
 
 ## Explore more
 

@@ -93,6 +93,11 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 [Fano Email](https://github.com/fanoframework/fano-email) demonstrates how to [send email](/utilities/sending-email).
 
+## Password hash examples
+
+[Fano Password example](https://github.com/fanoframework/fano-password) demonstrates how to [verify plain password against password hash](/security/password-hash).
+It is similar to session-related examples above but it compares password using password hash verification.
+
 ## Explore more
 
 - [Getting started](/getting-started)

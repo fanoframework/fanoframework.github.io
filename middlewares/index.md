@@ -25,7 +25,7 @@ function TMy1Controller.handleRequest(
 var sess : ISession;
 begin
     sess := fSessionMgr[request];
-    if session.has('loggedIn') then
+    if sess.has('loggedIn') then
     begin
         result := doSomething1WhenUserLoggedIn(request, response, args);
     end else
@@ -42,7 +42,7 @@ function TMy2Controller.handleRequest(
 var sess : ISession;
 begin
     sess := fSessionMgr[request];
-    if session.has('loggedIn') then
+    if sess.has('loggedIn') then
     begin
         result := doSomething2WhenUserLoggedIn(request, response, args);
     end else
@@ -64,7 +64,7 @@ function TAuthMiddleware.handleRequest(
 var sess : ISession;
 begin
     sess := fSessionMgr[request];
-    if session.has('loggedIn') then
+    if sess.has('loggedIn') then
     begin
         //user is logged in
         result := next.requestHandler(request, response, args);
@@ -108,7 +108,7 @@ Fano Framework use simple chained middleware list. Each middleware can decide wh
 <img src="/assets/images/middlewares.svg" alt="Middleware diagram" width="100%">
 </a>
 
-In Fano Framework, any class implements `IMiddleware` interface can be used as middleware. This interface has one methods `handleRequest()` which class must implements.
+In Fano Framework, any class implements `IMiddleware` interface can be used as middleware. This interface has one methods `handleRequest()` which class must implement.
 
 ```
 function handleRequest(
@@ -123,7 +123,7 @@ function handleRequest(
 - `args` is current route arguments. Read [Working with Router](/working-with-router#getting-route-argument) for more information about route argument.
 - `next` is next middleware to execute
 
-If a middleware should let execution to continue, it must call `next` request handler otherwise execution is stop and response that is returned by middleware's `handleRequest()` method will be response what client browser received.
+If a middleware should let execution to continue, it must call `next` request handler, otherwise execution stops and response that is returned by middleware's `handleRequest()` method will be response what client browser received.
 
 For example, following code will stop execution if request is not AJAX request otherwise it will continue execution.
 
@@ -163,7 +163,7 @@ Route middleware is middleware that is attached and applied to one or more speci
 
 ### Before middleware
 
-Before middleware is any middleware that is executed *before* controller execution. This is mostly type of middleware that can be used modify request or act as gate that block or pass request.
+Before middleware is any middleware that is executed *before* controller execution. This is mostly type of middleware that can be used to modify request or to act as gate that block or pass request.
 
 ```
 function TMyMiddleware.handleRequest(
@@ -194,9 +194,24 @@ begin
     result := next.handleRequest(request, response, args);
     doSomething();
 end;
+```
+### Before and after middleware
+
+Combination of both, before and after,
 
 ```
-
+function TMyMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    doSomething1();
+    result := next.handleRequest(request, response, args);
+    doSomething2();
+end;
+```
 ## Creating middleware
 
 ```
