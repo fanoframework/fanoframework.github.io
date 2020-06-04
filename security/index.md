@@ -12,3 +12,4 @@ description: Handling security issue in Fano Framework
 - [HTTP Authentication](/security/http-authentication)
 - [XSS Protection](/security/xss-protection)
 - [Clickjacking Protection](/security/clickjacking-protection)
+- [Password hash](/security/password-hash)

@@ -58,6 +58,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [HTTP Authentication](/security/http-authentication)
 - [XSS Protection](/security/xss-protection)
 - [Clickjacking Protection](/security/clickjacking-protection)
+- [Password hash](/security/password-hash)
 
 ## Utilities
 
