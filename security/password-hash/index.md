@@ -152,3 +152,4 @@ container.add('passwHash', TSha2PasswordHashFactory.create().use512());
 
 - [Dependency Container](/dependency-container)
 - [Security](/security)
+- [Fano Password example](https://github.com/fanoframework/fano-password).
