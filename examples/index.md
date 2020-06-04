@@ -95,7 +95,8 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 ## Password hash examples
 
-[Fano Password example](https://github.com/fanoframework/fano-password) demonstrate how to [verify plain password against password hash](/security/password-hash).
+[Fano Password example](https://github.com/fanoframework/fano-password) demonstrates how to [verify plain password against password hash](/security/password-hash).
+It is similar to session-related examples above but it compares password using password hash verification.
 
 ## Explore more
 
