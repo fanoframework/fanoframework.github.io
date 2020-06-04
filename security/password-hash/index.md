@@ -122,7 +122,7 @@ To register password hash,
 ```
 container.add('passwHash', TArgon2iPasswordHashFactory.create());
 ```
-See PBKDF2 code to retrieve password hash instance.
+See PBKDF2 code above to retrieve password hash instance.
 
 ### Scrypt password hash
 
@@ -132,7 +132,6 @@ To register password hash,
 ```
 container.add('passwHash', TScryptPasswordHashFactory.create());
 ```
-See PBKDF2 code to retrieve password hash instance.
 
 ### SHA2 password hash
 
@@ -149,7 +148,7 @@ To register SHA2 512 bit password hash,
 container.add('passwHash', TSha2PasswordHashFactory.create().use512());
 ```
 
-See PBKDF2 code to retrieve password hash instance.
+## Explore more
 
 - [Dependency Container](/dependency-container)
 - [Security](/security)

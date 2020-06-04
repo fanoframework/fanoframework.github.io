@@ -66,6 +66,7 @@ container.add(
     TXssFilterMiddlewareFactory.create().allowFrom('http://example.com')
 );
 ```
+## Explore more
 
 - [Dispatcher](/dispatcher)
 - [Security](/security)

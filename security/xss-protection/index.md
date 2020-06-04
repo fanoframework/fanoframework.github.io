@@ -28,6 +28,7 @@ container.add('xssFilter', TXssFilterMiddlewareFactory.create());
 ...
 router.get('/').add(container['xssFilter'] as IMiddleware);
 ```
+## Explore more
 
 - [Dispatcher](/dispatcher)
 - [Security](/security)
