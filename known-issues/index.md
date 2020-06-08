@@ -55,7 +55,7 @@ Edit Free Pascal main configuration, `/etc/fpc.cfg` file and add following lines
 ```
 
 ## Issue on FreeBSD
-On FreeBSD 12, when linker `ld` is symlinked to LLVM linker `/usr/bin/ld.lld`, this cause segementation fault when project is using `cthreads` unit.
+On FreeBSD 12, when linker `ld` is symlinked to LLVM linker `/usr/bin/ld.lld`, this cause segmentation fault when project is using `cthreads` unit.
 Workaround is to modify `ld` to point to GNU linker `/usr/bin/ld.bfd`.
 
 ```
