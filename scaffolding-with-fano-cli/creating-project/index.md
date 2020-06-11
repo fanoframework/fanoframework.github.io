@@ -95,7 +95,9 @@ setup uwsgi application to work with various web server.
 
 To create web application that use http using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/), use `--project-mhd` parameter. Other parameters are similar to SCGI, FastCGI or uwsgi project above.
 
-You also need to install libmicrohttpd development package. For Debian-based distribution,
+It will add conditional define `-dLIBMICROHTTPD` in `build.cfg` which cause libmicrohttpd to be linked with application. 
+
+You need to install libmicrohttpd development package. For Debian-based distribution,
 
 ```
 $ sudo apt install libmicrohttpd-dev
@@ -105,6 +107,12 @@ For Fedora-based distribution,
 
 ```
 $ sudo yum install libmicrohttpd-devel
+```
+
+If you missed it, during build, you will get linking error
+
+```
+/usr/bin/ld : cannot find -lmicrohttp
 ```
 
 See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behind various reverse proxy web server.
@@ -157,6 +165,22 @@ $ cd test-fano
 $ git commit -m "Initial commit"
 ```
 
+## Use libcurl in application
+If you want to use curl-based HTTP client such as [`THttpGet` class](https://github.com/fanoframework/fano/blob/master/src/Libs/HttpClient/Implementations/Curl/HttpGetImpl.pas), use `--with-curl` parameter. It adds conditional define `-dLIBCURL` in `build.cfg` file which causing libcurl library linked with application. 
+
+```
+$ fanocli --project-scgi=hello --with-curl
+```
+You need to install libcurl development package. For example 
+```
+$ sudo apt install libcurl4-gnutls-dev
+```
+
+If you missed it, during build, you will get linking error
+
+```
+/usr/bin/ld : cannot find -lcurl
+```
 ## Explore more
 
 - [Deployment](/deployment)
