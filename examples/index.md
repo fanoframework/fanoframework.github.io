@@ -36,7 +36,7 @@ Following example applications show how to [work with response](/working-with-re
 ## File upload
 
 [Handling upload example](https://github.com/fanoframework/fano-upload) shows how to [handle file upload](/handling-file-upload) in Fano Framework.
-For example how to validate file upload, read [Form Validation](#form-validation) section below.
+For file upload validation example, read [Form Validation](#form-validation) section below.
 
 ## Database
 
