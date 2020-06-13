@@ -60,8 +60,8 @@ For example, if we store application binary in directory `/home/myuser/myapp/pub
 add `Require` directive to allow Apache to serve request from
 this directory, otherwise they will be rejected.
 
-Above snippet basically tells Apache to allow (`+ExecCGI`) to serve any file ends with `cgi` extension as CGI script (`AddHandler cgi-script .cgi`). `-MultiViews` also important to disable automatic content negotiation because we need to add URL rewriting to allow use of routing in our application. So Our application will be responsible to decide what response to return.
-
+Above snippet basically tells Apache to allow (`+ExecCGI`) to serve any file ends with `cgi` extension as CGI script (`AddHandler cgi-script .cgi`). `-MultiViews` also important to disable automatic content negotiation because we need to add URL rewriting to allow use of routing in our application. So our application will be responsible to decide what response to return.
+You need to enable `mod_rewrite` module, otherwise, routing will not work.
 So in our example, we end up with following configuration:
 
 ```
