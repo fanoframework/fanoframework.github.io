@@ -193,6 +193,7 @@ Create virtual host config and add `fcgid-script`, for example
 
 Configuration above basically tells Apache to give any request to *.cgi file to
 be handled by `mod_fcgid` module (identified by `fcgid-script` handler).
+You need to enable `mod_rewrite` module too, otherwise routing will not work.
 
 ## Nginx
 
