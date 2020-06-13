@@ -63,14 +63,16 @@ $ ./bin/app.cgi
 Segmentation fault (core dumped)
 ```
 
-When linker `ld` is symlinked to LLVM linker `/usr/bin/ld.lld`, this cause segmentation fault when project is using `cthreads` unit.
-Workaround is to modify `ld` to point to GNU linker `/usr/bin/ld.bfd`.
+Try to update to latest FreeBSD and then rebuild the application, if the error does not go away, you may want to symlink `ld` to point to GNU linker `/usr/bin/ld.bfd` as a workaround.
 
 ```
 $ sudo ln -s -f /usr/bin/ld.bfd /usr/bin/ld
 ```
+
+When linker `ld` is symlinked to LLVM linker `/usr/bin/ld.lld` (default), sometime, this cause segmentation fault when project is using `cthreads` unit.
+
 However, latest binutils on newer FreeBSD releases no longer ships with `ld.bfd`.
-Other workaround is to install Free Pascal from FreeBSD package manager
+Other workaround you may try is to install Free Pascal from FreeBSD package manager
 
 ```
 $ sudo pkg install fpc
