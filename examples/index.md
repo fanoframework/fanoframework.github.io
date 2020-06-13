@@ -10,7 +10,7 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 
 ## Hello World applications
 
-List of getting started web application for various supported protocol, i.e [CGI](https://tools.ietf.org/html/rfc3875), [FastCGI](http://www.mit.edu/~yandros/doc/specs/fcgi-spec.html), [SCGI](http://python.ca/scgi/protocol.txt) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html).
+List of getting started web application for various supported protocol, i.e [CGI](https://tools.ietf.org/html/rfc3875), [FastCGI](http://www.mit.edu/~yandros/doc/specs/fcgi-spec.html), [SCGI](http://python.ca/scgi/protocol.txt), [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html) and http.
 
 - [Basic CGI web application example](https://github.com/fanoframework/fano-app), [live example](https://fano.juhara.id/)
 - [Fano Fcgid](https://github.com/fanoframework/fano-fcgid)
