@@ -55,11 +55,25 @@ Edit Free Pascal main configuration, `/etc/fpc.cfg` file and add following lines
 ```
 
 ## Issue on FreeBSD
-On FreeBSD 12, when linker `ld` is symlinked to LLVM linker `/usr/bin/ld.lld`, this cause segmentation fault when project is using `cthreads` unit.
+
+On FreeBSD 12, if you compile Free Pascal from source, you may get error when you try to run Fano web application executable.
+
+```
+$ ./bin/app.cgi
+Segmentation fault (core dumped)
+```
+
+When linker `ld` is symlinked to LLVM linker `/usr/bin/ld.lld`, this cause segmentation fault when project is using `cthreads` unit.
 Workaround is to modify `ld` to point to GNU linker `/usr/bin/ld.bfd`.
 
 ```
 $ sudo ln -s -f /usr/bin/ld.bfd /usr/bin/ld
+```
+However, latest binutils on newer FreeBSD releases no longer ships with `ld.bfd`.
+Other workaround is to install Free Pascal from FreeBSD package manager
+
+```
+$ sudo pkg install fpc
 ```
 ## Explore more
 
