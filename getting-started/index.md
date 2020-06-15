@@ -9,10 +9,12 @@ Following document explains minimum steps required to setup a working Fano web a
 
 ## Requirement
 
-- Linux
+- Linux or FreeBSD
 - [Free Pascal >= 3.0](https://www.freepascal.org)
 - [git](https://git-scm.com/)
 - [Apache 2.4](https://httpd.apache.org/)
+- [mod_cgi](https://httpd.apache.org/docs/current/mod/mod_cgi.html) or [mod_cgid](https://httpd.apache.org/docs/current/mod/mod_cgid.html)
+- [mod_rewrite](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)
 - [Fano CLI](https://github.com/fanoframework/fano-cli)
 - Working Internet connection.
 - Root privilege (for setting up virtual host).
@@ -38,7 +40,7 @@ $ sudo fanocli --deploy-cgi=hello.fano
 Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
 ## Project directory walkthrough
-Fano Framework has no opinion about your project directory structure. 
+Fano Framework has no opinion about your project directory structure.
 You can structure your project directories and files the way you like.
 However, Fano CLI creates several files and directories that follows certain assumptions.
 
