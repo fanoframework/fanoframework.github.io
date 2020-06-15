@@ -13,7 +13,7 @@ to help scaffolding project structure using [Fano Framework](https://github.com/
 
 ## <a name="installation"></a>Installation
 
-Make sure Free Pascal and git is installed. Run
+Make sure Free Pascal and git are installed. Run
 
 ```
 $ git clone https://github.com/fanoframework/fano-cli.git
@@ -187,7 +187,7 @@ To generate random key (for example, encryption secret key), run with  `--key=[l
 $ fanocli --key=32
 ```
 
-If `length` is not set, it is assumed 64 bytes of random value. Output is Base64 encoded string of random bytes. 
+If `length` is not set, it is assumed 64 bytes of random value. Output is Base64 encoded string of random bytes.
 In unix or Linux, it reads from `/dev/urandom`. In Windows, it uses CryptoAPI.
 
 ## <a name="generate-guid"></a>Generate GUID
