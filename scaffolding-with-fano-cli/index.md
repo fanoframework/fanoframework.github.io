@@ -31,7 +31,7 @@ Follow installation instruction in Fano CLI [README.md](https://github.com/fanof
 
 ## View Fano CLI Help
 
-To view available command, you can run
+To view available commands, you can run
 
 ```
 $ fanocli --help
@@ -39,7 +39,7 @@ $ fanocli --help
 
 ## <a name="creating-project"></a>Creating Web Application Project
 
-Fano CLI provides several commands for scaffolding Fano Framework web application easily such as `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which to create web application project using CGI, FastCGI, SCGI and uwsgi, http (using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)) protocol.
+Fano CLI provides several commands for scaffolding Fano Framework web application easily, such as, `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which is to create web application project using CGI, FastCGI, SCGI and uwsgi, http (using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)) protocol.
 
 ```
 $ fanocli --project-cgi=[project-name]
@@ -82,7 +82,7 @@ script, you can access `HelloController` by visiting URL
 wget http://[your host name]/hello
 ```
 
-To create controller for certain route pattern or HTTP method, add `--route` and `--method` parameter. For example to create controller which will handle POST request to `/my/hello`,
+To create controller for certain route pattern or HTTP method, add `--route` and `--method` parameter. For example, to create controller which will handle POST request to `/my/hello`,
 
 ```
 $ fanocli --controller=Hello --route=/my/hello --method=POST
@@ -157,7 +157,7 @@ $ fanocli --view=Hello
 
 ## <a name="add-middleware-support"></a>Add middleware support
 
-Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it set, then during project creation, [middleware support](/middlewares) is added to generated project.
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it is set, then during project creation, [middleware support](/middlewares) is added to generated project.
 
 ```
 $ fanocli --project-cgi=Hello --with-middleware
@@ -262,12 +262,16 @@ Please read [Working with Session](/working-with-session) for more information a
 
 Fano CLI offers commands to simplify setting up Fano web application with various web server through following commands,
 
-- `--deploy-cgi`, setup Fano web application as CGI with a web server.
-- `--deploy-fcgi`, setup Fano web application as FastCGI with a web server.
-- `--deploy-fcgid`, setup Fano web application as FastCGI with a Apache web server and mod_fcgid.
-- `--deploy-scgi` , setup Fano web application as SCGI with a web server.
-- `--deploy-lb-scgi` , setup Fano web application as SCGI with a web server and load balancer.
-- `--deploy-lb-fcgi` , setup Fano web application as FastCGI with a web server and load balancer.
+- `--deploy-cgi`, setup Fano CGI web application with a web server.
+- `--deploy-fcgi`, setup Fano FastCGI web application with a web server as reverse proxy.
+- `--deploy-fcgid`, setup Fano FastCGI web application with a Apache web server and mod_fcgid.
+- `--deploy-scgi` , setup Fano SCGI web application with a web server as reverse proxy.
+- `--deploy-lb-scgi` , setup Fano SCGI web application with a web server  as reverse proxy and load balancer.
+- `--deploy-lb-fcgi` , setup Fano FastCGI web application with a web server  as reverse proxy and load balancer.
+- `--deploy-uwsgi` , setup Fano uwsgi web application with a web server as reverse proxy.
+- `--deploy-lb-uwsgi` , setup Fano uwsgi web application with a web server as reverse proxy and load balancer.
+- `--deploy-http` , setup Fano http web application with a web server as reverse proxy.
+- `--deploy-lb-http` , setup Fano http web application with a web server as reverse proxy and load balancer.
 
 All commands above requires root privilege, so you need to run it with `sudo`.
 
