@@ -63,7 +63,13 @@ $ ./bin/app.cgi
 Segmentation fault (core dumped)
 ```
 
-Try to update to latest FreeBSD and then rebuild the application, if the error does not go away, you may want to symlink `ld` to point to GNU linker `/usr/bin/ld.bfd` as a workaround.
+Try to update to latest FreeBSD and install latest binutils
+
+```
+$ sudo pkg install binutils
+```
+
+and then rebuild the application, if the error does not go away, you may want to symlink `ld` to point to GNU linker `/usr/bin/ld.bfd` as a workaround.
 
 ```
 $ sudo ln -s -f /usr/bin/ld.bfd /usr/bin/ld
