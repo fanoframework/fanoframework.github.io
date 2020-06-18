@@ -41,7 +41,7 @@ Open web browser and go to `http://hello.fano`. You should see `Home controller`
 
 ## Command walkthrough
 
-Following command tells Fano CLI to create CGI web application project in `Hello` directory. Read [Creating Project](/scaffolding-with-fano-cli/creating-project) for creating different web application project (FastCGI, SCGI, uwsgi or http).
+Following command tells Fano CLI to create CGI web application project in `Hello` directory. Read [Creating Project](/scaffolding-with-fano-cli/creating-project) for creating different web application project ([FastCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-fastcgi-project), [SCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-scgi-project), [uwsgi](/scaffolding-with-fano-cli/creating-project#scaffolding-uwsgi-project) or [http](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project)).
 
 ```
 $ fanocli --project-cgi=Hello
@@ -66,7 +66,7 @@ Setup a virtual host for domain `hello.fano` and associate it with our CGI appli
 ```
 $ sudo fanocli --deploy-cgi=hello.fano
 ```
-Read [Deployment](/deployment) for deploying different protocol web application project (FastCGI, SCGI, uwsgi, http).
+Read [Deployment](/deployment) for deploying different protocol web application project ([FastCGI](/deployment/fastcgi), [SCGI](/deployment/scgi), [uwsgi](/deployment/uwsgi), [http](/deployment/standalone-web-server)).
 
 ## Project directory walkthrough
 Fano Framework has no opinion about your project directory structure.
