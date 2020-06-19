@@ -88,6 +88,12 @@ To create controller for certain route pattern or HTTP method, add `--route` and
 $ fanocli --controller=Hello --route=/my/hello --method=POST
 ```
 
+If you want to skip route creation, use `--no-route` parameter.
+
+```
+$ fanocli --controller=Hello --no-route
+```
+
 ## <a name="creating-view"></a>Creating view
 
 After you create project structure, to scaffold view class, run with  `--view` command line options
