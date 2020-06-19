@@ -95,7 +95,7 @@ setup uwsgi application to work with various web server.
 
 To create web application that use http using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/), use `--project-mhd` parameter. Other parameters are similar to SCGI, FastCGI or uwsgi project above.
 
-It will add conditional define `-dLIBMICROHTTPD` in `build.cfg` which cause libmicrohttpd to be linked with application. 
+It will add conditional define `-dLIBMICROHTTPD` in `build.cfg` which cause libmicrohttpd to be linked with application.
 
 You need to install libmicrohttpd development package. For Debian-based distribution,
 
@@ -128,6 +128,10 @@ $ fanocli --project-fcgi=test-fano --config=ini
 ```
 
 Read [Application Configuration](/configuration) for more information.
+
+## Add middleware support
+
+Use `--with-middleware` to [add middleware support](/scaffolding-with-fano-cli#add-middleware-support). Read [middleware documentation](/scaffolding-with-fano-cli#add-middleware-support) for more information.
 
 ## Unrelated commit histories issue
 
@@ -166,12 +170,12 @@ $ git commit -m "Initial commit"
 ```
 
 ## Use libcurl in application
-If you want to use curl-based HTTP client such as [`THttpGet` class](https://github.com/fanoframework/fano/blob/master/src/Libs/HttpClient/Implementations/Curl/HttpGetImpl.pas), use `--with-curl` parameter. It adds conditional define `-dLIBCURL` in `build.cfg` file which causing libcurl library linked with application. 
+If you want to use curl-based HTTP client such as [`THttpGet` class](https://github.com/fanoframework/fano/blob/master/src/Libs/HttpClient/Implementations/Curl/HttpGetImpl.pas), use `--with-curl` parameter. It adds conditional define `-dLIBCURL` in `build.cfg` file which causing libcurl library linked with application.
 
 ```
 $ fanocli --project-scgi=hello --with-curl
 ```
-You need to install libcurl development package. For example 
+You need to install libcurl development package. For example
 ```
 $ sudo apt install libcurl4-gnutls-dev
 ```
