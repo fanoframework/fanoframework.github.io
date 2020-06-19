@@ -156,7 +156,7 @@ rule := TRegexValidator.create(
     'Field %s does not match regular expression'
 );
 ```
-
+Parameters are `IRegex` instance, regular expression pattern and error message.
 `%s` will be replaced with field name being validated.
 
 ## Constant string equality
@@ -181,7 +181,7 @@ rule := TCaseInsensitiveEqualStrValidator.create('test');
 
 ### TEqualLengthValidator
 
-Data must be string with its length is equal to predefined value. For example, data being validated must contains exacly 10 characters to pass validation.
+Data must be string with its length is equal to predefined value. For example, data being validated must contains exactly 10 characters to pass validation.
 
 ```
 rule := TEqualLengthValidator.create(10);
