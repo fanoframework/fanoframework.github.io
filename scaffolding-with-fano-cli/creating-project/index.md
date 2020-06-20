@@ -114,8 +114,17 @@ If you missed it, during build, you will get linking error
 ```
 /usr/bin/ld : cannot find -lmicrohttp
 ```
-
 See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behind various reverse proxy web server.
+
+### Add https support
+Inside generated project directory, you can find that `src/app.pas` will have following commented code
+
+```
+//svrConfig.useTLS := true;
+//svrConfig.tlsKey := '/path/to/ssl/cert/key';
+//svrConfig.tlsCert := '/path/to/ssl/cert/cert';
+```
+If you want to support https, you need to uncomment those three lines of codes and set correct path for SSL certificate files. You need to make sure that they are readable by application.
 
 ## <a name="setup-application-configuration-when-creating-project"></a>Setup application configuration when creating project
 
