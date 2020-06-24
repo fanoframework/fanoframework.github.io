@@ -41,7 +41,7 @@ $ fanocli --help
 
 ## <a name="creating-project"></a>Creating Web Application Project
 
-Fano CLI provides several commands for scaffolding Fano Framework web application easily, such as, `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which is to create web application project using CGI, FastCGI, SCGI and uwsgi, http (using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)) protocol.
+Fano CLI provides several commands for scaffolding Fano Framework web application easily, such as, `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which is to create web application project supporting CGI, FastCGI, SCGI and uwsgi, http protocol. Currently http implementation is using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/) library.
 
 ```
 $ fanocli --project-cgi=[project-name]
@@ -242,7 +242,7 @@ Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.
 - `cookie`, create session which stores session data in encrypted cookie.
 - `db`, create session which stores session data in database. This is not implemented yet.
 
-If `[session storage]` not set then it is assumed `file`. So following commands are identical
+If `[session storage]` is not set then it is assumed `file`. So following commands are identical
 
 ```
 $ fanocli --project-cgi=Hello --with-session=file
