@@ -31,7 +31,11 @@ This interface is provided for getting session instance from a request. This int
 
 To register `TFileSessionManager` instance to dependency container, Fano Framework provides `TJsonFileSessionManagerFactory` and `TIniFileSessionManagerFactory` classes which will create session manager which store its data as JSON and INI file respectively.
 
-Its constructor accepts three optional parameters, name of session, path of directory where files will be stored and prefix which will be prepended before session id.
+Its constructor accepts three optional parameters:
+
+- Name of session (default value of `FANOSESSID`). This will be used as name of cookie.
+- Path of directory where files will be stored (default value of `/tmp`).
+- Prefix which will be prepended before session id (default value of empty string).
 
 You need to make sure that session directory is writeable by application.
 
@@ -42,6 +46,10 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
     'fano_sess`,
     '/home/fanoapp/storages/sessions/'
 );
+```
+or you can create factory with default value
+```
+sessionMgrFactory := TJsonFileSessionManagerFactory.create();
 ```
 
 If it is not set, by default, code above will use GUID as session id (using `TGuidSessionIdGeneratorFactory` class). Read [Session ID generator](/working-with-session#session-id-generator) for more information on algorithm used to generate session identifier.
@@ -99,7 +107,18 @@ container.add(
         )
 );
 ```
+Fourth parameter of constructor method of `TCookieSessionManagerFactory` is optional session name parameter with default value of `FANOSESSID`. So you can omit and use default value as follows.
+```
+container.add(
+    'sessionManager',
+    TCookieSessionManagerFactory.create(
+        TJsonSessionFactory.create(),
+        container['encrypter'] as IEncrypter,
+        container['encrypter'] as IDecrypter
+    )
+);
 
+```
 See [Fano Session Cookie](https://github.com/fanoframework/fano-session-cookie), example web project to demonstrate how to use session that store its data in encrypted cookie.
 
 ### Store session data in database
@@ -111,7 +130,9 @@ You need to make sure that you create proper database credential which has `SELE
 `TDbSessionManager` class provides capability to manage session data in database.
 To register it to dependency container, Fano Framework provides `TJsonDbSessionManagerFactory` and `TIniDbSessionManagerFactory` classes that will create session manager having capability to store its data in database as serialized JSON and INI string respectively.
 
-Its constructor accepts two parameters, instance of `IRdbms` interface and name of session. It provides several methods which mainly to let Fano Framework knows about your table schema. Read [database documentation](/database) for information on working with database in Fano Framework.
+Its constructor accepts two parameters, instance of `IRdbms` interface and name of session (optional with default value of `FANOSESSID`).
+
+It provides several additional methods to let Fano Framework knows about your table schema. Read [database documentation](/database) for information on working with database in Fano Framework.
 
 ```
 var sessionMgrFactory : IDependencyFactory;
@@ -120,13 +141,25 @@ sessionMgrFactory := TJsonDbSessionManagerFactory.create(
     container['db'] as IRdbms,
     'fano_sess`
 ).table('fano_sessions')
-.sessionIdColumn('sess_id')
-.dataColumn('sess_data')
+.sessionIdColumn('id')
+.dataColumn('data')
 .expiredAtColumn('expired_at');
 
 container.add('sessionManager', sessionMgrFactory);
 ```
-
+If table schema is not defined, factory class will assume table name `fano_sessions` with three columns: `id`, `data` and `expired_at`. So following code is doing same thing as above.
+```
+sessionMgrFactory := TJsonDbSessionManagerFactory.create(
+    container['db'] as IRdbms,
+    'fano_sess`
+);
+```
+You can omit last parameter and use default value as follows.
+```
+sessionMgrFactory := TJsonDbSessionManagerFactory.create(
+    container['db'] as IRdbms
+);
+```
 ## <a name="session-id-generator"></a>Session ID generator
 
 Fano Framework allows developer to change how session identifiers are generated. The idea is to minimise the probability of generating two session IDs with the same value.
