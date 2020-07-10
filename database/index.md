@@ -64,6 +64,35 @@ db.connect('', 'your_data.db', '', '', 0);
 
 It will open database connection which is stored in `your_data.db` file.
 
+## Registering IRdbms instance in dependency container
+
+You can register `IRdbms` instance in [dependency container](/dependency-container) so that you can access its instance easily.
+
+```
+var container : IDependencyContainer;
+...
+container.add(
+    'db',
+    TMysqlDbFactory.create(
+        'mysql 5.7',
+        'localhost',
+        'your_db_name',
+        'your_db_username',
+        'yoursecretpassword',
+        3306
+    )
+);
+```
+Then in your code where `IRdbms` instance is required, just get it from dependency container as shown in following code.
+
+```
+var rdbms : IRdbms;
+...
+rdbms := container['db'] as IRdbms;
+```
+Replace `TMysqlDbFactory` with `TPostgreSqlDbFactory`, `TFirebirdSqlDbFactory`,
+`TSQLiteDbFactory` for Postgresql, Firebird and SQLite database respectively.
+
 ## Executing SQL Query
 
 ```
