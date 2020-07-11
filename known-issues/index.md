@@ -95,6 +95,13 @@ $ BUILD_TYPE=dev ./build.sh
 
 You may find that compilation will stop with Free Pascal 3.2.0 compiler. This is because in development build, we use compiler options `Sewn` which will stop compilation when any error, warning or notes are generated.
 
+```
+#----------------------------------------------
+# halt compiler after error, warning and notes
+#----------------------------------------------
+-Sewn
+```
+
 To remedy the situation, just edit `build.dev.cfg` file in example root directory and replace `Sewn` to `Sew` so that compilation will not stop on notes.
 
 ## Explore more
