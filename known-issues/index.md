@@ -83,6 +83,20 @@ Other workaround you may try is to install Free Pascal from FreeBSD package mana
 ```
 $ sudo pkg install fpc
 ```
+## Issue with Free Pascal 3.2.0
+
+When upgrading Free Pascal from 3.0.4 to 3.2.0, you may notice that Free Pascal 3.2.0 will generate several notes regarding inline methods it can not inline while in Free Pascal 3.0.4 there was no such notes generated.
+
+When you compile examples program from [Examples page](/examples) with development build type, (i.e, you run build script with `BUILD_TYPE=dev`),
+
+```
+$ BUILD_TYPE=dev ./build.sh
+```
+
+You may find that compilation will stop with Free Pascal 3.2.0 compiler. This is because in development build, we use compiler options `Sewn` which will stop compilation when any error, warning or notes are generated.
+
+To remedy the situation, just edit `build.dev.cfg` file in example root directory and replace `Sewn` to `Sew` so that compilation will not stop on notes.
+
 ## Explore more
 
 - [Getting Started](/getting-started)
