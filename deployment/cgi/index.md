@@ -147,7 +147,7 @@ This section explains how to deploy server that you have no full control and hav
 
 ## Nginx
 
-This section explains how to deploy web application as CGI application on Nginx web server.
+Nginx does not support running CGI program, only FastCGI. So either you create FastCGI program or use tools such [fcgiwrap](https://www.nginx.com/resources/wiki/start/topics/examples/fcgiwrap/) that allows you to run CGI program as using FastCGI wrapper.
 
 ## Simulate run on command line
 
