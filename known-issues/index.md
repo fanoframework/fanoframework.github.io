@@ -18,6 +18,8 @@ This is known issue between Free Pascal and GNU Linker. See
 
 However, this warning is minor and can be ignored. It does not affect output executable.
 
+To remedy, just upgrade Free Pascal and binutils.
+
 ## <a name="issue-with-gcc-library-search-path"></a>Issue with development tools library search path
 
 When running `build.sh` script, you may encounter following minor warning:
