@@ -7,7 +7,7 @@ description: List of some of known issues
 
 ## <a name="issue-with-gnu-linker"></a>Issue with GNU Linker
 
-When running `build.sh` script, you may encounter following warning:
+When running `build.sh` script with Free Pascal 3.0.4, you may encounter following warning:
 
 ```
 /usr/bin/ld: warning: public/link.res contains output sections; did you forget -T?
@@ -56,13 +56,13 @@ Edit Free Pascal main configuration, `/etc/fpc.cfg` file and add following lines
 
 ## <a name="issue-on-freebsd"></a>Issue on FreeBSD
 
-On FreeBSD 12, if you compile Free Pascal from source, you may get error when you try to run Fano web application executable.
+On FreeBSD 12, if you compile Free Pascal from source or tar file, you may get error when you try to run Fano web application executable.
 
 ```
 $ ./bin/app.cgi
 Segmentation fault (core dumped)
 ```
-
+This is Free Pascal issue.
 Try to update to latest FreeBSD and install latest binutils
 
 ```
@@ -70,6 +70,7 @@ $ sudo pkg install binutils
 ```
 
 and then rebuild the application, if the error does not go away, you may want to symlink `ld` to point to GNU linker `/usr/bin/ld.bfd` as a workaround.
+If you can not find `ld.bfd` in `/usr/bin`, you may want to check other directories such as `/usr/local/bin`.
 
 ```
 $ sudo ln -s -f /usr/bin/ld.bfd /usr/bin/ld
