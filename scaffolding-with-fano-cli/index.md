@@ -7,13 +7,13 @@ description: Tutorial how to use Fano CLI to scaffold web application using Fano
 ## What is Fano CLI?
 
 [Fano CLI](https://github.com/fanoframework/fano-cli) is command line application
-to help scaffolding project structure using [Fano Framework](https://github.com/fanoframework/fano). It helps tedious tasks such as
+to help scaffolding [Fano Framework](https://github.com/fanoframework/fano) web application project. It helps tedious tasks such as
 [creating Fano web application project](#creating-project), [creating controller](#creating-controller), [model](#creating-model), [view](#creating-view), [middleware](#creating-middleware) classes,
 [generate random key](#generate-random-key) and [GUID](#generate-guid), [minify JavaScript files](#minify-javascript) and also [setting up web server configuration](#deployment).
 
 ## <a name="installation"></a>Installation
 
-Make sure Free Pascal and git is installed. Run
+Make sure Free Pascal and git are installed. Run
 
 ```
 $ git clone https://github.com/fanoframework/fano-cli.git
@@ -27,11 +27,13 @@ For easier typing, copy `bin/out/fanocli` executable binary to globally accessib
 $ sudo cp bin/out/fanocli /usr/local/bin/fanocli
 ```
 
+If you do not want to copy to `/usr/local/bin`, just add `fanocli` executable path to `PATH` environment variable.
+
 Follow installation instruction in Fano CLI [README.md](https://github.com/fanoframework/fano-cli/blob/master/README.md) document for more information.
 
 ## View Fano CLI Help
 
-To view available command, you can run
+To view available commands, you can run
 
 ```
 $ fanocli --help
@@ -39,7 +41,7 @@ $ fanocli --help
 
 ## <a name="creating-project"></a>Creating Web Application Project
 
-Fano CLI provides several commands for scaffolding Fano Framework web application easily such as `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which to create web application project using CGI, FastCGI, SCGI and uwsgi, http (using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/)) protocol.
+Fano CLI provides several commands for scaffolding Fano Framework web application easily, such as, `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which is to create web application project supporting CGI, FastCGI, SCGI and uwsgi, http protocol. Currently http implementation is using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/) library.
 
 ```
 $ fanocli --project-cgi=[project-name]
@@ -82,10 +84,16 @@ script, you can access `HelloController` by visiting URL
 wget http://[your host name]/hello
 ```
 
-To create controller for certain route pattern or HTTP method, add `--route` and `--method` parameter. For example to create controller which will handle POST request to `/my/hello`,
+To create controller for certain route pattern or HTTP method, add `--route` and `--method` parameter. For example, to create controller which will handle POST request to `/my/hello`,
 
 ```
 $ fanocli --controller=Hello --route=/my/hello --method=POST
+```
+
+If you want to skip route creation, use `--no-route` parameter.
+
+```
+$ fanocli --controller=Hello --no-route
 ```
 
 ## <a name="creating-view"></a>Creating view
@@ -157,7 +165,7 @@ $ fanocli --view=Hello
 
 ## <a name="add-middleware-support"></a>Add middleware support
 
-Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it set, then during project creation, [middleware support](/middlewares) is added to generated project.
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-middleware`. If it is set, then during project creation, [middleware support](/middlewares) is added to generated project.
 
 ```
 $ fanocli --project-cgi=Hello --with-middleware
@@ -187,7 +195,7 @@ To generate random key (for example, encryption secret key), run with  `--key=[l
 $ fanocli --key=32
 ```
 
-If `length` is not set, it is assumed 64 bytes of random value. Output is Base64 encoded string of random bytes. 
+If `length` is not set, it is assumed 64 bytes of random value. Output is Base64 encoded string of random bytes.
 In unix or Linux, it reads from `/dev/urandom`. In Windows, it uses CryptoAPI.
 
 ## <a name="generate-guid"></a>Generate GUID
@@ -234,7 +242,7 @@ Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.
 - `cookie`, create session which stores session data in encrypted cookie.
 - `db`, create session which stores session data in database. This is not implemented yet.
 
-If `[session storage]` not set then it is assumed `file`. So following commands are identical
+If `[session storage]` is not set then it is assumed `file`. So following commands are identical
 
 ```
 $ fanocli --project-cgi=Hello --with-session=file
@@ -262,12 +270,16 @@ Please read [Working with Session](/working-with-session) for more information a
 
 Fano CLI offers commands to simplify setting up Fano web application with various web server through following commands,
 
-- `--deploy-cgi`, setup Fano web application as CGI with a web server.
-- `--deploy-fcgi`, setup Fano web application as FastCGI with a web server.
-- `--deploy-fcgid`, setup Fano web application as FastCGI with a Apache web server and mod_fcgid.
-- `--deploy-scgi` , setup Fano web application as SCGI with a web server.
-- `--deploy-lb-scgi` , setup Fano web application as SCGI with a web server and load balancer.
-- `--deploy-lb-fcgi` , setup Fano web application as FastCGI with a web server and load balancer.
+- `--deploy-cgi`, setup Fano CGI web application with a web server.
+- `--deploy-fcgi`, setup Fano FastCGI web application with a web server as reverse proxy.
+- `--deploy-fcgid`, setup Fano FastCGI web application with a Apache web server and mod_fcgid.
+- `--deploy-scgi` , setup Fano SCGI web application with a web server as reverse proxy.
+- `--deploy-lb-scgi` , setup Fano SCGI web application with a web server  as reverse proxy and load balancer.
+- `--deploy-lb-fcgi` , setup Fano FastCGI web application with a web server  as reverse proxy and load balancer.
+- `--deploy-uwsgi` , setup Fano uwsgi web application with a web server as reverse proxy.
+- `--deploy-lb-uwsgi` , setup Fano uwsgi web application with a web server as reverse proxy and load balancer.
+- `--deploy-http` , setup Fano http web application with a web server as reverse proxy.
+- `--deploy-lb-http` , setup Fano http web application with a web server as reverse proxy and load balancer.
 
 All commands above requires root privilege, so you need to run it with `sudo`.
 

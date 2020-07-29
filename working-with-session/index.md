@@ -31,7 +31,11 @@ This interface is provided for getting session instance from a request. This int
 
 To register `TFileSessionManager` instance to dependency container, Fano Framework provides `TJsonFileSessionManagerFactory` and `TIniFileSessionManagerFactory` classes which will create session manager which store its data as JSON and INI file respectively.
 
-Its constructor accepts three optional parameters, name of session, path of directory where files will be stored and prefix which will be prepended before session id.
+Its constructor accepts three optional parameters:
+
+- Name of session (default value of `FANOSESSID`). This will be used as name of cookie.
+- Path of directory where files will be stored (default value of `/tmp`).
+- Prefix which will be prepended before session id (default value of empty string).
 
 You need to make sure that session directory is writeable by application.
 
@@ -43,8 +47,12 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
     '/home/fanoapp/storages/sessions/'
 );
 ```
+or you can create factory with default value
+```
+sessionMgrFactory := TJsonFileSessionManagerFactory.create();
+```
 
-If it is not set, by default, code above will use GUID as session id (using `TGuidSessionIdGeneratorFactory` class). Read [Session ID generator](/working-with-session#session-id-generator) for more information about algorithm used to generate session identifier.
+If it is not set, by default, code above will use GUID as session id (using `TGuidSessionIdGeneratorFactory` class). Read [Session ID generator](/working-with-session#session-id-generator) for more information on algorithm used to generate session identifier.
 
 After that register factory to dependency container
 
@@ -88,7 +96,7 @@ container.add(
 ```
 Code above will internally store data as JSON format, to use INI format, just replace `TJsonSessionFactory` with `TIniSessionFactory` class.
 
-You can replace `TBlowfishEncrypterFactory` above with `TSha1BlowfishEncrypterFactory` or `TMd5BlowfishEncrypterFactory` which adds encrypted cookie integrity check using HMAC SHA1 or HMAC MD5 respectively. When encrypted cookie is tampered, integrity check will fails and will result in new session is created.
+You can replace `TBlowfishEncrypterFactory` above with `TSha1BlowfishEncrypterFactory` or `TMd5BlowfishEncrypterFactory` which adds encrypted cookie integrity check using HMAC SHA1 or HMAC MD5 respectively. When encrypted cookie is tampered, integrity check will fail and in turn, new session is created.
 
 ```
 container.add(
@@ -99,14 +107,64 @@ container.add(
         )
 );
 ```
+Fourth parameter of constructor method of `TCookieSessionManagerFactory` is optional session name parameter with default value of `FANOSESSID`. So you can omit and use default value as follows.
+```
+container.add(
+    'sessionManager',
+    TCookieSessionManagerFactory.create(
+        TJsonSessionFactory.create(),
+        container['encrypter'] as IEncrypter,
+        container['encrypter'] as IDecrypter
+    )
+);
 
+```
 See [Fano Session Cookie](https://github.com/fanoframework/fano-session-cookie), example web project to demonstrate how to use session that store its data in encrypted cookie.
 
+### Store session data in database
+
+To use database for session storage, you need to create a table which contain at least three columns which will store session id, serialized session data and session expiry. Two first columns should be string type column, such as `VARCHAR` and last column should be `DATETIME`. For best performance, session id column should be primary key or at least unique index.
+
+You need to make sure that you create proper database credential which has `SELECT`, `INSERT`, `UPDATE` and `DELETE` privilege on table mentioned above.
+
+`TDbSessionManager` class provides capability to manage session data in database.
+To register it to dependency container, Fano Framework provides `TJsonDbSessionManagerFactory` and `TIniDbSessionManagerFactory` classes that will create session manager having capability to store its data in database as serialized JSON and INI string respectively.
+
+Its constructor accepts two parameters, instance of `IRdbms` interface and name of session (optional with default value of `FANOSESSID`).
+
+It provides several additional methods to let Fano Framework knows about your table schema. Read [database documentation](/database) for information on working with database in Fano Framework.
+
+```
+var sessionMgrFactory : IDependencyFactory;
+...
+sessionMgrFactory := TJsonDbSessionManagerFactory.create(
+    container['db'] as IRdbms,
+    'fano_sess`
+).table('fano_sessions')
+.sessionIdColumn('id')
+.dataColumn('data')
+.expiredAtColumn('expired_at');
+
+container.add('sessionManager', sessionMgrFactory);
+```
+If table schema is not defined, factory class will assume table name `fano_sessions` with three columns: `id`, `data` and `expired_at`. So following code is doing same thing as above.
+```
+sessionMgrFactory := TJsonDbSessionManagerFactory.create(
+    container['db'] as IRdbms,
+    'fano_sess`
+);
+```
+You can omit last parameter and use default value as follows.
+```
+sessionMgrFactory := TJsonDbSessionManagerFactory.create(
+    container['db'] as IRdbms
+);
+```
 ## <a name="session-id-generator"></a>Session ID generator
 
-Fano Framework allows developer to change how session id is generated. The idea is to  minimise the probability of generating two session IDs with the same value.
+Fano Framework allows developer to change how session identifiers are generated. The idea is to minimise the probability of generating two session IDs with the same value.
 
-You can change the way session id generated by calling `sessionIdGenerator()` of session manager factory and pass factory class of `ISessionIdGeneratorFactory` interface, as shown in following code,
+You can change the way session identifiers are generated by calling `sessionIdGenerator()` of session manager factory and pass factory class of `ISessionIdGeneratorFactory` interface, as shown in following code,
 
 ```
 sessionMgrFactory := TJsonFileSessionManagerFactory.create(
@@ -116,15 +174,28 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
     TKeyGuidSessionIdGeneratorFactory.create('some random string as secret key')
 );
 ```
+All session manager factory classes have `sessionIdGenerator()` method so you can also set session id generator on, for example, `TJsonDbSessionManagerFactory`,
+```
+sessionMgrFactory := TJsonDbSessionManagerFactory.create(
+    container['db'] as IRdbms,
+    'fano_sess`
+).sessionIdGenerator(
+    TKeyGuidSessionIdGeneratorFactory.create('some random string as secret key')
+).table('fano_sessions')
+.sessionIdColumn('sess_id')
+.dataColumn('sess_data')
+.expiredAtColumn('expired_at');
+```
 
 If you need to implement your own session id generator, you need to implement `ISessionIdGenerator` interface and also create its factory class which implements `ISessionIdGeneratorFactory` interface.
 
 ### Built-in session id generator
 
-- `TGuidSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use GUID.
+- `TGuidSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use GUID. While GUID is unique, it is predictable so it is vulnerable to session hijack attack.
 - `TKeyGuidSessionIdGeneratorFactory` is built-in factory class which will create session id which use SHA1 hash of a secret key concatenated with GUID as session id.
 - `TIpKeyGuidSessionIdGeneratorFactory` is built-in factory class which will create session id which use SHA1 hash of concatenated string of client IP address + time +  secret key + GUID as session id.
 - `TKeyRandSessionIdGeneratorFactory` is built-in factory class which will create session id generator which use SHA1 hash of a secret key + client IP address + time + random bytes from `/dev/urandom`.
+- `TSha2KeyRandSessionIdGeneratorFactory` is similar to `TKeyRandSessionIdGeneratorFactory` except that it uses SHA2 256-bit hash.
 
 Except `TGuidSessionIdGeneratorFactory` which its constructor does not require parameter, other built-in factory classes expect secret key to be provided when creating factory class.
 It is strongly advised that you use cryptographically strong random secret key. Fano CLI can help [generate random secret key](/scaffolding-with-fano-cli#generate-random-key) for you.
@@ -135,6 +206,17 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
     '/home/fanoapp/storages/sessions/'
 ).sessionIdGenerator(
     TGuidSessionIdGeneratorFactory.create()
+);
+```
+
+or with more cryptographically strong session id generator
+
+```
+sessionMgrFactory := TJsonFileSessionManagerFactory.create(
+    'fano_sess`,
+    '/home/fanoapp/storages/sessions/'
+).sessionIdGenerator(
+    TSha2KeyRandSessionIdGeneratorFactory.create('your very secret hush hush key')
 );
 ```
 
@@ -317,3 +399,4 @@ If you create session manager factory as example above, `sessionName` will conta
 - [Example applications](/examples)
 - [Session example applications](https://github.com/fanoframework/fano-session)
 - [Session in cookie example applications](https://github.com/fanoframework/fano-session-cookie)
+- [Session in database example](https://github.com/fanoframework/fano-db-session)

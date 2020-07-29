@@ -3,14 +3,14 @@ title: Example applications
 description: List of example application built with Fano Framework
 ---
 
-<h1 class="major">Example Application</h1>
+<h1 class="major">Example Applications</h1>
 
-Below is list of example applications which you can use to get started. They are
+Below is list of example applications you can use to get started. They are
 generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command line tools to help [scaffolding web application](/scaffolding-with-fano-cli) with Fano Framework.
 
 ## Hello World applications
 
-List of getting started web application for various supported protocol, i.e [CGI](https://tools.ietf.org/html/rfc3875), [FastCGI](http://www.mit.edu/~yandros/doc/specs/fcgi-spec.html), [SCGI](http://python.ca/scgi/protocol.txt) and [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html).
+List of getting started web application for various supported protocol, i.e [CGI](https://tools.ietf.org/html/rfc3875), [FastCGI](http://www.mit.edu/~yandros/doc/specs/fcgi-spec.html), [SCGI](http://python.ca/scgi/protocol.txt), [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html) and http.
 
 - [Basic CGI web application example](https://github.com/fanoframework/fano-app), [live example](https://fano.juhara.id/)
 - [Fano Fcgid](https://github.com/fanoframework/fano-fcgid)
@@ -36,7 +36,7 @@ Following example applications show how to [work with response](/working-with-re
 ## File upload
 
 [Handling upload example](https://github.com/fanoframework/fano-upload) shows how to [handle file upload](/handling-file-upload) in Fano Framework.
-For example how to validate file upload, read [Form Validation](#form-validation) section below.
+For file upload validation example, read [Form Validation](#form-validation) section below.
 
 ## Database
 
@@ -47,7 +47,7 @@ Following example applications show how to work with SQL and NoSQL databases by 
 - [MySQL web application example](https://github.com/fanoframework/fano-app-db)
 - [Database connection pool example](https://github.com/fanoframework/fano-db-pool)
 - [PostgreSQL web application example](https://github.com/fanoframework/fano-postgresql)
-- [Example web application that log messages to MySQL database](https://github.com/fanoframework/fano-db-logger)
+- [Example web application that log messages to MySQL database](https://github.com/fanoframework/fano-db-logger). This example demonstrates [logging functionality](/utilities/using-loggers) in Fano Framework.
 
 ## Middleware
 
@@ -59,6 +59,7 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 - [Session example](https://github.com/fanoframework/fano-session) demonstrates how to use session that is stored in file on server.
 - [Session in encrypted cookie example](https://github.com/fanoframework/fano-session-cookie) demonstrates session that is stored in encrypted cookie.
+- [Session in database example](https://github.com/fanoframework/fano-db-session) demonstrates session that is stored in MySQL database.
 
 ## Cross-Origin Resource Sharing (CORS)
 

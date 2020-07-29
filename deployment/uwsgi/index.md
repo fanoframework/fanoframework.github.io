@@ -42,7 +42,7 @@ To deploy as uwsgi application with [mod_proxy_uwsgi](https://httpd.apache.org/d
 To install module on Debian,
 
 ```
-$ sudo apt install libapache2_mod_proxy_uwsgi
+$ sudo apt install libapache2-mod-proxy-uwsgi
 ```
 
 To enable module,

@@ -19,6 +19,15 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
     <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="/assets/css/main.css" />
     <noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-169517371-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-169517371-1');
+</script>
 </head>
 <body class="is-preload">
 
@@ -50,7 +59,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                     <li><a href="/examples"
                     class="button primary">Sample Applications</a></li>
                     <li><a href="/getting-started" class="button primary">Getting Started</a></li>
-                
+
                 </ul>
 <pre><code>program app;
 
@@ -66,8 +75,8 @@ begin
     appInstance := TMyApp.create();
     appInstance.run();
 end.</code></pre>
-               
-                   
+
+
             </div>
         </section>
         <section id="feature" class="wrapper style2">
@@ -103,7 +112,7 @@ end.</code></pre>
                         <h3>MVC</h3>
                         <p><a href="/working-with-models">Model</a> <a href="/working-with-views">View</a> <a href="/working-with-controllers">Controller</a>
                             paradigm for better code organization.
-                            In addition, <a href="https://github.com/fanoframework/fano-cli">Fano CLI</a> can helps developer
+                            In addition, <a href="https://github.com/fanoframework/fano-cli">Fano CLI</a> helps developer
                             <a href="/scaffolding-with-fano-cli">scaffolding MVC web application</a> faster.
                         </p>
                     </section>
@@ -119,7 +128,7 @@ end.</code></pre>
                         <span class="icon major fa-unlock"></span>
                         <h3>Extensible</h3>
                         <p>Fano Framework aims to be extensible. From
-                            <a href="/security/form-validation">form validation</a> to <a href="/utilities/using-loggers">logging</a>,
+                            <a href="/security/form-validation">form validation</a> to <a href="/working-with-session">session</a> to <a href="/utilities/using-loggers">logging</a>,
                             you can always replace any software components with your own implementation if required.</p>
                     </section>
                     <section>
@@ -131,7 +140,7 @@ end.</code></pre>
                             <a href="/deployment/scgi">SCGI</a> or <a href="/deployment/uwsgi">uwsgi</a> web application with
                             Apache or nginx web server
                             or as <a href="/deployment/standalone-web-server">standalone web server</a>.
-                            Currently only Linux is supported.
+                            Currently only Linux and FreeBSD are supported.
                         </p>
                     </section>
                     <section>

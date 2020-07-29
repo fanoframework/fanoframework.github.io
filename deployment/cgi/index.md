@@ -60,8 +60,8 @@ For example, if we store application binary in directory `/home/myuser/myapp/pub
 add `Require` directive to allow Apache to serve request from
 this directory, otherwise they will be rejected.
 
-Above snippet basically tells Apache to allow (`+ExecCGI`) to serve any file ends with `cgi` extension as CGI script (`AddHandler cgi-script .cgi`). `-MultiViews` also important to disable automatic content negotiation because we need to add URL rewriting to allow use of routing in our application. So Our application will be responsible to decide what response to return.
-
+Above snippet basically tells Apache to allow (`+ExecCGI`) to serve any file ends with `cgi` extension as CGI script (`AddHandler cgi-script .cgi`). `-MultiViews` also important to disable automatic content negotiation because we need to add URL rewriting to allow use of routing in our application. So our application will be responsible to decide what response to return.
+You need to enable `mod_rewrite` module, otherwise, routing will not work.
 So in our example, we end up with following configuration:
 
 ```
@@ -147,7 +147,7 @@ This section explains how to deploy server that you have no full control and hav
 
 ## Nginx
 
-This section explains how to deploy web application as CGI application on Nginx web server.
+Nginx does not support running CGI program, only FastCGI. So either you create [FastCGI program](/scaffolding-with-fano-cli/creating-project/#scaffolding-fastcgi-project) or use tools such [fcgiwrap](https://www.nginx.com/resources/wiki/start/topics/examples/fcgiwrap/) that allows you to run CGI program as FastCGI program.
 
 ## Simulate run on command line
 

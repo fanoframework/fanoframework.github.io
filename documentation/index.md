@@ -83,3 +83,5 @@ description: Documentation and developer's resources for Fano Framework, web app
 ## Known Issue
 - [Issue with GNU Linker](/known-issues#issue-with-gnu-linker)
 - [Issue with development tools library search path](/known-issues#issue-with-gcc-library-search-path)
+- [Issue on FreeBSD](/known-issues#issue-on-freebsd)
+- [Issue with Free Pascal 3.2.0](/known-issues#issue-with-free-pascal-3.2.0)
