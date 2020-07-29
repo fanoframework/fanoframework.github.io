@@ -59,6 +59,7 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 - [Session example](https://github.com/fanoframework/fano-session) demonstrates how to use session that is stored in file on server.
 - [Session in encrypted cookie example](https://github.com/fanoframework/fano-session-cookie) demonstrates session that is stored in encrypted cookie.
+- [Session in database example](https://github.com/fanoframework/fano-db-session) demonstrates session that is stored in MySQL database.
 
 ## Cross-Origin Resource Sharing (CORS)
 

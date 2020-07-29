@@ -147,7 +147,7 @@ This section explains how to deploy server that you have no full control and hav
 
 ## Nginx
 
-This section explains how to deploy web application as CGI application on Nginx web server.
+Nginx does not support running CGI program, only FastCGI. So either you create [FastCGI program](/scaffolding-with-fano-cli/creating-project/#scaffolding-fastcgi-project) or use tools such [fcgiwrap](https://www.nginx.com/resources/wiki/start/topics/examples/fcgiwrap/) that allows you to run CGI program as FastCGI program.
 
 ## Simulate run on command line
 
