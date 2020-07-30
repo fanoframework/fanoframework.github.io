@@ -66,7 +66,7 @@ $ fanocli --deploy-lb-fcgi=myapp.me --stdout
 
 Skip this section if you deploy using Fano CLI.
 
-If you prefer setting up virtual host manually, create new file in `/etc/httpd/conf.d` or `/etc/apache/sites-available` directory for Fedora-based or Debian-based Linux respectively.
+If you prefer setting up virtual host manually, create new file in `/etc/httpd/conf.d` or `/etc/apache/sites-available` or `/usr/local/etc/apache24` directory for Fedora-based, Debian-based Linux or FreeBSD respectively.
 
 Add, for example, following code,
 
