@@ -29,6 +29,18 @@ $ sudo fanocli --deploy-http=myapp.me --web-server=nginx
 
 If you want to setup manually without Fano CLI, read section below.
 
+### Generate virtual host config to standard output
+
+If you want to generate virtual host configuration without actually modifying
+web server configuration, you can use `--stdout` command line option.
+This option will generate virtual host configuration  and print it to standard output. It is useful if you want to deploy configuration manually.
+
+Because it will not change any web server configuration, you do not need to run it with root privilege. So following code is suffice.
+
+```
+$ fanocli --deploy-http=myapp.me --stdout
+```
+
 ## Apache with mod_proxy_http module
 
 To deploy as http application with [mod_proxy_http](https://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html), you need to have `mod_proxy_http` installed and loaded. This module is not installed by default.
