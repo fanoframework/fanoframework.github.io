@@ -83,7 +83,13 @@ Create virtual host config and add `ProxyPassMatch`, for example
 </VirtualHost>
 ```
 You may need to replace `uwsgi://127.0.0.1:20477` with host and port where your
-application is running.
+application is running. If you use unix domain socket, you need to modify `ProxyPassMatch` as follows
+
+```
+ProxyPassMatch ^/(.*)$ "unix:/path/to/app.sock|uwsgi://127.0.0.1/"
+```
+
+Line `|uwsgi://127.0.0.1/` is required so `mod_proxy_uwsgi` is called to handle request, although, host and port information are ignored.
 
 Two `ProxyPassMatch` lines tell Apache to serve requests for
 files inside `css`, `images`, `js` directories directly. For other, pass requests to our application.
