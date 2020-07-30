@@ -33,6 +33,18 @@ $ sudo fanocli --deploy-scgi=myapp.me --web-server=nginx
 
 If you want to setup manually without Fano CLI, read section below.
 
+### Generate virtual host config to standard output
+
+If you want to generate virtual host configuration without actually modifying
+web server configuration, you can use `--stdout` command line option.
+This option will generate virtual host configuration  and print it to standard output. It is useful if you want to deploy configuration manually.
+
+Because it will not change any web server configuration, you do not need to run it with root privilege. So following code is suffice.
+
+```
+$ fanocli --deploy-scgi=myapp.me --stdout
+```
+
 ## Apache with mod_proxy_scgi module
 
 To deploy as SCGI application with [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html)

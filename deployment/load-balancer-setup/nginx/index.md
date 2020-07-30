@@ -24,6 +24,18 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano --web-server=nginx
 
 Replace with `--deploy-lb-fcgi`, `--deploy-lb-uwsgi` or `--deploy-lb-http` for setting up FastCGI, uwsgi or http web application respectively.
 
+### Generate virtual host config to standard output
+
+If you want to generate virtual host configuration without actually modifying
+web server configuration, you can use `--stdout` command line option.
+This option will generate virtual host configuration  and print it to standard output. It is useful if you want to deploy configuration manually.
+
+Because it will not change any web server configuration, you do not need to run it with root privilege. So following code is suffice.
+
+```
+$ fanocli --deploy-fcgi=myapp.fano --web-server=nginx --stdout
+```
+
 ## Deploy Fano Application with load balancer manually
 
 Skip this section if you use Fano CLI to deploy application.

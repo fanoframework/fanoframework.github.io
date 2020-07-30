@@ -16,6 +16,7 @@ Apache provides reverse proxy load balancer to distribute load to one or more ap
 
 ## Setting up mod_proxy_balancer
 
+In Apache 2.4, `mod_proxy_balancer` is installed but not enabled.
 Make sure that `mod_proxy_balancer` is enabled. For example, in Debian-based, run
 
 ```
@@ -48,6 +49,18 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano
 Command above, will create virtual host for Apache web server that utilize `mod_proxy_balancer` module, enabled virtual host configuration, reload Apache web server configuration and add entry to `myapp.fano` domain in `/etc/hosts`.
 
 Replace with `--deploy-lb-fcgi`, `--deploy-lb-uwsgi` or `--deploy-lb-http` for setting up FastCGI, uwsgi or http web application respectively.
+
+### Generate virtual host config to standard output
+
+If you want to generate virtual host configuration without actually modifying
+web server configuration, you can use `--stdout` command line option.
+This option will generate virtual host configuration  and print it to standard output. It is useful if you want to deploy configuration manually.
+
+Because it will not change any web server configuration, you do not need to run it with root privilege. So following code is suffice.
+
+```
+$ fanocli --deploy-lb-fcgi=myapp.me --stdout
+```
 
 ## Deploy Fano Application with load balancer manually
 
@@ -108,7 +121,7 @@ Open `http://myapp.fano` you should see main controller is invoked. There is no 
 
 Indication that your application is running with `mod_proxy_balancer` is availability of new environment variables, for examples `BALANCER_NAME`, `BALANCER_WORKER_NAME` and `BALANCER_WORKER_ROUTE`.
 
-Try to access route that does not exist, so that environment variables are printed on the browser. It will show that load balancer distribute the load by observing value of `BALANCER_WORKER_NAME` variable.
+Try to access route that does not exist, so that environment variables are printed on the browser. It will show that load balancer distributes the load by observing value of `BALANCER_WORKER_NAME` variable.
 
 ## Set balancer member
 
