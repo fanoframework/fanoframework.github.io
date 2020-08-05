@@ -52,10 +52,11 @@ We change active directory to `Hello` directory
 $ cd Hello
 ```
 
-Create controller name `HomeController.pas` that will handle request to route '/'
-```
+Create controller name `HomeController.pas` that will handle request to route '/'. 
+``` 
 $ fanocli --controller=Home --route=/
 ```
+Without `--route=/`, by default, Fano CLI will create route same as lower case of controller's name, i.e, `/home`. If you omit `--route=/` then you can only access `HomeController` using URL `http://hello.fano/home` instead of `http://hello.fano`.
 
 Compile application
 ```
