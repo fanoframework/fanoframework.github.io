@@ -107,12 +107,12 @@ container.add(
 ```
 ## Set dispatcher
 
-Fano Framework allows application to change dispatcher implementation to use and
-can be set in `initDispatcher()`. In this method implementation, you must returns
+Fano Framework allows application to change dispatcher implementation to use by
+overriding `buildDispatcher()` method of `TBasicServiceProvider` class. In this method implementation, you must returns
 instance of dispatcher.
 
 ```
-function TMyApp.initDispatcher(const container : IDependencyContainer) : IDispatcher;
+function TMyAppServiceProvider.buildDispatcher(const container : IDependencyContainer) : IDispatcher;
 begin
     result := container.get('dispatcher') as IDispatcher;
 end;

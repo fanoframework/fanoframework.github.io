@@ -43,15 +43,9 @@ $ fanocli --deploy-http=myapp.me --stdout
 
 ## Apache with mod_proxy_http module
 
-To deploy as http application with [mod_proxy_http](https://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html), you need to have `mod_proxy_http` installed and loaded. This module is not installed by default.
+To deploy as http application with [mod_proxy_http](https://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html), you need to have `mod_proxy_http` installed and loaded. This module is installed but not enabled by default.
 
 ### Debian
-
-To install module on Debian,
-
-```
-$ sudo apt install libapache2_mod_proxy_http
-```
 
 To enable module,
 
@@ -79,7 +73,14 @@ Create virtual host config and add `ProxyPassMatch`, for example
 </VirtualHost>
 ```
 You may need to replace `http://127.0.0.1:20477` with host and port where your
-application is running.
+application is listening. If you use unix domain socket, you need to modify `ProxyPassMatch` as follows
+
+```
+ProxyPassMatch ^/(.*)$ "unix:/path/to/app.sock|http://127.0.0.1/"
+```
+
+Line `|http://127.0.0.1/` is required so `mod_proxy_http` is called to handle request, although, host and port information are ignored.
+
 
 Two `ProxyPassMatch` lines tell Apache to serve requests for
 files inside `css`, `images`, `js` directories directly. For other, pass requests to our application.

@@ -36,7 +36,7 @@ If client opens `http://[app hostname]/my/app` through browser, our application 
 
 If client opens `http://[app hostname]/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will find match to `/another/app` but because it is only registered for `POST` request, exception `EMethodNotAllowed` will be raised.
 
-If client opens `http://[app hostname]/not/exists` through browser, our application will receive request `GET` method to `/not/exists` resources. Router will not find any matches. If this happens, exception `EMethodNotAllowed` will be raised.
+If client opens `http://[app hostname]/not/exists` through browser, our application will receive request `GET` method to `/not/exists` resources. Router will not find any matches. If this happens, exception `ERouteHandlerNotFound` will be raised.
 
 ## Create router instance
 

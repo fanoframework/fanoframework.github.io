@@ -33,14 +33,14 @@ This option will generate virtual host configuration  and print it to standard o
 Because it will not change any web server configuration, you do not need to run it with root privilege. So following code is suffice.
 
 ```
-$ fanocli --deploy-fcgi=myapp.fano --web-server=nginx --stdout
+$ fanocli --deploy-lb-fcgi=myapp.fano --web-server=nginx --stdout
 ```
 
 ## Deploy Fano Application with load balancer manually
 
 Skip this section if you use Fano CLI to deploy application.
 
-If you prefer setting up virtual host manually, create new file in `/etc/nginx/conf.d` directory and add, for example, following code,
+If you prefer setting up virtual host manually, create new file in `/etc/nginx/conf.d` or `/usr/local/etc/nginx/conf.d` directory for Linux or FreeBSD respectively and add, for example, following code,
 
 ```
 upstream my-app-load-balancer {

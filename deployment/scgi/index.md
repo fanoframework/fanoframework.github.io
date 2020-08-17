@@ -79,7 +79,13 @@ Create virtual host config and add `ProxyPassMatch`, for example
 </VirtualHost>
 ```
 You may need to replace `scgi://127.0.0.1:20477` with host and port where your
-application is running.
+application is listening. If you use unix domain socket, you need to modify `ProxyPassMatch` as follows
+
+```
+ProxyPassMatch ^/(.*)$ "unix:/path/to/app.sock|scgi://127.0.0.1/"
+```
+
+Line `|scgi://127.0.0.1/` is required so `mod_proxy_scgi` is called to handle request, although, host and port information are ignored.
 
 Two `ProxyPassMatch` lines tell Apache to serve requests for
 files inside `css`, `images`, `js` directories directly. For other, pass requests to our application.
