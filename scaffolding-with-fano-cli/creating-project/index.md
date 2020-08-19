@@ -128,7 +128,7 @@ If you want to support https, you need to uncomment those three lines of codes a
 
 ## <a name="use-fano-framework-specific-release-version"></a>Use Fano Framework specific release version
 
-To use Fano Framework specific release version when creating project, add `--fano-ver=[VER]` option, `[VER]` is string that contains specific release tag to use. For example, to use Fano Framework version 1.0.0, run following command.
+By default, when you use any `--project-*` option, it will use latest commit of `master` branch of Fano Framework repository. To use Fano Framework specific release version when creating project, add `--fano-ver=[VER]` option, `[VER]` is string that contains specific release tag to use. For example, to use Fano Framework version 1.0.0, run following command.
 
 ```
 $ fanocli --project-scgi=example.fano --fano-ver=v1.0.0
