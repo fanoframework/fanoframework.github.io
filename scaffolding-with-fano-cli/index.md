@@ -52,7 +52,7 @@ $ fanocli --project-cgi=[project-name]
 
 ## <a name="creating-controller"></a>Creating controller
 
-After you create project structure, to scaffold controller class, run with  `--controller` command line options
+After you create project structure, to scaffold controller class, run with  `--controller` command line options. For example, if `[project-name]` above equals to `test-fano` then you can create controller as follows,
 
 ```
 $ cd test-fano
