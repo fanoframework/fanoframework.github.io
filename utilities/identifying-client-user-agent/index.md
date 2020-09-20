@@ -9,7 +9,7 @@ description: Tutorial on how to detect client browser, device type and platform 
 
 Most standard browser will send identification string with each request header so that application running on server can use it to identify client browser, platform and device type.
 
-User-agent identification string is not reliable as thay can be changed rather easily so that identification may yield false result.
+User-agent identification string is not reliable as they can be changed rather easily so that identification may yield false result.
 
 ## IUserAgent interface
 
