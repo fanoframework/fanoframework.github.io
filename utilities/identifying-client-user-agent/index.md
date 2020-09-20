@@ -97,7 +97,7 @@ begin
     //client using Android device
 end;
 
-if browserInst.browser['iOS'] then
+if osInst.OS['iOS'] then
 begin
     //client using iOS device
 end;
