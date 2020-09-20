@@ -19,15 +19,15 @@ This interface provides methods to set and retrieve user-agent string and to ret
 
 ### IClientDevice interface
 
-Interface of any class having capability to identify client device such mobile device or desktop computer. To retrive `IClientDevice` instance, use `getDevice()` method of `IUserAgent` interface.
+Interface of any class having capability to identify client device such mobile device or desktop computer. To retrieve `IClientDevice` instance, use `getDevice()` method of `IUserAgent` interface.
 
 ### IClientBrowser interface
 
-Interface of any class having capability to identify client browser such Chrome or Firefox. To retrive `IClientBrowser` instance, use `getBrowser()` method of `IUserAgent` interface.
+Interface of any class having capability to identify client browser such Chrome or Firefox. To retrieve `IClientBrowser` instance, use `getBrowser()` method of `IUserAgent` interface.
 
 ### IClientOS interface
 
-Interface of any class having capability to identify client operating system such as Android or iOS. To retrive `IClientOS` instance, use `getOS()` method of `IUserAgent` interface.
+Interface of any class having capability to identify client operating system such as Android or iOS. To retrieve `IClientOS` instance, use `getOS()` method of `IUserAgent` interface.
 
 ## Setting up IUserAgent instance
 
@@ -36,7 +36,7 @@ Current implementation of `IInterface` interface only supports one implementatio
 ```
 container.factory('ua', TUserAgentFactory.create());
 ```
-to retrive `IUserAgent` instance,
+to retrieve `IUserAgent` instance,
 ```
 var auserAgent : IUserAgent;
 ...
