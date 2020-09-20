@@ -29,6 +29,14 @@ $ sudo fanocli --deploy-http=myapp.me --web-server=nginx
 
 If you want to setup manually without Fano CLI, read section below.
 
+### Skip adding domain name entry in /etc/hosts
+
+By default `--deploy-*` parameter will cause domain name entry is added in `/etc/hosts` file. You may want to setup domain name with DNS server manually or you do not want to mess up with `/etc/hosts` file. You can avoid it by adding `--skip-etc-hosts` parameter.
+
+```
+$ sudo fanocli --deploy-http=myapp.me --skip-etc-hosts
+```
+
 ### Generate virtual host config to standard output
 
 If you want to generate virtual host configuration without actually modifying

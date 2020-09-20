@@ -52,7 +52,7 @@ $ fanocli --project-cgi=[project-name]
 
 ## <a name="creating-controller"></a>Creating controller
 
-After you create project structure, to scaffold controller class, run with  `--controller` command line options
+After you create project structure, to scaffold controller class, run with  `--controller` command line options. For example, if `[project-name]` above equals to `test-fano` then you can create controller as follows,
 
 ```
 $ cd test-fano
@@ -90,7 +90,13 @@ To create controller for certain route pattern or HTTP method, add `--route` and
 $ fanocli --controller=Hello --route=/my/hello --method=POST
 ```
 
-If you want to skip route creation, use `--no-route` parameter.
+If you want controller to handle multiple methods, pass methods as comma-separated values. Following example will create `HelloController` class that will handle GET and POST request to route `/my/hello`.
+
+```
+$ fanocli --controller=Hello --route=/my/hello --method=GET,POST
+```
+
+If you want to create controller and skip route creation, use `--no-route` parameter.
 
 ```
 $ fanocli --controller=Hello --no-route

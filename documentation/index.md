@@ -65,6 +65,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Using Loggers](/utilities/using-loggers)
 - [Use HTTP client to call API](/utilities/http-clients)
 - [Sending email](/utilities/sending-email)
+- [Identifying client user-agent](/utilities/identifying-client-user-agent)
 
 ## Database
 
