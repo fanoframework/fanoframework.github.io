@@ -16,3 +16,7 @@ description: Tutorial on how to work with some utilities provided by Fano Framew
 ## Sending email
 
 - [Send email message](/utilities/sending-email)
+
+## Client User-Agent Identification
+
+- [Identifying client user-agent](/utilities/identifying-client-user-agent)
