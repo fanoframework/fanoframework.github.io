@@ -126,6 +126,15 @@ Inside generated project directory, you can find that `src/app.pas` will have fo
 ```
 If you want to support https, you need to uncomment those three lines of codes and set correct path for SSL certificate files. You need to make sure that they are readable by application.
 
+## <a name="use-fano-framework-specific-release-version"></a>Use Fano Framework specific release version
+
+By default, when you use any `--project-*` option, it will use latest commit of `master` branch of Fano Framework repository. To use Fano Framework specific release version when creating project, add `--fano-ver=[VER]` option, `[VER]` is string that contains specific release tag to use. For example, to use Fano Framework version 1.0.0, run following command.
+
+```
+$ fanocli --project-scgi=example.fano --fano-ver=v1.0.0
+```
+Visit [Fano Framework releases page](https://github.com/fanoframework/fano/releases) for complete list of release versions.
+
 ## <a name="setup-application-configuration-when-creating-project"></a>Setup application configuration when creating project
 
 All commands for creating project, for example, `--project-cgi`, `--project-fcgi`, `--project-scgi`, etc, accept additional parameter `--config=[configType]` where `[configType]` is either `ini` or `json`.

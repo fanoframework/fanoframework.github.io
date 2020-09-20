@@ -17,6 +17,28 @@ $ sudo fanocli --deploy-cgi=myapp.me
 
 Command above, will create virtual host for Apache web server, enabled virtual host configuration, reload Apache web server configuration and add entry to `myapp.me` domain in `/etc/hosts`.
 
+Because nginx does not support running CGI program, when you use `--web-server=nginx`, it does nothing.
+
+### Skip adding domain name entry in /etc/hosts
+
+By default `--deploy-cgi` parameter will cause domain name entry is added in `/etc/hosts` file. You may want to setup domain name with DNS server manually or you do not want to mess up with `/etc/hosts` file. You can avoid it by adding `--skip-etc-hosts` parameter.
+
+```
+$ sudo fanocli --deploy-cgi=myapp.me --skip-etc-hosts
+```
+
+### Generate virtual host config to standard output
+
+If you want to generate virtual host configuration without actually modifying
+web server configuration, you can use `--stdout` command line option.
+This option will generate virtual host configuration  and print it to standard output. It is useful if you want to deploy configuration manually.
+
+Because it will not change any web server configuration, you do not need to run it with root privilege. So following code is suffice.
+
+```
+$ fanocli --deploy-cgi=myapp.me --stdout
+```
+
 ## Apache
 
 This section explains how to deploy web application as CGI application on Apache web server.

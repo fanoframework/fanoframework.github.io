@@ -33,6 +33,26 @@ $ sudo fanocli --deploy-uwsgi=myapp.me --web-server=nginx
 
 If you want to setup manually without Fano CLI, read section below.
 
+### Skip adding domain name entry in /etc/hosts
+
+By default `--deploy-*` parameter will cause domain name entry is added in `/etc/hosts` file. You may want to setup domain name with DNS server manually or you do not want to mess up with `/etc/hosts` file. You can avoid it by adding `--skip-etc-hosts` parameter.
+
+```
+$ sudo fanocli --deploy-uwsgi=myapp.me --skip-etc-hosts
+```
+
+### Generate virtual host config to standard output
+
+If you want to generate virtual host configuration without actually modifying
+web server configuration, you can use `--stdout` command line option.
+This option will generate virtual host configuration  and print it to standard output. It is useful if you want to deploy configuration manually.
+
+Because it will not change any web server configuration, you do not need to run it with root privilege. So following code is suffice.
+
+```
+$ fanocli --deploy-uwsgi=myapp.me --stdout
+```
+
 ## Apache with mod_proxy_uwsgi module
 
 To deploy as uwsgi application with [mod_proxy_uwsgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_uwsgi.html), you need to have `mod_proxy_uwsgi` installed and loaded. This module is not installed by default.
@@ -42,7 +62,7 @@ To deploy as uwsgi application with [mod_proxy_uwsgi](https://httpd.apache.org/d
 To install module on Debian,
 
 ```
-$ sudo apt install libapache2_mod_proxy_uwsgi
+$ sudo apt install libapache2-mod-proxy-uwsgi
 ```
 
 To enable module,
@@ -71,7 +91,13 @@ Create virtual host config and add `ProxyPassMatch`, for example
 </VirtualHost>
 ```
 You may need to replace `uwsgi://127.0.0.1:20477` with host and port where your
-application is running.
+application is running. If you use unix domain socket, you need to modify `ProxyPassMatch` as follows
+
+```
+ProxyPassMatch ^/(.*)$ "unix:/path/to/app.sock|uwsgi://127.0.0.1/"
+```
+
+Line `|uwsgi://127.0.0.1/` is required so `mod_proxy_uwsgi` is called to handle request, although, host and port information are ignored.
 
 Two `ProxyPassMatch` lines tell Apache to serve requests for
 files inside `css`, `images`, `js` directories directly. For other, pass requests to our application.

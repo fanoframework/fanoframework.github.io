@@ -24,11 +24,31 @@ $ sudo fanocli --deploy-lb-scgi=myapp.fano --web-server=nginx
 
 Replace with `--deploy-lb-fcgi`, `--deploy-lb-uwsgi` or `--deploy-lb-http` for setting up FastCGI, uwsgi or http web application respectively.
 
+### Skip adding domain name entry in /etc/hosts
+
+By default `--deploy-*` parameter will cause domain name entry is added in `/etc/hosts` file. You may want to setup domain name with DNS server manually or you do not want to mess up with `/etc/hosts` file. You can avoid it by adding `--skip-etc-hosts` parameter.
+
+```
+$ sudo fanocli --deploy-lb-scgi=myapp.fano --skip-etc-hosts
+```
+
+### Generate virtual host config to standard output
+
+If you want to generate virtual host configuration without actually modifying
+web server configuration, you can use `--stdout` command line option.
+This option will generate virtual host configuration  and print it to standard output. It is useful if you want to deploy configuration manually.
+
+Because it will not change any web server configuration, you do not need to run it with root privilege. So following code is suffice.
+
+```
+$ fanocli --deploy-lb-fcgi=myapp.fano --web-server=nginx --stdout
+```
+
 ## Deploy Fano Application with load balancer manually
 
 Skip this section if you use Fano CLI to deploy application.
 
-If you prefer setting up virtual host manually, create new file in `/etc/nginx/conf.d` directory and add, for example, following code,
+If you prefer setting up virtual host manually, create new file in `/etc/nginx/conf.d` or `/usr/local/etc/nginx/conf.d` directory for Linux or FreeBSD respectively and add, for example, following code,
 
 ```
 upstream my-app-load-balancer {

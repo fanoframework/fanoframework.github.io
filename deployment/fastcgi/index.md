@@ -42,6 +42,30 @@ To deploy FastCGI web application for Apache mod_fcgid, run with `--deploy-fcgid
 $ sudo fanocli --deploy-fcgid=myapp.me
 ```
 
+### Skip adding domain name entry in /etc/hosts
+
+By default `--deploy-fcgi` or `--deploy-fcgid` parameter will cause domain name entry is added in `/etc/hosts` file. You may want to setup domain name with DNS server manually or you do not want to mess up with `/etc/hosts` file. You can avoid it by adding `--skip-etc-hosts` parameter.
+
+```
+$ sudo fanocli --deploy-fcgi=myapp.me --skip-etc-hosts
+```
+or
+```
+$ sudo fanocli --deploy-fcgid=myapp.me --skip-etc-hosts
+```
+
+### Generate virtual host config to standard output
+
+If you want to generate virtual host configuration without actually modifying
+web server configuration, you can use `--stdout` command line option.
+This option will generate virtual host configuration  and print it to standard output. It is useful if you want to deploy configuration manually.
+
+Because it will not change any web server configuration, you do not need to run it with root privilege. So following code is suffice.
+
+```
+$ fanocli --deploy-fcgi=myapp.me --stdout
+```
+
 ## Apache with mod_proxy_fcgi module
 
 To deploy as FastCGI application with [mod_proxy_fcgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_fcgi.html)
