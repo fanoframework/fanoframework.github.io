@@ -227,7 +227,7 @@ router.any('/', handler);
 
 ## Set route name or middlewares with IRoute interface
 
-All methods which register request handler such as `get()`, `post()`,.. etc returns
+All methods which register request handler such as `get()`, `post()`, etc., returns
 instance of `IRoute` interface which you can use to assign name to route or attach a middlewares. Following code lists all methods in this interface.
 
 ```
