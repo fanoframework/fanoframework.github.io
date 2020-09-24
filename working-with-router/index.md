@@ -5,17 +5,9 @@ description: Tutorial on how to work with router in Fano Framework
 
 <h1 class="major">Working with Router</h1>
 
-## What is router?
+## Router and route
 
-In Fano Framework, router is instance responsible to map a request to a code that handles it based on certain rule.
-
-It is similar to front desk staff in a building. When a customer (request) comes in to building looking for an accounting staff (URL), first, she/he checks standard operational procedure (rule) to check whether is ok for outsider to contact accounting staff. If there are rule allows it, she/he directs the customer to accounting departement.
-
-Similarly, when HTTP request is made to server, router determines code to handle request based on URL and HTTP method.
-
-## About route
-
-In Fano Framework, a route is an association rule between a request (identified by HTTP method and URL) and code that handles it.
+In Fano Framework, a route is an association rule between URL path pattern and HTTP method and code that handles it. Router manages one or more routes and match request URL path, extract data in it and select code that handles it. Router is any class implements `IRouter` interface.
 
 If we have following route setup
 
@@ -32,11 +24,17 @@ router.get('/my/app', myAppHandler);
 router.post('/another/app', anotherAppHandler);
 ```
 
-If client opens `http://[app hostname]/my/app` through browser, our application will receive request `GET` method to `/my/app` resources. Router will match HTTP method and URL and returns `myAppHandler` as code that responsible to handle this request.
+If your application hostname is `example.com` and  client opens `http://example.com/my/app` through browser, our application will receive request `GET` method to `/my/app` resources. Router will match HTTP method and URL and returns `myAppHandler` as code that responsible to handle this request.
 
-If client opens `http://[app hostname]/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will find match to `/another/app` but because it is only registered for `POST` request, exception `EMethodNotAllowed` will be raised.
+If client opens `http://example.com/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will find match to `/another/app` but because it is only registered for `POST` request, exception `EMethodNotAllowed` will be raised.
 
-If client opens `http://[app hostname]/not/exists` through browser, our application will receive request `GET` method to `/not/exists` resources. Router will not find any matches. If this happens, exception `ERouteHandlerNotFound` will be raised.
+If client opens `http://example.com/not/exists` through browser, our application will receive request `GET` method to `/not/exists` resources. Router will not find any matches. If this happens, exception `ERouteHandlerNotFound` will be raised.
+
+A route can have route argument as shown in following example.
+```
+router.get('/user/{username}', myUserHandler);
+```
+If client opens `http://example.com/user/jon` or `http://example.com/user/snow` then `myUserHandler` will be called. Value of `jon` or `snow` can be read inside `myUserHandler`. Read [Getting Route Argument](#getting-route-argument) section for information how to read route argument value.
 
 ## Create router instance
 
@@ -250,7 +248,7 @@ Read [Middlewares](/middlewares) for more information.
 
 Third parameter of `handleRequest()` method of `IRequestHandler` interface gives instance of `IRouteArgsReader` interface to allow application to retrieve route argument.
 
-If you have route pattern `/myroute/{name}` and you access route via URl `http://[your-host-name]/myroute/john` then you can get value of `name` parameter as follows
+If you have route pattern `/myroute/{name}` and you access route via URl `http://example.com/myroute/john` then you can get value of `name` parameter as follows
 
 ```
 function TMyController.handleRequest(
