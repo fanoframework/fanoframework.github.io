@@ -7,7 +7,7 @@ description: Tutorial on how to work with router in Fano Framework
 
 ## Router and route
 
-In Fano Framework, a route is an association rule between URL path pattern and HTTP method and code that handles it. Router manages one or more routes and match request URL path, extract data in it and select code that handles it. Router is any class implements `IRouter` interface.
+In Fano Framework, a route is an association rule between URL path pattern, HTTP method and code that handles it. Router manages one or more routes and match request URL path, extract data in it and select code that handles it. Router is any class implements `IRouter` interface.
 
 If we have following route setup
 
