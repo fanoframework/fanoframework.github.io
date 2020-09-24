@@ -53,7 +53,7 @@ We change active directory to newly created `Hello` directory.
 $ cd Hello
 ```
 
-Create controller name `HomeController.pas` that will handle request to route `/`. 
+Create controller name `HomeController.pas` that will handle request to route `/`. For more information regarding route, read [Working with Router](/working-with-router).
 ``` 
 $ fanocli --controller=Home --route=/
 ```
