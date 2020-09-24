@@ -26,9 +26,9 @@ router.post('/another/app', anotherAppHandler);
 
 If your application hostname is `example.com` and  client opens `http://example.com/my/app` through browser, our application will receive request `GET` method to `/my/app` resources. Router will match HTTP method and URL and returns `myAppHandler` as code that responsible to handle this request.
 
-If client opens `http://example.com/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will find match to `/another/app` but because it is only registered for `POST` request, exception `EMethodNotAllowed` will be raised.
+If client opens `http://example.com/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will find match to `/another/app` but because it is only registered for `POST` request, `EMethodNotAllowed` exception will be raised with HTTP 405 error code.
 
-If client opens `http://example.com/not/exists` through browser, our application will receive request `GET` method to `/not/exists` resources. Router will not find any matches. If this happens, exception `ERouteHandlerNotFound` will be raised.
+If client opens `http://example.com/not/exists` through browser, our application will receive request `GET` method to `/not/exists` resources. Router will not find any matches. If this happens, `ERouteHandlerNotFound` exception will be raised with HTTP 404 error code.
 
 A route can have route argument as shown in following example.
 ```
