@@ -9,6 +9,64 @@ description: Tutorial on how to work with router in Fano Framework
 
 In Fano Framework, a route is an association rule between URL path pattern, HTTP method and code that handles it. Router manages one or more routes and match request URL path, extract data in it and select code that handles it. Router is any class implements `IRouter` interface.
 
+### Creating route for GET method
+
+```
+var
+    router : IRouter;
+    handler : IRequestHandler;
+...
+router.get('/', handler);
+```
+
+### Creating route for POST method
+
+```
+router.post('/submit', handler);
+```
+
+### Creating route for PUT method
+
+```
+router.put('/submit', handler);
+```
+
+### Creating route for DELETE method
+
+```
+router.delete('/submit', handler);
+```
+
+### Creating route for PATCH method
+
+```
+router.patch('/submit', handler);
+```
+
+### Creating route for HEAD method
+
+```
+router.head('/', handler);
+```
+
+### Creating route for OPTIONS method
+
+```
+router.options('/', handler);
+```
+
+### Creating route for multiple methods
+
+```
+router.map(['GET', 'POST'], '/', handler);
+```
+
+### Creating route for all methods
+
+```
+router.any('/', handler);
+```
+
 If we have following route setup
 
 ```
@@ -36,9 +94,7 @@ router.get('/user/{username}', myUserHandler);
 ```
 If client opens `http://example.com/user/jon` or `http://example.com/user/snow` then `myUserHandler` will be called. Value of `jon` or `snow` can be read inside `myUserHandler`. Read [Getting Route Argument](#getting-route-argument) section for information how to read route argument value.
 
-## Create route
-
-### <a name="route-builder"></a>Route builder
+## <a name="route-builder"></a>Build application routes with route builder
 
 To build application routes, you need to create class that implements `IRouteBuilder` interface. 
 ```
@@ -57,21 +113,22 @@ end;
 Fano Framework provides base abstract class `TRouteBuilder` which you can extend and implement its `buildRoutes()` method and pass it when creating application instance as shown in following code,
 
 ```
-    TAppRoutes = class(TRouteBuilder)
-    public
-        procedure buildRoutes(
-            const container : IDependencyContainer;
-            const router : IRouter
-        ); override;
-    end;
-...
-    procedure TAppRoutes.buildRoutes(
+TAppRoutes = class(TRouteBuilder)
+public
+    procedure buildRoutes(
         const container : IDependencyContainer;
         const router : IRouter
-    );
-    begin
-        //register all routes here
-    end;
+    ); override;
+end;
+...
+procedure TAppRoutes.buildRoutes(
+    const container : IDependencyContainer;
+    const router : IRouter
+);
+begin
+   //register all routes here
+   router.get('/', handler);
+end;
 
 ```
 And then create its instance and pass it to application constructor.
@@ -150,64 +207,6 @@ appInstance := TCgiWebApplication.create(
 ```
 
 Please note that `TCompositeRouteBuilder` is built-in implementation of `IRouteBuilder` which composes one or more `IRouteBuilder` instances as one.
-
-### Creating route for GET method
-
-```
-var
-    router : IRouter;
-    handler : IRequestHandler;
-...
-router.get('/', handler);
-```
-
-### Creating route for POST method
-
-```
-router.post('/submit', handler);
-```
-
-### Creating route for PUT method
-
-```
-router.put('/submit', handler);
-```
-
-### Creating route for DELETE method
-
-```
-router.delete('/submit', handler);
-```
-
-### Creating route for PATCH method
-
-```
-router.patch('/submit', handler);
-```
-
-### Creating route for HEAD method
-
-```
-router.head('/', handler);
-```
-
-### Creating route for OPTIONS method
-
-```
-router.options('/', handler);
-```
-
-### Creating route for multiple methods
-
-```
-router.map(['GET', 'POST'], '/', handler);
-```
-
-### Creating route for all methods
-
-```
-router.any('/', handler);
-```
 
 ## Set route name or middlewares with IRoute interface
 
