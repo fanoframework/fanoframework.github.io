@@ -305,7 +305,7 @@ container.add('router', TRouterFactory.create());
 ```
 If you need only static URL path pattern, you should use it. 
 
-If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class which is good enough for most application. 
+If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class which is good enough for most applications. 
 
 ## Replace router instance
 If you want to replace router with different implementation, you can override `buildRouter()` method of `TBasicAppServiceProvider`. For example,
