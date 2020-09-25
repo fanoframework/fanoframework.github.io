@@ -43,9 +43,23 @@ Fano Framework comes with basic router implementation `TRouter` class which impl
 ```
 container.add('router', TSimpleRouterFactory.create());
 ```
+This factory class builds router instance that supports route argument parsing. Alternatively, you can use `TRouterFactory` class which creates router instance that do not support route argument but it is faster when matching request URL. 
 
-If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class. This router is available thorough `buildRoutes()` method of `IRouteBuilder` interface.
+```
+container.add('router', TRouterFactory.create());
+```
+If you need only static URL path pattern, you should use it. 
 
+If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class. 
+If you want to replace router with different implementation, you can override `buildRouter()` method of `TBasicAppServiceProvider`.
+
+Router instance is available through `buildRoutes()` method of `IRouteBuilder` interface.
+
+## Create route
+
+### <a name="route-builder"></a>Route builder
+
+To build application routes, you need to create class that implements `IRouteBuilder` interface. 
 ```
 IRouteBuilder = interface
     ['{46016416-B249-4258-B76A-7F5B55E8348D}']
@@ -59,14 +73,7 @@ IRouteBuilder = interface
     procedure buildRoutes(const cntr : IDependencyContainer; const rtr : IRouter);
 end;
 ```
-
-If you want to replace router with different implementation, you can override `buildRouter()` method of `TBasicAppServiceProvider`.
-
-## Create route
-
-### <a name="route-builder"></a>Route builder
-
-To build application routes, you need to create class that implements `IRouteBuilder` interface. Fano Framework provides base abstract class `TRouteBuilder` which you can extend and implement its `buildRoutes()` method and pass it when creating application instance as shown in following code,
+Fano Framework provides base abstract class `TRouteBuilder` which you can extend and implement its `buildRoutes()` method and pass it when creating application instance as shown in following code,
 
 ```
     TAppRoutes = class(TRouteBuilder)
@@ -86,7 +93,7 @@ To build application routes, you need to create class that implements `IRouteBui
     end;
 
 ```
-
+And then create its instance and pass it to application constructor.
 ```
 appInstance := TCgiWebApplication.create(
     TAppServiceProvider.create(),
