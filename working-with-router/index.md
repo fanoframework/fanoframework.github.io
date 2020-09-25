@@ -61,7 +61,7 @@ private
     fRouterMatcher : IRouteMatcher;
 public
     function getRouteMatcher() : IRouteMatcher; override;
-    function buildRouter(const cntr : IDependencyContainer) : IRoute; override;
+    function buildRouter(const cntr : IDependencyContainer) : IRouter; override;
 end;
 ...
 function TMyAppProvider.buildRouter(const cntr : IDependencyContainer) : IRouter;
@@ -71,7 +71,7 @@ begin
     fRouteMatcher := result as IRouteMatcher;
 end;    
 
-function TMyAppProvider.getRouteMatcher() : IRouteMatcher; override;
+function TMyAppProvider.getRouteMatcher() : IRouteMatcher;
 begin
     result := fRouteMatcher;
 end;    
