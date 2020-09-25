@@ -43,17 +43,40 @@ Fano Framework comes with basic router implementation `TRouter` class which impl
 ```
 container.add('router', TSimpleRouterFactory.create());
 ```
-This factory class builds router instance that supports route argument parsing. Alternatively, you can use `TRouterFactory` class which creates router instance that do not support route argument but it is faster when matching request URL. 
+`TSimpleRouterFactory` class builds router instance that supports route argument parsing. Alternatively, you can use `TRouterFactory` class which creates router instance that does not support route argument but it is faster when matching request URL.
 
 ```
 container.add('router', TRouterFactory.create());
 ```
 If you need only static URL path pattern, you should use it. 
 
-If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class. 
-If you want to replace router with different implementation, you can override `buildRouter()` method of `TBasicAppServiceProvider`.
+If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class which is good enough for most application. 
 
-Router instance is available through `buildRoutes()` method of `IRouteBuilder` interface.
+## Replace router instance
+If you want to replace router with different implementation, you can override `buildRouter()` method of `TBasicAppServiceProvider`. For example,
+
+```
+TMyAppProvider = class(TBasicAppServiceProvider)
+private
+    fRouterMatcher : IRouteMatcher;
+public
+    function getRouteMatcher() : IRouteMatcher; override;
+    function buildRouter(const cntr : IDependencyContainer) : IRoute; override;
+end;
+...
+function TMyAppProvider.buildRouter(const cntr : IDependencyContainer) : IRouter;
+begin
+    ctnr.add('router', TRouterFactory.create());
+    result := ctnr['router'] as IRouter;
+    fRouteMatcher := result as IRouteMatcher;
+end;    
+
+function TMyAppProvider.getRouteMatcher() : IRouteMatcher; override;
+begin
+    result := fRouteMatcher;
+end;    
+```
+Note that `IRouteMatcher` is interface which is responsible to match request URL and `TRouter` implements it.
 
 ## Create route
 
