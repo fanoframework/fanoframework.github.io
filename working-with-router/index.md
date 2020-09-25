@@ -36,48 +36,6 @@ router.get('/user/{username}', myUserHandler);
 ```
 If client opens `http://example.com/user/jon` or `http://example.com/user/snow` then `myUserHandler` will be called. Value of `jon` or `snow` can be read inside `myUserHandler`. Read [Getting Route Argument](#getting-route-argument) section for information how to read route argument value.
 
-## Create router instance
-
-Fano Framework comes with basic router implementation `TRouter` class which implements `IRouter` interface.
-
-```
-container.add('router', TSimpleRouterFactory.create());
-```
-`TSimpleRouterFactory` class builds router instance that supports route argument parsing. Alternatively, you can use `TRouterFactory` class which creates router instance that does not support route argument but it is faster when matching request URL.
-
-```
-container.add('router', TRouterFactory.create());
-```
-If you need only static URL path pattern, you should use it. 
-
-If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class which is good enough for most application. 
-
-## Replace router instance
-If you want to replace router with different implementation, you can override `buildRouter()` method of `TBasicAppServiceProvider`. For example,
-
-```
-TMyAppProvider = class(TBasicAppServiceProvider)
-private
-    fRouterMatcher : IRouteMatcher;
-public
-    function getRouteMatcher() : IRouteMatcher; override;
-    function buildRouter(const cntr : IDependencyContainer) : IRouter; override;
-end;
-...
-function TMyAppProvider.buildRouter(const cntr : IDependencyContainer) : IRouter;
-begin
-    ctnr.add('router', TRouterFactory.create());
-    result := ctnr['router'] as IRouter;
-    fRouteMatcher := result as IRouteMatcher;
-end;    
-
-function TMyAppProvider.getRouteMatcher() : IRouteMatcher;
-begin
-    result := fRouteMatcher;
-end;    
-```
-Note that `IRouteMatcher` is interface which is responsible to match request URL and `TRouter` implements it.
-
 ## Create route
 
 ### <a name="route-builder"></a>Route builder
@@ -158,9 +116,7 @@ procedure TUsersRoutes.buildRoutes(
 begin
     //register users related routes here
 end;
-
 ```
-
 For product feature routes,
 
 ```
@@ -333,6 +289,48 @@ end;
 ```
 
 See [code example](https://github.com/fanoframework/fano-app/blob/master/app/App/Hello/Controllers/HelloController.pas) how to read route argument.
+
+## Create router instance
+
+Fano Framework comes with basic router implementation `TRouter` class which implements `IRouter` interface.
+
+```
+container.add('router', TSimpleRouterFactory.create());
+```
+`TSimpleRouterFactory` class builds router instance that supports route argument parsing. Alternatively, you can use `TRouterFactory` class which creates router instance that does not support route argument but it is faster when matching request URL.
+
+```
+container.add('router', TRouterFactory.create());
+```
+If you need only static URL path pattern, you should use it. 
+
+If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class which is good enough for most application. 
+
+## Replace router instance
+If you want to replace router with different implementation, you can override `buildRouter()` method of `TBasicAppServiceProvider`. For example,
+
+```
+TMyAppProvider = class(TBasicAppServiceProvider)
+private
+    fRouterMatcher : IRouteMatcher;
+public
+    function getRouteMatcher() : IRouteMatcher; override;
+    function buildRouter(const cntr : IDependencyContainer) : IRouter; override;
+end;
+...
+function TMyAppProvider.buildRouter(const cntr : IDependencyContainer) : IRouter;
+begin
+    ctnr.add('router', TRouterFactory.create());
+    result := ctnr['router'] as IRouter;
+    fRouteMatcher := result as IRouteMatcher;
+end;    
+
+function TMyAppProvider.getRouteMatcher() : IRouteMatcher;
+begin
+    result := fRouteMatcher;
+end;    
+```
+Note that `IRouteMatcher` is interface which is responsible to match request URL and `TRouter` implements it.
 
 ## Explore more
 
