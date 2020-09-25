@@ -90,7 +90,7 @@ router.get('/my/app', myAppHandler);
 router.post('/another/app', anotherAppHandler);
 ```
 
-If your application hostname is `example.com` and  client opens `http://example.com/my/app` through browser, our application will receive request `GET` method to `/my/app` resources. Router will match HTTP method and URL and returns `myAppHandler` as code that responsible to handle this request.
+If your application hostname is `example.com` and  client opens `http://example.com/my/app` through browser, our application will receive request `GET` method to `/my/app` resources. Router will match HTTP method and URL and returns `myAppHandler` as code that responsible to handle this request. For more information regarding request handler, read [Working with Controllers](/working-with-controllers).
 
 If client opens `http://example.com/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will find match to `/another/app` but because it is only registered for `POST` request, `EMethodNotAllowed` exception will be raised with HTTP 405 error code.
 
