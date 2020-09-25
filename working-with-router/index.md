@@ -67,9 +67,10 @@ router.map(['GET', 'POST'], '/', handler);
 router.any('/', handler);
 ```
 ### Route with argument
-A route can have argument as shown in following example.
+A route can have arguments as shown in following example.
 ```
 router.get('/user/{username}', myUserHandler);
+router.get('/products/{id}/{productSlug}', productList);
 ```
 Read [Getting Route Argument](#getting-route-argument) section for information how to read route argument value.
 
@@ -232,7 +233,7 @@ Read [Middlewares](/middlewares) for more information.
 
 ## <a name="getting-route-argument"></a>Getting route argument
 
-Third parameter of `handleRequest()` method of `IRequestHandler` interface gives instance of `IRouteArgsReader` interface to allow application to retrieve route argument.
+Third parameter of `handleRequest()` method of `IRequestHandler` interface gives instance of `IRouteArgsReader` interface to allow application to retrieve route arguments.
 
 If you have route pattern `/myroute/{name}` and you access route via URl `http://example.com/myroute/john` then you can get value of `name` parameter as follows
 
