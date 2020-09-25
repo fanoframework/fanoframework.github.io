@@ -66,7 +66,14 @@ router.map(['GET', 'POST'], '/', handler);
 ```
 router.any('/', handler);
 ```
+### Route with argument
+A route can have argument as shown in following example.
+```
+router.get('/user/{username}', myUserHandler);
+```
+Read [Getting Route Argument](#getting-route-argument) section for information how to read route argument value.
 
+## Route matching
 If we have following route setup
 
 ```
@@ -87,12 +94,6 @@ If your application hostname is `example.com` and  client opens `http://example.
 If client opens `http://example.com/another/app` through browser, our application will receive request `GET` method to `/another/app` resources. Router will find match to `/another/app` but because it is only registered for `POST` request, `EMethodNotAllowed` exception will be raised with HTTP 405 error code.
 
 If client opens `http://example.com/not/exists` through browser, our application will receive request `GET` method to `/not/exists` resources. Router will not find any matches. If this happens, `ERouteHandlerNotFound` exception will be raised with HTTP 404 error code.
-
-A route can have route argument as shown in following example.
-```
-router.get('/user/{username}', myUserHandler);
-```
-If client opens `http://example.com/user/jon` or `http://example.com/user/snow` then `myUserHandler` will be called. Value of `jon` or `snow` can be read inside `myUserHandler`. Read [Getting Route Argument](#getting-route-argument) section for information how to read route argument value.
 
 ## <a name="route-builder"></a>Build application routes with route builder
 
