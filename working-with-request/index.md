@@ -142,6 +142,46 @@ var langAvail : boolean;
 langAvail := request.headers().has('Accept-Language');
 ```
 
+## Get HTTP method
+
+To get request http method such as GET, POST, etc., use `method` property.
+
+
+```
+var httpMethod : string;
+...
+httpMethod := request.method;
+```
+
+## Get request URI
+
+To get request URI, use `uri()` method. It returns `IUri` interface which you can use to get information regarding current request URI such as scheme, host, port, path, query string, fragment. Read [RFC 3986](https://tools.ietf.org/html/rfc3986) for information regarding URI.
+
+```
+var reqUri : IUri;
+...
+reqUri := request.uri();
+//if we have https://example.com:8080/hello?q=good#fano
+
+//print uri scheme i.e, https
+writeln(reqUri.scheme);
+
+//print uri host i.e, example.com
+writeln(reqUri.host);
+
+//print uri port i.e, 8080
+writeln(reqUri.port);
+
+//print uri path i.e, /hello
+writeln(reqUri.path);
+
+//print uri query i.e, q=good
+writeln(reqUri.query);
+
+//print uri fragment i.e, fano
+writeln(reqUri.fragment);
+```
+
 ## <a name="handling-request-with-json-body"></a>Handling request with JSON body
 
 To handle request with `application/json` body, such as following shell command

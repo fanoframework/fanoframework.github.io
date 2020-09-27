@@ -71,7 +71,6 @@ end.
 ### TController
 [`TController` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas). It extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template.
 
-But of course, you are free to implements your own. In fact, you are not required to use `TAbstractController` or `TController` at all. You can use any class as long as it implements `IRequestHandler` interface.
 
 ## Using TController class
 
@@ -103,6 +102,117 @@ For more information regarding view and view parameters, read [Working with View
 This method is part of `IRequestHandler` interface. Dispatcher will pass request and response instance to this method.
 
 `TController` class provides basic implementation of this method, which is, to return view output. Fano Framework provides some built-in response class that you can use such HTML response, JSON response or binary response (for example to output image). Of course, you are free to implements your own output response.
+
+## Custom IRequestHandler implementation
+`TAbstractController` and `TController` are provided for convinience. In fact, you are not required to use them at all. You can use any class as long as it implements `IRequestHandler` interface.
+
+For example, if you prefer to handle CRUD task in a single class instead of multiple class.
+
+```
+unit UserController;
+
+interface
+
+{$MODE OBJFPC}
+{$H+}
+
+uses
+
+    fano;
+
+type
+
+    TUserController = class(TInterfacedObject, IRequestHandler)
+    private
+        function createUser(
+            const request : IRequest;
+            const response : IResponse;
+            const args : IRouteArgsReader
+        ) : IResponse;
+
+        function showUser(
+            const request : IRequest;
+            const response : IResponse;
+            const args : IRouteArgsReader
+        ) : IResponse;
+
+        function updateUser(
+            const request : IRequest;
+            const response : IResponse;
+            const args : IRouteArgsReader
+        ) : IResponse;
+
+        function deleteUser(
+            const request : IRequest;
+            const response : IResponse;
+            const args : IRouteArgsReader
+        ) : IResponse;
+    public
+        function handleRequest(
+            const request : IRequest;
+            const response : IResponse;
+            const args : IRouteArgsReader
+        ) : IResponse; override;
+    end;
+
+implementation
+
+    function TUserController.createUser(
+        const request : IRequest;
+        const response : IResponse;
+        const args : IRouteArgsReader
+    ) : IResponse;
+    begin
+        //handle user creation
+        result := response;
+    end;
+
+    function TUserController.showUser(
+        const request : IRequest;
+        const response : IResponse;
+        const args : IRouteArgsReader
+    ) : IResponse;
+    begin
+        //handle view user
+        result := response;
+    end;
+
+    function TUserController.updateUser(
+        const request : IRequest;
+        const response : IResponse;
+        const args : IRouteArgsReader
+    ) : IResponse;
+    begin
+        //handle user update
+        result := response;
+    end;
+
+    function TUserController.deleteUser(
+        const request : IRequest;
+        const response : IResponse;
+        const args : IRouteArgsReader
+    ) : IResponse;
+    begin
+        //handle user deletion
+        result := response;
+    end;
+
+    function TUserController.handleRequest(
+        const request : IRequest;
+        const response : IResponse;
+        const args : IRouteArgsReader
+    ) : IResponse;
+    begin
+        result := response;
+        case request.method of
+            'GET' : result := showUser(request, response, args);
+            'POST' : result := createUser(request, response, args);
+            'PUT' : result := updateUser(request, response, args);
+            'DELETE' : result := deleteUser(request, response, args);
+        end;
+    end;
+end.
+```
 
 ## Explore more
 
