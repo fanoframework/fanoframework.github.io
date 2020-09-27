@@ -146,7 +146,6 @@ langAvail := request.headers().has('Accept-Language');
 
 To get request http method such as GET, POST, etc., use `method` property.
 
-
 ```
 var httpMethod : string;
 ...
@@ -181,6 +180,16 @@ writeln(reqUri.query);
 //print uri fragment i.e, fano
 writeln(reqUri.fragment);
 ```
+
+## Get current environment variables
+You can get current CGI environment using `env` method.
+
+```
+var reqEnv : ICGIEnvironment;
+...
+reqEnv := request.env;
+```
+Read [CGI Environment](/environment) for more information.
 
 ## <a name="handling-request-with-json-body"></a>Handling request with JSON body
 
