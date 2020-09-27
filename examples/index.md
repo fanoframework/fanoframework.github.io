@@ -99,6 +99,11 @@ Following example applications demonstrate how to use session with Fano Framewor
 [Fano Password example](https://github.com/fanoframework/fano-password) demonstrates how to [verify plain password against password hash](/security/password-hash).
 It is similar to session-related examples above but it compares password using password hash verification.
 
+## User-agent examples
+
+[Fano User-Agent](https://github.com/fanoframework/fano-user-agent) demonstrates how to [work with user-agent](/utilities/identifying-client-user-agent) to identify client browser, device type or operating system.
+
+
 ## Explore more
 
 - [Getting started](/getting-started)

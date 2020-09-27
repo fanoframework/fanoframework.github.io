@@ -5,7 +5,9 @@ description: List of built-in validation rules in Fano Framework
 
 <h1 class="major">Built-in Validation Rules</h1>
 
-## Field  availability
+This page lists all available built-in validation rules that Fano Framework provides. For information on how to use these validation rules in application, please read [Form Validation](/security/form-validation) documentation.
+
+## Field availability
 
 Following validator test if field is present.
 

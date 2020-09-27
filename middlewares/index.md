@@ -351,6 +351,8 @@ corsAuthAjax := TCompositeMiddleware.create([cors, authOnly, ajaxOnly]);
 
 ### Use controller as a middleware
 
+`TRequestHandlerAsMiddleware` is an adapter middleware that allows instance of `IRequestHandler` interface to be used as `IMiddleware`. It means you can wrap a controller instance and attach it to a route and to be executed as part of middleware chain. However, controller instance used this way can not block request but only can modify request and/or response because `TRequestHandlerAsMiddleware` class always passes request to next middleware.
+
 ```
 var helloCtrlMiddleware : IMiddleware;
     helloController : IRequestHandler;
@@ -360,7 +362,7 @@ helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 
 ## Performance consideration
 
-Using middleware add overhead as request must go multiple execution points before reaching actual request handler also you need to aware that each middleware will call next middleware recursively so you should limit number of middlewares in use.
+Using middleware adds overhead as request must go multiple execution points before reaching actual request handler. Also, you need to aware that each middleware will call next middleware recursively so you should limit number of middlewares in use.
 
 ## Explore more
 

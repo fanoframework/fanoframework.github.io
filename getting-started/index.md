@@ -41,6 +41,8 @@ Open web browser and go to `http://hello.fano`. You should see `Home controller`
 
 ## Command walkthrough
 
+Let us take a look at each command above to understand what it does.
+
 Following command tells Fano CLI to create CGI web application project in `Hello` directory. Directory must not exist. Read [Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project) for creating different web application project ([FastCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-fastcgi-project), [SCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-scgi-project), [uwsgi](/scaffolding-with-fano-cli/creating-project#scaffolding-uwsgi-project) or [http](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project)).
 
 ```
@@ -51,7 +53,7 @@ We change active directory to newly created `Hello` directory.
 $ cd Hello
 ```
 
-Create controller name `HomeController.pas` that will handle request to route `/`. 
+Create controller name `HomeController.pas` that will handle request to route `/`. For more information regarding route, read [Working with Router](/working-with-router).
 ``` 
 $ fanocli --controller=Home --route=/
 ```
