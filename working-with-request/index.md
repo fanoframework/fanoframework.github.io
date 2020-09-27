@@ -182,7 +182,7 @@ writeln(reqUri.fragment);
 ```
 
 ## Get current environment variables
-You can get current CGI environment using `env` method.
+You can get current CGI environment using `env` property.
 
 ```
 var reqEnv : ICGIEnvironment;
@@ -190,6 +190,16 @@ var reqEnv : ICGIEnvironment;
 reqEnv := request.env;
 ```
 Read [CGI Environment](/environment) for more information.
+
+## Check if request is AJAX
+
+To test if request is AJAX request, use `isXhr()` method.
+
+```
+var ajax : boolean;
+...
+ajax := request.isXhr();
+```
 
 ## <a name="handling-request-with-json-body"></a>Handling request with JSON body
 
