@@ -7,7 +7,7 @@ description: Tutorial on how to work with controllers in Fano Framework
 
 ## IRequestHandler interface
 
-When web application receives [request](/working-with-request), dispatcher uses uri and HTTP method to [match route](/working-with-router) for the request. If route is found, associated request handler will be called, otherwise it raises `ERouteHandlerNotFound` exception.
+When web application receives [request](/working-with-request), [dispatcher](/dispatcher) uses uri and HTTP method to [match route](/working-with-router) for the request. If route is found, associated request handler will be called, otherwise it raises `ERouteHandlerNotFound` exception.
 
 `IRequestHandler` interface is basis of request handler implementation in Fano Framework. It consists of `handleRequest()` method that implementor class must provide. Dispatcher invokes this method and passes request, response and route argument objects. It must return instance of [response](/working-with-response). You can return response given by dispatcher or return entirely new response instance.
 
