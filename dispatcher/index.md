@@ -44,7 +44,7 @@ while the latter supports middleware.
 `TVerbTunnellingDispatcher` is decorator dispatcher that allows web application to serve request through [HTTP verb tunnelling](/security/http-verb-tunnelling).
 
 ## Creating dispatcher
-If you use [Fano CLI](https://github.com/fanoframework/fano-cli) to [scaffold your web application project](/scaffolding-with-fano-cli), you can skip this as Fano CLI create dispatcher instance for you.
+If you use [Fano CLI](https://github.com/fanoframework/fano-cli) to [scaffold your web application project](/scaffolding-with-fano-cli), you can skip this as Fano CLI creates dispatcher instance for you.
 
 Creating simple dispatcher:
 
