@@ -59,7 +59,7 @@ container.add(
 );
 ```
 
-For creating basic dispatcher with middleware support, you need to pass instance of `IMiddlewareLinkList` instance. Please read [Middlewares](/middlewares) for more information.
+For creating basic dispatcher with middleware support, you need to pass instance of `IMiddlewareLinkList` instance. Please read [Middlewares](/middlewares) for more information. `container` is an instance of `IDependencyContainer`. Read [Dependency Container](/dependency-container) for more informations.
 
 ```
 var router : IRouteMatcher;
@@ -96,7 +96,7 @@ To allow [HTTP verb tunnelling](/security/http-verb-tunnelling), wrap actual dis
 
 ```
 container.add(
-    GuidToString(IDispatcher),
+    'dispatcher',
     TVerbTunnellingDispatcherFactory.create(
         TSimpleDispatcherFactory.create(
             router,
@@ -114,10 +114,11 @@ instance of dispatcher.
 ```
 function TMyAppServiceProvider.buildDispatcher(const container : IDependencyContainer) : IDispatcher;
 begin
-    result := container.get('dispatcher') as IDispatcher;
+    result := container['dispatcher'] as IDispatcher;
 end;
 ```
 
 ## Explore more
 
 - [Working with Router](/working-with-router)
+- [Dependency container](/dependency-container)
