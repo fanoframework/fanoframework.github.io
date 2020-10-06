@@ -145,8 +145,7 @@ router2 := container.get('router') as IRouteMatcher;
 
 ## Adding service alias
 
-To register new name for an existing service, dependency container provides method `alias()`.
-This method expects two parameters. First parameter is new name for existing service, and second parameter identifies existing service to be aliased.
+Dependency container provides method `alias()` to register new name for an existing service. This method expects two parameters. First parameter is new name for existing service, and second parameter identifies existing service to be aliased. It raises `EDependencyAlias` exception when first and second parameter is same or when you try to create alias to other aliased service.  
 
 For example, if you have service registered as follows,
 
