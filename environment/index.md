@@ -165,7 +165,7 @@ or
 ```
 browser := myEnv.httpUserAgent();
 ```
-It returns raw user-agent string. If you want know what browser your user is using or operating system or if they use mobile phone or desktop, use `IUserAgent` interface. Read [Identifiying client user-agent](/identifiying-client-user-agent) for more information.
+It returns raw user-agent string. If you want know what browser your user is using or operating system or if they use mobile phone or desktop, use `IUserAgent` interface. Read [Identifiying client user-agent](/utilities/identifiying-client-user-agent) for more information.
 
 ## Protocol-specific variables
 
