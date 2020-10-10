@@ -8,21 +8,18 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Getting Started](/getting-started)
 - [Step-By-Step Tutorials](/tutorials)
 - [Example Applications](/examples)
+- [Scaffolding with Fano CLI](/scaffolding-with-fano-cli).
 
 ## Application
 
-- [Working with Application](/working-with-application)
-- [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
-- [CGI Environment](/environment)
-- [Configuration](/configuration)
-
-## Dependency Container
-
-- [Dependency Container](/dependency-container)
-
-## Dispatcher
-
-- [About Dispatcher](/dispatcher)
+- [Working with Application](/working-with-application). It explains basic concept of Fano Framework web application. 
+- [Dependency Container](/dependency-container).
+- [Dispatcher](/dispatcher). Explains basic concept of dispatcher.
+- [CGI Environment](/environment).
+- [Configuration](/configuration). How to setup and read application settings.
+- [Error Handler](/error-handler). How to handle error in Fano Framework.
+- [Middlewares](/middlewares). It explains middleware concept and how use it in Fano Framework web application.
+- [Working with Router](/working-with-router). It explains how to setup application route and associate URL path pattern with code that handle it.
 
 ## Request and Response
 
@@ -36,18 +33,6 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Working With Controllers](/working-with-controllers)
 - [Working With Views](/working-with-views)
 - [Working With Models](/working-with-models)
-
-## Routing
-
-- [Working with Router](/working-with-router)
-
-## Middlewares
-
-- [Middlewares](/middlewares)
-
-## Error Handling
-
-- [Error Handler](/error-handler)
 
 ## Security
 
