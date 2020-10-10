@@ -9,7 +9,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 
 ## Field availability
 
-Following validator test if field is present.
+Following validators test if field is present.
 
 ### TRequiredValidator
 
