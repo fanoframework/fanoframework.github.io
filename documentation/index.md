@@ -13,9 +13,9 @@ description: Documentation and developer's resources for Fano Framework, web app
 ## Application
 
 - [Working with Application](/working-with-application). It explains basic concept of Fano Framework web application. 
-- [Dependency Container](/dependency-container).
+- [Dependency Container](/dependency-container). Explains dependency injection in Fano Framework.
 - [Dispatcher](/dispatcher). Explains basic concept of dispatcher.
-- [CGI Environment](/environment).
+- [CGI Environment](/environment). Tutorial on how to read server environmental variables.
 - [Configuration](/configuration). How to setup and read application settings.
 - [Error Handler](/error-handler). How to handle error in Fano Framework.
 - [Middlewares](/middlewares). It explains middleware concept and how use it in Fano Framework web application.
