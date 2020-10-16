@@ -14,17 +14,21 @@ Fano Framework provides `IAppConfiguration` interface for that purpose.
 
 ## IAppConfiguration
 
-`IAppConfiguration` interface provides two methods
+`IAppConfiguration` interface provides several methods,
 
-- `getString()` which accepts name and returns string value
-- `getInt()` which accept name returns integer value
-- `getBool()` which accept name returns boolean value
+- `getString()` accepts name and returns string value.
+- `getInt()` accepts name returns integer value.
+- `getBool()` accepts name returns boolean value.
+- `getFloat()` accepts name returns double value.
+- `has()` test if name is exists in configuration.
 
 ## Built-in IAppConfiguration implementation
 
-Fano Framework provides `TJsonFileConfig` and `TIniFileConfig` class which loads configuration data from JSON and INI file respectively. Also available `TNullConfig` which is null class implements `IAppConfiguration` interface.
+Fano Framework provides `TJsonFileConfig`, `TIniFileConfig`, `TEnvConfig` class which loads configuration data from JSON, INI file and environment variables respectively.
 
-Load config from JSON,
+Fano Framework also provides `TCompositeConfig` and `TNullConfig` class. First one is `IAppConfiguration` implementation with capability to combine two`IAppConfiguration` instance and latter is null class implements `IAppConfiguration` interface.
+
+### Load config from JSON
 
 ```
 var config : IAppConfiguration;
@@ -34,7 +38,7 @@ config := TJsonFileConfig.create(
 );
 ```
 
-Load config from INI,
+### Load config from INI
 
 ```
 var config : IAppConfiguration;
@@ -46,9 +50,36 @@ config := TIniFileConfig.create(
 ```
 Last parameter is name of default section to use. Read [INI file configuration](#ini-file-configuration) section in this document for more information.
 
-To be able to use `TJsonFileConfig` and `TIniFileConfig` class with [dependency container](/dependency-container), Fano Framework provides `TJsonFileConfigFactory` and `TIniFileConfigFactory` class which enables you to register above classes in container.
+### Load configuration from environment variables
 
-Register JSON config
+```
+var config : IAppConfiguration;
+...
+config := TEnvConfig.create();
+```
+
+### Combine multiple configurations as one
+
+`TCompositeConfig` allows you to use multiple configurations. In following setup,
+if configuration not found in environment variables, then it will try to find it in
+config.json.
+
+```
+var config : IAppConfiguration;
+...
+config := TCompositeConfig.create(
+    TEnvConfig.create(),
+    TJsonFileConfig.create(
+        getCurrentDir() + '/config/config.json'
+    )
+);
+```
+
+## Register config instance to dependency container
+
+To be able to use `TJsonFileConfig`, `TIniFileConfig`, `TEnvConfig`, `TCompositeConfig` and `TNullConfig` class with [dependency container](/dependency-container), Fano Framework provides `TJsonFileConfigFactory`, `TIniFileConfigFactory`, `TEnvConfigFactory`, `TCompositeConfigFactory` and `TNullConfigFactory` class which enables you to register above classes in container.
+
+### Register JSON config
 ```
 container.add(
     'config',
@@ -58,7 +89,7 @@ container.add(
 );
 ```
 
-Register INI config
+### Register INI config
 ```
 container.add(
     'config',
@@ -68,6 +99,26 @@ container.add(
 );
 ```
 
+### Register environment variable config
+```
+container.add(
+    'config',
+    TEnvConfigFactory.create()
+);
+```
+
+### Register composite configurations
+```
+container.add(
+    'config',
+    TCompositeConfigFactory.create(
+        TNullConfigFactory.create(),
+        TJsonFileConfigFactory.create(getCurrentDir() + '/config/config.json')
+    )
+);
+```
+
+### Retrieve configuration instance from dependency container
 
 To get configuration instance
 
@@ -75,6 +126,11 @@ To get configuration instance
 var config : IAppConfiguration;
 ...
 config := container.get('config') as IAppConfiguration;
+```
+or with array-like syntax
+
+```
+config := container['config'] as IAppConfiguration;
 ```
 
 ## Read configuration data
@@ -122,6 +178,15 @@ var cookieMaxAge : integer;
 ...
 cookieMaxAge := config.getInt('cookie.maxAge');
 ```
+
+`getString()`, `getInt()`, `getBool()` and `getFloat()` methods accept second parameter
+if you want to use different value when key does not exist.
+
+```
+baseUrl := config.getString('baseUrl', 'https://example.com');
+```
+If key `baseUrl` is not found, it returns second parameter value.
+
 
 ## <a name="ini-file-configuration"></a>INI file configuration
 

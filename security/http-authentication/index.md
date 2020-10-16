@@ -158,13 +158,62 @@ router.get('/', container['homeController'] as IRequestHandler)
     .add(container['digestAuthMiddleware'] as IMiddleware);
 ```
 
+## Handling Bearer Authentication with middleware
+
+Fano Framework provides implementation for bearer type HTTP authentication with
+`TBearerAuthMiddleware` middleware with purpose to simplify task to protect access of certain routes using Bearer HTTP authentication scheme.
+
+Constructor of `TBearerAuthMiddleware` expects three parameters,
+
+- Instance of `ITokenVerifier` interface which is responsible to perform actual token verification.
+- String of realm name.
+- String of credential key name where authenticated credential can be queried from request.
+
+Currently, Fano Framework supports JSON Web Token (JWT) verification only via `TJwtTokenVerifier`
+class which implements `ITokenVerifier` interface.
+
+After token is verified, credential info found in token is stored in request which later can be queried
+in controller using name you defined in credential key name.
+
+## Register Bearer Authentication middleware with container
+
+Fano Framework has `TBearerAuthMiddlewareFactory` class
+which allows you to register `TBearerAuthMiddleware` into service container.
+
+```
+container.add(
+    'bearerAuth',
+    TBearerAuthMiddlewareFactory.create()
+        .realm('fano-realm')
+        .verifier(container['tokenVerifier'] as ITokenVerifier)
+);
+```
+
+## Attach Bearer Auth middleware to application routes
+
+Attach bearer auth middleware instance to application routes, for example
+
+```
+router.get('/', container['homeController'] as IRequestHandler)
+    .add(container['bearerAuth'] as IMiddleware);
+```
+For every GET request to URL `/`, middleware will check token existence and verify
+if it is found. If token is not found or not verified, it returns HTTP 401 response
+with `WWW-Authenticate: Bearer realm="[realm name]"` header,
+where `[realm name]` is realm that you set above.
+
 ## Security consideration
 
 For Basic HTTP authentication scheme, username and password is transmitted as Base64-encoded string. It is prone to man in middle attack and it is must be used in conjunction with SSL/TLS.
 
 Digest HTTP authentication scheme is more computation expensive but can be used with or without SSL/TLS because password and other data is sent to server as MD5 hashed value. However, because MD5 hash is not cryptographically strong, you need to be cautious when use it without SSL/TLS.
 
-If your application is running behind reverse proxy, for example, with `mod_proxy_scgi` module, Apache does not pass `Authorization` header to application because of security concern.
+For Bearer HTTP authentication, token is credential. It must be used in conjunction with SSL/TLS
+to avoid man in middle attack. Token may or may not be encrypted. If you use
+unencrypted JWT token, do not store sensitive data in token.
+
+### Missing Authorization header
+If your application is running behind reverse proxy, for example, with `mod_proxy_scgi` module, Apache does not pass `Authorization` header to application because of security concern. This will cause all middlewares above return HTTP 401 as they can not find this header.
 
 In case, you have trusted network between Apache and your application, simple solution is to transform `Authorization` header into `HTTP_AUTHORIZATION` environment variable using `mod_rewrite` module.
 

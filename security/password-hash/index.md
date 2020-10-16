@@ -11,9 +11,9 @@ description: Password hash in Fano Framework
 
 ## Password hash and verification
 
-Fano Framework provides several password hash algorithm based on [HashLib4Pascal library](https://github.com/Xor-el/HashLib4Pascal).
+Fano Framework provides several password hash algorithm based on [HashLib4Pascal](https://github.com/Xor-el/HashLib4Pascal) and [BCrypt](https://github.com/viniciussanchez/bcrypt) libraries.
 
-Fano Framework provides simple wrapper for this library through `IPasswordHash` interface.
+Fano Framework provides simple wrapper for these libraries through `IPasswordHash` interface.
 
 ### Generate password hash
 
@@ -53,8 +53,7 @@ passwHash.salt('some random value');
 
 #### Cost
 To make generating password expensive, some password hash algorithm requires you to set number of iterations as cost of algorithm.
-Higher value usually means higher computation resources. You should think carefully about this value as this is trade-off between
-security and performance.
+Higher value usually means higher computation resources. You should think carefully about this value as this is trade-off between security and performance.
 
 To set cost, call `cost()` method with integer value for cost.
 This method returns current password hash instance.
@@ -64,7 +63,7 @@ passwHash.cost(1024);
 ```
 
 #### Memory cost
-Some algorithm employ memory cost.
+Some algorithm employs memory cost, such as Argon2i. For other, this value is ignored.
 
 To set memory cost, you call `memory()` method of `IPasswordHash` interface. This method returns current password hash instance.
 
@@ -72,7 +71,7 @@ To set memory cost, you call `memory()` method of `IPasswordHash` interface. Thi
 passwHash.memory(32);
 ```
 #### Paralleism
-Some algorithm employ paralleism cost.
+Some algorithm employs paralleism cost.
 
 To set paralleism cost, you call `paralleism()` method of `IPasswordHash` interface. This method returns current password hash instance.
 
@@ -97,7 +96,7 @@ passwHash.len(64);
 
 ## Available password hash implementations
 
-Currently, Fano Framework provides `IPasswordHash` implementation for [Argon2i](https://en.wikipedia.org/wiki/Argon2), [PBKDF2](https://tools.ietf.org/html/rfc2898), [Scrypt](https://tools.ietf.org/html/rfc7914) and SHA2.
+Currently, Fano Framework provides `IPasswordHash` implementation for [Argon2i](https://en.wikipedia.org/wiki/Argon2), [PBKDF2](https://tools.ietf.org/html/rfc2898), [Scrypt](https://tools.ietf.org/html/rfc7914), [BCrypt](https://en.wikipedia.org/wiki/Bcrypt) and SHA2.
 
 ### PBKDF2 password hash
 
@@ -124,6 +123,19 @@ container.add('passwHash', TArgon2iPasswordHashFactory.create());
 ```
 See PBKDF2 code above to retrieve password hash instance.
 
+You can set initial setting values for password hash instance, for example
+
+```
+container.add(
+    'passwHash',
+    TArgon2iPasswordHashFactory.create()
+        .cost(4)
+        .memory(32)
+        .paralleism(4)
+        .len(32)
+);
+```
+
 ### Scrypt password hash
 
 To use Scrypt password hash, you need to use `TScryptPasswordHash` class. You can register this class with dependency container using its factory class `TScryptPasswordHashFactory`.
@@ -131,6 +143,15 @@ To use Scrypt password hash, you need to use `TScryptPasswordHash` class. You ca
 To register password hash,
 ```
 container.add('passwHash', TScryptPasswordHashFactory.create());
+```
+
+### BCrypt password hash
+
+To use BCrypt password hash, you need to use `TBcryptPasswordHash` class. You can register this class with dependency container using its factory class `TBcryptPasswordHashFactory`.
+
+To register password hash,
+```
+container.add('passwHash', TBcryptPasswordHashFactory.create());
 ```
 
 ### SHA2 password hash
