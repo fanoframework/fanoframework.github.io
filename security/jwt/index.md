@@ -9,7 +9,7 @@ According to [jwt.io](https://jwt.io)
 
 > JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.
 
-JWT consists of three parts, header, claims and signature. They are concatenated with dot character to form JWT. Two parties can verify claims using only data contained in JWT. If token is verified, any party can be sure that claims is authentic.
+JWT consists of three parts, header, claims and signature. They are concatenated with dot character to form JWT. Authenticator party can verify claims using only data contained in JWT. If token is verified, claims is authentic.
 
 ## Generate and sign JSON Web token (JWT)
 
@@ -125,3 +125,5 @@ type
 ```
 
 ## Explore more
+
+- [HTTP Authentication](/security/http-authentication)

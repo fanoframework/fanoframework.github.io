@@ -113,7 +113,7 @@ container.add(
 
 ## Attach Basic Auth middleware to application routes
 
-Attach basic auth middleware instance to application routes, for example
+Attach basic auth middleware instance to application [routes](/working-with-router), for example
 
 ```
 router.get('/', container['homeController'] as IRequestHandler)
@@ -169,8 +169,7 @@ Constructor of `TBearerAuthMiddleware` expects three parameters,
 - String of realm name.
 - String of credential key name where authenticated credential can be queried from request.
 
-Currently, Fano Framework supports JSON Web Token (JWT) verification only via `TJwtTokenVerifier`
-class which implements `ITokenVerifier` interface.
+Currently, Fano Framework supports [JSON Web Token (JWT)](/security/jwt) verification only, via `TJwtTokenVerifier` class which implements `ITokenVerifier` interface.
 
 After token is verified, credential info found in token is stored in request which later can be queried
 in controller using name you defined in credential key name.
@@ -186,6 +185,7 @@ container.add(
     TBearerAuthMiddlewareFactory.create()
         .realm('fano-realm')
         .verifier(container['tokenVerifier'] as ITokenVerifier)
+        .credentialKey('fano_cred')
 );
 ```
 
@@ -197,10 +197,27 @@ Attach bearer auth middleware instance to application routes, for example
 router.get('/', container['homeController'] as IRequestHandler)
     .add(container['bearerAuth'] as IMiddleware);
 ```
-For every GET request to URL `/`, middleware will check token existence and verify
+In code above, for each GET request to URL `/`, middleware will check token existence and verify
 if it is found. If token is not found or not verified, it returns HTTP 401 response
 with `WWW-Authenticate: Bearer realm="[realm name]"` header,
 where `[realm name]` is realm that you set above.
+
+When token is verified, credential found from token can be read from request in controller with
+credential key you set before, i.e, `fano_cred`.
+
+```
+function THomeController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var username : string;
+begin
+    username := request.getParam('fano_cred');
+    response.body().write('Hello ' + username);
+    result := response;
+end;
+```
 
 ## Security consideration
 
@@ -211,6 +228,8 @@ Digest HTTP authentication scheme is more computation expensive but can be used 
 For Bearer HTTP authentication, token is credential. It must be used in conjunction with SSL/TLS
 to avoid man in middle attack. Token may or may not be encrypted. If you use
 unencrypted JWT token, do not store sensitive data in token.
+
+To address when token is leaked to third party, You can combine short-lived token with short expiry time (access token) and login-lived token (refresh token). When access token is expired, client must get new access token from authentication server using refresh token. If refresh token is expired then client session is ended. To get new refresh token and access token, client must login again using username password.
 
 ### Missing Authorization header
 If your application is running behind reverse proxy, for example, with `mod_proxy_scgi` module, Apache does not pass `Authorization` header to application because of security concern. This will cause all middlewares above return HTTP 401 as they can not find this header.
