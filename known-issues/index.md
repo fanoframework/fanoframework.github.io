@@ -109,7 +109,7 @@ To remedy the situation, just edit `build.dev.cfg` file in example root director
 
 ## <a name="missing-etc-fpc-cfg"></a>Missing /etc/fpc.cfg
 
-`build.sh` script that [Fano CLI](/scaffolding-with-fano-cli) generates for each project use `/etc/fpc.cfg`. If you install Free Pascal to non default directory or use tool such as [fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe), build script will complain about missing `/etc/fpc.cfg` file. To remedy this situation, just create symbolic link in `/etc` directory to actual `fpc.cfg` file. For example,
+`build.sh` script that [Fano CLI](/scaffolding-with-fano-cli) generates for each project, needs `/etc/fpc.cfg`. If you install Free Pascal to non default directory or use tool such as [fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe), build script will complain about missing `/etc/fpc.cfg` file. To remedy this situation, just create symbolic link in `/etc` directory to actual `fpc.cfg` file. For example,
 
 ```
 $ sudo ln -s ~/fpcupdeluxe/fpc/bin/x86_64-linux/fpc.cfg /etc/fpc.cfg
