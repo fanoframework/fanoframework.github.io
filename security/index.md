@@ -15,3 +15,4 @@ This section explains web application security-related issue regarding Fano Fram
 - [XSS Protection](/security/xss-protection)
 - [Clickjacking Protection](/security/clickjacking-protection)
 - [Password hash](/security/password-hash)
+- [JSON Web Token (JWT)](/security/jwt)

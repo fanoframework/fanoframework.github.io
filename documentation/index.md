@@ -12,7 +12,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Application
 
-- [Working with Application](/working-with-application). It explains basic concept of Fano Framework web application. 
+- [Working with Application](/working-with-application). It explains basic concept of Fano Framework web application.
 - [Dependency Container](/dependency-container). Explains dependency injection in Fano Framework.
 - [Dispatcher](/dispatcher). Explains basic concept of dispatcher.
 - [CGI Environment](/environment). Tutorial on how to read server environmental variables.
@@ -44,6 +44,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [XSS Protection](/security/xss-protection)
 - [Clickjacking Protection](/security/clickjacking-protection)
 - [Password hash](/security/password-hash)
+- [JSON Web Token (JWT)](/security/jwt)
 
 ## Utilities
 
