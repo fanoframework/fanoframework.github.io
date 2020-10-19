@@ -9,6 +9,9 @@ description: Password hash in Fano Framework
 
 [Best practice for storing password](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) is to never store plain password but hash value of password and its salt, so that when password storage is compromised, it is still considerably very difficult task to retrieve plain password.
 
+Password hash algorithms are designed to make computation to retrieve actual password be expensive
+so that it is not feasible for attacker.
+
 ## Password hash and verification
 
 Fano Framework provides several password hash algorithm based on [HashLib4Pascal](https://github.com/Xor-el/HashLib4Pascal) and [BCrypt](https://github.com/viniciussanchez/bcrypt) libraries.
@@ -156,7 +159,7 @@ container.add('passwHash', TBcryptPasswordHashFactory.create());
 
 ### SHA2 password hash
 
-While you are advised not to use SHA2 for password hash, Fano Framework provides `IPasswordHash` implementation for SHA2 256 bit and 512 bit using `TSHA2_256PasswordHash` and `TSHA2_512PasswordHash` class.
+While you are advised NOT to use SHA2 for password hash as they are not designed for hashing password, Fano Framework provides `IPasswordHash` implementation for SHA2 256 bit and 512 bit using `TSHA2_256PasswordHash` and `TSHA2_512PasswordHash` class.
 
 You can register this class with dependency container using its factory class `TSha2PasswordHashFactory`.
 
