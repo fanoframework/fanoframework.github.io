@@ -107,6 +107,14 @@ You may find that compilation will stop with Free Pascal 3.2.0 compiler. This is
 
 To remedy the situation, just edit `build.dev.cfg` file in example root directory and replace `Sewn` to `Sew` so that compilation will not stop on notes.
 
+## <a name="missing-etc-fpc-cfg"></a>Missing /etc/fpc.cfg
+
+`build.sh` script that Fano CLI generates for each project use `/etc/fpc.cfg`. If you install Free Pascal to non default directory or use tool such as [fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe), build script will complain about missing `/etc/fpc.cfg` file. To remedy this situation, just create symbolic link in `/etc` directory to actual `fpc.cfg` file. For example,
+
+```
+$ sudo ln -s ~/fpcupdeluxe/fpc/bin/x86_64-linux/fpc.cfg /etc/fpc.cfg
+```
+
 ## Explore more
 
 - [Getting Started](/getting-started)
