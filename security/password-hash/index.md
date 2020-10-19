@@ -156,7 +156,7 @@ container.add('passwHash', TBcryptPasswordHashFactory.create());
 
 ### SHA2 password hash
 
-While you are advised not to use SHA2 for password hash, Fano Framework provides `IPasswordHash` implementation for SHA1 256 bit and 512 bit using `TSHA2_256PasswordHash` and `TSHA2_512PasswordHash` class.
+While you are advised not to use SHA2 for password hash, Fano Framework provides `IPasswordHash` implementation for SHA2 256 bit and 512 bit using `TSHA2_256PasswordHash` and `TSHA2_512PasswordHash` class.
 
 You can register this class with dependency container using its factory class `TSha2PasswordHashFactory`.
 
