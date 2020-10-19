@@ -234,7 +234,7 @@ To address when token is leaked to third party, You can combine short-lived toke
 ### Missing Authorization header
 If your application is running behind reverse proxy, for example, with `mod_proxy_scgi` module, Apache does not pass `Authorization` header to application because of security concern. This will cause all middlewares above return HTTP 401 as they can not find this header.
 
-In case, you have trusted network between Apache and your application, simple solution is to transform `Authorization` header into `HTTP_AUTHORIZATION` environment variable using `mod_rewrite` module.
+In case, you have trusted network between Apache and your application, simple solution is to transform `Authorization` header into `HTTP_AUTHORIZATION` environment variable using `mod_rewrite` module. You can add it in application virtual host configuration file.
 
 ```
 <IfModule mod_rewrite.c>

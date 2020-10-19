@@ -129,3 +129,4 @@ type
 ## Explore more
 
 - [HTTP Authentication](/security/http-authentication)
+- [HTTP Bearer Authentication with JWT example project](https://github.com/fanoframework/fano-jwt) demonstrates how to use [JWT](https://tools.ietf.org/html/rfc7519) (RFC 7519) to sign and verify JWT token in Fano Framework.

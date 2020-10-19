@@ -80,7 +80,8 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 ## HTTP Authentication examples
 
-[HTTP Basic Authentication example application](https://github.com/fanoframework/fano-basic-auth) demonstrates how to use [HTTP Basic Authentication](/security/http-authentication) (RFC 2617) in Fano Framework.
+- [HTTP Basic Authentication example application](https://github.com/fanoframework/fano-basic-auth) demonstrates how to use [HTTP Basic Authentication](/security/http-authentication) (RFC 2617) in Fano Framework.
+- [HTTP Bearer Authentication with JWT](https://github.com/fanoframework/fano-jwt) demonstrates how to use [JWT](https://tools.ietf.org/html/rfc7519) (RFC 7519) to sign and verify JWT token in Fano Framework.
 
 ## Handling request with JSON body
 
