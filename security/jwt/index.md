@@ -11,6 +11,8 @@ According to [jwt.io](https://jwt.io)
 
 JWT consists of three parts, header, claims and signature. They are concatenated with dot character to form JWT. Authenticator party can verify claims using only data contained in JWT. If token is verified, claims is authentic.
 
+You can read [RFC 7519](https://tools.ietf.org/html/rfc7519) for detail information regarding JWT.
+
 ## Generate and sign JSON Web token (JWT)
 
 To generate and sign JWT, Fano Framework provides `TJwtTokenGenerator` class. It
