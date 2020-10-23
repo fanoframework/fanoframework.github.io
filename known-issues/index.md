@@ -114,7 +114,7 @@ To remedy the situation, just edit `build.dev.cfg` file in example root director
 ```
 $ sudo ln -s ~/fpcupdeluxe/fpc/bin/x86_64-linux/fpc.cfg /etc/fpc.cfg
 ```
-## Missing MySQL client library
+## <a name="missing-mysql-client-library"></a>Missing MySQL client library
 
 If you encounter error *Can't load default MySQL library ("libmysqlclient.so.20" or "libmysqlclient.so"). Check your installation*, you need to install MySQL client development library. For example on Debian,
 
