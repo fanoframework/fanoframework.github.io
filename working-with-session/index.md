@@ -20,7 +20,7 @@ To use session in Fano Framework, you need to use `ISessionManager` and also dis
 
 - `TFileSessionManager`, session manager which store session data in file.
 - `TCookieSessionManager`, session manager which store session data in encrypted cookie.
-- `TDbSessionManager`, session manager which store session data in RDBMS database.
+- `TDbSessionManager`, session manager which store session data in [RDBMS database](/database).
 
 ## IReadOnlySessionManager
 
