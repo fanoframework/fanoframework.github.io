@@ -20,12 +20,15 @@ To use session in Fano Framework, you need to use `ISessionManager` and also dis
 
 - `TFileSessionManager`, session manager which store session data in file.
 - `TCookieSessionManager`, session manager which store session data in encrypted cookie.
+- `TDbSessionManager`, session manager which store session data in RDBMS database.
 
 ## IReadOnlySessionManager
 
 This interface is provided for getting session instance from a request. This interface if parent of `ISessionManager` interface. This interface only has one method `getSession()` which expect `IRequest` instance and returns `ISession` instance.
 
 ## Create session manager instance
+
+Easiest steps to work with session is to [scaffold Fano Framework web application project with session support](/scaffolding-with-fano-cli#add-session-support) using Fano CLI.
 
 ### Store session data in file
 
@@ -392,6 +395,7 @@ sessionName := sess.name();
 ```
 
 If you create session manager factory as example above, `sessionName` will contains `fano_sess` value.
+
 
 ## Explore more
 

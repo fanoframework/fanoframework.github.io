@@ -248,8 +248,9 @@ Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.
 
 - `file`, create session which stores session data in file.
 - `cookie`, create session which stores session data in encrypted cookie.
-- `db`, create session which stores session data in database. This is not implemented yet.
+- `db`, create session which stores session data in database.
 
+### Session with file as storage
 If `[session storage]` is not set then it is assumed `file`. So following commands are identical
 
 ```
@@ -257,13 +258,40 @@ $ fanocli --project-cgi=Hello --with-session=file
 $ fanocli --project-cgi=Hello --with-session
 ```
 
-For `file` and `cookie`, you can define format of session data with `--type` parameter which expect value of `json` or `ini` for JSON or INI format respectively.
+### Session with cookie as storage
+
+Session data is stored in encrypted cookie.
+
+```
+$ fanocli --project-cgi=Hello --with-session=cookie
+```
+### Session with database as storage
+
+```
+$ fanocli --project-cgi=Hello --with-session=db
+```
+
+Type of RDBMS to use can be set using `--db` parameter. If it is not set, it assumes MySQL. Following command is same as above.
+
+```
+$ fanocli --project-cgi=Hello --with-session=db --db=mysql
+```
+Use `postgresql`,`firebird` and `sqlite` for PostgreSQL, Firebird and SQLite database respectively.
+
+```
+$ fanocli --project-cgi=Hello --with-session=db --db=postgresql
+```
+
+### Session data format
+For `file`, `cookie` and `db`, you can define format of session data with `--type` parameter which expect value of `json` or `ini` for JSON or INI format respectively.
 
 For example, following command will cause session support to be added to project and each session data will be stored as INI file.
 
 ```
 $ fanocli --project-cgi=Hello --with-session=file --type=ini
 ```
+
+### Session requires middleware
 
 Because in Fano Framework, session support is implemented with middleware infrastructure, `--with-session` implies usage of `--with-middleware` so following command are identical
 

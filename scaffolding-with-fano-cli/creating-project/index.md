@@ -147,9 +147,13 @@ $ fanocli --project-fcgi=test-fano --config=ini
 
 Read [Application Configuration](/configuration) for more information.
 
+## Add session support
+
+Use `--with-session` to [add session support](/scaffolding-with-fano-cli#add-session-support). Read [Session documentation](/working-with-session) for more information.
+
 ## Add middleware support
 
-Use `--with-middleware` to [add middleware support](/scaffolding-with-fano-cli#add-middleware-support). Read [middleware documentation](/scaffolding-with-fano-cli#add-middleware-support) for more information.
+Use `--with-middleware` to [add middleware support](/scaffolding-with-fano-cli#add-middleware-support). Read [Middleware documentation](/middlewares) for more information.
 
 ## Unrelated commit histories issue
 
