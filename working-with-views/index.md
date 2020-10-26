@@ -341,7 +341,10 @@ mainView := TMainView.create(
 );
 
 ```
-
+Where `templateParser` is defined as follows,
+```
+templateParser:= TSimpleTemplateParser.create('<!--[', ']-->');
+```
 When main view is rendered by `TMyController` inherited from base class [`TController`](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas), as follows
 
 ```
