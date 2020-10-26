@@ -34,7 +34,7 @@ store any variable replacement. See *Working with view parameter* section in [Di
 
 `render()` method expects that you will return response instance that will be used to render HTTP response.
 
-## Working with template
+## Built-in IView implementations
 
 Fano provides some built-in classes implementing `IView` interface which you can use to work with HTML template to display web application response.
 
@@ -45,6 +45,8 @@ template consist of header, main content and footer. To compose more than two vi
 - `TGroupView` is similar to `TCompositeView` class but it can compose more than two other `IView` instances. So it is more flexible as you do not need to daisy-chain views.
 - `TNullView` class implements `IView` but does nothing. This class is provide
 mostly in conjunction with TCompositeView
+
+## Working with template
 
 ### Load template from string
 
