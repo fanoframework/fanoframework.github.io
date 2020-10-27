@@ -121,6 +121,9 @@ If you encounter error *Can't load default MySQL library ("libmysqlclient.so.20"
 ```
 $ sudo apt install libmysqlclient-dev
 ```
+## <a name="shut-down-database-server-may-cause-memory-leak"></a>Memory leak due to database shutdown.
+
+When Fano Framework web application is connected to a database server, and then database shuts down while application is still running. When application shuts down, [it leaks memory](https://github.com/fanoframework/fano/issues/14). This issue is related to Free Pascal [bug report 37993](https://bugs.freepascal.org/view.php?id=37993). Memory leak only happens when database shuts down and never restart. Memory leak does not happen when database server shuts down and then restarts or when database does not runs at all.
 
 ## Explore more
 
