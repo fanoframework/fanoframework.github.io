@@ -251,21 +251,23 @@ begin
 end;
 ```
 
-If you are interested only for its value, you can call `getValue()` and pass name of argument. It will return value as string.
+If you are interested only for its value, you can call `getValue()` and pass name of argument. It returns value as string.
 
 ```
-writeln(args.getValue('name'));
+var name : string;
+...
+name := args.getValue('name'); //name = 'john'
 ```
 or with simplified array-like syntax,
 
 ```
-writeln(args['name']);
+name := args['name']; //name = 'john'
 ```
 
 Above codes will print identical output as follows
 
 ```
-writeln(args.getArg('name').value);
+name := args.getArg('name').value;
 ```
 
 You can get all route arguments using `getArgs()` method,

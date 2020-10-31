@@ -271,7 +271,7 @@ $ fanocli --project-cgi=Hello --with-session=cookie
 $ fanocli --project-cgi=Hello --with-session=db
 ```
 
-Type of RDBMS to use can be set using `--db` parameter. If it is not set, it assumes MySQL. Following command is same as above.
+You can set type of RDBMS to use with `--db` parameter. If it is not set, it assumes MySQL. Following command is same as above.
 
 ```
 $ fanocli --project-cgi=Hello --with-session=db --db=mysql

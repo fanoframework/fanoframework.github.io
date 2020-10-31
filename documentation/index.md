@@ -74,3 +74,5 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Issue with Free Pascal 3.2.0](/known-issues#issue-with-free-pascal-3.2.0)
 - [Missing /etc/fpc.cfg](/known-issues#missing-etc-fpc-cfg)
 - [Missing MySQL client library](/known-issues#missing-mysql-client-library)
+- [Memory leak due to database shutdown](/known-issues#shut-down-database-server-may-cause-memory-leak)
+
