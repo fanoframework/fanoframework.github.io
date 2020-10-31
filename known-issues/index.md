@@ -107,6 +107,26 @@ You may find that compilation will stop with Free Pascal 3.2.0 compiler. This is
 
 To remedy the situation, just edit `build.dev.cfg` file in example root directory and replace `Sewn` to `Sew` so that compilation will not stop on notes.
 
+## <a name="missing-libmicrohttpd-development-package"></a>Missing Libmicrohttpd development package
+
+If you [create libmicrohttpd-based web application](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project) and get linking error
+
+```
+/usr/bin/ld : cannot find -lmicrohttpd
+```
+when running `build.sh` script.
+
+You need to install libmicrohttpd development package. For Debian-based distribution,
+
+```
+$ sudo apt install libmicrohttpd-dev
+```
+
+For Fedora-based distribution,
+
+```
+$ sudo yum install libmicrohttpd-devel
+```
 ## <a name="missing-etc-fpc-cfg"></a>Missing /etc/fpc.cfg
 
 `build.sh` script that [Fano CLI](/scaffolding-with-fano-cli) generates for each project, needs `/etc/fpc.cfg`. If you install Free Pascal to non default directory or using tool such as [fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe), it may show error about missing `/etc/fpc.cfg` file. To remedy this situation, just create symbolic link in `/etc` directory to actual `fpc.cfg` file. For example,
