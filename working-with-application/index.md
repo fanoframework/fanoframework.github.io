@@ -254,16 +254,33 @@ deploy http application as stand alone web server or through various reverse pro
 You may want to read
 [Scaffolding libmicrohttpd project directory structure](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project) for information how to scaffolding libmicrohttpd web application easily.
 
-## Apache modules Application
+## <a name="use-ipv6-address"></a>Use IPv6 address
 
-Implementation of IWebApplication that run as Apache modules is not yet implemented.
+If you want to create web application server which binds to [IPv6 address](https://tools.ietf.org/html/rfc4291), replace `TInetSvrFactory`, `TEpollInetSvrFactory`, `TKqueueInetSvrFactory` with `TInet6SvrFactory`, `TEpollInet6SvrFactory`, `TKqueueInet6SvrFactory` class respectively.
 
-## Application implementation which support Rack-like protocol
+You may need to replace server address in proxy module of web server. For example for SCGI application using Apache `mod_proxy_scgi` module, you need to change virtual host configuration as shown in following example.
 
-Implementation of `IWebApplication` that implements Rack-like protocol, currently, is still under development.
+```
+# IPv4 address
+# ProxyPassMatch ^/(.*)$ "scgi://127.0.0.1:20477"
 
-- [Ruby Rack](https://rack.github.io/)
-- [Prack](https://github.com/piradoiv/Prack)
+# IPv6 address
+ProxyPassMatch ^/(.*)$ "scgi://[::1]:20477"
+```
+Please note that the IPv6 address needs to be inside square brackets.
+
+See [fano-ipv6](https://github.com/fanoframework/fano-ipv6) example demo application which use IPv6.
+
+For libmicrohttpd-based web application, you can add support to IPv6 address by setting
+field `useIPv6` of `TMhdSvrConfig` record to `true`. If you need both IPv4 and IPv6, set field `dualStack` of `TMhdSvrConfig` to `true`.
+
+```
+var svrConfig : TMhdSvrConfig;
+...
+svrConfig.useIPv6 :=true;
+svrConfig.dualStack := false; //IPv6 only
+```
+See [fano-mhdipv6](https://github.com/fanoframework/fano-mhdipv6) example demo http application which use IPv6.
 
 ## How to choose IWebApplication implementation?
 
