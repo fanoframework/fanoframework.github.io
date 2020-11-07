@@ -11,7 +11,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 
 Following validators test if field is present.
 
-### TRequiredValidator
+### <a name="trequiredvalidator"></a>TRequiredValidator
 
 Field must be present and not empty.
 
@@ -93,7 +93,7 @@ Data must be alphabet, numeric and dash character only.
 rule := TAlphaNumDashValidator.create(TRegex.create());
 ```
 
-### TEmailValidator
+### <a name="temailvalidator"></a>TEmailValidator
 
 Data must be in valid email format. This validator does not check if email address actually exists.
 
