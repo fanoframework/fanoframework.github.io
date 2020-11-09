@@ -17,6 +17,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Float](#tfloatvalidator) | [Currency](#tcurrencyvalidator) | [Numeric](#tnumericvalidator) | 
 | [Min integer](#tminintegervalidator) | [Max integer](#tmaxintegervalidator) | [Less than](#tlessthanvalidator) | 
 | [Greater than](#tgreaterthanvalidator) | [Equal integer](#tequalintvalidator) | [Positive integer](#tpositiveintvalidator) |
+| [Negative integer](#tnegativeintvalidator) | [Odd integer](#toddintvalidator) | [Even integer](#tevenintvalidator) |
 
 ## Field availability
 
@@ -325,7 +326,7 @@ Data must be positive integer value.
 rule := TPositiveIntValidator.create();
 ```
 
-### TNegativeIntValidator
+### <a name="tnegativeintvalidator"></a>TNegativeIntValidator
 
 Data must be negative integer value.
 
@@ -333,7 +334,7 @@ Data must be negative integer value.
 rule := TNegativeIntValidator.create();
 ```
 
-### TOddIntValidator
+### <a name="toddintvalidator"></a>TOddIntValidator
 
 Data must be odd integer value.
 
@@ -341,7 +342,7 @@ Data must be odd integer value.
 rule := TOddIntValidator.create();
 ```
 
-### TEvenIntValidator
+### <a name="tevenintvalidator"></a>TEvenIntValidator
 
 Data must be even integer value.
 
