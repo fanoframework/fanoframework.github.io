@@ -12,6 +12,10 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Alpha num dash](#talphanumdashvalidator) | [Email](#temailvalidator) | [Url](#turlvalidator) |
 | [Slug](#tslugvalidator) | [Phone](#tphonevalidator) | [Regex](#tregexvalidator) |
 | [Equal string](#tequalstrvalidator) | [Equal length](#tequallengthvalidator) | [Min length](#tminlengthvalidator) |
+| [Max length](#tmaxlengthvalidator) | [Integer](#tintegervalidator) | [Int64](#tint64validator) |
+| [Dword](#tdwordvalidator) | [Qword](#tqwordvalidator) | [Float](#tfloatvalidator) |
+| [Currency](#tcurrencyvalidator) | [Numeric](#tnumericvalidator) | [Min integer](#tminintegervalidator) |
+| [Max integer](#tmaxintegervalidator) | [Less than](#tlessthanvalidator) | [Greater than](#tgreaterthanvalidator) |
 
 ## Field availability
 
