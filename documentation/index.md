@@ -12,21 +12,21 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Application
 
-- [Working with Application](/working-with-application). It explains basic concept of Fano Framework web application.
-- [Dependency Container](/dependency-container). Explains dependency injection in Fano Framework.
-- [Dispatcher](/dispatcher). Explains basic concept of dispatcher.
-- [CGI Environment](/environment). Tutorial on how to read server environmental variables.
-- [Configuration](/configuration). How to setup and read application settings.
-- [Error Handler](/error-handler). How to handle error in Fano Framework.
-- [Middlewares](/middlewares). It explains middleware concept and how use it in Fano Framework web application.
-- [Working with Router](/working-with-router). It explains how to setup application route and associate URL path pattern with code that handle it.
+- **[Working with Application](/working-with-application)**. It explains basic concept of Fano Framework web application.
+- **[Dependency Container](/dependency-container)**. Explains dependency injection in Fano Framework.
+- **[Dispatcher](/dispatcher)**. Explains basic concept of dispatcher.
+- **[CGI Environment](/environment)**. Tutorial on how to read server environmental variables.
+- **[Configuration](/configuration)**. How to setup and read application settings.
+- **[Error Handler](/error-handler)**. How to handle error in Fano Framework.
+- **[Middlewares](/middlewares)**. It explains middleware concept and how use it in Fano Framework web application.
+- **[Working with Router](/working-with-router)**. It explains how to setup application route and associate URL path pattern with code that handle it.
 
 ## Request and Response
 
-- [Working with Request](/working-with-request). It explains how to get query string parameters, read request body data or read cookie.
-- [Working with Response](/working-with-response). It explains how to return response in various format such as HTML, JSON or binary response, for example, image and also setting response cookie.
-- [Handling File Upload](/handling-file-upload). It explains how to work with file upload.
-- [Working with Session](/working-with-session). It explains how to manage state between requests.
+- **[Working with Request](/working-with-request)**. It explains how to get query string parameters, read request body data or read cookie.
+- **[Working with Response](/working-with-response)**. It explains how to return response in various format such as HTML, JSON or binary response, for example, image and also setting response cookie.
+- **[Handling File Upload](/handling-file-upload)**. It explains how to work with file upload.
+- **[Working with Session](/working-with-session)**. It explains how to manage state between requests.
 
 ## MVC
 
