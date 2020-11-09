@@ -26,6 +26,11 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Uploaded file](#tuploadedfilevalidator) | [Uploaded Mime](#tuploadedmimevalidator) | [Uploaded size](#tuploadedsizevalidator) |
 | [File format](#tfileformatvalidator) | [Image PNG](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) | [Image JPG](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) |
 | [Image GIF](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) | [Anti virus](#tantivirusvalidator) | [Composite](#tcompositevalidator) |
+| [Collective](#tcollectivevalidator) | [Or](#torvalidator) | [Any of](#tanyofvalidator) |
+| [And](#tandvalidator) | [Not](#tnotvalidator) | [Confirmed](#tconfirmedvalidator) |
+| [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
+| [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [MAC](#tmacaddrvalidator) |
+| [JSON](#tjsonvalidator) |  |  |
 
 
 ## Field availability
