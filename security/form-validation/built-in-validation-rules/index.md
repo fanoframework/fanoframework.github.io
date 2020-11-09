@@ -9,6 +9,8 @@ This page lists all available built-in validation rules that Fano Framework prov
 
 | [Required](#trequiredvalidator) | [Present](#tpresentvalidator) | [Required if](#trequiredifvalidator) |
 | [Alpha](#talphavalidator) | [Alpha Num](#talphanumvalidator) | [Alpha num space](#talphanumspacevalidator) |
+| [Alpha num dash](#talphanumdashvalidator) | [Email](#temailvalidator) | [Url](#turlvalidator) |
+| [Slug](#tslugvalidator) | [Phone](#tphonevalidator) | [Regex](#tregexvalidator) |
 
 ## Field availability
 
