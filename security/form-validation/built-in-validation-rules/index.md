@@ -7,6 +7,9 @@ description: List of built-in validation rules in Fano Framework
 
 This page lists all available built-in validation rules that Fano Framework provides. For information on how to use these validation rules in application, please read [Form Validation](/security/form-validation) documentation.
 
+| [Required](#trequiredvalidator) | [Present](#tpresentvalidator) | [Required if](#trequiredifvalidator) |
+| [Alpha](#talphavalidator) | [Alpha Num](#talphanumvalidator) | [Alpha num space](#talphanumspacevalidator) |
+
 ## Field availability
 
 Following validators test if field is present.
