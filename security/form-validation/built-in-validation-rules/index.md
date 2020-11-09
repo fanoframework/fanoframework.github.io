@@ -11,6 +11,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Alpha](#talphavalidator) | [Alpha Num](#talphanumvalidator) | [Alpha num space](#talphanumspacevalidator) |
 | [Alpha num dash](#talphanumdashvalidator) | [Email](#temailvalidator) | [Url](#turlvalidator) |
 | [Slug](#tslugvalidator) | [Phone](#tphonevalidator) | [Regex](#tregexvalidator) |
+| [Equal string](#tequalstrvalidator) | [Equal length](#tequallengthvalidator) | [Min length](#tminlengthvalidator) |
 
 ## Field availability
 
