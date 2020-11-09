@@ -69,7 +69,7 @@ Data must be alphabet character only. This class expect instance of `IRegex` int
 rule := TAlphaValidator.create(TRegex.create());
 ```
 
-### TAlphaNumValidator
+### <a name="talphanumvalidator"></a>TAlphaNumValidator
 
 Data must be alphabet and numeric character only.
 
@@ -77,7 +77,7 @@ Data must be alphabet and numeric character only.
 rule := TAlphaNumValidator.create(TRegex.create());
 ```
 
-### TAlphaNumSpaceValidator
+### <a name="talphanumspacevalidator"></a>TAlphaNumSpaceValidator
 
 Data must be alphabet, numeric and space character only.
 
@@ -85,7 +85,7 @@ Data must be alphabet, numeric and space character only.
 rule := TAlphaNumSpaceValidator.create(TRegex.create());
 ```
 
-### TAlphaNumDashValidator
+### <a name="talphanumdashvalidator"></a>TAlphaNumDashValidator
 
 Data must be alphabet, numeric and dash character only.
 
@@ -101,7 +101,7 @@ Data must be in valid email format. This validator does not check if email addre
 rule := TEmailValidator.create(TRegex.create());
 ```
 
-### TUrlValidator
+### <a name="turlvalidator"></a>TUrlValidator
 
 Data must be in valid URL format. This validator does not check if URL address actually exists.
 
@@ -109,7 +109,7 @@ Data must be in valid URL format. This validator does not check if URL address a
 rule := TUrlValidator.create(TRegex.create());
 ```
 
-### TSlugValidator
+### <a name="tslugvalidator"></a>TSlugValidator
 
 Data must be in slug format.
 
@@ -128,7 +128,7 @@ This validator will give result as shown in following example input,
 'my-slug--title' ==> fail
 ```
 
-### TPhoneValidator
+### <a name="tphonevalidator"></a>TPhoneValidator
 
 Data must be in phone number format.
 
@@ -147,7 +147,7 @@ This validator will give result as shown in following example input,
 '081-1234-56-7a' ==> fail
 ```
 
-### TRegexValidator
+### <a name="tregexvalidator"></a>TRegexValidator
 
 Data must be in format as specified by regular expression pattern.
 
@@ -163,7 +163,7 @@ Parameters are `IRegex` instance, regular expression pattern and error message.
 
 ## Constant string equality
 
-### TEqualStrValidator
+### <a name="tequalstrvalidator"></a>TEqualStrValidator
 
 Data must match predefined constant string. For example, data being validated must equals string `test` to pass validation.
 
@@ -171,7 +171,7 @@ Data must match predefined constant string. For example, data being validated mu
 rule := TEqualStrValidator.create('test');
 ```
 
-### TCaseInsensitiveEqualStrValidator
+### <a name="tcaseinseinsitiveequalstrvalidator"></a>TCaseInsensitiveEqualStrValidator
 
 Data must match predefined constant string in case-insensitive manner. For example, data being validated can equal to `test`, `Test`, `teSt` to pass validation.
 
@@ -181,7 +181,7 @@ rule := TCaseInsensitiveEqualStrValidator.create('test');
 
 ## String length
 
-### TEqualLengthValidator
+### <a name="tequallengthvalidator"></a>TEqualLengthValidator
 
 Data must be string with its length is equal to predefined value. For example, data being validated must contains exactly 10 characters to pass validation.
 
@@ -189,7 +189,7 @@ Data must be string with its length is equal to predefined value. For example, d
 rule := TEqualLengthValidator.create(10);
 ```
 
-### TMinLengthValidator
+### <a name="tminlengthvalidator"></a>TMinLengthValidator
 
 Data must be string with its length not less than predefined value.
 
@@ -197,7 +197,7 @@ Data must be string with its length not less than predefined value.
 rule := TMinLengthValidator.create(10);
 ```
 
-### TMaxLengthValidator
+### <a name="tmaxlengthvalidator"></a>TMaxLengthValidator
 
 Data must be string with its length not greater than predefined value.
 
@@ -207,7 +207,7 @@ rule := TMaxLengthValidator.create(10);
 
 ## Numeric data
 
-### TIntegerValidator
+### <a name="tintegervalidator"></a>TIntegerValidator
 
 Data must be integer value.
 
@@ -215,21 +215,21 @@ Data must be integer value.
 rule := TIntegerValidator.create();
 ```
 
-### TInt64Validator
+### <a name="tint64validator"></a>TInt64Validator
 
 Data must be int64 value.
 
 ```
 rule := TInt64Validator.create();
 ```
-### TDwordValidator
+### <a name="tdwordvalidator"></a>TDwordValidator
 
 Data must be dword value.
 
 ```
 rule := TDwordValidator.create();
 ```
-### TQwordValidator
+### <a name="tqwordvalidator"></a>TQwordValidator
 
 Data must be qword value.
 
@@ -237,7 +237,7 @@ Data must be qword value.
 rule := TQwordValidator.create();
 ```
 
-### TFloatValidator
+### <a name="tfloatvalidator"></a>TFloatValidator
 
 Data must be float value.
 
@@ -245,7 +245,7 @@ Data must be float value.
 rule := TFloatValidator.create();
 ```
 
-### TCurrencyValidator
+### <a name="tcurrencyvalidator"></a>TCurrencyValidator
 
 Data must be currency value.
 
@@ -253,7 +253,7 @@ Data must be currency value.
 rule := TCurrencyValidator.create();
 ```
 
-### TNumericValidator
+### <a name="tnumericvalidator"></a>TNumericValidator
 
 Data must be integer or float value.
 
@@ -261,7 +261,7 @@ Data must be integer or float value.
 rule := TNumericValidator.create();
 ```
 
-### TMinIntegerValidator
+### <a name="tminintegervalidator"></a>TMinIntegerValidator
 
 Data must be integer value and its value not less than predefined value.
 
@@ -270,7 +270,7 @@ rule := TMinIntegerValidator.create(100);
 ```
 Validation will pass only if you pass integer value >= 100.
 
-### TMaxIntegerValidator
+### <a name="tmaxintegervalidator"></a>TMaxIntegerValidator
 
 Data must be integer value and not greater than predefined value.
 
@@ -279,7 +279,7 @@ rule := TMaxIntegerValidator.create(100);
 ```
 Validation will pass only if you pass integer value <= 100.
 
-### TLessThanValidator
+### <a name="tlessthanvalidator"></a>TLessThanValidator
 
 Data must be integer value less than predefined value.
 
@@ -288,7 +288,7 @@ rule := TLessThanValidator.create(100);
 ```
 Validation will pass only if you pass integer value < 100.
 
-### TGreaterThanValidator
+### <a name="tgreaterthanvalidator"></a>TGreaterThanValidator
 
 Data must be integer value greater than predefined value.
 
@@ -297,7 +297,7 @@ rule := TGreaterThanValidator.create(100);
 ```
 Validation will pass only if you pass integer value > 100.
 
-### TEqualIntValidator
+### <a name="tequalintvalidator"></a>TEqualIntValidator
 
 Data must be integer value equals predefined value.
 
@@ -306,7 +306,7 @@ rule := TEqualIntValidator.create(100);
 ```
 Validation will pass only if you pass integer equals 100.
 
-### TPositiveIntValidator
+### <a name="tpositiveintvalidator"></a>TPositiveIntValidator
 
 Data must be positive integer value.
 
