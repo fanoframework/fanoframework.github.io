@@ -30,7 +30,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [And](#tandvalidator) | [Not](#tnotvalidator) | [Confirmed](#tconfirmedvalidator) |
 | [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
 | [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [MAC](#tmacaddrvalidator) |
-| [JSON](#tjsonvalidator) |  |  |
+| [JSON](#tjsonvalidator) | - | - |
 
 
 ## Field availability
