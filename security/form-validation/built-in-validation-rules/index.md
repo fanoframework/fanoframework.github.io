@@ -19,6 +19,14 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Greater than](#tgreaterthanvalidator) | [Equal integer](#tequalintvalidator) | [Positive integer](#tpositiveintvalidator) |
 | [Negative integer](#tnegativeintvalidator) | [Odd integer](#toddintvalidator) | [Even integer](#tevenintvalidator) |
 | [Boolean](#tbooleanvalidator) | [Accepted](#tacceptedvalidator) | [In](#tinvalidator) |
+| [In integer](#tinintvalidator) | [Not in integer](#tnotinintvalidator) | [Date](#tdatevalidator) |
+| [Date time](#tdatetimevalidator) | [Time](#ttimevalidator) | [Equal date time](#tequaldatetimevalidator) |
+| [After date time](#tafterdatetimevalidator) | [Before date time](#tbeforedatetimevalidator) | [After date time field](#tafterdatetimefieldvalidator) |
+| [Before date time field](#tbeforedatetimefieldvalidator) | [File](#tfilevalidator) | [Directory](#tdirectoryvalidator) |
+| [Uploaded file](#tuploadedfilevalidator) | [Uploaded Mime](#tuploadedmimevalidator) | [Uploaded size](#tuploadedsizevalidator) |
+| [File format](#tfileformatvalidator) | [Image PNG](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) | [Image JPG](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) |
+| [Image GIF](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) | [Anti virus](#tantivirusvalidator) | [Composite](#tcompositevalidator) |
+
 
 ## Field availability
 
