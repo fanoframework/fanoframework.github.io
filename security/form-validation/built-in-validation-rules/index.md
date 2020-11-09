@@ -18,6 +18,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Min integer](#tminintegervalidator) | [Max integer](#tmaxintegervalidator) | [Less than](#tlessthanvalidator) | 
 | [Greater than](#tgreaterthanvalidator) | [Equal integer](#tequalintvalidator) | [Positive integer](#tpositiveintvalidator) |
 | [Negative integer](#tnegativeintvalidator) | [Odd integer](#toddintvalidator) | [Even integer](#tevenintvalidator) |
+| [Boolean](#tbooleanvalidator) | [Accepted](#tacceptedvalidator) | [In](#tinvalidator) |
 
 ## Field availability
 
