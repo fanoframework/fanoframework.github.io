@@ -21,7 +21,7 @@ var rule : IValidator;
 rule := TRequiredValidator.create();
 ```
 
-### TPresentValidator
+### <a name="tpresentvalidator"></a>TPresentValidator
 
 Field must be present but allowed to be empty.
 
@@ -29,7 +29,7 @@ Field must be present but allowed to be empty.
 rule := TPresentValidator.create();
 ```
 
-### TRequiredIfValidator
+### <a name="trequiredifvalidator"></a>TRequiredIfValidator
 
 Field must be present and not empty if other field passes validation.
 
@@ -61,7 +61,7 @@ Field being validated becomes mandatory field, only if `other-field` value is no
 
 ## Character format
 
-### TAlphaValidator
+### <a name="talphavalidator"></a>TAlphaValidator
 
 Data must be alphabet character only. This class expect instance of `IRegex` interface.
 
