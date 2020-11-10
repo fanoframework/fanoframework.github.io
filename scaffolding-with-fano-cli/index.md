@@ -49,7 +49,7 @@ Fano CLI provides several commands for scaffolding Fano Framework web applicatio
 $ fanocli --project-cgi=[project-name]
 ```
 
-`[project-name]` is directory where project resides and will be created by Fano CLI. Please read [Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project) for more detail explanation of each command.
+`[project-name]` is directory where project resides and will be created by Fano CLI. Please read *[Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project)* for more detail explanation of each command.
 
 
 ## <a name="creating-controller"></a>Creating controller
