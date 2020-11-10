@@ -10,8 +10,8 @@ Fano Framework allows many its core functionalities to be configured or replaced
 
 [Fano CLI](https://github.com/fanoframework/fano-cli) is command line application
 to help scaffolding [Fano Framework](https://github.com/fanoframework/fano) web application project. It helps tedious tasks such as
-[creating Fano web application project](#creating-project), [creating controller](#creating-controller), [model](#creating-model), [view](#creating-view), [middleware](#creating-middleware) classes,
-[generate random key](#generate-random-key) and [GUID](#generate-guid), [minify JavaScript files](#minify-javascript) and also [setting up web server configuration](#deployment).
+*[creating Fano web application project](#creating-project)*, *[creating controller](#creating-controller)*, *[model](#creating-model)*, *[view](#creating-view)*, *[middleware](#creating-middleware)* classes,
+*[generate random key](#generate-random-key)* and *[GUID](#generate-guid)*, *[minify JavaScript files](#minify-javascript)* and also *[setting up web server configuration](#deployment)*.
 
 ## <a name="installation"></a>Installation
 
