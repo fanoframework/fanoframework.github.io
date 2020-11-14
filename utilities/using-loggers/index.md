@@ -204,6 +204,7 @@ be registered in [dependency container](/dependency-container) easily. Following
 - `TCompositeLoggerFactory`, factory class for `TCompositeLogger`.
 - `TSegregatedLoggerFactory`, factory class for `TSegregatedLogger`.
 - `TStdOutLoggerFactory`, factory class for `TStdOutLogger`.
+- `TStdErrLoggerFactory`, factory class for `TStdErrLogger`.
 - `TSysLogLoggerFactory`, factory class for `TSysLogLogger`.
 - `TDbLoggerFactory`, factory class for `TDbLogger`.
 
