@@ -86,6 +86,10 @@ logger := TFileLogger.create('storages/logs/app.log');
 
 `TStdOutLogger` is logger implementation that will output log message to STDOUT.
 
+### Logging to STDERR
+
+`TStdErrLogger` is logger implementation that will output log message to STDERR.
+
 ### Logging to Database
 
 `TDbLogger` is logger implementation that will output log message to database. It requires instance of `IRdbms` which responsible to do database operation. Read [Database](/database) section for more information.

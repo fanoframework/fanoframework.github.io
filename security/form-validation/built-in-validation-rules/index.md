@@ -11,11 +11,11 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Alpha](#talphavalidator) | [Alpha Num](#talphanumvalidator) | [Alpha num space](#talphanumspacevalidator) |
 | [Alpha num dash](#talphanumdashvalidator) | [Email](#temailvalidator) | [Url](#turlvalidator) |
 | [Slug](#tslugvalidator) | [Phone](#tphonevalidator) | [Regex](#tregexvalidator) |
-| [Equal string](#tequalstrvalidator) | [Case insensitive equal string](#tcaseinsensitiveequalstrvalidator) | [Equal length](#tequallengthvalidator) | 
-| [Min length](#tminlengthvalidator) | [Max length](#tmaxlengthvalidator) | [Integer](#tintegervalidator) | 
-| [Int64](#tint64validator) | [Dword](#tdwordvalidator) | [Qword](#tqwordvalidator) | 
-| [Float](#tfloatvalidator) | [Currency](#tcurrencyvalidator) | [Numeric](#tnumericvalidator) | 
-| [Min integer](#tminintegervalidator) | [Max integer](#tmaxintegervalidator) | [Less than](#tlessthanvalidator) | 
+| [Equal string](#tequalstrvalidator) | [Case insensitive equal string](#tcaseinsensitiveequalstrvalidator) | [Equal length](#tequallengthvalidator) |
+| [Min length](#tminlengthvalidator) | [Max length](#tmaxlengthvalidator) | [Integer](#tintegervalidator) |
+| [Int64](#tint64validator) | [Dword](#tdwordvalidator) | [Qword](#tqwordvalidator) |
+| [Float](#tfloatvalidator) | [Currency](#tcurrencyvalidator) | [Numeric](#tnumericvalidator) |
+| [Min integer](#tminintegervalidator) | [Max integer](#tmaxintegervalidator) | [Less than](#tlessthanvalidator) |
 | [Greater than](#tgreaterthanvalidator) | [Equal integer](#tequalintvalidator) | [Positive integer](#tpositiveintvalidator) |
 | [Negative integer](#tnegativeintvalidator) | [Odd integer](#toddintvalidator) | [Even integer](#tevenintvalidator) |
 | [Boolean](#tbooleanvalidator) | [Accepted](#tacceptedvalidator) | [In](#tinvalidator) |
@@ -29,8 +29,8 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Collective](#tcollectivevalidator) | [Or](#torvalidator) | [Any of](#tanyofvalidator) |
 | [And](#tandvalidator) | [Not](#tnotvalidator) | [Confirmed](#tconfirmedvalidator) |
 | [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
-| [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [MAC](#tmacaddrvalidator) |
-| [JSON](#tjsonvalidator) | - | - |
+| [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [IPv6](#tipv6validator) |
+| [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) | - |
 
 
 ## Field availability
@@ -753,6 +753,14 @@ Data must be valid IP address (IPv4).
 
 ```
 rule := TIpv4Validator.create();
+```
+
+### <a name="tipv6validator"></a>TIpv6Validator
+
+Data must be valid IP address (IPv6).
+
+```
+rule := TIpv6Validator.create();
 ```
 
 ### <a name="tmacaddrvalidator"></a>TMacAddrValidator
