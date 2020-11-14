@@ -225,6 +225,15 @@ To register `TNullLogger`,
 ```
 container.add('logger', TNullLoggerFactory.create());
 ```
+
+### Register TStdErrLogger
+
+To register `TStdErrLogger`,
+
+```
+container.add('logger', TStdErrLoggerFactory.create());
+```
+
 ### Register TCompositeLogger
 
 To register `TCompositeLogger`,
