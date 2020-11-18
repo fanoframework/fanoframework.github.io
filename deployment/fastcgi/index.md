@@ -7,15 +7,15 @@ description: Tutorial on how to deploy FastCGI web application built with Fano F
 
 Fano Framework can be deployed as [FastCGI](https://fastcgi-archives.github.io/FastCGI_Specification.html) web application.
 
-See [Working with Application](/working-with-application) for information how to create FastCGI web application.
+See *[Working with Application](/working-with-application)* for information how to create FastCGI web application.
 
 See example application:
 
-- [Fano FastCGI](https://github.com/fanoframework/fano-fastcgi), example FastCGI application which listening on TCP host:port
-- [Fano FCGI Unix](https://github.com/fanoframework/fano-fcgi-unix), example FastCGI application which listening using Unix Domain Socket.
-- [Fano fcgid](https://github.com/fanoframework/fano-fcgid), example FastCGI application which started automatically by [Apache mod_fcgid](https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html) module.
+- *[Fano FastCGI](https://github.com/fanoframework/fano-fastcgi)*, example FastCGI application which listening on TCP host:port
+- *[Fano FCGI Unix](https://github.com/fanoframework/fano-fcgi-unix)*, example FastCGI application which listening using Unix Domain Socket.
+- *[Fano fcgid](https://github.com/fanoframework/fano-fcgid)*, example FastCGI application which started automatically by [Apache mod_fcgid](https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html) module.
 
-You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to easily
+You may want to look *[Scaffolding with Fano CLI](/scaffolding-with-fano-cli)* to easily
 create new FastCGI web application project.
 
 ## Deploy with Fano CLI
@@ -115,7 +115,7 @@ $ sudo systemctl restart apache2
 
 #### Use unix domain socket
 
-If your Fano application and Apache run on same machine, you can get small improvement by using unix domain socket file. See example [Fano Fastcgi Unix application](https://github.com/fanoframework/fano-fcgi-unix).
+If your Fano application and Apache run on same machine, you can get small improvement by using unix domain socket file. See example *[Fano Fastcgi Unix application](https://github.com/fanoframework/fano-fcgi-unix)*.
 
 If application is listening using socket file `/tmp/fano-fcgi.sock`, you need to change `ProxyPassMatch` as follows:
 
@@ -255,11 +255,11 @@ where `/tmp/fano-fcgi.sock` is socket file which application using and of course
 
 ## Issue with firewall
 
-In Fedora-based distribution, firewall is active by default. Read [Issue with firewall](/deployment/scgi#issue-with-firewall) for more information.
+In Fedora-based distribution, firewall is active by default. Read *[Issue with firewall](/deployment/scgi#issue-with-firewall)* for more information.
 
 ## Permission issue with SELinux
 
-Running FastCGI application may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux) for more information.
+Running FastCGI application may be subject to strict security policy of SELinux. Read *[Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux)* for more information.
 
 ## Issue with web server limit
 
