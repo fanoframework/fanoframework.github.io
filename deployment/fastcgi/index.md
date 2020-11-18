@@ -172,8 +172,7 @@ $ sudo systemctl reload httpd
 
 ## Apache with mod_fcgid module
 
-To deploy as FastCGI application with [mod_fcgid](https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html), make sure you use `TSimpleSockFastCGIWebApplication` as base application.
-Internally, it uses `TBoundSocketSvrImpl` as socket server.
+To deploy as FastCGI application with [mod_fcgid](https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html), make sure you use `TDaemonWebApplication` and `TFastCgiAppServiceProvider` with `TBoundSocketSvrImpl` as socket server as [shown here](https://github.com/fanoframework/fano-fcgid/blob/master/src/app.pas).
 
 Unlike `mod_proxy_fcgi` module where our application is run independently,
 `mod_fcgid` provides automatic process management. So our application process lifecycle is managed by this module. It will spawn or kill one or more our application processes based on request load.
