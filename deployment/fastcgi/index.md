@@ -178,7 +178,7 @@ Unlike `mod_proxy_fcgi` module where our application is run independently,
 `mod_fcgid` provides automatic process management. So our application process lifecycle is managed by this module. It will spawn or kill one or more our application processes based on request load.
 
 Socket connection is already bound and listen by `mod_fcgid`. so we need to
-use `TBoundSocketSvrImpl` as socket server.
+use `TBoundSvrFactory` as socket server.
 
 and of course you need to have `mod_fcgid` installed and loaded.
 
