@@ -30,7 +30,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [And](#tandvalidator) | [Not](#tnotvalidator) | [Confirmed](#tconfirmedvalidator) |
 | [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
 | [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [IPv6](#tipv6validator) |
-| [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) | - |
+| [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) | [Base64](#tbase64validator) |
 
 
 ## Field availability
@@ -171,6 +171,13 @@ This validator will give result as shown in following example input,
 '081-12-34-567' ==> pass
 'a0811234567' ==> fail
 '081-1234-56-7a' ==> fail
+```
+### <a name="tbase64validator"></a>TBase64Validator
+
+Data must be in Base64-encoded string format.
+
+```
+rule := TBase64Validator.create();
 ```
 
 ### <a name="tregexvalidator"></a>TRegexValidator
