@@ -224,7 +224,7 @@ With `[path]` empty, it will scan current directory for any JavaScript files and
 $ fanocli --jsmin
 ```
 
-With `[path]` not empty, if it is directory, it will scan that directory for any JavaScript files and minify them and output as new file with name using original file name appended with `min.js`. If `[path]` is single file, it minify it and create new file with same name appended with `min.js`.
+With `[path]` not empty, if it is directory, it scans that directory for any JavaScript files and minifies them and output as new file with name using original file name appended with `min.js`. If `[path]` is single file, it minifies it and create new file with same name appended with `min.js`.
 
 ```
 $ fanocli --jsmin=/path/to/js
@@ -236,10 +236,38 @@ If you specify optional `--output=[target-path]` parameter, then `[target-path]`
 $ fanocli --jsmin=/path/to/js --output=/path/to/js/scripts.min.js
 ```
 
-If `[target-path]` equals `stdout`, minify output is printed to STDOUT.
+If `[target-path]` equals `stdout`, minified output is printed to STDOUT.
 
 ```
 $ fanocli --jsmin=/path/to/js --output=stdout
+```
+
+## <a name="minify-css"></a> Minify CSS files
+
+To reduce CSS file size, run with  `--cssmin=[path]` command line options.
+
+With `[path]` empty, it will scan current directory for any CSS files and minify them and output as new file with name using original file name appended with `min.css`.
+
+```
+$ fanocli --cssmin
+```
+
+With `[path]` not empty, if it is directory, it scans that directory for any CSS files and minifies them and output as new file with name using original file name appended with `min.css`. If `[path]` is single file, it minifies it and create new file with same name appended with `min.css`.
+
+```
+$ fanocli --cssmin=/path/to/css
+```
+
+If you specify optional `--output=[target-path]` parameter, then `[target-path]` will be used as its filename.
+
+```
+$ fanocli --cssmin=/path/to/css --output=/path/to/css/styles.min.css
+```
+
+If `[target-path]` equals `stdout`, minified output is printed to STDOUT.
+
+```
+$ fanocli --cssmin=/path/to/css --output=stdout
 ```
 
 ## <a name="add-session-support"></a>Add session support
