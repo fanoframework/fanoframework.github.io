@@ -24,8 +24,8 @@ Fano Framework provides logging mechanism thorough `ILogger` interface. This int
 Except `log()` method, all methods expect two parameter, first parameter is message to log and second parameter is data related to log message. This parameter is optional. If this second parameter is given, then it must implements
 `ISerializeable` interface.
 
-- [See ILogger source code](https://github.com/fanoframework/fano/blob/master/src/Libs/Logger/Contracts/LoggerIntf.pas) for more information.
-- [ISerializeable interface](https://github.com/fanoframework/fano/blob/master/src/Core/Contracts/SerializeableIntf.pas)
+- [See `ILogger` source code](https://github.com/fanoframework/fano/blob/master/src/Libs/Logger/Contracts/LoggerIntf.pas) for more information.
+- [`ISerializeable` interface](https://github.com/fanoframework/fano/blob/master/src/Core/Contracts/SerializeableIntf.pas)
 
 For example to log critical message,
 
@@ -85,6 +85,10 @@ logger := TFileLogger.create('storages/logs/app.log');
 ### Logging to STDOUT
 
 `TStdOutLogger` is logger implementation that will output log message to STDOUT.
+
+### Logging to STDERR
+
+`TStdErrLogger` is logger implementation that will output log message to STDERR.
 
 ### Logging to Database
 
@@ -200,6 +204,7 @@ be registered in [dependency container](/dependency-container) easily. Following
 - `TCompositeLoggerFactory`, factory class for `TCompositeLogger`.
 - `TSegregatedLoggerFactory`, factory class for `TSegregatedLogger`.
 - `TStdOutLoggerFactory`, factory class for `TStdOutLogger`.
+- `TStdErrLoggerFactory`, factory class for `TStdErrLogger`.
 - `TSysLogLoggerFactory`, factory class for `TSysLogLogger`.
 - `TDbLoggerFactory`, factory class for `TDbLogger`.
 
@@ -220,6 +225,15 @@ To register `TNullLogger`,
 ```
 container.add('logger', TNullLoggerFactory.create());
 ```
+
+### Register TStdErrLogger
+
+To register `TStdErrLogger`,
+
+```
+container.add('logger', TStdErrLoggerFactory.create());
+```
+
 ### Register TCompositeLogger
 
 To register `TCompositeLogger`,

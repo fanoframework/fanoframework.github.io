@@ -21,7 +21,7 @@ Following document explains minimum steps required to setup a working Fano web a
 
 ## Install Fano CLI
 
-Install [Fano CLI](https://github.com/fanoframework/fano-cli) as described in [Installation](/scaffolding-with-fano-cli#installation) section of [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) documentation.
+Install [Fano CLI](https://github.com/fanoframework/fano-cli) as described in *[Installation](/scaffolding-with-fano-cli#installation)* section of *[Scaffolding with Fano CLI](/scaffolding-with-fano-cli)* documentation.
 
 ## Create application
 
@@ -43,7 +43,7 @@ Open web browser and go to `http://hello.fano`. You should see `Home controller`
 
 Let us take a look at each command above to understand what it does.
 
-Following command tells Fano CLI to create CGI web application project in `Hello` directory. Directory must not exist. Read [Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project) for creating different web application project ([FastCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-fastcgi-project), [SCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-scgi-project), [uwsgi](/scaffolding-with-fano-cli/creating-project#scaffolding-uwsgi-project) or [http](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project)).
+Following command tells Fano CLI to create CGI web application project in `Hello` directory. Directory must not exist. Read *[Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project)* for creating different web application project ([FastCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-fastcgi-project), [SCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-scgi-project), [uwsgi](/scaffolding-with-fano-cli/creating-project#scaffolding-uwsgi-project) or [http](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project)).
 
 ```
 $ fanocli --project-cgi=Hello
@@ -53,7 +53,7 @@ We change active directory to newly created `Hello` directory.
 $ cd Hello
 ```
 
-Create controller name `HomeController.pas` that will handle request to route `/`. For more information regarding route, read [Working with Router](/working-with-router).
+Create controller name `HomeController.pas` that will handle request to route `/`. For more information regarding route, read *[Working with Router](/working-with-router)*.
 ``` 
 $ fanocli --controller=Home --route=/
 ```
@@ -68,7 +68,7 @@ Setup a virtual host for domain `hello.fano` and associate it with our CGI appli
 ```
 $ sudo fanocli --deploy-cgi=hello.fano
 ```
-`--deploy-cgi` modifies web server configuration and reload it. That is why you need to use `sudo` command. Read [Deployment](/deployment) for deploying different protocol web application project ([FastCGI](/deployment/fastcgi), [SCGI](/deployment/scgi), [uwsgi](/deployment/uwsgi), [http](/deployment/standalone-web-server)).
+`--deploy-cgi` modifies web server configuration and reload it. That is why you need to use `sudo` command. Read *[Deployment](/deployment)* for deploying different protocol web application project ([FastCGI](/deployment/fastcgi), [SCGI](/deployment/scgi), [uwsgi](/deployment/uwsgi), [http](/deployment/standalone-web-server)).
 
 ## Project directory walkthrough
 Fano Framework has no opinion about your project directory structure.

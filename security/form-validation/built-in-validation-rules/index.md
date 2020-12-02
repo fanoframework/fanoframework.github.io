@@ -7,11 +7,37 @@ description: List of built-in validation rules in Fano Framework
 
 This page lists all available built-in validation rules that Fano Framework provides. For information on how to use these validation rules in application, please read [Form Validation](/security/form-validation) documentation.
 
+| [Required](#trequiredvalidator) | [Present](#tpresentvalidator) | [Required if](#trequiredifvalidator) |
+| [Alpha](#talphavalidator) | [Alpha Num](#talphanumvalidator) | [Alpha num space](#talphanumspacevalidator) |
+| [Alpha num dash](#talphanumdashvalidator) | [Email](#temailvalidator) | [Url](#turlvalidator) |
+| [Slug](#tslugvalidator) | [Phone](#tphonevalidator) | [Regex](#tregexvalidator) |
+| [Equal string](#tequalstrvalidator) | [Case insensitive equal string](#tcaseinsensitiveequalstrvalidator) | [Equal length](#tequallengthvalidator) |
+| [Min length](#tminlengthvalidator) | [Max length](#tmaxlengthvalidator) | [Integer](#tintegervalidator) |
+| [Int64](#tint64validator) | [Dword](#tdwordvalidator) | [Qword](#tqwordvalidator) |
+| [Float](#tfloatvalidator) | [Currency](#tcurrencyvalidator) | [Numeric](#tnumericvalidator) |
+| [Min integer](#tminintegervalidator) | [Max integer](#tmaxintegervalidator) | [Less than](#tlessthanvalidator) |
+| [Greater than](#tgreaterthanvalidator) | [Equal integer](#tequalintvalidator) | [Positive integer](#tpositiveintvalidator) |
+| [Negative integer](#tnegativeintvalidator) | [Odd integer](#toddintvalidator) | [Even integer](#tevenintvalidator) |
+| [Boolean](#tbooleanvalidator) | [Accepted](#tacceptedvalidator) | [In](#tinvalidator) |
+| [In integer](#tinintvalidator) | [Not in integer](#tnotinintvalidator) | [Date](#tdatevalidator) |
+| [Date time](#tdatetimevalidator) | [Time](#ttimevalidator) | [Equal date time](#tequaldatetimevalidator) |
+| [After date time](#tafterdatetimevalidator) | [Before date time](#tbeforedatetimevalidator) | [After date time field](#tafterdatetimefieldvalidator) |
+| [Before date time field](#tbeforedatetimefieldvalidator) | [File](#tfilevalidator) | [Directory](#tdirectoryvalidator) |
+| [Uploaded file](#tuploadedfilevalidator) | [Uploaded Mime](#tuploadedmimevalidator) | [Uploaded size](#tuploadedsizevalidator) |
+| [File format](#tfileformatvalidator) | [Image PNG](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) | [Image JPG](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) |
+| [Image GIF](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) | [Anti virus](#tantivirusvalidator) | [Composite](#tcompositevalidator) |
+| [Collective](#tcollectivevalidator) | [Or](#torvalidator) | [Any of](#tanyofvalidator) |
+| [And](#tandvalidator) | [Not](#tnotvalidator) | [Confirmed](#tconfirmedvalidator) |
+| [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
+| [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [IPv6](#tipv6validator) |
+| [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) | [Base64](#tbase64validator) |
+
+
 ## Field availability
 
-Following validator test if field is present.
+Following validators test if field is present.
 
-### TRequiredValidator
+### <a name="trequiredvalidator"></a>TRequiredValidator
 
 Field must be present and not empty.
 
@@ -21,7 +47,7 @@ var rule : IValidator;
 rule := TRequiredValidator.create();
 ```
 
-### TPresentValidator
+### <a name="tpresentvalidator"></a>TPresentValidator
 
 Field must be present but allowed to be empty.
 
@@ -29,7 +55,7 @@ Field must be present but allowed to be empty.
 rule := TPresentValidator.create();
 ```
 
-### TRequiredIfValidator
+### <a name="trequiredifvalidator"></a>TRequiredIfValidator
 
 Field must be present and not empty if other field passes validation.
 
@@ -61,7 +87,7 @@ Field being validated becomes mandatory field, only if `other-field` value is no
 
 ## Character format
 
-### TAlphaValidator
+### <a name="talphavalidator"></a>TAlphaValidator
 
 Data must be alphabet character only. This class expect instance of `IRegex` interface.
 
@@ -69,7 +95,7 @@ Data must be alphabet character only. This class expect instance of `IRegex` int
 rule := TAlphaValidator.create(TRegex.create());
 ```
 
-### TAlphaNumValidator
+### <a name="talphanumvalidator"></a>TAlphaNumValidator
 
 Data must be alphabet and numeric character only.
 
@@ -77,7 +103,7 @@ Data must be alphabet and numeric character only.
 rule := TAlphaNumValidator.create(TRegex.create());
 ```
 
-### TAlphaNumSpaceValidator
+### <a name="talphanumspacevalidator"></a>TAlphaNumSpaceValidator
 
 Data must be alphabet, numeric and space character only.
 
@@ -85,7 +111,7 @@ Data must be alphabet, numeric and space character only.
 rule := TAlphaNumSpaceValidator.create(TRegex.create());
 ```
 
-### TAlphaNumDashValidator
+### <a name="talphanumdashvalidator"></a>TAlphaNumDashValidator
 
 Data must be alphabet, numeric and dash character only.
 
@@ -93,7 +119,7 @@ Data must be alphabet, numeric and dash character only.
 rule := TAlphaNumDashValidator.create(TRegex.create());
 ```
 
-### TEmailValidator
+### <a name="temailvalidator"></a>TEmailValidator
 
 Data must be in valid email format. This validator does not check if email address actually exists.
 
@@ -101,7 +127,7 @@ Data must be in valid email format. This validator does not check if email addre
 rule := TEmailValidator.create(TRegex.create());
 ```
 
-### TUrlValidator
+### <a name="turlvalidator"></a>TUrlValidator
 
 Data must be in valid URL format. This validator does not check if URL address actually exists.
 
@@ -109,7 +135,7 @@ Data must be in valid URL format. This validator does not check if URL address a
 rule := TUrlValidator.create(TRegex.create());
 ```
 
-### TSlugValidator
+### <a name="tslugvalidator"></a>TSlugValidator
 
 Data must be in slug format.
 
@@ -128,7 +154,7 @@ This validator will give result as shown in following example input,
 'my-slug--title' ==> fail
 ```
 
-### TPhoneValidator
+### <a name="tphonevalidator"></a>TPhoneValidator
 
 Data must be in phone number format.
 
@@ -146,8 +172,15 @@ This validator will give result as shown in following example input,
 'a0811234567' ==> fail
 '081-1234-56-7a' ==> fail
 ```
+### <a name="tbase64validator"></a>TBase64Validator
 
-### TRegexValidator
+Data must be in Base64-encoded string format.
+
+```
+rule := TBase64Validator.create();
+```
+
+### <a name="tregexvalidator"></a>TRegexValidator
 
 Data must be in format as specified by regular expression pattern.
 
@@ -163,7 +196,7 @@ Parameters are `IRegex` instance, regular expression pattern and error message.
 
 ## Constant string equality
 
-### TEqualStrValidator
+### <a name="tequalstrvalidator"></a>TEqualStrValidator
 
 Data must match predefined constant string. For example, data being validated must equals string `test` to pass validation.
 
@@ -171,7 +204,7 @@ Data must match predefined constant string. For example, data being validated mu
 rule := TEqualStrValidator.create('test');
 ```
 
-### TCaseInsensitiveEqualStrValidator
+### <a name="tcaseinseinsitiveequalstrvalidator"></a>TCaseInsensitiveEqualStrValidator
 
 Data must match predefined constant string in case-insensitive manner. For example, data being validated can equal to `test`, `Test`, `teSt` to pass validation.
 
@@ -181,7 +214,7 @@ rule := TCaseInsensitiveEqualStrValidator.create('test');
 
 ## String length
 
-### TEqualLengthValidator
+### <a name="tequallengthvalidator"></a>TEqualLengthValidator
 
 Data must be string with its length is equal to predefined value. For example, data being validated must contains exactly 10 characters to pass validation.
 
@@ -189,7 +222,7 @@ Data must be string with its length is equal to predefined value. For example, d
 rule := TEqualLengthValidator.create(10);
 ```
 
-### TMinLengthValidator
+### <a name="tminlengthvalidator"></a>TMinLengthValidator
 
 Data must be string with its length not less than predefined value.
 
@@ -197,7 +230,7 @@ Data must be string with its length not less than predefined value.
 rule := TMinLengthValidator.create(10);
 ```
 
-### TMaxLengthValidator
+### <a name="tmaxlengthvalidator"></a>TMaxLengthValidator
 
 Data must be string with its length not greater than predefined value.
 
@@ -207,7 +240,7 @@ rule := TMaxLengthValidator.create(10);
 
 ## Numeric data
 
-### TIntegerValidator
+### <a name="tintegervalidator"></a>TIntegerValidator
 
 Data must be integer value.
 
@@ -215,21 +248,21 @@ Data must be integer value.
 rule := TIntegerValidator.create();
 ```
 
-### TInt64Validator
+### <a name="tint64validator"></a>TInt64Validator
 
 Data must be int64 value.
 
 ```
 rule := TInt64Validator.create();
 ```
-### TDwordValidator
+### <a name="tdwordvalidator"></a>TDwordValidator
 
 Data must be dword value.
 
 ```
 rule := TDwordValidator.create();
 ```
-### TQwordValidator
+### <a name="tqwordvalidator"></a>TQwordValidator
 
 Data must be qword value.
 
@@ -237,7 +270,7 @@ Data must be qword value.
 rule := TQwordValidator.create();
 ```
 
-### TFloatValidator
+### <a name="tfloatvalidator"></a>TFloatValidator
 
 Data must be float value.
 
@@ -245,7 +278,7 @@ Data must be float value.
 rule := TFloatValidator.create();
 ```
 
-### TCurrencyValidator
+### <a name="tcurrencyvalidator"></a>TCurrencyValidator
 
 Data must be currency value.
 
@@ -253,7 +286,7 @@ Data must be currency value.
 rule := TCurrencyValidator.create();
 ```
 
-### TNumericValidator
+### <a name="tnumericvalidator"></a>TNumericValidator
 
 Data must be integer or float value.
 
@@ -261,7 +294,7 @@ Data must be integer or float value.
 rule := TNumericValidator.create();
 ```
 
-### TMinIntegerValidator
+### <a name="tminintegervalidator"></a>TMinIntegerValidator
 
 Data must be integer value and its value not less than predefined value.
 
@@ -270,7 +303,7 @@ rule := TMinIntegerValidator.create(100);
 ```
 Validation will pass only if you pass integer value >= 100.
 
-### TMaxIntegerValidator
+### <a name="tmaxintegervalidator"></a>TMaxIntegerValidator
 
 Data must be integer value and not greater than predefined value.
 
@@ -279,7 +312,7 @@ rule := TMaxIntegerValidator.create(100);
 ```
 Validation will pass only if you pass integer value <= 100.
 
-### TLessThanValidator
+### <a name="tlessthanvalidator"></a>TLessThanValidator
 
 Data must be integer value less than predefined value.
 
@@ -288,7 +321,7 @@ rule := TLessThanValidator.create(100);
 ```
 Validation will pass only if you pass integer value < 100.
 
-### TGreaterThanValidator
+### <a name="tgreaterthanvalidator"></a>TGreaterThanValidator
 
 Data must be integer value greater than predefined value.
 
@@ -297,7 +330,7 @@ rule := TGreaterThanValidator.create(100);
 ```
 Validation will pass only if you pass integer value > 100.
 
-### TEqualIntValidator
+### <a name="tequalintvalidator"></a>TEqualIntValidator
 
 Data must be integer value equals predefined value.
 
@@ -306,7 +339,7 @@ rule := TEqualIntValidator.create(100);
 ```
 Validation will pass only if you pass integer equals 100.
 
-### TPositiveIntValidator
+### <a name="tpositiveintvalidator"></a>TPositiveIntValidator
 
 Data must be positive integer value.
 
@@ -314,7 +347,7 @@ Data must be positive integer value.
 rule := TPositiveIntValidator.create();
 ```
 
-### TNegativeIntValidator
+### <a name="tnegativeintvalidator"></a>TNegativeIntValidator
 
 Data must be negative integer value.
 
@@ -322,7 +355,7 @@ Data must be negative integer value.
 rule := TNegativeIntValidator.create();
 ```
 
-### TOddIntValidator
+### <a name="toddintvalidator"></a>TOddIntValidator
 
 Data must be odd integer value.
 
@@ -330,7 +363,7 @@ Data must be odd integer value.
 rule := TOddIntValidator.create();
 ```
 
-### TEvenIntValidator
+### <a name="tevenintvalidator"></a>TEvenIntValidator
 
 Data must be even integer value.
 
@@ -340,7 +373,7 @@ rule := TEvenIntValidator.create();
 
 ## Boolean data
 
-### TBooleanValidator
+### <a name="tbooleanvalidator"></a>TBooleanValidator
 
 Data must be boolean value
 
@@ -348,7 +381,7 @@ Data must be boolean value
 rule := TBooleanValidator.create();
 ```
 
-### TAcceptedValidator
+### <a name="tacceptedvalidator"></a>TAcceptedValidator
 
 Data must be boolean value `true`, or integer 1 or string `yes` or string `on`. This is mostly to be used for accepting "Terms and Conditions".
 
@@ -358,7 +391,7 @@ rule := TAcceptedValidator.create();
 
 ## Ranged data
 
-### TInValidator
+### <a name="tinvalidator"></a>TInValidator
 
 Data must be one of predefined string values.
 
@@ -367,7 +400,7 @@ rule := TInValidator.create(['foo', 'bar']);
 ```
 Validation will pass only if its value equals to `foo` or `bar`.
 
-### TInIntValidator
+### <a name="tinintvalidator"></a>TInIntValidator
 
 Data must be one of predefined integer values.
 
@@ -377,7 +410,7 @@ rule := TInIntValidator.create([1, 2, 3]);
 Validation will pass only if its value equals to 1, 2 or 3.
 
 
-### TNotInValidator
+### <a name="tnotinvalidator"></a>TNotInValidator
 
 Data must not be one of predefined values.
 
@@ -388,7 +421,7 @@ Validation will pass only if its value is not equal to `foo` or `bar`.
 
 ## Date and time
 
-### TDateValidator
+### <a name="tdatevalidator"></a>TDateValidator
 
 Data must be valid date
 
@@ -396,7 +429,7 @@ Data must be valid date
 rule := TDateValidator.create();
 ```
 
-### TDateTimeValidator
+### <a name="tdatetimevalidator"></a>TDateTimeValidator
 
 Data must be valid date time.
 
@@ -404,7 +437,7 @@ Data must be valid date time.
 rule := TDateTimeValidator.create();
 ```
 
-### TTimeValidator
+### <a name="ttimevalidator"></a>TTimeValidator
 
 Data must be valid time.
 
@@ -412,7 +445,7 @@ Data must be valid time.
 rule := TTimeValidator.create();
 ```
 
-### TEqualDateTimeValidator
+### <a name="tequaldatetimevalidator"></a>TEqualDateTimeValidator
 
 Data must be date time and its value must equal predefined value.
 
@@ -420,7 +453,7 @@ Data must be date time and its value must equal predefined value.
 rule := TEqualDateTimeValidator.create(date());
 ```
 
-### TAfterDateTimeValidator
+### <a name="tafterdatetimevalidator"></a>TAfterDateTimeValidator
 
 Data must be date time and its value must be later than predefined value.
 
@@ -428,7 +461,7 @@ Data must be date time and its value must be later than predefined value.
 rule := TAfterDateTimeValidator.create(date());
 ```
 
-### TBeforeDateTimeValidator
+### <a name="tbeforedatetimevalidator"></a>TBeforeDateTimeValidator
 
 Data must be date time and its value must be prior than predefined value.
 
@@ -436,7 +469,7 @@ Data must be date time and its value must be prior than predefined value.
 rule := TBeforeDateTimeValidator.create(date());
 ```
 
-### TAfterDateTimeFieldValidator
+### <a name="tafterdatetimefieldvalidator"></a>TAfterDateTimeFieldValidator
 
 This validation rule is similar to `TAfterDateTimeValidator` but it compares against other field instead of predefined value.
 
@@ -446,7 +479,7 @@ rule := TAfterDateTimeFieldValidator.create('event-start-date');
 
 Above rule makes current field passes validation only if its value is later than the value in `event-start-date` field.
 
-### TBeforeDateTimeFieldValidator
+### <a name="tbeforedatetimefieldvalidator"></a>TBeforeDateTimeFieldValidator
 
 This validation rule is similar to `TBeforeDateTimeValidator` but it compares against other field instead of predefined value.
 
@@ -458,7 +491,7 @@ Above rule makes current field passes validation only if its value is prior than
 
 ## <a name="file-directory"></a>File and Directory
 
-### TFileValidator
+### <a name="tfilevalidator"></a>TFileValidator
 
 Data must be name of file which exists.
 
@@ -466,7 +499,7 @@ Data must be name of file which exists.
 rule := TFileValidator.create('images/image.jpg');
 ```
 
-### TDirectoryValidator
+### <a name="tdirectoryvalidator"></a>TDirectoryValidator
 
 Data must be name of directory which exists.
 
@@ -476,7 +509,7 @@ rule := TDirectoryValidator.create('images');
 
 ## <a name="uploaded-file"></a>Uploaded file
 
-### TUploadedFileValidator
+### <a name="tuploadedfilevalidator"></a>TUploadedFileValidator
 
 Field must be valid uploaded file.
 
@@ -484,7 +517,7 @@ Field must be valid uploaded file.
 rule := TUploadedFileValidator.create();
 ```
 
-### TUploadedMimeValidator
+### <a name="tuploadedmimevalidator"></a>TUploadedMimeValidator
 
 Field must be valid uploaded file and its content type must be one of predefined MIME types.
 
@@ -493,7 +526,7 @@ rule := TUploadedMimeValidator.create(['image/jpg', 'image/png']);
 ```
 Please note that this validation rule does not check if file uploaded is actually JPEG/PNG image.
 
-### TUploadedSizeValidator
+### <a name="tuploadedsizevalidator"></a>TUploadedSizeValidator
 
 Field must be valid uploaded file and its file size must be less or equal predefined size in bytes. For example to restrict that uploaded file size must not exceed 200KB.
 
@@ -501,11 +534,11 @@ Field must be valid uploaded file and its file size must be less or equal predef
 rule := TUploadedSizeValidator.create(200 * 1024);
 ```
 
-### TFileFormatValidator
+### <a name="tfileformatvalidator"></a>TFileFormatValidator
 
 Abstract class which validate uploaded file against certain file format.
 
-### TImagePngValidator, TImageJpgValidator, TImageGifValidator
+### <a name="timagepngvalidator-timagejpgvalidator-timagegifvalidator"></a>TImagePngValidator, TImageJpgValidator, TImageGifValidator
 
 Validation rules inherit from `TFileFormatValidator` which validate uploaded file against PNG, JPEG and GIF image format. Please note these classes only do fast check on first few bytes of file to determine its format and without loading whole file.
 
@@ -526,7 +559,7 @@ Validate field that must be uploaded file with GIF image format
 rule := TImageGifValidator.create();
 ```
 
-### TAntivirusValidator
+### <a name="tantivirusvalidator"></a>TAntivirusValidator
 
 Field must be valid uploaded file and must be free from computer virus. Current implementation supports [ClamAV](https://www.clamav.net) via [clamav-daemon](https://www.clamav.net/documents/scanning#clamd) and null implementation only.
 
@@ -587,7 +620,7 @@ This is provided to bypass antivirus scanning.
 
 ## Miscellaneous
 
-### TCompositeValidator
+### <a name="tcompositevalidator"></a>TCompositeValidator
 
 Validator class which combined one or more validators as one. For example to make field to become mandatory and alpha numeric dash characters only, with length between 8 and 10,
 
@@ -602,7 +635,7 @@ rule := TCompositeValidator.create([
 
 Please note that order of validator in array matters as validation is carried out starting from first validation rule in the array and to next rule. As soon as validator fails, next validator will not be called and error message reported is last failed validation rule error message.
 
-### TCollectiveValidator
+### <a name="tcollectivevalidator"></a>TCollectiveValidator
 
 It is similar to `TCompositeValidator`, except that, instead of terminating validation process as soon as one of validation rule fails, it continues to process all validation rules and collects all failed validation rule messages.
 
@@ -615,7 +648,7 @@ rule := TCollectiveValidator.create([
 ]);
 ```
 
-### TOrValidator
+### <a name="torvalidator"></a>TOrValidator
 
 It is similar to `TCollectiveValidator`, except that, it uses boolean operator OR when test each validator, thus it returns false only when all external validators are failed and returns true if one or more validators are succeeded.
 
@@ -628,11 +661,11 @@ rule := TOrValidator.create([
 ]);
 ```
 
-### TAnyOfValidator
+### <a name="tanyofvalidator"></a>TAnyOfValidator
 
 Alias of `TOrValidator`.
 
-### TAndValidator
+### <a name="tandvalidator"></a>TAndValidator
 
 It is alias of `TCompositeValidator`.
 
@@ -645,7 +678,7 @@ rule := TAndValidator.create([
 ]);
 ```
 
-### TNotValidator
+### <a name="tnotvalidator"></a>TNotValidator
 
 Decorator validator class which negate other validator.
 
@@ -669,7 +702,7 @@ rule := TNotValidator.create(
 ```
 Validation will pass as long as data is not integer value and not boolean value.
 
-### TConfirmedValidator
+### <a name="tconfirmedvalidator"></a>TConfirmedValidator
 
 Data must equal to other predefined field. This is mostly to be used for password confirmation.
 
@@ -678,7 +711,7 @@ rule := TConfirmedValidator.create('password_confirmation');
 ```
 Validation will pass if current data is equal to data in field `password_confirmation`.
 
-### TSameValidator
+### <a name="tsamevalidator"></a>TSameValidator
 
 This is alias for `TConfirmedValidator`. It passes validation if other field has same value as field being validated.
 
@@ -686,7 +719,7 @@ This is alias for `TConfirmedValidator`. It passes validation if other field has
 rule := TSameValidator.create('password_confirmation');
 ```
 
-### TUuidValidator
+### <a name="tuuidvalidator"></a>TUuidValidator
 
 Data must be in valid GUID string.
 
@@ -694,7 +727,7 @@ Data must be in valid GUID string.
 rule := TUuidValidator.create();
 ```
 
-### TExistsValidator
+### <a name="texistsvalidator"></a>TExistsValidator
 
 Data must exist in database. Its constructor expects three parameters, instance of `IRdbms` interface representing database connection, table name and column name.
 
@@ -713,7 +746,7 @@ SELECT `user_id` FROM `table_users` WHERE user_id = :primaryId LIMIT 1
 ```
 where `primaryId` placeholder will be replace with actual data being validated. Read [Working with Database](/database) for more information.
 
-### TAlwaysPassValidator
+### <a name="talwayspassvalidator"></a>TAlwaysPassValidator
 
 Dummy validator which always make field passes validation.
 
@@ -721,15 +754,23 @@ Dummy validator which always make field passes validation.
 rule := TAlwaysPassValidator.create();
 ```
 
-### TIpv4Validator
+### <a name="tipv4validator"></a>TIpv4Validator
 
-Data must be valid IP address (IPV4).
+Data must be valid IP address (IPv4).
 
 ```
 rule := TIpv4Validator.create();
 ```
 
-### TMacAddrValidator
+### <a name="tipv6validator"></a>TIpv6Validator
+
+Data must be valid IP address (IPv6).
+
+```
+rule := TIpv6Validator.create();
+```
+
+### <a name="tmacaddrvalidator"></a>TMacAddrValidator
 
 Data must be valid MAC address.
 
@@ -737,7 +778,7 @@ Data must be valid MAC address.
 rule := TMAcAddrValidator.create(TRegex.create());
 ```
 
-### TJsonValidator
+### <a name="tjsonvalidator"></a>TJsonValidator
 
 Data must be valid JSON.
 

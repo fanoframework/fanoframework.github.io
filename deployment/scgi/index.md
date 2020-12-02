@@ -8,10 +8,10 @@ description: Tutorial on how to deploy SCGI web application built with Fano Fram
 Fano Framework can be deployed as [SCGI (Simple Common Gateway Interface)](https://python.ca/scgi/protocol.txt) web application. SCGI is similar to FastCGI protocol
 but simpler to parse.
 
-See [Working with Application](/working-with-application) for information how to create SCGI web application.
+See *[Working with Application](/working-with-application)* for information how to create SCGI web application.
 
 See [Fano SCGI](https://github.com/fanoframework/fano-scgi) for example application.
-You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to easily create new SCGI web application project.
+You may want to look *[Scaffolding with Fano CLI](/scaffolding-with-fano-cli)* to easily create new SCGI web application project.
 
 ## Deploy with Fano CLI
 
@@ -188,7 +188,7 @@ Fedora, Red Hat Enterprise Linux and Centos come with SELinux enabled and with v
 2019/10/17 15:17:58 [crit] 1022#0: *6 connect() to 127.0.0.1:20477 failed (13: Permission denied) while connecting to upstream, client: 192.168.0.79, server: example.fano, request: "GET / HTTP/1.1", upstream: "scgi://127.0.0.1:20477", host: "example.fano"
 ```
 
-Simple solution was to run SELinux with `permissive` mode. In permissive mode, SELinux permits all operations but log operations that would have breached in `enforcing` mode.
+Simple solution is to run SELinux with `permissive` mode. In permissive mode, SELinux permits all operations but log operations that would have breached in `enforcing` mode.
 
 Web server such Apache or Nginx is listed in SELinux under `httpd_t` context. Run following command as root to add `httpd_t` to permissive mode.
 

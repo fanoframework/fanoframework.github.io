@@ -107,6 +107,44 @@ You may find that compilation will stop with Free Pascal 3.2.0 compiler. This is
 
 To remedy the situation, just edit `build.dev.cfg` file in example root directory and replace `Sewn` to `Sew` so that compilation will not stop on notes.
 
+## <a name="missing-libmicrohttpd-development-package"></a>Missing Libmicrohttpd development package
+
+If you [create libmicrohttpd-based web application](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project) and get linking error
+
+```
+/usr/bin/ld : cannot find -lmicrohttpd
+```
+when running `build.sh` script.
+
+You need to install libmicrohttpd development package. For Debian-based distribution,
+
+```
+$ sudo apt install libmicrohttpd-dev
+```
+
+For Fedora-based distribution,
+
+```
+$ sudo yum install libmicrohttpd-devel
+```
+## <a name="missing-etc-fpc-cfg"></a>Missing /etc/fpc.cfg
+
+`build.sh` script that [Fano CLI](/scaffolding-with-fano-cli) generates for each project, needs `/etc/fpc.cfg`. If you install Free Pascal to non default directory or using tool such as [fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe), it may show error about missing `/etc/fpc.cfg` file. To remedy this situation, just create symbolic link in `/etc` directory to actual `fpc.cfg` file. For example,
+
+```
+$ sudo ln -s ~/fpcupdeluxe/fpc/bin/x86_64-linux/fpc.cfg /etc/fpc.cfg
+```
+## <a name="missing-mysql-client-library"></a>Missing MySQL client library
+
+If you encounter error *Can't load default MySQL library ("libmysqlclient.so.20" or "libmysqlclient.so"). Check your installation*, you need to install MySQL client development library. For example on Debian,
+
+```
+$ sudo apt install libmysqlclient-dev
+```
+## <a name="shut-down-database-server-may-cause-memory-leak"></a>Memory leak due to database shutdown.
+
+When Fano Framework web application is connected to a database server, and then database shuts down while application is still running. When application shuts down, [it leaks memory](https://github.com/fanoframework/fano/issues/14). This issue is related to Free Pascal [bug report 37993](https://bugs.freepascal.org/view.php?id=37993). Memory leak only happens when database shuts down and never restart. Memory leak does not happen when database server shuts down and then restarts or when database does not runs at all.
+
 ## Explore more
 
 - [Getting Started](/getting-started)

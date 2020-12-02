@@ -17,7 +17,7 @@ In Fano Framework, form validation is composed of 3 parts,
 - *Validation rule manager*, an object that is having capability to manage one or more validation rule. It must implements `IValidationRules` interface.
 - *Validation rule*, an object implements `IValidator` interface and is responsible to validate individual data. It decides whether request is considered valid or not.
 
-Fano Framework provides `TValidation` class which implements `IRequestValidator` and `IValidationRules` interfaces and also provides several [common validation rules](#built-in-validation-rule).
+Fano Framework provides `TValidation` class which implements `IRequestValidator` and `IValidationRules` interfaces and also provides several *[common validation rules](#built-in-validation-rule)*.
 
 ```
 var requestValidator : IRequestValidator;
@@ -100,7 +100,7 @@ validationRules
     ])
 );
 ```
-`TCompositeValidator` is built-in validation rule implementation which combine one or more validators as one so that complex validation rule can be achieved by combining several simple validation rules.
+`TCompositeValidator` is [built-in validation rule](/security/form-validation/built-in-validation-rules/#tcompositevalidator) implementation which combine one or more validators as one so that complex validation rule can be achieved by combining several simple validation rules.
 
 ## Validate request
 

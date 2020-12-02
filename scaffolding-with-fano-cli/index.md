@@ -6,10 +6,12 @@ description: Tutorial how to use Fano CLI to scaffold web application using Fano
 
 ## What is Fano CLI?
 
+Fano Framework allows many its core functionalities to be configured or replaced with different implementation. This has drawback. You need many boilerplate code to create a single project.
+
 [Fano CLI](https://github.com/fanoframework/fano-cli) is command line application
 to help scaffolding [Fano Framework](https://github.com/fanoframework/fano) web application project. It helps tedious tasks such as
-[creating Fano web application project](#creating-project), [creating controller](#creating-controller), [model](#creating-model), [view](#creating-view), [middleware](#creating-middleware) classes,
-[generate random key](#generate-random-key) and [GUID](#generate-guid), [minify JavaScript files](#minify-javascript) and also [setting up web server configuration](#deployment).
+*[creating Fano web application project](#creating-project)*, *[creating controller](#creating-controller)*, *[model](#creating-model)*, *[view](#creating-view)*, *[middleware](#creating-middleware)* classes,
+*[generate random key](#generate-random-key)* and *[GUID](#generate-guid)*, *[minify JavaScript files](#minify-javascript)* and also *[setting up web server configuration](#deployment)*.
 
 ## <a name="installation"></a>Installation
 
@@ -47,7 +49,7 @@ Fano CLI provides several commands for scaffolding Fano Framework web applicatio
 $ fanocli --project-cgi=[project-name]
 ```
 
-`[project-name]` is directory where project resides and will be created by Fano CLI. Please read [Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project) for more detail explanation of each command.
+`[project-name]` is directory where project resides and will be created by Fano CLI. Please read *[Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project)* for more detail explanation of each command.
 
 
 ## <a name="creating-controller"></a>Creating controller
@@ -222,7 +224,7 @@ With `[path]` empty, it will scan current directory for any JavaScript files and
 $ fanocli --jsmin
 ```
 
-With `[path]` not empty, if it is directory, it will scan that directory for any JavaScript files and minify them and output as new file with name using original file name appended with `min.js`. If `[path]` is single file, it minify it and create new file with same name appended with `min.js`.
+With `[path]` not empty, if it is directory, it scans that directory for any JavaScript files and minifies them and output as new file with name using original file name appended with `min.js`. If `[path]` is single file, it minifies it and create new file with same name appended with `min.js`.
 
 ```
 $ fanocli --jsmin=/path/to/js
@@ -234,10 +236,38 @@ If you specify optional `--output=[target-path]` parameter, then `[target-path]`
 $ fanocli --jsmin=/path/to/js --output=/path/to/js/scripts.min.js
 ```
 
-If `[target-path]` equals `stdout`, minify output is printed to STDOUT.
+If `[target-path]` equals `stdout`, minified output is printed to STDOUT.
 
 ```
 $ fanocli --jsmin=/path/to/js --output=stdout
+```
+
+## <a name="minify-css"></a> Minify CSS files
+
+To reduce CSS file size, run with  `--cssmin=[path]` command line options.
+
+With `[path]` empty, it will scan current directory for any CSS files and minify them and output as new file with name using original file name appended with `min.css`.
+
+```
+$ fanocli --cssmin
+```
+
+With `[path]` not empty, if it is directory, it scans that directory for any CSS files and minifies them and output as new file with name using original file name appended with `min.css`. If `[path]` is single file, it minifies it and create new file with same name appended with `min.css`.
+
+```
+$ fanocli --cssmin=/path/to/css
+```
+
+If you specify optional `--output=[target-path]` parameter, then `[target-path]` will be used as its filename.
+
+```
+$ fanocli --cssmin=/path/to/css --output=/path/to/css/styles.min.css
+```
+
+If `[target-path]` equals `stdout`, minified output is printed to STDOUT.
+
+```
+$ fanocli --cssmin=/path/to/css --output=stdout
 ```
 
 ## <a name="add-session-support"></a>Add session support
@@ -246,8 +276,9 @@ Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.
 
 - `file`, create session which stores session data in file.
 - `cookie`, create session which stores session data in encrypted cookie.
-- `db`, create session which stores session data in database. This is not implemented yet.
+- `db`, create session which stores session data in database.
 
+### Session with file as storage
 If `[session storage]` is not set then it is assumed `file`. So following commands are identical
 
 ```
@@ -255,13 +286,40 @@ $ fanocli --project-cgi=Hello --with-session=file
 $ fanocli --project-cgi=Hello --with-session
 ```
 
-For `file` and `cookie`, you can define format of session data with `--type` parameter which expect value of `json` or `ini` for JSON or INI format respectively.
+### Session with cookie as storage
+
+Session data is stored in encrypted cookie.
+
+```
+$ fanocli --project-cgi=Hello --with-session=cookie
+```
+### Session with database as storage
+
+```
+$ fanocli --project-cgi=Hello --with-session=db
+```
+
+You can set type of RDBMS to use with `--db` parameter. If it is not set, it assumes MySQL. Following command is same as above.
+
+```
+$ fanocli --project-cgi=Hello --with-session=db --db=mysql
+```
+Use `postgresql`,`firebird` and `sqlite` for PostgreSQL, Firebird and SQLite database respectively.
+
+```
+$ fanocli --project-cgi=Hello --with-session=db --db=postgresql
+```
+
+### Session data format
+For `file`, `cookie` and `db`, you can define format of session data with `--type` parameter which expect value of `json` or `ini` for JSON or INI format respectively.
 
 For example, following command will cause session support to be added to project and each session data will be stored as INI file.
 
 ```
 $ fanocli --project-cgi=Hello --with-session=file --type=ini
 ```
+
+### Session requires middleware
 
 Because in Fano Framework, session support is implemented with middleware infrastructure, `--with-session` implies usage of `--with-middleware` so following command are identical
 

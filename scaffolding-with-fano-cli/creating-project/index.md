@@ -97,23 +97,8 @@ To create web application that use http using [libmicrohttpd](https://www.gnu.or
 
 It will add conditional define `-dLIBMICROHTTPD` in `build.cfg` which cause libmicrohttpd to be linked with application.
 
-You need to install libmicrohttpd development package. For Debian-based distribution,
+You need to [install libmicrohttpd development package](/known-issues#missing-libmicrohttpd-development-package) otherwise you get linking error.
 
-```
-$ sudo apt install libmicrohttpd-dev
-```
-
-For Fedora-based distribution,
-
-```
-$ sudo yum install libmicrohttpd-devel
-```
-
-If you missed it, during build, you will get linking error
-
-```
-/usr/bin/ld : cannot find -lmicrohttp
-```
 See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behind various reverse proxy web server.
 
 ### Add https support
@@ -147,9 +132,13 @@ $ fanocli --project-fcgi=test-fano --config=ini
 
 Read [Application Configuration](/configuration) for more information.
 
+## Add session support
+
+Use `--with-session` to [add session support](/scaffolding-with-fano-cli#add-session-support). Read [Session documentation](/working-with-session) for more information.
+
 ## Add middleware support
 
-Use `--with-middleware` to [add middleware support](/scaffolding-with-fano-cli#add-middleware-support). Read [middleware documentation](/scaffolding-with-fano-cli#add-middleware-support) for more information.
+Use `--with-middleware` to [add middleware support](/scaffolding-with-fano-cli#add-middleware-support). Read [Middleware documentation](/middlewares) for more information.
 
 ## Unrelated commit histories issue
 

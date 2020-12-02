@@ -1,6 +1,6 @@
 ---
 title: Deploy as uwsgi application
-description: Tutorial on how to deploy SCGI web application built with Fano Framework to various web servers.
+description: Tutorial on how to deploy uwsgi web application built with Fano Framework to various web servers.
 ---
 
 <h1 class="major">Deployment as uwsgi application</h1>
@@ -8,10 +8,10 @@ description: Tutorial on how to deploy SCGI web application built with Fano Fram
 Fano Framework can be deployed as [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html) web application. uwsgi is binary protocol similar to FastCGI protocol
 but simpler to parse.
 
-See [Working with Application](/working-with-application) for information how to create uwsgi web application.
+See *[Working with Application](/working-with-application)* for information how to create uwsgi web application.
 
 See [Fano uwsgi](https://github.com/fanoframework/fano-uwsgi) for example application.
-You may want to look [Scaffolding with Fano CLI](/scaffolding-with-fano-cli) to easily create new uwsgi web application project.
+You may want to look *[Scaffolding with Fano CLI](/scaffolding-with-fano-cli)* to easily create new uwsgi web application project.
 
 ## Deploy with Fano CLI
 
@@ -157,11 +157,11 @@ Last two `location` configurations tells Nginx to serve files directly if exists
 
 ## Issue with firewall
 
-In Fedora-based distribution, firewall is active by default. Read [Issue with firewall](/deployment/scgi#issue-with-firewall) for more information.
+In Fedora-based distribution, firewall is active by default. Read *[Issue with firewall](/deployment/scgi#issue-with-firewall)* for more information.
 
 ## Permission issue with SELinux
 
-Running uwsgi application through reverse proxy may be subject to strict security policy of SELinux. Read [Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux) for more information.
+Running uwsgi application through reverse proxy may be subject to strict security policy of SELinux. Read *[Permission issue with SELinux](/deployment/scgi#permission-issue-with-selinux)* for more information.
 
 ## Explore more
 

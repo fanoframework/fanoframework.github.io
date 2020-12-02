@@ -48,6 +48,10 @@ auserAgent := container['ua'] as IUserAgent;
 Before you can identify client user-agent, you need to set user-agent string to instance of `IUserAgent`. User-agent of each request can be read from `IRequest` instance.
 
 ```
+auserAgent.userAgent := request.headers().getHeader('User-Agent');
+```
+or
+```
 auserAgent.userAgent := request.env.httpUserAgent();
 ```
 

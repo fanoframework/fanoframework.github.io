@@ -12,7 +12,7 @@ In Fano Framework, middleware is an optional software component that is executed
 For example, middleware allows developer to test if user is logged in before request reaches controller. If user is not logged in, it blocks request.
 So when controller is executed, developer can be sure that user must be logged in.
 
-Single middleware instance can be attached to one or more routes. This allows centralized action to be taken for multiple controllers.
+One or more middleware instances can be attached to one or more [routes](/working-with-router). This allows centralized action to be taken for multiple controllers.
 
 So, instead of tedious check each time controller is executed,
 
