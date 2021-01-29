@@ -129,7 +129,7 @@ $ sudo yum install libmicrohttpd-devel
 ```
 ## <a name="missing-etc-fpc-cfg"></a>Missing /etc/fpc.cfg
 
-`build.sh` script that [Fano CLI](/scaffolding-with-fano-cli) generates for each project, needs `/etc/fpc.cfg`. If you install Free Pascal to non default directory or using tool such as [fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe), it may show error about missing `/etc/fpc.cfg` file or `Fatal: Can't find unit system used by ...` error. To remedy this situation, just create symbolic link in `/etc` directory to actual `fpc.cfg` file. For example,
+`build.sh` script that [Fano CLI](/scaffolding-with-fano-cli) generates for each project, needs `/etc/fpc.cfg`. If you install Free Pascal to non default directory or using tool such as *[fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe)*, it may show error about missing `/etc/fpc.cfg` file or `Fatal: Can't find unit system used by ...` error. To remedy this situation, just create symbolic link in `/etc` directory to actual `fpc.cfg` file. For example,
 
 ```
 $ sudo ln -s ~/fpcupdeluxe/fpc/bin/x86_64-linux/fpc.cfg /etc/fpc.cfg
