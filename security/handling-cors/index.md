@@ -126,7 +126,7 @@ factory.allowedMethods(['*']);
 To allowed custom HTTP header
 
 ```
-factory..allowedHeaders(['X-My-Custom-Header']);
+factory.allowedHeaders(['X-My-Custom-Header']);
 ```
 
 To allowed all custom headers
