@@ -22,7 +22,11 @@ Fano Framework provides built-in middleware class `TCorsMiddleware` which is to 
 
 Constructor of `TCorsMiddleware` expects `ICors` interface instance which responsible to handle CORS request.
 
-`TNullCors` is `ICors` implementation which simply allow all CORS request without restriction, while `TCors` class is implementation which can be configured to selectively apply restriction.
+## Built-in ICors implementation
+
+Fano Framework provides two built-in `ICors` implementation.
+- `TNullCors`, `ICors` implementation which simply allow all CORS request without restriction.
+- `TCors` class is implementation which can be configured to selectively apply restriction.
 
 ## Register CORS middleware with container
 
