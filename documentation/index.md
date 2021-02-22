@@ -67,6 +67,10 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Deploy as http application](/deployment/standalone-web-server)
 - [Deploy Fano web application with web server as load balancer](/deployment/load-balancer-setup)
 
+## Debugging
+
+- [Debugging](/debugging)
+
 ## Known Issue
 - [Issue with GNU Linker](/known-issues#issue-with-gnu-linker)
 - [Issue with development tools library search path](/known-issues#issue-with-gcc-library-search-path)
