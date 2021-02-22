@@ -12,20 +12,20 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 
 List of getting started web application for various supported protocol, i.e [CGI](https://tools.ietf.org/html/rfc3875), [FastCGI](http://www.mit.edu/~yandros/doc/specs/fcgi-spec.html), [SCGI](http://python.ca/scgi/protocol.txt), [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html) and http.
 
-- [Basic CGI web application example](https://github.com/fanoframework/fano-app), [live example](https://fano.juhara.id/)
-- [Fano Fcgid](https://github.com/fanoframework/fano-fcgid)
-- [Example FastCGI/CGI web application which can be deployed as FastCGI with mod_fcgid or as CGI](https://github.com/fanoframework/fano-cgi-fcgi)
-- [Example FastCGI web application listen on Unix domain socket](https://github.com/fanoframework/fano-fcgi-unix)
-- [Example FastCGI web application listen on TCP port](https://github.com/fanoframework/fano-fastcgi)
-- [Example web application using scgi protocol](https://github.com/fanoframework/fano-scgi)
-- [Example web application using uwsgi protocol](https://github.com/fanoframework/fano-uwsgi)
-- [Example web application using http protocol](https://github.com/fanoframework/fano-http)
+- [Basic CGI web application example](https://github.com/fanoframework/fano-app).
+- [Fano Fcgid](https://github.com/fanoframework/fano-fcgid).
+- [Example FastCGI/CGI web application which can be deployed as FastCGI with mod_fcgid or as CGI](https://github.com/fanoframework/fano-cgi-fcgi).
+- [Example FastCGI web application listen on Unix domain socket](https://github.com/fanoframework/fano-fcgi-unix).
+- [Example FastCGI web application listen on TCP port](https://github.com/fanoframework/fano-fastcgi).
+- [Example web application using scgi protocol](https://github.com/fanoframework/fano-scgi).
+- [Example web application using uwsgi protocol](https://github.com/fanoframework/fano-uwsgi).
+- [Example web application using http protocol](https://github.com/fanoframework/fano-http).
 
 ## MIME types web application
 
 Following example applications show how to [work with response](/working-with-response) other than HTML page, such as image, PDF and JSON data.
 
-- [Image generator CGI web application](https://github.com/fanoframework/fano-app-img) shows how to output image that is generated on-the fly, See [live example here](https://fano-img.juhara.id/)
+- [Image generator CGI web application](https://github.com/fanoframework/fano-app-img) shows how to output image that is generated on-the fly.
 - [Fano Api](https://github.com/fanoframework/fano-api) demonstrates how to return JSON response.
 - [Fano Pdf](https://github.com/fanoframework/fano-pdf) demonstrates how to generate PDF document on the fly.
 

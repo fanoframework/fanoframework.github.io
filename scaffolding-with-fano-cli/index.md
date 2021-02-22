@@ -31,6 +31,8 @@ $ sudo cp bin/out/fanocli /usr/local/bin/fanocli
 
 If you do not want to copy to `/usr/local/bin`, just add `fanocli` executable path to `PATH` environment variable.
 
+If you use FreeBSD, after you run `config.setup.sh` but before run `build.sh` script, edit`build.cfg` and replace line `-Tlinux` with `-Tfreebsd`.
+
 Follow installation instruction in Fano CLI [README.md](https://github.com/fanoframework/fano-cli/blob/master/README.md) document for more information.
 
 ## View Fano CLI Help

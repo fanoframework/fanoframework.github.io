@@ -170,12 +170,12 @@ You can replace `TInetSvrFactory` with `TUnixSvrFactory` class if you want to us
 You can replace `TInetSvrFactory` with `TBoundSvrFactory` if you want to create FastCGI application which run and managed by web server, for example Apache with `mod_fcgid` module. See
 [fano-fcgid](https://github.com/fanoframework/fano-fcgid) example demo application.
 
-`TInetSvrFactory`, `TUnixSvrFactory` and `TBoundSvrFactory` are using [select()](http://man7.org/linux/man-pages/man2/select.2.html) to monitor if socket is ready for I/O operation. To use [epoll](http://man7.org/linux/man-pages/man7/epoll.7.html), replace with `TEpollInetSvrFactory`, `TEpollUnixSvrFactory` and `TEpollBoundSvrFactory`.
+`TInetSvrFactory`, `TUnixSvrFactory` and `TBoundSvrFactory` use [*select*](http://man7.org/linux/man-pages/man2/select.2.html) to monitor if socket is ready for I/O operation. To use [*epoll*](http://man7.org/linux/man-pages/man7/epoll.7.html), replace with `TEpollInetSvrFactory`, `TEpollUnixSvrFactory` and `TEpollBoundSvrFactory`. If you use FreeBSD, to use [*kqueue*](https://www.freebsd.org/cgi/man.cgi?kqueue), replace with `TKqueueInetSvrFactory`, `TKqueueUnixSvrFactory` and `TKqueueBoundSvrFactory`. You need to add conditional compilation define `$DEFINE USE_KQUEUE` or add `-dUSE_KQUEUE` line in `build.cfg` file. 
 
-See [Deploy as FastCGI application](/deployment/fastcgi) for information how to
+See [*Deploy as FastCGI application*](/deployment/fastcgi) for information how to
 deploy FastCGI application on various web servers.
 
-You may want to read [Scaffolding FastCGI project directory structure](/scaffolding-with-fano-cli/creating-project#scaffolding-fastcgi-project) for information how to scaffolding FastCGI web application with [Fano CLI](https://github.com/fanoframework/fano-cli).
+You may want to read [*Scaffolding FastCGI project directory structure*](/scaffolding-with-fano-cli/creating-project#scaffolding-fastcgi-project) for information how to scaffolding FastCGI web application with [Fano CLI](https://github.com/fanoframework/fano-cli).
 
 ## SCGI Application
 

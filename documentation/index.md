@@ -23,7 +23,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Request and Response
 
-- **[Working with Request](/working-with-request)**. It explains how to get query string parameters, read request body data or read cookie.
+- **[Working with Request](/working-with-request)**. It explains how to [get query string parameters](/working-with-request#getting-query-parameters), [read request body data](/working-with-request#get-post-put-patch-data), [read cookie](/working-with-request#retrieve-cookies) and [handle request with JSON body](/working-with-request#handling-request-with-json-body).
 - **[Working with Response](/working-with-response)**. It explains how to return response in various format such as HTML, JSON or binary response, for example, image and also setting response cookie.
 - **[Handling File Upload](/handling-file-upload)**. It explains how to work with file upload.
 - **[Working with Session](/working-with-session)**. It explains how to manage state between requests.
@@ -66,6 +66,10 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Deploy as uwsgi application](/deployment/uwsgi)
 - [Deploy as http application](/deployment/standalone-web-server)
 - [Deploy Fano web application with web server as load balancer](/deployment/load-balancer-setup)
+
+## Debugging
+
+- [Debugging](/debugging)
 
 ## Known Issue
 - [Issue with GNU Linker](/known-issues#issue-with-gnu-linker)

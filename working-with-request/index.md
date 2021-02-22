@@ -44,7 +44,7 @@ var params : IReadOnlyList;
 params := request.getQueryParams();
 ```
 
-## Retrieve cookies
+## <a name="retrieve-cookies"></a>Retrieve cookies
 
 To retrieve value of `msg1` and `msg2` parameters from cookies, you can use `getCookieParam()` method.
 
@@ -69,7 +69,7 @@ var cookies : IReadOnlyList;
 cookies := request.getCookieParams();
 ```
 
-## Get POST/PUT/PATCH data
+## <a name="get-post-put-patch-data">Get POST/PUT/PATCH data
 
 If you have form like following snippet
 
