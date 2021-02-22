@@ -15,7 +15,7 @@ We will install [Native Debug](https://github.com/WebFreak001/code-debug) extens
 
 ### Create launch.json file
 
-Open Run tab (`Ctrl + Shift + D`) click *Run and Debug* button and select GDB environment.
+Open *Run* tab (`Ctrl + Shift + D`) click *Run and Debug* button and select GDB environment.
 Visual Studio Code will create `launch.json` file. Replace `name` and `target` like so
 
 ```
