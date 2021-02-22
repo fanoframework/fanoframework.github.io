@@ -69,7 +69,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Debugging
 
-- [Debugging](/debugging)
+- **[Debugging](/debugging)**. It explains how to debug Fano Framework web application with IDE such as Visual Studio Code or Lazarus.
 
 ## Known Issue
 - [Issue with GNU Linker](/known-issues#issue-with-gnu-linker)
