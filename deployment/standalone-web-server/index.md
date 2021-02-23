@@ -49,7 +49,7 @@ Because it will not change any web server configuration, you do not need to run 
 $ fanocli --deploy-http=myapp.me --stdout
 ```
 
-## <a name="change-host-and-port"></a>Change host and port
+### <a name="change-host-and-port"></a>Change host and port
 
 By default, Fano CLI, `--deploy-http` parameter will use `127.0.0.1` and `20477` as default host and port respectively. To use different value, you can edit generated virtual host configuration file or use `--host`, `--port` parameters when using `--deploy-http`.
 
