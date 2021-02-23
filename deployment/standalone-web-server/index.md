@@ -49,6 +49,14 @@ Because it will not change any web server configuration, you do not need to run 
 $ fanocli --deploy-http=myapp.me --stdout
 ```
 
+## Change host and port
+
+By default, Fano CLI, `--deploy-http` parameter will use `127.0.0.1` and `20477` as default host and port respectively. To use different value, you can edit generated virtual host configuration file or use `--host`, `--port` parameters when using `--deploy-http`.
+
+```
+$ sudo fanocli --deploy-http=myapp.me --host=192.168.2.2 --port=4000
+```
+
 ## Apache with mod_proxy_http module
 
 To deploy as http application with [mod_proxy_http](https://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html), you need to have `mod_proxy_http` installed and loaded. This module is installed but not enabled by default.
