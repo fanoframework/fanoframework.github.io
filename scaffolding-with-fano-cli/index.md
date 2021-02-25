@@ -332,6 +332,21 @@ $ fanocli --project-cgi=Hello --with-session --with-middleware
 
 Please read [Working with Session](/working-with-session) for more information about session.
 
+## <a name="add-csrf-support"></a>Add CSRF support
+
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-csrf`. If it is set, then during project creation, [Cross-Site Request Forgery (CSRF) protection](/security/csrf-protection) is added to generated project.
+
+```
+$ fanocli --project-scgi=Hello --with-csrf
+```
+
+`--with-csrf` adds `--config` and `--with-session` parameters implicitly, so folowing command generate similar project.
+
+```
+$ fanocli --project-scgi=Hello --with-csrf
+$ fanocli --project-scgi=Hello --config --with-session --with-csrf
+```
+
 ## <a name="deployment"></a>Deployment
 
 Fano CLI offers commands to simplify setting up Fano web application with various web server through following commands,

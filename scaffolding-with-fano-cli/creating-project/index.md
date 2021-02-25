@@ -140,6 +140,10 @@ Use `--with-session` to [add session support](/scaffolding-with-fano-cli#add-ses
 
 Use `--with-middleware` to [add middleware support](/scaffolding-with-fano-cli#add-middleware-support). Read [Middleware documentation](/middlewares) for more information.
 
+## Add CSRF support
+
+Use `--with-csrf` to [add CSRF support](/scaffolding-with-fano-cli#add-csrf-support). Read [Cross-Site Request Forgery (CSRF) protection](/security/csrf-protection) for more information.
+
 ## Unrelated commit histories issue
 
 `--project-*` command line options creates Git repository and initial commit for you automatically. This behavior may cause problem if you already create remote repository and try to merge local repository with remote one. Git may refuse to merge because they have unrelated commit histories.
