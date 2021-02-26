@@ -43,9 +43,9 @@ Create main controller
 $ fanocli --controller=Home --route=/
 ```
 ## Setup SSL certificate
-For our development  purpose we only need to use self-signed certificate. If you plan to have a publicly reachable server, you will need to ask a trusted third party, called *Certificate Authority*, to attest the certificate for you.
+For our development purpose, we only need to use self-signed certificate. If you plan to have a publicly reachable server, you will need to ask a trusted third party, called *Certificate Authority*, to attest the certificate for you.
 
-We need to create private key. We use OpenSSL to generate 1024 bit key. For our purpose, 1024 bit key is sufficient.
+We need to create secret private key. We use OpenSSL to generate 1024 bit key. For our purpose, 1024 bit key is sufficient.
 
 ```
 $ openssl genrsa -out myhttps.key 1024
@@ -57,9 +57,9 @@ If everything is ok, you should find `myhttps.key` file in current directory. Ne
 $ openssl req -days 365 -out myhttps.pem -new -x509 -key myhttps.key
 ```
 You will be asked serveral questions, make sure `Common Name` match URI of your domain.
-If command is succesful, you should find `myhttps.pem` file in current directory.
+If command is successful, you should find `myhttps.pem` file in current directory.
 
-## Add certificate in application
+## Add SSL certificate in application
 
 Open `src/app.pas` and edit lines like so
 
@@ -76,7 +76,7 @@ Run
 $ ./build.sh
 ```
 
-Wait until compilation is finished. If you get error such as
+Wait until compilation is finished. If you get error such as,
 
 ```
 /usr/bin/ld : cannot find -lmicrohttpd
@@ -94,7 +94,7 @@ $ ./bin/app.cgi
 
 ## Access application from browser
 
-By default, our application listens on port `20477`. Open web browser and go to `https://127.0.0.1:20477`. Internet browser will show warning because we use self-signed certificate. Just ignore it and you should see text *Home Controller* is printed on browser.
+By default, application listens on port `20477`. Open web browser and go to `https://127.0.0.1:20477`. Internet browser will show warning because we use self-signed certificate. Just allow and accept it and you should see text *Home Controller* is printed on browser.
 
 ## Summary
 
