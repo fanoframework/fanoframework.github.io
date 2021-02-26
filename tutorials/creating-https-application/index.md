@@ -48,13 +48,13 @@ For our development  purpose we only need to use self-signed certificate. If you
 We need to create private key. We use OpenSSL to generate 1024 bit key. For our purpose, 1024 bit key is sufficient.
 
 ```
-openssl genrsa -out myhttps.key 1024
+$ openssl genrsa -out myhttps.key 1024
 ```
 
 If everything is ok, you should find `myhttps.key` file in current directory. Next we need to generate certificate using private key. Following command generate x509 certificate valid for one year.
 
 ```
-openssl req -days 365 -out myhttps.pem -new -x509 -key myhttps.key
+$ openssl req -days 365 -out myhttps.pem -new -x509 -key myhttps.key
 ```
 You will be asked serveral questions, make sure `Common Name` match URI of your domain.
 If command is succesful, you should find `myhttps.pem` file in current directory.
