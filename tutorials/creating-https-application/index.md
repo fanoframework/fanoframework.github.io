@@ -43,7 +43,7 @@ Create main controller
 $ fanocli --controller=Home --route=/
 ```
 ## Setup SSL certificate
-For our development  purpose we only need to use self-signed certificate. If you plan to have a publicly reachable server, you will need to ask a trusted third party, called Certificate Authority, to attest the certificate for you.
+For our development  purpose we only need to use self-signed certificate. If you plan to have a publicly reachable server, you will need to ask a trusted third party, called *Certificate Authority*, to attest the certificate for you.
 
 We need to create private key. We use OpenSSL to generate 1024 bit key. For our purpose, 1024 bit key is sufficient.
 
