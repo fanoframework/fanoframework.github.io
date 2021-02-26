@@ -153,6 +153,27 @@ Change `proxy_pass` to match host and port where application is listening.
 
 Last two `location` configurations tells Nginx to serve files directly if exists, otherwise pass it to our application.
 
+## Running on port 80 (http) or 443 (https)
+
+Ports below 1024 can be opened only by root. If you want to serve HTTP request directly without reverse proxy, there are options
+
+### Redirect connections using firewall
+You can redirect connnections on port 80 to your application port, 8080 for example. Run as root
+```
+# iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+```
+This has disadvantage in multi-user systems. If your application is shutdown, other users may bind to port 8080 and accidentally intercepting traffic to port 80 which may not what they want.
+
+### Use setuid
+
+Run as root to bind port 80 and drop privileges and become lower privileged user as soon as port is successfully opened. This is what web server such Apache or nginx used.
+
+### Use CAP_NET_BIND_SERVICE
+Linux kernel since 2.6.24 has capability to mark executable with `CAP_NET_BIND_SERVICE` capability to allow bind to port. 
+```
+sudo apt-get install libcap2-bin 
+sudo setcap 'cap_net_bind_service=+ep' /path/to/program
+```
 ## Issue with firewall
 
 In Fedora-based distribution, firewall is active by default. Read [Issue with firewall](/deployment/scgi#issue-with-firewall) for more information.
