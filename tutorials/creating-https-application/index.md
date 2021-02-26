@@ -94,7 +94,7 @@ $ ./bin/app.cgi
 
 ## Access application from browser
 
-By default, our application listens on port `20477`. Open web browser and go to `https://127.0.0.1:20477`. Internet browser will show warning. This is because we use self-signed certificate. Just ignore it and you should see text *Home Controller* is printed on browser.
+By default, our application listens on port `20477`. Open web browser and go to `https://127.0.0.1:20477`. Internet browser will show warning because we use self-signed certificate. Just ignore it and you should see text *Home Controller* is printed on browser.
 
 ## Summary
 
