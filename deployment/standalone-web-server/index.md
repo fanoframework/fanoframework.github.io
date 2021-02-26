@@ -158,7 +158,7 @@ Last two `location` configurations tells Nginx to serve files directly if exists
 Ports below 1024 can be opened only by root. If you want to serve HTTP request directly without reverse proxy, there are options
 
 ### Redirect connections using firewall
-You can redirect connnections on port 80 to your application port, 8080 for example. Run as root
+You can redirect connections on port 80 to your application port, 8080 for example. Run as root
 ```
 # iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
 ```
