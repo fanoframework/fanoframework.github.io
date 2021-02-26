@@ -33,7 +33,7 @@ Wait until new project is created. If everything is ok, your project will be cre
 $ cd myhttps.fano
 ```
 
-All actions below is assumed to take place inside `myhttps.fano` directory.
+All actions below are assumed to take place inside `myhttps.fano` directory.
 
 ## Create controller
 
