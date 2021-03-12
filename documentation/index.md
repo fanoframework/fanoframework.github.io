@@ -52,6 +52,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Use HTTP client to call API](/utilities/http-clients)
 - [Sending email](/utilities/sending-email)
 - [Identifying client user-agent](/utilities/identifying-client-user-agent)
+- [Working with regular expression](/utilities/regular-expression)
 
 ## Database
 
