@@ -66,13 +66,13 @@ var
     matches : TRegexMatchResult;
 ...
 regex := TRegex.create();
-matches := regex.match('\{\{\s*([a-zA-Z0-9]*)\s*\}\}', 'This is {{ myVar }}');
+matches := regex.match('\[\[\s*([a-zA-Z0-9]*)\s*\]\]', 'This is [[ myVar ]]');
 ```
-Above code matches string inside `{{ ... }}` and will yield
+Above code matches string inside `[[ ... ]]` and will yield
 
 ```
 matches.matched = true
-matches.matches[0][0] = '{{ myVar }}'
+matches.matches[0][0] = '[[ myVar ]]'
 matches.matches[0][1] = 'myVar'
 ```
 
@@ -92,9 +92,9 @@ var
     newStr : string;
 ...
 regex := TRegex.create();
-newStr := regex.match('\{\{\s*([a-zA-Z0-9]*)\s*\}\}', 'This is {{ myVar }}', 'cool');
+newStr := regex.match('\[\[\s*([a-zA-Z0-9]*)\s*\]\]', 'This is [[ myVar ]]', 'cool');
 ```
-Above code matches string inside `{{ ... }}` and will yield
+Above code matches string inside `[[ ... ]]` and will yield
 
 ```
 newStr = 'This is cool'
