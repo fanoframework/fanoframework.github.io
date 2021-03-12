@@ -32,13 +32,16 @@ validationRules := requestValidator as IValidationRules;
 A validation rule is class which responsible to decide if data being processed is valid or not. Any class implements `IValidator` interface can be used as validation rule and it must implements following methods,
 
 ```
-function isValid(
-    const key : shortstring;
-    const dataToValidate : IReadOnlyList;
-    const request : IRequest
-) : boolean;
+IValidator = interface
+    ['{CEC67097-2D57-4278-BE8F-7B77EAB614FB}']
+    function isValid(
+        const key : shortstring;
+        const dataToValidate : IReadOnlyList;
+        const request : IRequest
+    ) : boolean;
 
-function errorMessage(const key : shortstring) : string;
+    function errorMessage(const key : shortstring) : string;
+end;
 ```
 
 ### isValid() method
@@ -301,3 +304,5 @@ end.
 - [Working with request](/working-with-request)
 - [Middlewares](/middlewares)
 - [Form Validation example](https://github.com/fanoframework/fano-validation)
+- [TValidation class](https://github.com/fanoframework/fano/blob/master/src/Security/Validation/ValidationImpl.pas)
+- [IValidator interface](https://github.com/fanoframework/fano/blob/master/src/Security/Validation/Contracts/ValidatorIntf.pas)
