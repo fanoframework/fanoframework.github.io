@@ -41,7 +41,7 @@ Open web browser and go to `http://hello.fano`. You should see `Home controller`
 
 Following video shows step by step creating Fano Framework web application project.
 
-[![Getting Started with Fano Framework video](https://img.youtube.com/vi/393pMHp8yj8/1.jpg)](https://www.youtube.com/watch?v=393pMHp8yj8 "Getting Started with Fano Framework video")
+[![Getting Started with Fano Framework video](https://img.youtube.com/vi/393pMHp8yj8/sddefault.jpg)](https://www.youtube.com/watch?v=393pMHp8yj8 "Getting Started with Fano Framework video")
 
 ## Command walkthrough
 
