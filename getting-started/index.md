@@ -39,11 +39,7 @@ $ sudo fanocli --deploy-cgi=hello.fano
 
 Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
-<iframe width="560" height="315"
-src="https://youtu.be/393pMHp8yj8"
-frameborder="0"
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-allowfullscreen></iframe>
+[![Getting Started with Fano Framework video](https://img.youtube.com/vi/393pMHp8yj8/0.jpg)](https://www.youtube.com/watch?v=393pMHp8yj8 "Getting Started with Fano Framework video")
 
 ## Command walkthrough
 
