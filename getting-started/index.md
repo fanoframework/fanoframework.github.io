@@ -100,8 +100,8 @@ However, Fano CLI creates several files and directories that follows certain ass
 
 ### Browser downloads application binary
 
-When you visit http://hello.fano URL and browser display confirmation dialog to download application binary instead of displaying `Home Controller` text then this is most likely due to
-`mod_cgi` or `mod_cgid` is not enabled. Both modules are installed by default on Apache 2 but not enabled.
+When you visit http://hello.fano URL, browser displays confirmation dialog to download application binary instead of displaying `Home Controller` text. This is most likely because
+`mod_cgi` or `mod_cgid` is not enabled. Both modules are installed by default on Apache 2 but are not enabled.
 
 To remedy, you need to enable it and restart Apache. For example, to enable `mod_cgi` module
 
