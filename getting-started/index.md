@@ -37,7 +37,7 @@ $ sudo fanocli --deploy-cgi=hello.fano
 
 ## Run it from browser
 
-Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
+Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working. If you do not see text is printed, [read What could go wrong section](#what-could-go-wrong) below.
 
 Following video shows step by step creating Fano Framework web application project.
 
@@ -95,6 +95,21 @@ However, Fano CLI creates several files and directories that follows certain ass
 - Home controller `HomeController.pas` in `src/App/Home/Controllers` is code that prints `Home controller` text.
 - Include file `src/Routes/Home/route.inc` associates default URL `/` with home controller.
 - Include file `controllers.dependencies.inc` in `src/Dependencies` directory, registers factory class for home controller.
+
+## <a name="what-could-go-wrong"></a>What could go wrong
+
+### Browser downloads application binary
+
+When you visit http://hello.fano URL and browser display confirmation dialog to download application binary instead of displaying `Home Controller` text then this is most likely due to
+`mod_cgi` or `mod_cgid` is not enabled. Both modules are installed by default on Apache 2 but not enabled.
+
+To remedy, you need to enable it and restart Apache. For example, to enable `mod_cgi` module
+
+```
+$ sudo a2enmod cgi
+$ sudo systemctl restart apache2
+```
+Replace `cgi` with `cgid` if you want to enable `mod_cgid` module instead.
 
 ## Explore more
 
