@@ -39,6 +39,12 @@ $ sudo fanocli --deploy-cgi=hello.fano
 
 Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
+<iframe width="560" height="315"
+src="https://youtu.be/393pMHp8yj8"
+frameborder="0"
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen></iframe>
+
 ## Command walkthrough
 
 Let us take a look at each command above to understand what it does.
@@ -54,7 +60,7 @@ $ cd Hello
 ```
 
 Create controller name `HomeController.pas` that will handle request to route `/`. For more information regarding route, read *[Working with Router](/working-with-router)*.
-``` 
+```
 $ fanocli --controller=Home --route=/
 ```
 Without `--route=/`, by default, Fano CLI will create route same as lower case of controller's name, i.e, `/home`. If you omit `--route=/` then you can only access `HomeController` using URL `http://hello.fano/home` instead of `http://hello.fano`.
