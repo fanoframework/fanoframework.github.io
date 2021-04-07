@@ -33,7 +33,10 @@ If you do not want to copy to `/usr/local/bin`, just add `fanocli` executable pa
 
 If you use FreeBSD, after you run `config.setup.sh` but before run `build.sh` script, edit`build.cfg` and replace line `-Tlinux` with `-Tfreebsd`.
 
-Follow installation instruction in Fano CLI [README.md](https://github.com/fanoframework/fano-cli/blob/master/README.md) document for more information.
+Follow installation instruction in Fano CLI [README.md](https://github.com/fanoframework/fano-cli/blob/master/README.md) document for more information or view Fano CLI Installation video below.
+
+
+[![Fano CLI Installation video](https://img.youtube.com/vi/B42X_WB_iPs/1.jpg)](https://www.youtube.com/watch?v=B42X_WB_iPs "Fano CLI Installation video")
 
 ## View Fano CLI Help
 
