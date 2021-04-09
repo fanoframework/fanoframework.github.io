@@ -404,6 +404,56 @@ $ sudo systemctl stop hello
 $ sudo fanocli --daemon-sysd=hello --user=fano --bin=/home/my.fano/bin/myapp.bin
 ```
 
+## Convert text file content into Pascal string variable declaration
+To allow include HTML file directly as an include file, you can convert it into Pascal string variable declaration using `--txt2inc` command.
+
+For example, if you have file `index.html` with content as follows
+
+```
+<html><head></head>
+<body></body></html>
+```
+To convert it as include file, run
+
+```
+$ fanocli --txt2inc --src=index.html --dst=index.html.inc --var=htmlTemplate
+```
+It will create `index.html.inc` file with content as follows,
+
+```
+htmlTemplate : string =
+    '<html><head></head>' + LineEnding +
+    '<body></body></html>';
+```
+which you can include it in Pascal code
+
+```
+procedure print();
+var
+    {$INCLUDE index.html.inc}
+begin
+    writeln(htmlTemplate)
+end;
+```
+### Parameters
+Parameter `--src` tells source file path to convert. If it is not set or empty, STDIN will be used. If it is set but file does not exist, error is generated.
+
+Parameter `--dst` tells destination file path. If it is not set or empty and `--src` is set then value of `--src` is concatenated with `.inc` file extension. If it is not set or empty and `--src` is not set, STDOUT will be used. If `--dst` is set but file does exist, error is generated to avoid accidentally overwrite existing file. To force overwriting existing file, add `--force` parameter.
+
+Parameter `--var` sets variable name to use for declaration. If it is not set, then `myStr` is used.
+
+For example
+
+```
+$ printf "<html><head></head>\r\n<body></body></html>" | fanocli --txt2inc
+
+{-------------begin----------------}
+myStr : string =
+    '<html><head></head>' + LineEnding +
+    '<body></body></html>';
+{-------------end------------------}
+```
+
 ## Build
 
 Change active directory to new project directory after you created project and run
