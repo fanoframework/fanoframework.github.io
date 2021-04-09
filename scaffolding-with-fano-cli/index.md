@@ -438,7 +438,7 @@ end;
 ### Parameters
 Parameter `--src` tells source file path to convert. If it is not set or empty, STDIN will be used. If it is set but file does not exist, error is generated.
 
-Parameter `--dst` tells destination file path. If it is not set or empty and `--src` is set then value of `--src` is concatenated with `.inc` file extension. If it is not set or empty and `--src` is not set, STDOUT will be used. If `--dst` is set but file does exist, error is generated to avoid accidentally overwrite existing file. To force overwriting existing file, add `--force` parameter.
+Parameter `--dst` tells destination file path. If it is not set or empty and `--src` is set then value of `--src` is concatenated with `.inc` file extension. If it is not set or empty and `--src` is not set, STDOUT will be used. If `--dst` is set but file does exist, error is generated to avoid accidentally overwriting existing file. To force overwriting existing file, add `--force` parameter.
 
 Parameter `--var` sets variable name to use for declaration. If it is not set, then `myStr` is used.
 
