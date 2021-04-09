@@ -432,7 +432,7 @@ procedure print();
 var
     {$INCLUDE index.html.inc}
 begin
-    writeln(htmlTemplate)
+    writeln(htmlTemplate);
 end;
 ```
 ### Parameters
