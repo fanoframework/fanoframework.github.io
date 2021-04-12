@@ -12,7 +12,7 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 
 List of getting started web application for various supported protocol, i.e [CGI](https://tools.ietf.org/html/rfc3875), [FastCGI](http://www.mit.edu/~yandros/doc/specs/fcgi-spec.html), [SCGI](http://python.ca/scgi/protocol.txt), [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html) and http.
 
-- [Basic CGI web application example](https://github.com/fanoframework/fano-app).
+- [Basic CGI web application example](https://github.com/fanoframework/fano-app). [View video tutorial](https://youtu.be/bnOqoUBOx7o).
 - [Fano Fcgid](https://github.com/fanoframework/fano-fcgid).
 - [Example FastCGI/CGI web application which can be deployed as FastCGI with mod_fcgid or as CGI](https://github.com/fanoframework/fano-cgi-fcgi).
 - [Example FastCGI web application listen on Unix domain socket](https://github.com/fanoframework/fano-fcgi-unix).
