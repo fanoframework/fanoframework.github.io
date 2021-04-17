@@ -7,7 +7,7 @@ description: Tutorial on how to detect client browser, device type and platform 
 
 ## About User-Agent
 
-Most standard browser will send identification string with each request header so that application running on server can use it to identify client browser, platform and device type.
+Most standard browsers will send identification string with each request header so that application running on server can use it to identify client browser, platform and device type.
 
 User-agent identification string is not reliable as they can be changed rather easily so that identification may yield false result.
 
@@ -31,7 +31,7 @@ Interface of any class having capability to identify client operating system suc
 
 ## Setting up IUserAgent instance
 
-Current implementation of `IInterface` interface only supports one implementation thorough class `TUserAgent`. To use it, register its factory class with [container](/dependency-container).
+Current implementation of `IInterface` interface only supports one implementation through class `TUserAgent`. To use it, register its factory class with [container](/dependency-container).
 
 ```
 container.factory('ua', TUserAgentFactory.create());
