@@ -38,9 +38,9 @@ container.factory('ua', TUserAgentFactory.create());
 ```
 to retrieve `IUserAgent` instance,
 ```
-var auserAgent : IUserAgent;
+var ua : IUserAgent;
 ...
-auserAgent := container['ua'] as IUserAgent;
+ua := container['ua'] as IUserAgent;
 ```
 
 ## Set user-agent string
@@ -48,11 +48,11 @@ auserAgent := container['ua'] as IUserAgent;
 Before you can identify client user-agent, you need to set user-agent string to instance of `IUserAgent`. User-agent of each request can be read from `IRequest` instance.
 
 ```
-auserAgent.userAgent := request.headers().getHeader('User-Agent');
+ua.userAgent := request.headers().getHeader('User-Agent');
 ```
 or
 ```
-auserAgent.userAgent := request.env.httpUserAgent();
+ua.userAgent := request.env.httpUserAgent();
 ```
 
 ## Detecting if client is using mobile device
@@ -62,7 +62,7 @@ Use `isMobile()` method of `IClientDevice` interface to test if client is using 
 ```
 var dev : IClientDevice;
 ...
-dev := auserAgent.getDevice();
+dev := ua.getDevice();
 if dev.isMobile() then
 begin
     //client using mobile device
@@ -76,7 +76,7 @@ Use `isBrowser()` method or `browser` property of `IClientBrowser` interface to 
 ```
 var browserInst : IClientBrowser;
 ...
-browserInst := auserAgent.getBrowser();
+browserInst := ua.getBrowser();
 if browserInst.browser['Chrome'] then
 begin
     //client using Chrome browser
@@ -95,7 +95,7 @@ Use `isOS()` method or `OS` property of `IClientOS` interface to test client ope
 ```
 var osInst : IClientOS;
 ...
-osInst := auserAgent.getOS();
+osInst := ua.getOS();
 if osInst.OS['AndroidOS'] then
 begin
     //client using Android device
