@@ -7,7 +7,7 @@ description: Tutorial on how to detect client browser, device type and platform 
 
 ## About User-Agent
 
-Most standard browsers will send identification string with each request header so that application running on server can use it to identify client browser, platform and device type.
+Most standard browsers will send identification string with each request header so that application running on server can use it to identify client browser, platform and device type. This is useful, for example, if you want to serve different page layout if user is using mobile device.
 
 User-agent identification string is not reliable as they can be changed rather easily so that identification may yield false result.
 
