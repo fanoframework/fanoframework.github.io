@@ -246,7 +246,8 @@ container.add(
     'dispatcher',
     TDispatcherFactory.create(
         container.get('appMiddlewares') as IMiddlewareLinkList,
-        aRouterInst as IRouteMatcher
+        aRouterInst as IRouteMatcher,
+        TRequestResponseFactory.create()    
     )
 );
 ```

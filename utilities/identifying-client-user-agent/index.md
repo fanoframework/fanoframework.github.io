@@ -7,7 +7,7 @@ description: Tutorial on how to detect client browser, device type and platform 
 
 ## About User-Agent
 
-Most standard browser will send identification string with each request header so that application running on server can use it to identify client browser, platform and device type.
+Most standard browsers will send identification string with each request header so that application running on server can use it to identify client browser, platform and device type. This is useful, for example, if you want to serve different page layout if user is using mobile device.
 
 User-agent identification string is not reliable as they can be changed rather easily so that identification may yield false result.
 
@@ -31,16 +31,16 @@ Interface of any class having capability to identify client operating system suc
 
 ## Setting up IUserAgent instance
 
-Current implementation of `IInterface` interface only supports one implementation thorough class `TUserAgent`. To use it, register its factory class with [container](/dependency-container).
+Current implementation of `IInterface` interface only supports one implementation through class `TUserAgent`. To use it, register its factory class with [container](/dependency-container).
 
 ```
 container.factory('ua', TUserAgentFactory.create());
 ```
 to retrieve `IUserAgent` instance,
 ```
-var auserAgent : IUserAgent;
+var ua : IUserAgent;
 ...
-auserAgent := container['ua'] as IUserAgent;
+ua := container['ua'] as IUserAgent;
 ```
 
 ## Set user-agent string
@@ -48,11 +48,11 @@ auserAgent := container['ua'] as IUserAgent;
 Before you can identify client user-agent, you need to set user-agent string to instance of `IUserAgent`. User-agent of each request can be read from `IRequest` instance.
 
 ```
-auserAgent.userAgent := request.headers().getHeader('User-Agent');
+ua.userAgent := request.headers().getHeader('User-Agent');
 ```
 or
 ```
-auserAgent.userAgent := request.env.httpUserAgent();
+ua.userAgent := request.env.httpUserAgent();
 ```
 
 ## Detecting if client is using mobile device
@@ -62,7 +62,7 @@ Use `isMobile()` method of `IClientDevice` interface to test if client is using 
 ```
 var dev : IClientDevice;
 ...
-dev := auserAgent.getDevice();
+dev := ua.getDevice();
 if dev.isMobile() then
 begin
     //client using mobile device
@@ -76,7 +76,7 @@ Use `isBrowser()` method or `browser` property of `IClientBrowser` interface to 
 ```
 var browserInst : IClientBrowser;
 ...
-browserInst := auserAgent.getBrowser();
+browserInst := ua.getBrowser();
 if browserInst.browser['Chrome'] then
 begin
     //client using Chrome browser
@@ -95,7 +95,7 @@ Use `isOS()` method or `OS` property of `IClientOS` interface to test client ope
 ```
 var osInst : IClientOS;
 ...
-osInst := auserAgent.getOS();
+osInst := ua.getOS();
 if osInst.OS['AndroidOS'] then
 begin
     //client using Android device
