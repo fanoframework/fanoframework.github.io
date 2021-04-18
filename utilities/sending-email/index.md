@@ -69,7 +69,7 @@ FromLineOverride=YES
 <img src="/assets/images/mailtrap.io.png" alt="Mailtrap.io credential" width="50%">
 </a>
 
-To test that you configuration works, try to send an email from command line
+To test that your configuration works, try to send an email from command line
 
 ```
 $ echo -e 'Subject: test\n\nTesting ssmtp' | sendmail -v tousername@example.com
