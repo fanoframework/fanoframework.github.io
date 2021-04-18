@@ -57,7 +57,7 @@ FromLineOverride=YES
 
 Replace `mailhub`, `AuthUser`, `AuthPass` with your own value. If you do not setup dedicated SMTP server, you can use external SMTP server such as gmail or mailtrap, or MailHog. Both mailtrap and MailHog is fake SMTP server which helps sending test email without fear of becoming email spammer during development.
 
-For example, this is configuration for sending email with mailtrap.io. You should replace `YourUsername` and `YourOwnSecretPassword` with username and password of your mailtrap.io account.
+For example, this is configuration for sending email with mailtrap.io on development machine. You should replace `YourUsername` and `YourOwnSecretPassword` with username and password of your mailtrap.io account.
 
 ```
 mailhub=smtp.mailtrap.io:2525
