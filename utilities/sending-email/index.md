@@ -66,7 +66,7 @@ AuthPass=YourOwnSecretPassword
 FromLineOverride=YES
 ```
 <a href="/assets/images/mailtrap.io.png">
-<img src="/assets/images/mailtrap.io.png" alt="Mailtrap.io credential" width="100%">
+<img src="/assets/images/mailtrap.io.png" alt="Mailtrap.io credential" width="50%">
 </a>
 
 To test that you configuration works, try to send an email from command line
