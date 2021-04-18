@@ -40,7 +40,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - **[Form Validation](/security/form-validation)**. It explains how to validate form input data.
 - **[CSRF Protection](/security/csrf-protection)** discusses how to protect application from *Cross-site request Forgery (CSRF)* attack.
 - **[HTTP Verb Tunnelling](/security/http-verb-tunnelling)** explains about how to override HTTP verb such as `PUT`, `PATCH` and `DELETE`.
-- **[HTTP Authentication](/security/http-authentication)** discusses authentication using basic, digest authentication. It is also related to JSON Web Token.
+- **[HTTP Authentication](/security/http-authentication)** discusses authentication using basic, digest, bearer token authentication. It is also related to JSON Web Token.
 - [XSS Protection](/security/xss-protection)
 - [Clickjacking Protection](/security/clickjacking-protection)
 - **[Password hash](/security/password-hash)** explains how to properly hash password using Argon2i, SCrypt, BCrypt password hash algorithm.
