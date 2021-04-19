@@ -38,7 +38,7 @@ logger.critical('This is critical message');
 ## Built-in logger
 
 Fano Framework has several built-in loggers that developers can use or extend.
-All built-in loggers inherit from `TAbstractLogger` which provides most of method implementations except `log()` method which is an abstract method that descendant needs to implements. This class is mostly what developers need to extends in order to create new type of logger.
+All built-in loggers inherit from `TAbstractLogger` which provides most of method implementations except `log()` method which is an abstract method that descendant needs to implements. This class is mostly what developers need to extend in order to create new type of logger.
 
 ### Log to system log
 
@@ -90,6 +90,26 @@ logger := TFileLogger.create('storages/logs/app.log');
 
 `TStdErrLogger` is logger implementation that will output log message to STDERR.
 
+### Logging to Email
+
+`TMailLogger` is logger implementation that will output log message as email. It requires
+instance of `IMailer` interface that will be responsible for [sending email](/utilities/sending-email).
+
+```
+var logger : ILogger;
+...
+logger := TMailLogger.create(
+    TSendmailMailer.create(), //send using sendmail
+    'to@example.com', //recipient
+    'from@myapp.fano' //sender
+);
+```
+
+`TMailLogger` constructor accepts fourth optional parameter which is prefix string
+that is prepended on email subject.
+To change how email subject and email body are composed, you can extends [`TMailLogger` class](https://github.com/fanoframework/fano/blob/development/src/Libs/Logger/MailLoggerImpl.pas)
+and override its `buildSubject()` and `buildMessage()` protected methods.
+
 ### Logging to Database
 
 `TDbLogger` is logger implementation that will output log message to database. It requires instance of `IRdbms` which responsible to do database operation. Read [Database](/database) section for more information.
@@ -128,7 +148,14 @@ var logger : ILogger;
 ...
 logger := TCompositeLogger.create([
     TFileLogger.create('storages/logs/app.log'),
-    TSomeLoggerThatLogToDb.create()
+    TDbLogger.create(
+        rdbms,
+        'logs', //table name
+        'level', //level column name
+        'msg', //message column name
+        'created_at', //log datetime
+        'context' //context column name
+    )
 ]);
 ```
 
@@ -193,6 +220,23 @@ logger := TSegregatedLogger.create(
     infoDebug
 );
 ```
+## Logging in background thread
+
+Some logger implementation takes time to complete such as `TMailLogger`. To avoid
+blocking main thread, you can write log in background thread using `TBackgroundThreadLogger`.
+Following example makes write log to email happens in background thread.
+
+```
+var logger : ILogger;
+...
+logger := TBackgroundThreadLogger.create(
+    TMailLogger.create(
+        TSendmailMailer.create(), //send using sendmail
+        'to@example.com', //recipient
+        'from@myapp.fano' //sender
+    )
+);
+```
 
 ## Factory class for built-in loggers
 
@@ -207,6 +251,8 @@ be registered in [dependency container](/dependency-container) easily. Following
 - `TStdErrLoggerFactory`, factory class for `TStdErrLogger`.
 - `TSysLogLoggerFactory`, factory class for `TSysLogLogger`.
 - `TDbLoggerFactory`, factory class for `TDbLogger`.
+- `TMailLoggerFactory`, factory class for `TMailLogger`.
+- `TBackgroundThreadLoggerFactory`, factory class for `TBackgroundThreadLogger`.
 
 ### Register TFileLogger
 
@@ -286,9 +332,55 @@ container.add(
         .levelField('mylevel')
         .msgField('mymsg')
         .createdAtField('my_created_at')
-        .contextField('my_context')
+        .contextField('my_coaintext')
 );
 ```
+
+### Register TMailLogger
+
+To register `TMailLogger`,
+
+```
+container.add('mailer', TSendmailMailerFactory.create());
+container.add(
+    'logger',
+    TMailLoggerFactory.create()
+        .mailer('mailer')
+        .recipient('to@example.com')
+        .sender('no-reply@myapp.fano')
+);
+```
+
+`mailer()` is used to tell factory where to look for `IMailer`  instance.
+To set prefix to email subject use `prefix()` method like so,
+
+```
+container.add(
+    'logger',
+    TMailLoggerFactory.create()
+        .mailer('mailer')
+        .recipient('to@example.com')
+        .sender('no-reply@myapp.fano')
+        .prefix('My App')
+);
+```
+
+### Register TBackgroundThreadLogger
+
+To register `TBackgroundThreadLogger`,
+
+```
+container.add(
+    'logger',
+    TBackgroundThreadLoggerFactory.create(
+        TMailLoggerFactory.create()
+            .mailer('mailer')
+            .recipient('to@example.com')
+            .sender('no-reply@myapp.fano')
+    )
+);
+```
+
 ### Retrieve ILogger instance from container
 
 After logger factory is registered, you can access logger anywhere from application as shown in following code.
