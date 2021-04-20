@@ -129,6 +129,54 @@ And set `INDY_DIR` environment variable to point to Indy library base directory.
 ```
 $ export INDY_DIR="/path/to/Indy"
 ```
+## Sending email with Synapse
+
+Current implementation of `IMailer` interface supports sending email using Synapse, thorough class `TSynapseMailer`. To use it, register its factory class with [container](/dependency-container).
+
+```
+container.add('mailer', TSynapseMailerFactory.create());
+```
+
+```
+var amailer : IMailer;
+...
+amailer := container['mailer'] as IMailer;
+...
+```
+To be able to use `TSynapseMailer` you need to add conditional compilation define `USE_SYNAPSE`
+in your project.
+
+```
+{$DEFINE USE_SYNAPSE}
+```
+or add it via Free Pascal configuration file or commmand line.
+
+```
+-dUSE_SYNAPSE
+```
+
+You also need to tells Free Pascal directory of Synapse library. Add this in your
+compiler configuration file (for example in `build.cfg`).
+
+```
+#----------------------------------------------
+# Add $DEFINE USE_SYNAPSE to enable implementation
+# which depends on Synapse such as TSynapseMailer
+#----------------------------------------------
+-dUSE_SYNAPSE
+
+#----------------------------------------------
+# Set directory search for Synapse library
+# which depends on Synapse such as TSynapseMailer
+#----------------------------------------------
+-Fu$SYNAPSE_DIR$/source/lib
+```
+And set `SYNAPSE_DIR` environment variable to point to Synapse library base directory.
+
+```
+$ export SYNAPSE_DIR="/path/to/synapse"
+```
+
 ## Explore more
 
 - [Utilities](/utilities)
