@@ -16,7 +16,7 @@ To abstract away mail sender implementation, `IMailer` interface is provided. It
 
 ## Sending email with sendmail
 
-Current implementation of `IMailer` interface only supports sending email using sendmail binary, from [ssmtp library](https://linux.die.net/man/8/ssmtp) thorough class `TSendmailMailer`. To use it, register its factory class with [container](/dependency-container).
+Current implementation of `IMailer` interface supports sending email using sendmail binary, from [ssmtp library](https://linux.die.net/man/8/ssmtp) thorough class `TSendmailMailer`. To use it, register its factory class with [container](/dependency-container).
 
 ```
 container.add('mailer', TSendmailMailerFactory.create());
@@ -75,6 +75,60 @@ To test if your configuration works, try to send an email from command line
 $ echo -e 'Subject: test\n\nTesting ssmtp' | sendmail -v tousername@example.com
 ```
 
+## Sending email with Indy
+
+Current implementation of `IMailer` interface supports sending email using Indy, thorough class `TIndyMailer`. To use it, register its factory class with [container](/dependency-container).
+
+```
+container.add('mailer', TIndyMailerFactory.create());
+```
+
+```
+var amailer : IMailer;
+...
+amailer := container['mailer'] as IMailer;
+...
+```
+To be able to use `TIndyMailer` you need to add conditional compilation define `USE_INDY`
+in your project.
+
+```
+{$DEFINE USE_INDY}
+```
+or add it via Free Pascal configuration file or commmand line.
+
+```
+-dUSE_INDY
+```
+
+When using Indy, you need to be aware of [intentional memory leak issue of Indy library](/known-issues#indy-memory-leak-issue).
+
+You also need to tells Free Pascal directory of Indy library. Add this in your
+compiler configuration file (for example in `build.cfg`).
+
+```
+#----------------------------------------------
+# Add $DEFINE USE_INDY to enable implementation
+# which depends on Indy such as TIndyMailer
+#----------------------------------------------
+-dUSE_INDY
+
+#----------------------------------------------
+# Set directory search for Indy library
+# which depends on Indy such as TIndyMailer
+#----------------------------------------------
+-Fu$INDY_DIR$/Lib/Core
+-Fu$INDY_DIR$/Lib/Core/*
+-Fu$INDY_DIR$/Lib/Protocols
+-Fu$INDY_DIR$/Lib/Protocols/*
+-Fu$INDY_DIR$/Lib/System
+-Fu$INDY_DIR$/Lib/System/*
+```
+And set `INDY_DIR` environment variable to point to Indy library base directory.
+
+```
+$ export INDY_DIR="/path/to/Indy"
+```
 ## Explore more
 
 - [Utilities](/utilities)

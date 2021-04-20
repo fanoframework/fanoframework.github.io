@@ -145,6 +145,26 @@ $ sudo apt install libmysqlclient-dev
 
 When Fano Framework web application is connected to a database server, and then database shuts down while application is still running. When application shuts down, [it leaks memory](https://github.com/fanoframework/fano/issues/14). This issue is related to Free Pascal [bug report 37993](https://bugs.freepascal.org/view.php?id=37993). Memory leak only happens when database shuts down and never restart. Memory leak does not happen when database server shuts down and then restarts or when database does not runs at all.
 
+## <a name="indy-memory-leak-issue"></a>Indy memory leak issue.
+
+When using Indy library, you need to be aware of Indy's [intentional memory leak issue](https://github.com/IndySockets/Indy/issues/237). To avoid memory leak, you need to enable
+conditional compilation define `FREE_ON_FINAL` in all `IdCompilerDefines.inc` inside Indy library, which is disabled by default.
+
+From
+```
+{.$DEFINE FREE_ON_FINAL}
+{$UNDEF FREE_ON_FINAL}
+```
+to
+```
+{$DEFINE FREE_ON_FINAL}
+{.$UNDEF FREE_ON_FINAL}
+```
+
+Indy library also cause some warnings to be emitted during compilation. If your project is created using Fano CLI which by default use `-Sew` configuration for development type build (See `build.dev.cfg`) to stop compilation on error or warning.
+
+This may cause compilation to stop, so if you use Indy, you may want to make it relax by using `-Se` configuration which stops only on error.
+
 ## Explore more
 
 - [Getting Started](/getting-started)
