@@ -326,7 +326,7 @@ $ fanocli --project-cgi=Hello --with-session=file --type=ini
 
 ### Session requires middleware
 
-Because in Fano Framework, session support is implemented with middleware infrastructure, `--with-session` implies usage of `--with-middleware` so following command are identical
+Because in Fano Framework, session support is implemented with [middleware](/middlewares) infrastructure, `--with-session` implies usage of `--with-middleware` so following command are identical
 
 ```
 $ fanocli --project-cgi=Hello --with-session
