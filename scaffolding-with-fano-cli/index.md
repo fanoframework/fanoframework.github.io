@@ -36,7 +36,7 @@ If you use FreeBSD, after you run `config.setup.sh` but before run `build.sh` sc
 Follow installation instruction in Fano CLI [README.md](https://github.com/fanoframework/fano-cli/blob/master/README.md) document for more information or view Fano CLI Installation video below.
 
 
-[![Fano CLI Installation video](https://img.youtube.com/vi/B42X_WB_iPs/1.jpg)](https://www.youtube.com/watch?v=B42X_WB_iPs "Fano CLI Installation video")
+[![Fano CLI Installation video](/assets/images/fanocli.png)](https://www.youtube.com/watch?v=B42X_WB_iPs "Fano CLI Installation video")
 
 ## View Fano CLI Help
 
