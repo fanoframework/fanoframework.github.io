@@ -15,6 +15,7 @@ This tutorial is written for anyone new to Fano Framework. It is assumed that yo
 
 - [Free Pascal >= 3.0](https://www.freepascal.org)
 - [git](https://git-scm.com/)
+- [Libmicrohttpd](https://www.gnu.org/software/libmicrohttpd)
 - Text editor, vim, VSCode, Atom etc.
 - [Fano CLI](https://github.com/fanoframework/fano-cli)
 - Working Internet connection.
