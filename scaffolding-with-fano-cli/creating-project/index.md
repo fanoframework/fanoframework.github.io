@@ -181,7 +181,7 @@ $ git commit -m "Initial commit"
 ```
 
 ## Use libcurl in application
-If you want to use curl-based HTTP client such as [`THttpGet` class](https://github.com/fanoframework/fano/blob/master/src/Libs/HttpClient/Implementations/Curl/HttpGetImpl.pas), use `--with-curl` parameter. It adds conditional define `-dLIBCURL` in `build.cfg` file which causing libcurl library linked with application.
+If you want to use curl-based HTTP client such as [`THttpGet` class](https://github.com/fanoframework/fano/blob/master/src/Libs/HttpClient/Implementations/Curl/HttpGetImpl.pas), use `--with-curl` parameter. It adds conditional define `-dLIBCURL` in `defines.cfg` file which causing libcurl library linked with application.
 
 ```
 $ fanocli --project-scgi=hello --with-curl
