@@ -127,6 +127,18 @@ For Fedora-based distribution,
 ```
 $ sudo yum install libmicrohttpd-devel
 ```
+## <a name="missing-libcurl-development-package"></a>Missing Libcurl development package
+
+If you [use curl-based http client](/scaffolding-with-fano-cli/creating-project#use-libcurl-in-application) and get linking error
+
+```
+/usr/bin/ld : cannot find -lcurl
+```
+when running `build.sh` script. You need to install libcurl development package. For Debian-based distribution,
+
+```
+$ sudo apt install libcurl4-gnutls-dev
+```
 ## <a name="missing-etc-fpc-cfg"></a>Missing /etc/fpc.cfg
 
 `build.sh` script that [Fano CLI](/scaffolding-with-fano-cli) generates for each project, needs `/etc/fpc.cfg`. If you install Free Pascal to non default directory or using tool such as *[fpcupdeluxe](https://github.com/LongDirtyAnimAlf/fpcupdeluxe)*, it may show error about missing `/etc/fpc.cfg` file or `Fatal: Can't find unit system used by ...` error. To remedy this situation, just create symbolic link in `/etc` directory to actual `fpc.cfg` file. For example,
