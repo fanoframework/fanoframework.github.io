@@ -180,22 +180,14 @@ $ cd test-fano
 $ git commit -m "Initial commit"
 ```
 
-## Use libcurl in application
+## <a name="use-libcurl-in-application"></a>Use libcurl in application
 If you want to use curl-based HTTP client such as [`THttpGet` class](https://github.com/fanoframework/fano/blob/master/src/Libs/HttpClient/Implementations/Curl/HttpGetImpl.pas), use `--with-curl` parameter. It adds conditional define `-dLIBCURL` in `build.cfg` file which causing libcurl library linked with application.
 
 ```
 $ fanocli --project-scgi=hello --with-curl
 ```
-You need to install libcurl development package. For example
-```
-$ sudo apt install libcurl4-gnutls-dev
-```
+You need to install libcurl development package otherwise you get [missing libcurl error](/known-issues/#missing-libcurl-development-package).
 
-If you missed it, during build, you will get linking error
-
-```
-/usr/bin/ld : cannot find -lcurl
-```
 ## Explore more
 
 - [Deployment](/deployment)
