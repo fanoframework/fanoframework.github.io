@@ -110,4 +110,5 @@ In this tutorial, you have learned how to use Fano CLI to
 
 - [Step by Step Tutorials](/tutorials)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
+- [Deploy HTTP web application](/deployment/standalone-web-server)
 
