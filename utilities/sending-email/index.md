@@ -103,28 +103,7 @@ or add it via Free Pascal configuration file or commmand line.
 
 When using Indy, you need to be aware of [intentional memory leak issue of Indy library](/known-issues#indy-memory-leak-issue).
 
-You also need to tells Free Pascal directory of Indy library. Add this in your
-compiler configuration file (for example in `build.cfg`).
-
-```
-#----------------------------------------------
-# Add $DEFINE USE_INDY to enable implementation
-# which depends on Indy such as TIndyMailer
-#----------------------------------------------
--dUSE_INDY
-
-#----------------------------------------------
-# Set directory search for Indy library
-# which depends on Indy such as TIndyMailer
-#----------------------------------------------
--Fu$INDY_DIR$/Lib/Core
--Fu$INDY_DIR$/Lib/Core/*
--Fu$INDY_DIR$/Lib/Protocols
--Fu$INDY_DIR$/Lib/Protocols/*
--Fu$INDY_DIR$/Lib/System
--Fu$INDY_DIR$/Lib/System/*
-```
-And set `INDY_DIR` environment variable to point to Indy library base directory.
+You need to set `INDY_DIR` environment variable to point to Indy library base directory.
 
 ```
 $ export INDY_DIR="/path/to/Indy"
@@ -136,7 +115,7 @@ Current implementation of `IMailer` interface supports sending email using Synap
 ```
 container.add('mailer', TSynapseMailerFactory.create());
 ```
-
+When you need its instance, query it from service container.
 ```
 var amailer : IMailer;
 ...
@@ -155,22 +134,6 @@ or add it via Free Pascal configuration file or commmand line.
 -dUSE_SYNAPSE
 ```
 
-You also need to tells Free Pascal directory of Synapse library. Add this in your
-compiler configuration file (for example in `build.cfg`).
-
-```
-#----------------------------------------------
-# Add $DEFINE USE_SYNAPSE to enable implementation
-# which depends on Synapse such as TSynapseMailer
-#----------------------------------------------
--dUSE_SYNAPSE
-
-#----------------------------------------------
-# Set directory search for Synapse library
-# which depends on Synapse such as TSynapseMailer
-#----------------------------------------------
--Fu$SYNAPSE_DIR$/source/lib
-```
 And set `SYNAPSE_DIR` environment variable to point to Synapse library base directory.
 
 ```
