@@ -31,7 +31,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
 | [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [IPv6](#tipv6validator) |
 | [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) | [Base64](#tbase64validator) |
-
+| [Color](#tcolorvalidator) |
 
 ## Field availability
 
@@ -784,6 +784,14 @@ Data must be valid JSON.
 
 ```
 rule := TJsonValidator.create();
+```
+
+### <a name="tcolorvalidator"></a>TColorValidator
+
+Data must be valid hex color value such as `#ffffff` or `#fff`.
+
+```
+rule := TColorValidator.create(TRegex.create());
 ```
 
 ### TBaseValidator
