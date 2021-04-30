@@ -247,7 +247,7 @@ container.add(
     TDispatcherFactory.create(
         container.get('appMiddlewares') as IMiddlewareLinkList,
         aRouterInst as IRouteMatcher,
-        TRequestResponseFactory.create()    
+        TRequestResponseFactory.create()
     )
 );
 ```
@@ -306,6 +306,7 @@ Fano Framework provides several built-in middlewares.
 - `TValidationMiddleware`, middleware class which validate request. Read [Form Validation](/security/form-validation) for more information.
 - `TJsonContentTypeMiddleware`, middleware class which handle request with `application/json` in its header. For more information, read [Handling request with JSON body](/working-with-request#handling-request-with-json-body).
 - `TCacheControlMiddleware`, middleware class which adds `Cache-Control` response header. For more information, read [Http cache header](/working-with-response/http-cache-header).
+- `TStaticFilesMiddleware`, middleware class which serves static files. For more information, read [Serving static files](/working-with-response/serve-static-files).
 
 ### Group several middlewares as one
 
