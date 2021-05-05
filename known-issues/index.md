@@ -127,6 +127,11 @@ For Fedora-based distribution,
 ```
 $ sudo yum install libmicrohttpd-devel
 ```
+For FreeBSD,
+```
+$ sudo pkg install libmicrohttpd
+```
+
 ## <a name="missing-libcurl-development-package"></a>Missing Libcurl development package
 
 If you [use curl-based http client](/scaffolding-with-fano-cli/creating-project#use-libcurl-in-application) and get linking error
