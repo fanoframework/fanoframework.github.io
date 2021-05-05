@@ -131,7 +131,18 @@ For FreeBSD,
 ```
 $ sudo pkg install libmicrohttpd
 ```
+On FreeBSD 12, libmicrohttpd library is installed in `/usr/local/lib` which is not default directory where linker looks for library. If you get error 
 
+```
+ld-elf.so.1: Shared object "libmicrohttpd.so.12" not found
+```
+when you run your application, make sure that `/usr/local/lib` is included in linker library directory, for example by setting `LD_LIBRARY_PATH` variable
+
+```
+$ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+$ sudo ldconfig
+```
+or you can use FreePascal `-Fl` command line parameter, for example `-Fl/usr/local/lib`, after that rebuild application.
 ## <a name="missing-libcurl-development-package"></a>Missing Libcurl development package
 
 If you [use curl-based http client](/scaffolding-with-fano-cli/creating-project#use-libcurl-in-application) and get linking error
