@@ -157,7 +157,7 @@ result := TRedirectResponse.create(
 
 ## JSON response
 
-To simplify output JSON response, you can use `TJsonResponse` as shown in following code
+To output JSON response, you can use `TJsonResponse` as shown in following code
 
 ```
 function TMyController.handleRequest(
@@ -172,7 +172,7 @@ begin
     );
 end;
 ```
-You can also output JSON from `TJSONData` class or `TObject` with RTTI information with help of `TJsonSerializeable` and ``TJsonRttiSerializeable` class as shown on following code
+You can also output JSON from `TJSONData` class or `TObject` with RTTI information with help of `TJsonSerializeable` and ``TJsonRttiSerializeable` class as shown in following code
 
 ```
 uses
@@ -234,7 +234,7 @@ end;
 
 ## Binary response
 
-To simplify to output binary response such as image, you can use `TBinaryResponse` as shown in following code,
+To output binary response such as image, you can use `TBinaryResponse` as shown in following code,
 
 ```
 function TMyController.handleRequest(
