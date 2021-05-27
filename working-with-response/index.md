@@ -172,6 +172,65 @@ begin
     );
 end;
 ```
+You can also output JSON from `TJSONData` class or `TObject` with RTTI information with help of `TJsonSerializeable` and ``TJsonRttiSerializeable` class as shown on following code
+
+```
+uses
+    fpjson;
+
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+const FREE_PERSON_OBJ_AUTOMATICALLY = true;
+var
+    person : TJSONObject;
+begin
+    person := TJSONObject.create();
+    person.Add('FirstName', 'John');
+    person.Add('LastName', 'Doe');
+    result := TJsonResponse.create(
+        response.headers,
+        TJsonSerializeable.create(person, FREE_PERSON_OBJ_AUTOMATICALLY)
+    );
+end;
+```
+
+or using `TObject` with RTTI information.
+```
+//make sure to add RTTI information
+{$M+}
+
+type
+
+TPerson = class
+private
+    fFirstName : string;
+    fLastName : string;
+published
+    property firstName : string read fFirstName write fFirstName;
+    property lastName : string read fLastName write fLastName;
+end;
+
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+const FREE_PERSON_OBJ_AUTOMATICALLY = true;
+var
+    person : TPerson;
+begin
+    person := TPerson.create();
+    person.firstName := 'John';
+    person.lastName := 'Doe';
+    result := TJsonResponse.create(
+        response.headers,
+        TJsonRttiSerializeable.create(person, FREE_PERSON_OBJ_AUTOMATICALLY)
+    );
+end;
+```
 
 ## Binary response
 
