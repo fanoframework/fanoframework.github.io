@@ -93,7 +93,7 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 ## Send email examples
 
-[Fano Email](https://github.com/fanoframework/fano-email) demonstrates how to [send email](/utilities/sending-email).
+[Fano Email](https://github.com/fanoframework/fano-email) demonstrates how to [send email](/utilities/sending-email) while [Fano mail logger](https://github.com/fanoframework/fano-mail-logger) demonstrates [writing log to email address](/utilities/using-loggers).
 
 ## Password hash examples
 
