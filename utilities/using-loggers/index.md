@@ -110,6 +110,8 @@ that is prepended on email subject.
 To change how email subject and email body are composed, you can extends [`TMailLogger` class](https://github.com/fanoframework/fano/blob/development/src/Libs/Logger/MailLoggerImpl.pas)
 and override its `buildSubject()` and `buildMessage()` protected methods.
 
+[Fano Mail Logger](https://github.com/fanoframework/fano-mail-logger) is an example web application that demonstrates how to log messages as email.
+
 ### Logging to Database
 
 `TDbLogger` is logger implementation that will output log message to database. It requires instance of `IRdbms` which responsible to do database operation. Read [Database](/database) section for more information.
@@ -138,6 +140,7 @@ logger := TDbLogger.create(
     'context' //context column name
 );
 ```
+[Fano Db Logger](https://github.com/fanoframework/fano-db-logger) is an example web application that demonstrates how to log to MySQL database.
 
 ### Log to several medium
 
@@ -401,3 +404,4 @@ logger := container['logger'] as ILogger;
 - [Error Handler](/error-handler)
 - [Database](/database)
 - [Example web application that log messages to MySQL database](https://github.com/fanoframework/fano-db-logger)
+- [Example web application that log messages as email](https://github.com/fanoframework/fano-mail-logger)
