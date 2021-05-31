@@ -126,4 +126,5 @@ appMiddlewares
 
 - [Middleware example application](/examples)
 - [Working with Router](/working-with-router)
+- [Working with Response](/working-with-response)
 - [Middlewares](/middlewares)
