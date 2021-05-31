@@ -118,6 +118,7 @@ Fano Framework comes with several built-in `IResponse` implementations to simpli
 - `TResponse`, this class is mostly what you get from dispatcher when controller is invoked.
 - `TJSONResponse`. This is response that you may use to output JSON format. It set `Content-Type` header to `application/json`.
 - `TBinaryResponse`.This is response that you may need to send binary data to browser, such as image response. See [Fano App Image](https://github.com/fanoframework/fano-app-img) demo application to see how to return binary response.
+- `TFileResponse` is response for [serving static files](serve-static-files).
 - `TRedirectResponse` is response for doing HTTP redirection. Read [Redirection](#redirection-response) section on this document.
 - `THttpCodeResponse` is response for setting up HTTP status manually. Read [Response with HTTP Status Code](#response-with-status-code) for more information.
 - `TNotModifiedResponse` is response for HTTP 304. Read [Not modified response](#not-modified-response) for more information.
@@ -279,6 +280,10 @@ end;
 ```
 
 Please note that `TPDFDocument` is part of Free Pascal `fcl-pdf` library.
+
+## Static file response
+
+To output response from existing file, you can use `TFileResponse`. [Serving static files](serve-static-files) page explains in detail how to serve static files with `TFileResponse`.
 
 ## <a name="response-with-status-code"></a>Response with HTTP Status Code
 
