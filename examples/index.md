@@ -108,6 +108,10 @@ It is similar to session-related examples above but it compares password using p
 
 [Fano Ipv6](https://github.com/fanoframework/fano-ipv6) and [Fano MhdIpv6](https://github.com/fanoframework/fano-mhdipv6) example applications demonstrate how to [use IPv6 address](/working-with-application#use-ipv6-address).
 
+## Logger
+[Fano mail logger](https://github.com/fanoframework/fano-mail-logger) demonstrates writing log to email address. 
+While Fano Db logger example web application demonstrates how to [log messages to MySQL database](https://github.com/fanoframework/fano-db-logger). These examples demonstrate [logging functionality](/utilities/using-loggers) in Fano Framework.
+
 ## Explore more
 
 - [Getting started](/getting-started)
