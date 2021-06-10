@@ -362,6 +362,12 @@ var helloCtrlMiddleware : IMiddleware;
 helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 ```
 
+## Middleware issues
+
+### Middleware is not being called
+
+When you attach middleware to a route but middleware is not being called, make sure you use [dispatcher implementation which supports middleware](/dispatcher#set-dispatcher). Middleware support is not enabled by default.
+
 ## Performance consideration
 
 Using middleware adds overhead as request must go multiple execution points before reaching actual request handler. Also, you need to aware that each middleware will call next middleware recursively so you should limit number of middlewares in use.
