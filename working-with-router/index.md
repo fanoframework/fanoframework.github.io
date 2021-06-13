@@ -7,7 +7,7 @@ description: Tutorial on how to work with router in Fano Framework
 
 ## Router and route
 
-In Fano Framework, a route is an association rule between URL path pattern, HTTP method and code that handles it. Router manages one or more routes and match request URL path, extract data in it and select code that handles it. Router is any class implements `IRouter` interface.
+In Fano Framework, a route is an association rule between URL path pattern, HTTP method and code that handles it. Router manages one or more routes and match request URL path, extract data in it and select code that handles it (request handler instance, i.e., [controller](/working-with-controllers)). Router is any class implements `IRouter` interface.
 
 ### Creating route for GET method
 
@@ -98,7 +98,7 @@ If client opens `http://example.com/not/exists` through browser, our application
 
 ## <a name="route-builder"></a>Build application routes with route builder
 
-To build application routes, you need to create class that implements `IRouteBuilder` interface. 
+To build application routes, you need to create class that implements `IRouteBuilder` interface.
 ```
 IRouteBuilder = interface
     ['{46016416-B249-4258-B76A-7F5B55E8348D}']
@@ -305,9 +305,9 @@ container.add('router', TSimpleRouterFactory.create());
 ```
 container.add('router', TRouterFactory.create());
 ```
-If you need only static URL path pattern, you should use it. 
+If you need only static URL path pattern, you should use it.
 
-If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class which is good enough for most applications. 
+If you create application service provider inherit from `TBasicAppServiceProvider`, it will create default router using `TSimpleRouterFactory` class which is good enough for most applications.
 
 ## Replace router instance
 If you want to replace router with different implementation, you can override `buildRouter()` method of `TBasicAppServiceProvider`. For example,
@@ -326,12 +326,12 @@ begin
     ctnr.add('router', TRouterFactory.create());
     result := ctnr['router'] as IRouter;
     fRouteMatcher := result as IRouteMatcher;
-end;    
+end;
 
 function TMyAppProvider.getRouteMatcher() : IRouteMatcher;
 begin
     result := fRouteMatcher;
-end;    
+end;
 ```
 Note that `IRouteMatcher` is interface which is responsible to match request URL and `TRouter` implements it.
 
@@ -339,6 +339,7 @@ Note that `IRouteMatcher` is interface which is responsible to match request URL
 
 - [Dispatcher](/dispatcher).
 - [Middlewares](/middlewares).
+- [Working with Controller](/working-with-controller).
 - [IRouter source](https://github.com/fanoframework/fano/blob/master/src/Router/Contracts/RouterIntf.pas).
 - [IRoute source](https://github.com/fanoframework/fano/blob/master/src/Router/Contracts/RouteIntf.pas).
 - [IRouteMatcher source](https://github.com/fanoframework/fano/blob/master/src/Router/Contracts/RouteMatcherIntf.pas).

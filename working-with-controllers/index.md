@@ -123,7 +123,7 @@ uses
 type
 
     TUserController = class(TInterfacedObject, IRequestHandler)
-    private
+    public
         function createUser(
             const request : IRequest;
             const response : IResponse;
@@ -147,7 +147,7 @@ type
             const response : IResponse;
             const args : IRouteArgsReader
         ) : IResponse;
-    public
+
         function handleRequest(
             const request : IRequest;
             const response : IResponse;
@@ -212,6 +212,50 @@ implementation
         end;
     end;
 end.
+```
+You register route as follows
+
+```
+router.any('/users', TUserController.create());
+```
+
+## Use class method or function as request handler
+Fano Framework provides `TMethodRequestHandler` and `TFuncRequestHandler` adapter class which implements `IRequestHandler` interface to allow use of method or function as request handler. For example, using `TUserController` class above,
+
+```
+var
+    userCtrl : TUserController;
+
+router.get(
+    '/users/show/{id}',
+    TMethodRequestHandler.create(@userCtrl.showUser)
+);
+router.post(
+    '/users/create',
+    TMethodRequestHandler.create(@userCtrl.createUser)
+);
+router.put(
+    '/users/update',
+    TMethodRequestHandler.create(@userCtrl.updateUser)
+);
+```
+You can also use ordinary function,
+
+```
+function hello(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+begin
+    //handle view user
+    result := response;
+end;
+
+router.get(
+    '/users/show/{id}',
+    TFuncRequestHandler.create(@hello)
+);
 ```
 
 ## Explore more
