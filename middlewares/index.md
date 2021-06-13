@@ -308,7 +308,7 @@ Fano Framework provides several built-in middlewares.
 - `TCacheControlMiddleware`, middleware class which adds `Cache-Control` response header. For more information, read [Http cache header](/working-with-response/http-cache-header).
 - `TNoCacheMiddleware`, middleware class which adds `Cache-Control` response header to prevent browser from caching response.
 - `TStaticFilesMiddleware`, middleware class which serves static files. For more information, read [Serving static files](/working-with-response/serve-static-files).
-- `TThrottleMiddleware`, middleware class which limit rate of request to one ore more routes.
+- `TThrottleMiddleware`, middleware class which [limits rate of request](/utilities/rate-limit) to one or more routes.
 
 ### Group several middlewares as one
 
