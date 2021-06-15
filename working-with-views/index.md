@@ -224,6 +224,85 @@ var view : IView;
 view := TGroupView.create([headerView, contentView, footerView]);
 ```
 
+## Compose view with object inheritance
+Because instance of `IView` is just ordinary class. You can use Free Pascal object-oriented programming support to create complex view structure. For example if you have following base template
+
+```
+TBaseTemplate = class abstract (TInterfacedObject, IView)
+protected
+    function pageTitle() : string; virtual; abstract;
+    function headCss() : string; virtual; abstract;
+    function scriptJs() : string; virtual; abstract;
+    function mainContent() : string; virtual; abstract;
+public
+    function render(
+        const viewParams : IViewParameters;
+        const response : IResponse
+    ) : IResponse;
+end
+
+...
+function TBaseTemplate.render(
+    const viewParams : IViewParameters;
+    const response : IResponse
+) : IResponse;
+begin
+    response.body().write(
+        '<html>' +
+        '<head>' +
+            '<title> ' + pageTitle() +' </title>' +
+            '<style>.container { color : red }</style>' +
+            headCss() +
+        '</head>' +
+        '<body>' +
+        '<div class="container">' +
+            mainContent() +
+        '</div>' +
+        '<script src="jquery.js"></script>' +
+        scriptJss() +
+        '</body>' +
+        '<html>'
+    );
+    result := response;
+end;
+```
+For home template view, you can just inherit from TBaseTemplate
+
+```
+THomeTemplate = class (TBaseTemplate)
+protected
+    function pageTitle() : string; override;
+    function headCss() : string; override;
+    function scriptJs() : string; override;
+    function mainContent() : string; override;
+end
+...
+
+function THomeTemplate.pageTitle() : string;
+begin
+    result := 'Homepage';
+end;
+
+function THomeTemplate.headCss() : string;
+begin
+    //set any CSS required for home template
+    result := '<style>.home { font-size:1em; }</style>';
+end;
+
+function THomeTemplate.scriptJs() : string;
+begin
+    //set any JavaScript code required for home template
+    result := '<script></script>';
+end;
+
+function THomeTemplate.mainContent() :string;
+begin
+    //return main content of home template
+    result := '<p>Home template</p>';
+end;
+```
+For other page that share similar look and feel, just create another view class inherites from `TBaseTemplate`.
+
 ## Compose view from one or more view partials
 
 View partial is basically any class which implements `IViewPartial` interface. This interface has only one method `partial()` that implementor must provide.
