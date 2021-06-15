@@ -311,7 +311,7 @@ THomeTemplate will output
 <body>
     <div class="container"><p>Homepage content</p></div>
 <script src="jquery.js"></script>
-<scrip></script>
+<script></script>
 </body></html>
 ```
 
@@ -576,7 +576,7 @@ will result tags at bottom of HTML document.
 <body>
     <div class="container"><p>Homepage content</p></div>' +
 <script src="jquery.js"></script>
-<scrip></script>
+<script></script>
 <script src="hello.js"></script>
 <script src="thirdparty.js"></script>
 <script src="myapp.js"></script>
