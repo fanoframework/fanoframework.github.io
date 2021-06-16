@@ -7,7 +7,7 @@ description: Tutorial on how to limit rate of request with  utilities provided b
 
 ## Why limit request?
 
-![Rate limiting](/assets/images/rate-limit.jpg)
+![Rate limiting](/assets/images/rate-limit.jpg){:class="img-responsive"}
 
 (Image by Ludovic Charlet [unsplash.com](https://unsplash.com/photos/CGWK6k2RduY)).
 
