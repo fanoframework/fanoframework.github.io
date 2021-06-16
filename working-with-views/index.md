@@ -224,6 +224,99 @@ var view : IView;
 view := TGroupView.create([headerView, contentView, footerView]);
 ```
 
+## Compose view with object inheritance
+Because instance of `IView` is just ordinary class. You can use Free Pascal object-oriented programming support to create complex view structure. For example if you have following base template
+
+```
+TBaseTemplate = class abstract (TInterfacedObject, IView)
+protected
+    function pageTitle() : string; virtual; abstract;
+    function headCss() : string; virtual; abstract;
+    function scriptJs() : string; virtual; abstract;
+    function mainContent() : string; virtual; abstract;
+public
+    function render(
+        const viewParams : IViewParameters;
+        const response : IResponse
+    ) : IResponse;
+end
+
+...
+function TBaseTemplate.render(
+    const viewParams : IViewParameters;
+    const response : IResponse
+) : IResponse;
+begin
+    response.body().write(
+        '<html>' +
+        '<head>' +
+            '<title> ' + pageTitle() +' </title>' +
+            '<style>.container { color : red }</style>' +
+            headCss() +
+        '</head>' +
+        '<body>' +
+        '<div class="container">' +
+            mainContent() +
+        '</div>' +
+        '<script src="jquery.js"></script>' +
+        scriptJss() +
+        '</body>' +
+        '<html>'
+    );
+    result := response;
+end;
+```
+For home template view, you can just inherit from TBaseTemplate
+
+```
+THomeTemplate = class (TBaseTemplate)
+protected
+    function pageTitle() : string; override;
+    function headCss() : string; override;
+    function scriptJs() : string; override;
+    function mainContent() : string; override;
+end
+...
+
+function THomeTemplate.pageTitle() : string;
+begin
+    result := 'Homepage';
+end;
+
+function THomeTemplate.headCss() : string;
+begin
+    //set any CSS required for home template
+    result := '<style>.home { font-size:1em; }</style>';
+end;
+
+function THomeTemplate.scriptJs() : string;
+begin
+    //set any JavaScript code required for home template
+    result := '<script></script>';
+end;
+
+function THomeTemplate.mainContent() :string;
+begin
+    //return main content of home template
+    result := '<p>Homepage content</p>';
+end;
+```
+THomeTemplate will output
+
+```
+<html><head><title>Homepage</title>
+<style>.container { color : red }</style>
+<style>.home { font-size:1em; }</style>
+</head>
+<body>
+    <div class="container"><p>Homepage content</p></div>
+<script src="jquery.js"></script>
+<script></script>
+</body></html>
+```
+
+For other page that share similar look and feel, just create another view class inherites from `TBaseTemplate`.
+
 ## Compose view from one or more view partials
 
 View partial is basically any class which implements `IViewPartial` interface. This interface has only one method `partial()` that implementor must provide.
@@ -393,6 +486,102 @@ Fano Framework provides two `IViewPartial` interface implementation
 
 - [`TViewPartial`](https://github.com/fanoframework/fano/blob/master/src/Mvc/Views/ViewPartialImpl.pas), this class loads template from file, replace any variable placeholders and output it as string.
 - [`TStrViewPartial`](https://github.com/fanoframework/fano/blob/master/src/Mvc/Views/StrViewPartialImpl.pas), it is similar as above but loads template from string.
+
+## Compose view using view stack
+
+View stack is similar to view partial except that you can push string as many as you need and view stack will concat and render pushed string. It is inspired by Laravel Blade `@stack` and `@push` directive. However, in Fano Framework, we use `IViewStack` and `IViewPush` interface.
+
+To explain view stack, let use `TBaseTemplate` class in example above
+
+```
+TBaseTemplate = class abstract (TInterfacedObject, IView)
+private
+    fViewStack : IViewStack;
+protected
+    fViewPush : IViewPush;
+    function pageTitle() : string; virtual; abstract;
+    function headCss() : string; virtual; abstract;
+    function scriptJs() : string; virtual; abstract;
+    function mainContent() : string; virtual; abstract;
+public
+    constructor create();
+    function render(
+        const viewParams : IViewParameters;
+        const response : IResponse
+    ) : IResponse;
+end
+
+...
+constructor TBaseTemplate.create();
+begin
+    fViewStack := TViewStack.create(TTemplateParser.create());
+    fViewPush := fViewStack as IViewPush;
+end;
+
+function TBaseTemplate.render(
+    const viewParams : IViewParameters;
+    const response : IResponse
+) : IResponse;
+begin
+    response.body().write(
+        '<html>' +
+        '<head>' +
+            '<title> ' + pageTitle() +' </title>' +
+            '<style>.container { color : red }</style>' +
+            headCss() +
+        '</head>' +
+        '<body>' +
+        '<div class="container">' +
+            mainContent() +
+        '</div>' +
+        '<script src="jquery.js"></script>' +
+        scriptJss() +
+        fViewStack.stack('js', fViewParams) +
+        '</body>' +
+        '<html>'
+    );
+    result := response;
+end;
+```
+Please note that now we have view stack created and we setup `js` name where any pushed string will go. Let us use example `THomeTemplate` class above and use view push instance
+
+```
+THomeTemplate = class (TBaseTemplate)
+protected
+    ...
+    function pageTitle() : string; override;
+    function mainContent() : string; override;
+end
+...
+function THomeTemplate.pageTitle() : string;
+begin
+    result := 'Homepage';
+    fViewPush.push('js', '<script src="hello.js"></script>');
+end;
+
+function THomeTemplate.mainContent() : string;
+begin
+    fViewPush.push('js', '<script src="thirdparty.js"></script>');
+    result := '<p>Homepage content</p>';
+    fViewPush.push('js', '<script src="myapp.js"></script>');
+end;
+```
+will result tags at bottom of HTML document.
+
+```
+<html><head><title>Homepage</title>
+<style>.container { color : red }</style>
+<style>.home { font-size:1em; }</style>
+</head>
+<body>
+    <div class="container"><p>Homepage content</p></div>' +
+<script src="jquery.js"></script>
+<script></script>
+<script src="hello.js"></script>
+<script src="thirdparty.js"></script>
+<script src="myapp.js"></script>
+</body></html>
+```
 
 ## View for non HTML presentation
 
