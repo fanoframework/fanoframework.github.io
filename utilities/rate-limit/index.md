@@ -36,7 +36,7 @@ router.get(
 
 ## Change number of requests
 
-By default when you use `TThrottleMiddlewareFactory` as shown above, throttle middleware allows 1 request per second only. If you create another request before 1 second elapse, you get HTTP 429 error.
+By default when you use `TThrottleMiddlewareFactory` as shown above, throttle middleware allows 1 request per second only. If you make another request before 1 second elapse, you get HTTP 429 error.
 
 To change number of requests calls following factory methods:
 
