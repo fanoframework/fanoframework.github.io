@@ -226,7 +226,7 @@ implementation
 end.
 ```
 
-You can register throttle middleware with memory rate limiter but rate is loaded dynamically from database
+You can register throttle middleware with memory rate limiter but rate is loaded dynamically from [database](/database) as shown below.
 
 ```
 container.add(
