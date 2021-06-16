@@ -267,7 +267,9 @@ router.get(
 );
 ```
 
-[![TFuncRequestHandler video tutorial](/assets/images/func-as-controller.png){:class="image fit"}](https://youtu.be/-EG27KqI1ao "TFuncRequestHandler video tutorial") explains how to use this class.
+[![TFuncRequestHandler video tutorial](/assets/images/func-as-controller.png){:class="image fit"}](https://youtu.be/-EG27KqI1ao "TFuncRequestHandler video tutorial") 
+    
+ TFuncRequestHandler video tutorial explains how to use this class.
 
 ## Explore more
 
