@@ -7,8 +7,9 @@ description: Tutorial on how to limit rate of request with  utilities provided b
 
 ## Why limit request?
 
-![Rate limit](https://unsplash.com/photos/CGWK6k2RduY)
-Rate limiting (by Ludovic Charlet[unsplash.com](https://unsplash.com/photos/CGWK6k2RduY))
+![Rate limiting](/assets/images/rate-limit.jpg)
+(Image by Ludovic Charlet [unsplash.com](https://unsplash.com/photos/CGWK6k2RduY)).
+
 
 While developing API, we want to be able to maximize our application so that it handles request as many as it can. But we also want to avoid client overusing API and cause denial of service to other client or we want to allow paid clients to have bigger number of requests quota than free clients.
 
