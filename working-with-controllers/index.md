@@ -24,7 +24,8 @@ function handleRequest(
 - `args`, current route arguments. Read [Working with Router](/working-with-router) for more information about purpose of this object.
 
 ## Built-in IRequestHandler implementation
-Fano Framework provides `TAbstractController` and `TController` class.
+Fano Framework provides `TAbstractController`, `TController`,
+`TMethodRequestHandler` and `TFuncRequestHandler` class.
 
 ### TAbstractController
 [`TAbstractController` is an abstract class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/AbstractControllerImpl.pas). You need to derive and implements its `handleRequest()` method to be able to use it.
@@ -70,6 +71,14 @@ end.
 ```
 ### TController
 [`TController` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas). It extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template.
+
+### TMethodRequestHandler
+
+[`TMethodRequestHandler` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/MethodRequestHandlerImpl.pas). It allows [use of any class method as request handler](#method-function-as-request-handler) as long as it matches [`THandlerMethod`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas).
+
+### TFuncRequestHandler
+
+[`TFuncRequestHandler` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/FuncRequestHandlerImpl.pas). It allows [use of Pascal function as request handler](#method-function-as-request-handler) as long as it matches [`THandlerFunc`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas).
 
 
 ## Using TController class
@@ -219,7 +228,7 @@ You register route as follows
 router.any('/users', TUserController.create());
 ```
 
-## Use class method or function as request handler
+## <a name="method-function-as-request-handler">Use class method or function as request handler
 Fano Framework provides `TMethodRequestHandler` and `TFuncRequestHandler` adapter class which implements `IRequestHandler` interface to allow use of method or function as request handler. For example, using `TUserController` class above,
 
 ```
@@ -257,6 +266,7 @@ router.get(
     TFuncRequestHandler.create(@hello)
 );
 ```
+[View video tutorial](https://youtu.be/-EG27KqI1ao) on how to use `TFuncRequestHandler` class.
 
 ## Explore more
 
@@ -265,3 +275,4 @@ router.get(
 - [Working with Views](/working-with-views)
 - [Working with Models](/working-with-models)
 - [Working with Router](/working-with-router)
+- [Video tutorial how to use function as request handler](https://youtu.be/-EG27KqI1ao).
