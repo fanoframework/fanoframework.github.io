@@ -69,6 +69,18 @@ container.add(
 );
 ```
 
+`rate*()` methods as basically just set internal field of type `TRate`, which is, record declared as follows,
+
+```
+TRate = record
+    //number of operations allowed
+    operations : integer;
+
+    //interval in seconds
+    interval : integer;
+end;
+```
+
 ## Change how requests are identified
 To be able to tell which clients exceed limit, throttle middleware need to be able to indentify requests using instance of `IRequestIdentifier` interface.
 
@@ -212,20 +224,8 @@ implementation
     end;
 
 end.
-```
-`TRate` is record declared as follows,
 
-```
-TRate = record
-    //number of operations allowed
-    operations : integer;
-
-    //interval in seconds
-    interval : integer;
-end;
-```
-
-You can register throttle middleware with memory rate limiter but rate is load dynamically from database
+You can register throttle middleware with memory rate limiter but rate is loaded dynamically from database
 
 ```
 container.add(
@@ -243,3 +243,5 @@ container.add(
 
 - [Utilities](/utilities)
 - [Middlewares](/middlewares)
+- [TThrottleMiddleware source](https://github.com/fanoframework/fano/blob/master/src/Libs/Throttle/Implementations/ThrottleMiddlewareImpl.pas)
+- [TThrottleMiddlewareFactory source](https://github.com/fanoframework/fano/blob/master/src/Libs/Throttle/Implementations/Factories/ThrottleMiddlewareFactoryImpl.pas)
