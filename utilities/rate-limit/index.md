@@ -224,6 +224,7 @@ implementation
     end;
 
 end.
+```
 
 You can register throttle middleware with memory rate limiter but rate is loaded dynamically from database
 
