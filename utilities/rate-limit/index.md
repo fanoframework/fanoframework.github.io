@@ -243,7 +243,7 @@ container.add(
 ## Rate-limiting video tutorial
 
 
-[![Rate limiting video tutorial](/assets/images/func-as-controller.png){:class="image fit"}](https://youtu.be/dfmArIN4s-o "Rate limiting video tutorial")
+[![Rate limiting video tutorial](/assets/images/video-preview.png){:class="image fit"}](https://youtu.be/dfmArIN4s-o "Rate limiting video tutorial")
 
 Rate-limiting video tutorial explains how to use rate limit middleware to restrict number of request client can make.
 
