@@ -136,6 +136,10 @@ Read [Application Configuration](/configuration) for more information.
 
 Use `--with-session` to [add session support](/scaffolding-with-fano-cli#add-session-support). Read [Session documentation](/working-with-session) for more information.
 
+```
+$ fanocli --project-fcgi=test-fano --config=ini
+```
+
 ## Add middleware support
 
 Use `--with-middleware` to [add middleware support](/scaffolding-with-fano-cli#add-middleware-support). Read [Middleware documentation](/middlewares) for more information.
@@ -143,6 +147,10 @@ Use `--with-middleware` to [add middleware support](/scaffolding-with-fano-cli#a
 ## Add CSRF support
 
 Use `--with-csrf` to [add CSRF support](/scaffolding-with-fano-cli#add-csrf-support). Read [Cross-Site Request Forgery (CSRF) protection](/security/csrf-protection) for more information.
+
+## Add logger dependencies
+
+Use `--with-logger` to [add logger dependencies](/scaffolding-with-fano-cli#add-logger-dependencies) to [service container](/dependency-container). Read [Using Loggers](/utilities/using-loggers) for more information.
 
 ## Unrelated commit histories issue
 

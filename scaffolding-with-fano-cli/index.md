@@ -45,6 +45,24 @@ To view available commands, you can run
 ```
 $ fanocli --help
 ```
+or simply
+```
+$ fanocli
+```
+
+To view help of single command
+
+```
+$ fanocli --help --task=[name of task]
+```
+or
+```
+$ fanocli --task=[name of task]
+```
+For example
+```
+$ fanocli --task=project-scgi
+```
 
 ## <a name="creating-project"></a>Creating Web Application Project
 
@@ -348,6 +366,24 @@ $ fanocli --project-scgi=Hello --with-csrf
 ```
 $ fanocli --project-scgi=Hello --with-csrf
 $ fanocli --project-scgi=Hello --config --with-session --with-csrf
+```
+## <a name="add-logger-dependencies"></a>Add logger dependencies
+
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-logger`. If it is set, then during project creation, [logger](/utilities/using-loggers) dependencies is added to generated project.
+
+Add logger that store logs in file
+```
+$ fanocli --project-scgi=Hello --with-logger=file
+```
+
+Add logger that store logs in database
+```
+$ fanocli --project-scgi=Hello --with-logger=db
+```
+
+Add logger that store logs in [syslog](https://man7.org/linux/man-pages/man3/syslog.3.html)
+```
+$ fanocli --project-scgi=Hello --with-logger=syslog
 ```
 
 ## <a name="deployment"></a>Deployment
