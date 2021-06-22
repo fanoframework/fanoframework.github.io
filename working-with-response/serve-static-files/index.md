@@ -9,7 +9,7 @@ Web application needs to serve static files that seldom change during
 request response cycle such as JavaScript codes, cascading stylesheet files and also fonts and images.
 
 ## Serve static files with reverse proxy server
-If your application is running behind reverse proxy server, easiest way to serve static files is to let reverse proxy server does it for you. Thus your appplication can focus on problem it supposes to solve.
+If your application is running behind reverse proxy server, easiest way to serve static files is to let reverse proxy server does it for you. Thus your application can focus on problem it supposes to solve.
 
 For example if you use Nginx, you can use `try_files` which will try to serve files if it exists. If it does not then let your application handles it.
 

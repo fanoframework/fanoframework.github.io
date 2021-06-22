@@ -383,6 +383,8 @@ container.add(
     )
 );
 ```
+### Register logger dependencies
+You can automate [registering logger dependencies](/scaffolding-with-fano-cli#add-logger-depndencies) when scaffolding project with Fano CLI.
 
 ### Retrieve ILogger instance from container
 
