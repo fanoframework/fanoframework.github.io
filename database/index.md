@@ -223,6 +223,10 @@ finally
 end;
 ```
 
+## What can go wrong
+
+You may find thing does not work due to missing library for example you [do not have MySQL client library](/known-issues#missing-mysql-client-library) or [ODBC client library](/known-issues#missing-odbc-client-library) installed.
+
 ## Explore more
 
 - [Working with Models](/working-with-models)
