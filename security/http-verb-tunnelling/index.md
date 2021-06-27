@@ -14,14 +14,29 @@ To allow PUT, DELETE, OPTIONS, PATCH method to be used, developer can use POST m
 ```
 POST /delete HTTP/1.1
 Host: myapp.fano
+Content-type: application/json
+Content-length: 16
 X-Http-Method-Override: DELETE
+
+{"data":"value"}
+```
+
+Alternatively, you can also use special request body parameter `_method` like so.
+
+```
+POST /delete HTTP/1.1
+Host: myapp.fano
+Content-type: application/x-www-form-urlencoded
+Content-length: 25
+
+data=value&_method=DELETE
 ```
 
 In example above, `http://myapp.fano/delete` is assumed only handle DELETE request. Using apropriate header value, client can send as POST request which will be translated as DELETE request.
 
 ## Using HTTP verb tunnelling in Fano Framework
 
-To allow HTTP verb tunnelling, you need to use `TVerbTunnellingDispatcher` class as shown in following example code,
+To allow HTTP verb tunnelling, you need to use `TXDispatcher` or `TXSimpleDispatcher` class and `TVerbTunnellingRequestResponseFactory` as shown in following example code,
 
 ```
 function TAppServiceProvider.buildDispatcher(
@@ -32,9 +47,9 @@ function TAppServiceProvider.buildDispatcher(
 begin
     ctnr.add(
         GuidToString(IDispatcher),
-        TVerbTunnellingDispatcherFactory.create(
-            TSimpleDispatcherFactory.create(
-                routeMatcher,
+        TXSimpleDispatcherFactory.create(
+            ctnr[GuidToString(IRouter)] as IRouteMatcher,
+            TVerbTunnellingRequestResponseFactory.create(
                 TRequestResponseFactory.create()
             )
         )
@@ -44,7 +59,7 @@ end;
 ```
 
 Using this type of dispatcher, when Fano Framework receives POST request with
-`X-Http-Method-Override` header set, it uses verb set in header value instead.
+`X-Http-Method-Override` header set or request parameter `_method`, it uses verb set in header or parameter value instead.
 This new verb is tested against known HTTP verb (GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD).
 If not one of allowed methods, `EInvalidMethod` exception is raised.
 

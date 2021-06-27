@@ -20,3 +20,11 @@ description: Tutorial on how to work with some utilities provided by Fano Framew
 ## Client User-Agent Identification
 
 - [Identifying client user-agent](/utilities/identifying-client-user-agent)
+
+## Regular expression
+
+- [Working with regular expression](/utilities/regular-expression)
+
+## Rate limiting request
+
+- [Rate limiting request](/utilities/rate-limit)

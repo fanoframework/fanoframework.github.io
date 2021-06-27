@@ -222,7 +222,7 @@ ajaxOnly := TAjaxOnlyMiddleware.create();
 authOnly := TAuthOnlyMiddleware.create();
 ```
 
-## Attaching middleware to application middleware
+## <a name="attaching-middleware-to-application-middleware"></a>Attaching middleware to application middleware
 
 When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup one global `IMiddlewareLinkList` instances which stores list of middlewares applied globally to all routes. Read [Dispatcher](/dispatcher) for more information.
 
@@ -246,7 +246,8 @@ container.add(
     'dispatcher',
     TDispatcherFactory.create(
         container.get('appMiddlewares') as IMiddlewareLinkList,
-        aRouterInst as IRouteMatcher
+        aRouterInst as IRouteMatcher,
+        TRequestResponseFactory.create()
     )
 );
 ```
@@ -305,6 +306,9 @@ Fano Framework provides several built-in middlewares.
 - `TValidationMiddleware`, middleware class which validate request. Read [Form Validation](/security/form-validation) for more information.
 - `TJsonContentTypeMiddleware`, middleware class which handle request with `application/json` in its header. For more information, read [Handling request with JSON body](/working-with-request#handling-request-with-json-body).
 - `TCacheControlMiddleware`, middleware class which adds `Cache-Control` response header. For more information, read [Http cache header](/working-with-response/http-cache-header).
+- `TNoCacheMiddleware`, middleware class which adds `Cache-Control` response header to prevent browser from caching response.
+- `TStaticFilesMiddleware`, middleware class which serves static files. For more information, read [Serving static files](/working-with-response/serve-static-files).
+- `TThrottleMiddleware`, middleware class which [limits rate of request](/utilities/rate-limit) to one or more routes.
 
 ### Group several middlewares as one
 
@@ -359,6 +363,12 @@ var helloCtrlMiddleware : IMiddleware;
 ...
 helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 ```
+
+## Middleware issues
+
+### Middleware is not being called
+
+When you attach middleware to a route but middleware is not being called, make sure you use [dispatcher implementation which supports middleware](/dispatcher#set-dispatcher). Middleware support is not enabled by default.
 
 ## Performance consideration
 

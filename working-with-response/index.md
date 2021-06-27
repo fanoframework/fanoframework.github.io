@@ -118,6 +118,7 @@ Fano Framework comes with several built-in `IResponse` implementations to simpli
 - `TResponse`, this class is mostly what you get from dispatcher when controller is invoked.
 - `TJSONResponse`. This is response that you may use to output JSON format. It set `Content-Type` header to `application/json`.
 - `TBinaryResponse`.This is response that you may need to send binary data to browser, such as image response. See [Fano App Image](https://github.com/fanoframework/fano-app-img) demo application to see how to return binary response.
+- `TFileResponse` is response for [serving static files](serve-static-files).
 - `TRedirectResponse` is response for doing HTTP redirection. Read [Redirection](#redirection-response) section on this document.
 - `THttpCodeResponse` is response for setting up HTTP status manually. Read [Response with HTTP Status Code](#response-with-status-code) for more information.
 - `TNotModifiedResponse` is response for HTTP 304. Read [Not modified response](#not-modified-response) for more information.
@@ -157,7 +158,7 @@ result := TRedirectResponse.create(
 
 ## JSON response
 
-To simplify output JSON response, you can use `TJsonResponse` as shown in following code
+To output JSON response, you can use `TJsonResponse` as shown in following code
 
 ```
 function TMyController.handleRequest(
@@ -172,10 +173,69 @@ begin
     );
 end;
 ```
+You can also output JSON from `TJSONData` class or `TObject` with RTTI information with help of `TJsonSerializeable` and ``TJsonRttiSerializeable` class as shown in following code
+
+```
+uses
+    fpjson;
+
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+const FREE_PERSON_OBJ_AUTOMATICALLY = true;
+var
+    person : TJSONObject;
+begin
+    person := TJSONObject.create();
+    person.Add('FirstName', 'John');
+    person.Add('LastName', 'Doe');
+    result := TJsonResponse.create(
+        response.headers,
+        TJsonSerializeable.create(person, FREE_PERSON_OBJ_AUTOMATICALLY)
+    );
+end;
+```
+
+or using `TObject` with RTTI information.
+```
+//make sure to add RTTI information
+{$M+}
+
+type
+
+TPerson = class
+private
+    fFirstName : string;
+    fLastName : string;
+published
+    property firstName : string read fFirstName write fFirstName;
+    property lastName : string read fLastName write fLastName;
+end;
+
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+const FREE_PERSON_OBJ_AUTOMATICALLY = true;
+var
+    person : TPerson;
+begin
+    person := TPerson.create();
+    person.firstName := 'John';
+    person.lastName := 'Doe';
+    result := TJsonResponse.create(
+        response.headers,
+        TJsonRttiSerializeable.create(person, FREE_PERSON_OBJ_AUTOMATICALLY)
+    );
+end;
+```
 
 ## Binary response
 
-To simplify to output binary response such as image, you can use `TBinaryResponse` as shown in following code,
+To output binary response such as image, you can use `TBinaryResponse` as shown in following code,
 
 ```
 function TMyController.handleRequest(
@@ -220,6 +280,10 @@ end;
 ```
 
 Please note that `TPDFDocument` is part of Free Pascal `fcl-pdf` library.
+
+## Static file response
+
+To output response from existing file, you can use `TFileResponse`. [Serving static files](serve-static-files) page explains in detail how to serve static files with `TFileResponse`.
 
 ## <a name="response-with-status-code"></a>Response with HTTP Status Code
 

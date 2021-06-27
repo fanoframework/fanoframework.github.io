@@ -36,6 +36,12 @@ Following steps explain how to build and preview site locally, before you commit
 
 Follow [Jekyll installation manual](https://jekyllrb.com/docs/installation/).
 
+#### Install depencencies
+
+Run
+```
+$ bundle install
+```
 #### Serve site locally
 
 Change active directory to this repository and run
@@ -45,6 +51,17 @@ $ bundle exec jekyll serve
 ```
 
 Open browser and go to URL `http://127.0.0.1:4000/`
+
+When you run command above and you get following error
+```
+Can't find gem bundler (>= 0.a) with executable bundle (Gem::GemNotFoundException)
+```
+
+This is [RubyGemas and Bundler bug](https://bundler.io/blog/2019/05/14/solutions-for-cant-find-gem-bundler-with-executable-bundle.html). To remedy this, you need to install Bundler exact version used in `Gemfile.lock`.
+
+```
+$ gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
+```
 
 ### Jekyll Themes
 

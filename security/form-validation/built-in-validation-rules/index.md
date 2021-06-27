@@ -31,7 +31,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
 | [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [IPv6](#tipv6validator) |
 | [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) | [Base64](#tbase64validator) |
-
+| [Color](#tcolorvalidator) | [Start With](#tstartwithvalidator) | [End With](#tendwithvalidator) |
 
 ## Field availability
 
@@ -178,6 +178,41 @@ Data must be in Base64-encoded string format.
 
 ```
 rule := TBase64Validator.create();
+```
+
+### <a name="tstartwithvalidator"></a>TStartWithValidator
+
+Data must start with a string value.
+
+```
+rule := TStartWithValidator.create('Hello');
+```
+This validator will give result as shown in following example input,
+
+```
+'Hello' ==> pass
+'HelloWorld' ==> pass
+'Hello Hello' ==> pass
+'myHello' ==> fail
+'hello' ==> fail
+'hello world' ==> fail
+```
+### <a name="tendwithvalidator"></a>TEndWithValidator
+
+Data must end with a string value.
+
+```
+rule := TEndWithValidator.create('Hello');
+```
+This validator will give result as shown in following example input,
+
+```
+'Hello' ==> pass
+'myHello' ==> pass
+'Hello Hello' ==> pass
+'Hello ' ==> fail
+'Hello world' ==> fail
+'hello world' ==> fail
 ```
 
 ### <a name="tregexvalidator"></a>TRegexValidator
@@ -784,6 +819,14 @@ Data must be valid JSON.
 
 ```
 rule := TJsonValidator.create();
+```
+
+### <a name="tcolorvalidator"></a>TColorValidator
+
+Data must be valid hex color value such as `#ffffff` or `#fff`.
+
+```
+rule := TColorValidator.create(TRegex.create());
 ```
 
 ### TBaseValidator

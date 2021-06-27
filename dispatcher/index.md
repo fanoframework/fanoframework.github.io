@@ -106,10 +106,10 @@ container.add(
     )
 );
 ```
-## Set dispatcher
+## <a name="set-dispatcher"></a> Set dispatcher
 
-Fano Framework allows application to change dispatcher implementation to use by
-overriding `buildDispatcher()` method of `TBasicServiceProvider` class. In this method implementation, you must returns
+Fano Framework allows application to change dispatcher implementation to use, by
+overriding protected `buildDispatcher()` method of `TBasicServiceProvider` class. In this method implementation, you must returns
 instance of dispatcher.
 
 ```
@@ -118,6 +118,40 @@ begin
     result := container['dispatcher'] as IDispatcher;
 end;
 ```
+
+If you use Fano CLI to [scaffold your web application project](/scaffolding-with-fano-cli), you can declared `buildDispatcher()` in `bootstrap.pas` file as shown in following example.
+
+```
+TAppServiceProvider = class(TDaemonAppServiceProvider)
+protected
+    function buildDispatcher(
+        const ctnr : IDependencyContainer;
+        const routeMatcher : IRouteMatcher;
+        const config : IAppConfiguration
+    ) : IDispatcher; override;
+    ...
+end;
+...
+function TAppServiceProvider.buildDispatcher(
+    const ctnr : IDependencyContainer;
+    const routeMatcher : IRouteMatcher;
+    const config : IAppConfiguration
+) : IDispatcher;
+begin
+    ctnr.add('appMiddlewares', TMiddlewareListFactory.create());
+
+    ctnr.add(
+        'my-dispatcher',
+        TDispatcherFactory.create(
+            ctnr['appMiddlewares'] as IMiddlewareLinkList,
+            routeMatcher,
+            TRequestResponseFactory.create()
+        )
+    );
+    result := ctnr['my-dispatcher'] as IDispatcher;
+end;
+```
+See [example of adding dispatcher with middleware support](https://github.com/fanoframework/fano-csrf/blob/master/src/bootstrap.pas).
 
 ## Explore more
 

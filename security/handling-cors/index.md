@@ -76,7 +76,10 @@ CORS middleware is executed for all application routes.
 ```
 globalMiddlewares.add(container.get('cors') as IMiddleware);
 ```
-
+or with array-like syntax
+```
+globalMiddlewares.add(container['cors'] as IMiddleware);
+```
 ## Configure CORS settings
 
 `TBaseCorsMiddlewareFactory` class provides several methods to help configure CORS

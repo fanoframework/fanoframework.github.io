@@ -49,6 +49,14 @@ Because it will not change any web server configuration, you do not need to run 
 $ fanocli --deploy-http=myapp.me --stdout
 ```
 
+### <a name="change-host-and-port"></a>Change host and port
+
+By default, Fano CLI, `--deploy-http` parameter will use `127.0.0.1` and `20477` as default host and port respectively. To use different value, you can edit generated virtual host configuration file or use `--host`, `--port` parameters when using `--deploy-http`.
+
+```
+$ sudo fanocli --deploy-http=myapp.me --host=192.168.2.2 --port=4000
+```
+
 ## Apache with mod_proxy_http module
 
 To deploy as http application with [mod_proxy_http](https://httpd.apache.org/docs/2.4/mod/mod_proxy_http.html), you need to have `mod_proxy_http` installed and loaded. This module is installed but not enabled by default.
@@ -145,6 +153,27 @@ Change `proxy_pass` to match host and port where application is listening.
 
 Last two `location` configurations tells Nginx to serve files directly if exists, otherwise pass it to our application.
 
+## Running on port 80 (http) or 443 (https)
+
+Ports below 1024 can be opened only by root. If you want to serve HTTP request directly without reverse proxy, there are options
+
+### Redirect connections using firewall
+You can redirect connections on port 80 to your application port, 8080 for example. Run as root
+```
+# iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+```
+This has disadvantage in multi-user systems. If your application is shutdown, other users may bind to port 8080 and accidentally intercepting traffic to port 80 which may not what they want.
+
+### Use setuid
+
+Run as root to bind port 80 and drop privileges and become lower privileged user as soon as port is successfully opened. This is what web server such Apache or nginx used.
+
+### Use CAP_NET_BIND_SERVICE
+Linux kernel since 2.6.24 has capability to mark executable with `CAP_NET_BIND_SERVICE` capability to allow bind to port. 
+```
+sudo apt-get install libcap2-bin 
+sudo setcap 'cap_net_bind_service=+ep' /path/to/program
+```
 ## Issue with firewall
 
 In Fedora-based distribution, firewall is active by default. Read [Issue with firewall](/deployment/scgi#issue-with-firewall) for more information.
@@ -159,4 +188,5 @@ Running http application through reverse proxy may be subject to strict security
 - [Deploy as SCGI application](/deployment/scgi)
 - [Deploy as uwsgi application](/deployment/uwsgi)
 - [Deploy Fano application with load balancer](/deployment/load-balancer-setup)
+- [Creating HTTPS web application](/tutorials/creating-https-application)
 - [Back to Deployment](/deployment)

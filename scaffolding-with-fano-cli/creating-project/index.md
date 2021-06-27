@@ -136,9 +136,21 @@ Read [Application Configuration](/configuration) for more information.
 
 Use `--with-session` to [add session support](/scaffolding-with-fano-cli#add-session-support). Read [Session documentation](/working-with-session) for more information.
 
+```
+$ fanocli --project-fcgi=test-fano --config=ini
+```
+
 ## Add middleware support
 
 Use `--with-middleware` to [add middleware support](/scaffolding-with-fano-cli#add-middleware-support). Read [Middleware documentation](/middlewares) for more information.
+
+## Add CSRF support
+
+Use `--with-csrf` to [add CSRF support](/scaffolding-with-fano-cli#add-csrf-support). Read [Cross-Site Request Forgery (CSRF) protection](/security/csrf-protection) for more information.
+
+## Add logger dependencies
+
+Use `--with-logger` to [add logger dependencies](/scaffolding-with-fano-cli#add-logger-dependencies) to [service container](/dependency-container). Read [Using Loggers](/utilities/using-loggers) for more information.
 
 ## Unrelated commit histories issue
 
@@ -176,22 +188,14 @@ $ cd test-fano
 $ git commit -m "Initial commit"
 ```
 
-## Use libcurl in application
-If you want to use curl-based HTTP client such as [`THttpGet` class](https://github.com/fanoframework/fano/blob/master/src/Libs/HttpClient/Implementations/Curl/HttpGetImpl.pas), use `--with-curl` parameter. It adds conditional define `-dLIBCURL` in `build.cfg` file which causing libcurl library linked with application.
+## <a name="use-libcurl-in-application"></a>Use libcurl in application
+If you want to use curl-based HTTP client such as [`THttpGet` class](https://github.com/fanoframework/fano/blob/master/src/Libs/HttpClient/Implementations/Curl/HttpGetImpl.pas), use `--with-curl` parameter. It adds conditional define `-dLIBCURL` in `defines.cfg` file which causing libcurl library linked with application.
 
 ```
 $ fanocli --project-scgi=hello --with-curl
 ```
-You need to install libcurl development package. For example
-```
-$ sudo apt install libcurl4-gnutls-dev
-```
+You need to install libcurl development package otherwise you get [missing libcurl error](/known-issues/#missing-libcurl-development-package).
 
-If you missed it, during build, you will get linking error
-
-```
-/usr/bin/ld : cannot find -lcurl
-```
 ## Explore more
 
 - [Deployment](/deployment)

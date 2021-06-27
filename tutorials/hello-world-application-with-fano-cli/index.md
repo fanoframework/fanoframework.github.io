@@ -17,7 +17,7 @@ This tutorial is written for anyone new to Fano Framework. It is assumed that yo
 - [git](https://git-scm.com/)
 - [Apache 2.4](https://httpd.apache.org/)
 - Text editor, vim, VSCode, Atom etc.
-- [Fano CLI](https://github.com/fanoframework/fano-cli)
+- [Fano CLI](https://github.com/fanoframework/fano-cli). Read [Fano CLI installation](/scaffolding-with-fano-cli/#installation) or [view video tutorial](https://www.youtube.com/watch?v=B42X_WB_iPs)
 - Working Internet connection.
 - Root privilege.
 

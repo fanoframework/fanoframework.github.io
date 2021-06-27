@@ -99,6 +99,21 @@ container.add(
 );
 ```
 
+## Prevent browser from caching response
+To prevent browser from caching response, you can use something like following example
+```
+container.add(
+    'no-cache',
+    TCacheControlMiddlewareFactory.create()
+        .noStore()
+        .mustRevalidate()
+);
+```
+or you can use `TNoCacheMiddleware` which specifically provided for this purpose
+```
+container.add('no-cache', TNoCacheMiddlewareFactory.create());
+```
+
 ## Explore more
 
 - [Working with Request](/working-with-request)

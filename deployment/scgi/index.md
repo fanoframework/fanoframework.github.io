@@ -53,6 +53,14 @@ Because it will not change any web server configuration, you do not need to run 
 $ fanocli --deploy-scgi=myapp.me --stdout
 ```
 
+### <a name="change-host-and-port"></a>Change host and port
+
+By default, Fano CLI, `--deploy-scgi` parameter will use `127.0.0.1` and `20477` as default host and port respectively. To use different value, you can edit generated virtual host configuration file or use `--host`, `--port` parameters when using `--deploy-scgi`.
+
+```
+$ sudo fanocli --deploy-scgi=myapp.me --host=192.168.2.2 --port=4000
+```
+
 ## Apache with mod_proxy_scgi module
 
 To deploy as SCGI application with [mod_proxy_scgi](https://httpd.apache.org/docs/2.4/mod/mod_proxy_scgi.html)

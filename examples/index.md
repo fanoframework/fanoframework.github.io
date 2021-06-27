@@ -12,22 +12,22 @@ generated with [Fano CLI](https://github.com/fanoframework/fano-cli), command li
 
 List of getting started web application for various supported protocol, i.e [CGI](https://tools.ietf.org/html/rfc3875), [FastCGI](http://www.mit.edu/~yandros/doc/specs/fcgi-spec.html), [SCGI](http://python.ca/scgi/protocol.txt), [uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/Protocol.html) and http.
 
-- [Basic CGI web application example](https://github.com/fanoframework/fano-app).
+- [Basic CGI web application example](https://github.com/fanoframework/fano-app). [View video tutorial](https://youtu.be/bnOqoUBOx7o).
 - [Fano Fcgid](https://github.com/fanoframework/fano-fcgid).
 - [Example FastCGI/CGI web application which can be deployed as FastCGI with mod_fcgid or as CGI](https://github.com/fanoframework/fano-cgi-fcgi).
 - [Example FastCGI web application listen on Unix domain socket](https://github.com/fanoframework/fano-fcgi-unix).
-- [Example FastCGI web application listen on TCP port](https://github.com/fanoframework/fano-fastcgi).
+- [Example FastCGI web application listen on TCP port](https://github.com/fanoframework/fano-fastcgi). [View Scaffold FastCGI web application video tutorial](https://youtu.be/Z4Zmp-7Cqe4)
 - [Example web application using scgi protocol](https://github.com/fanoframework/fano-scgi).
-- [Example web application using uwsgi protocol](https://github.com/fanoframework/fano-uwsgi).
+- [Example web application using uwsgi protocol](https://github.com/fanoframework/fano-uwsgi). [View step by step video tutorial](https://youtu.be/BhuPoNMDuwk).
 - [Example web application using http protocol](https://github.com/fanoframework/fano-http).
 
 ## MIME types web application
 
 Following example applications show how to [work with response](/working-with-response) other than HTML page, such as image, PDF and JSON data.
 
-- [Image generator CGI web application](https://github.com/fanoframework/fano-app-img) shows how to output image that is generated on-the fly.
+- [Image generator CGI web application](https://github.com/fanoframework/fano-app-img) shows how to output image that is generated on-the fly. [View video tutorial](https://youtu.be/HCLzhgOfWJ8)
 - [Fano Api](https://github.com/fanoframework/fano-api) demonstrates how to return JSON response.
-- [Fano Pdf](https://github.com/fanoframework/fano-pdf) demonstrates how to generate PDF document on the fly.
+- [Fano Pdf](https://github.com/fanoframework/fano-pdf) demonstrates how to generate PDF document on the fly. [View step by step video tutorial](https://youtu.be/kEjFaOMi888).
 
 ## MVC web application
 
@@ -93,7 +93,7 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 ## Send email examples
 
-[Fano Email](https://github.com/fanoframework/fano-email) demonstrates how to [send email](/utilities/sending-email).
+[Fano Email](https://github.com/fanoframework/fano-email) demonstrates how to [send email](/utilities/sending-email) while [Fano mail logger](https://github.com/fanoframework/fano-mail-logger) demonstrates [writing log to email address](/utilities/using-loggers).
 
 ## Password hash examples
 
@@ -107,6 +107,14 @@ It is similar to session-related examples above but it compares password using p
 ## IPv6 address examples
 
 [Fano Ipv6](https://github.com/fanoframework/fano-ipv6) and [Fano MhdIpv6](https://github.com/fanoframework/fano-mhdipv6) example applications demonstrate how to [use IPv6 address](/working-with-application#use-ipv6-address).
+
+## Logger
+[Fano mail logger](https://github.com/fanoframework/fano-mail-logger) demonstrates writing log to email address.
+While Fano Db logger example web application demonstrates how to [log messages to MySQL database](https://github.com/fanoframework/fano-db-logger). These examples demonstrate [logging functionality](/utilities/using-loggers) in Fano Framework.
+
+## Rate-limit
+
+[Rate-limiting demo application](https://github.com/fanoframework/fano-rate-limiting) demonstrates how to limit number of request a client can make. [View video tutorial](https://youtu.be/dfmArIN4s-o).
 
 ## Explore more
 

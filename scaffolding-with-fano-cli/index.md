@@ -6,7 +6,7 @@ description: Tutorial how to use Fano CLI to scaffold web application using Fano
 
 ## What is Fano CLI?
 
-Fano Framework allows many its core functionalities to be configured or replaced with different implementation. This has drawback. You need many boilerplate code to create a single project.
+Fano Framework allows many its core functionalities to be configured or replaced with different implementation. This has drawback. You need many boilerplate codes to create a single project.
 
 [Fano CLI](https://github.com/fanoframework/fano-cli) is command line application
 to help scaffolding [Fano Framework](https://github.com/fanoframework/fano) web application project. It helps tedious tasks such as
@@ -33,7 +33,10 @@ If you do not want to copy to `/usr/local/bin`, just add `fanocli` executable pa
 
 If you use FreeBSD, after you run `config.setup.sh` but before run `build.sh` script, edit`build.cfg` and replace line `-Tlinux` with `-Tfreebsd`.
 
-Follow installation instruction in Fano CLI [README.md](https://github.com/fanoframework/fano-cli/blob/master/README.md) document for more information.
+Follow installation instruction in Fano CLI [README.md](https://github.com/fanoframework/fano-cli/blob/master/README.md) document for more information or view Fano CLI Installation video below.
+
+
+[![Fano CLI Installation video](/assets/images/fanocli.png)](https://www.youtube.com/watch?v=B42X_WB_iPs "Fano CLI Installation video")
 
 ## View Fano CLI Help
 
@@ -41,6 +44,24 @@ To view available commands, you can run
 
 ```
 $ fanocli --help
+```
+or simply
+```
+$ fanocli
+```
+
+To view help of single command
+
+```
+$ fanocli --help --task=[name of task]
+```
+or
+```
+$ fanocli --task=[name of task]
+```
+For example
+```
+$ fanocli --task=project-scgi
 ```
 
 ## <a name="creating-project"></a>Creating Web Application Project
@@ -323,7 +344,7 @@ $ fanocli --project-cgi=Hello --with-session=file --type=ini
 
 ### Session requires middleware
 
-Because in Fano Framework, session support is implemented with middleware infrastructure, `--with-session` implies usage of `--with-middleware` so following command are identical
+Because in Fano Framework, session support is implemented with [middleware](/middlewares) infrastructure, `--with-session` implies usage of `--with-middleware` so following command are identical
 
 ```
 $ fanocli --project-cgi=Hello --with-session
@@ -331,6 +352,39 @@ $ fanocli --project-cgi=Hello --with-session --with-middleware
 ```
 
 Please read [Working with Session](/working-with-session) for more information about session.
+
+## <a name="add-csrf-support"></a>Add CSRF support
+
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-csrf`. If it is set, then during project creation, [Cross-Site Request Forgery (CSRF) protection](/security/csrf-protection) is added to generated project.
+
+```
+$ fanocli --project-scgi=Hello --with-csrf
+```
+
+`--with-csrf` adds `--config` and `--with-session` parameters implicitly, so folowing command generate similar project.
+
+```
+$ fanocli --project-scgi=Hello --with-csrf
+$ fanocli --project-scgi=Hello --config --with-session --with-csrf
+```
+## <a name="add-logger-dependencies"></a>Add logger dependencies
+
+Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.e, `--project*` commands, accept additional parameter `--with-logger`. If it is set, then during project creation, [logger](/utilities/using-loggers) dependencies is added to generated project.
+
+Add logger that store logs in file
+```
+$ fanocli --project-scgi=Hello --with-logger=file
+```
+
+Add logger that store logs in database
+```
+$ fanocli --project-scgi=Hello --with-logger=db
+```
+
+Add logger that store logs in [syslog](https://man7.org/linux/man-pages/man3/syslog.3.html)
+```
+$ fanocli --project-scgi=Hello --with-logger=syslog
+```
 
 ## <a name="deployment"></a>Deployment
 
@@ -384,6 +438,56 @@ $ sudo systemctl stop hello
 
 ```
 $ sudo fanocli --daemon-sysd=hello --user=fano --bin=/home/my.fano/bin/myapp.bin
+```
+
+## Convert text file content into Pascal string variable declaration
+To allow include HTML file directly as an include file, you can convert it into Pascal string variable declaration using `--txt2inc` command.
+
+For example, if you have file `index.html` with content as follows
+
+```
+<html><head></head>
+<body></body></html>
+```
+To convert it as include file, run
+
+```
+$ fanocli --txt2inc --src=index.html --dst=index.html.inc --var=htmlTemplate
+```
+It will create `index.html.inc` file with content as follows,
+
+```
+htmlTemplate : string =
+    '<html><head></head>' + LineEnding +
+    '<body></body></html>';
+```
+which you can include it in Pascal code
+
+```
+procedure print();
+var
+    {$INCLUDE index.html.inc}
+begin
+    writeln(htmlTemplate);
+end;
+```
+### Parameters
+Parameter `--src` tells source file path to convert. If it is not set or empty, STDIN will be used. If it is set but file does not exist, error is generated.
+
+Parameter `--dst` tells destination file path. If it is not set or empty and `--src` is set then value of `--src` is concatenated with `.inc` file extension. If it is not set or empty and `--src` is not set, STDOUT will be used. If `--dst` is set but file does exist, error is generated to avoid accidentally overwriting existing file. To force overwriting existing file, add `--force` parameter.
+
+Parameter `--var` sets variable name to use for declaration. If it is not set, then `myStr` is used.
+
+For example
+
+```
+$ printf "<html><head></head>\r\n<body></body></html>" | fanocli --txt2inc
+
+{-------------begin----------------}
+myStr : string =
+    '<html><head></head>' + LineEnding +
+    '<body></body></html>';
+{-------------end------------------}
 ```
 
 ## Build
