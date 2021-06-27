@@ -64,6 +64,47 @@ db.connect('', 'your_data.db', '', '', 0);
 
 It will open database connection which is stored in `your_data.db` file.
 
+### ODBC
+
+If you use database which not yet supported directly by FreePascal sqldb library you may use ODBC connection.
+`TOdbcDb` class is thin wrapper for `TODBCConnection` class which implements `IRdbms` interface.
+
+For example, if you have `/etc/odbcinst.ini` with content as follows
+
+```
+[my-mariadb-odbc-driver]
+Description = MariaDB Connector/ODBC v.3.0
+Driver = /usr/lib/libmaodbc.so
+```
+and content of `/etc/odbc.ini`
+
+```
+[my-app-db]
+Description=My App Database
+Driver=my-mariadb-odbc-driver
+SERVER=localhost
+PORT=3306
+USER=<your username>
+PASSWORD=<your password>
+DATABASE=<database name>
+```
+To connect to database using `my-app-db` DSN, set database parameter with name of DSN
+like so
+```
+var db : IRdbms;
+...
+db := TOdbcDb.create();
+db.connect('', 'my-app-db', '', '', 0);
+```
+If you want to change value, for example to use different port than what is defined in `/etc/odbc.ini`, just fill port parameter with desired value
+
+```
+var db : IRdbms;
+...
+db := TOdbcDb.create();
+db.connect('', 'my-app-db', '', '', 3307);
+```
+
 ## Registering IRdbms instance in dependency container
 
 You can register `IRdbms` instance in [dependency container](/dependency-container) so that you can access its instance easily.
@@ -83,25 +124,48 @@ container.add(
     )
 );
 ```
-Then in your code where `IRdbms` instance is required, just get it from dependency container as shown in following code.
+Replace `TMysqlDbFactory` with `TPostgreSqlDbFactory`, `TFirebirdSqlDbFactory`,
+`TSQLiteDbFactory`, `TOdbcDbFactory` for Postgresql, Firebird, SQLite database and ODBC respectively.
+
+For `TOdbcDbFactory`, using ODBC with DSN, you can register simply by using its DSN name for example
 
 ```
-var rdbms : IRdbms;
-...
-rdbms := container['db'] as IRdbms;
+container.add(
+    'db',
+    TOdbcDbFactory.create()
+        .database('my-app-d')
+);
 ```
-Replace `TMysqlDbFactory` with `TPostgreSqlDbFactory`, `TFirebirdSqlDbFactory`,
-`TSQLiteDbFactory` for Postgresql, Firebird and SQLite database respectively.
+
+To get instance of `IRdbms` instance, just get it from dependency container as shown in following code.
+
+
+```
+var db : IRdbms;
+...
+db := container.get('db') as IRdbms;
+```
+or with array-like syntax
+
+```
+var db : IRdbms;
+...
+db := container['db'] as IRdbms;
+```
 
 ## Executing SQL Query
 
 ```
-var resultSet : IModelResultSet;
+var
+    db : IRdbms;
+    resultSet : IModelResultSet;
 ...
 resultSet := db.prepare('SELECT * FROM users').execute();
 ```
 
 ### Passing parameters to SQL query
+
+To avoid SQL injection, it is recommended to use prepared statement with parameter
 
 ```
 resultSet := db.prepare('SELECT * FROM users WHERE user_email = :userEmail')
