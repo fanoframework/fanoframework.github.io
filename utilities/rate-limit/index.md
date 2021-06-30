@@ -159,11 +159,50 @@ You can also create class inherit from `TAbstractRequestIdentifier` and implemen
 Throttle middleware depends on instance of `IRateLimiter` interface to do actual test of request limitation. Currently Fano Framework provides
 
 - `TMemoryRateLimiter` which tracks requests on memory. This implementation can not be used in CGI application as CGI application is created for each request.
+- `TDbRateLimiter` which tracks request in relational database table.
 - `TDecoratorRateLimiter` which decorates other `IRateLimiter` instance.
 
-Development of other type rate limiter such as rate limiter which keeps track request in Redis or MySQL is planned.
+Development of other type rate limiter such as rate limiter which keeps track request in Redis or MongoDB is planned.
 
-By default, `TMemoryRateLimiter` is used. If you need to modify rate dynamically, for example, each client type has its own maximum rate, you can create rate limiter inherit from `TDecoratorRateLimiter` and modify its `limit()` method as shown in following example.
+### Memory storage rate limiter
+By default, `TThrottleMiddlewareFactory` uses `TMemoryRateLimiter`. Internal implementation of this class store data using hash map in memory.
+
+### Database storage rate limiter
+You need `TDbRateLimiter` to use relational database such as MySQL, PostgreSQL, Firebird or SQLite to track requests.
+
+`TDbRateLimiter` class requires instance if `IRdbms` interface which responsible to do actual database operation. You need to tell what table to use and also column name of identifier column, operation column and reset timestamp.
+
+```
+container.add(
+    'throttle-one-request-per-minute',
+    TThrottleMiddlewareFactory.create()
+        .ratePerMinute(1)
+        .rateLimiter(
+            TDbRateLimiter.create(
+                container['db'] as IRdbms,
+                'rates',
+                'id',
+                'operation',
+                'reset_timestamp'
+            )
+        )
+);
+```
+Identifier column stores identifier related to request, for example IP address, session ID or other unique value and it is expected to be VARCHAR column and primary key.
+
+Operation column stores integer value number of operation . Reset timestamp column stores integer value of timestamp. Following SQL is minimal schema for table
+
+```
+CREATE TABLE rates
+(
+    id VARCHAR(100) PRIMARY KEY NOT NULL,
+    operation INT(11) NOT NULL,
+    reset_timestamp INT(11) NOT NULL
+);
+```
+
+### Decorator rate limiter
+If you need to modify rate dynamically, for example, each client type has its own maximum rate, you can create rate limiter inherit from `TDecoratorRateLimiter` and modify its `limit()` method as shown in following example.
 
 ```
 unit MyRateLimiterImpl;
@@ -239,7 +278,6 @@ container.add(
         )
 );
 ```
-
 ## Rate-limiting video tutorial
 
 
