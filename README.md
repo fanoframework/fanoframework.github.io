@@ -36,7 +36,7 @@ Following steps explain how to build and preview site locally, before you commit
 
 Follow [Jekyll installation manual](https://jekyllrb.com/docs/installation/).
 
-#### Install depencencies
+#### Install dependencies
 
 Run
 ```
