@@ -7,8 +7,8 @@ description: List of built-in validation rules in Fano Framework
 
 This page lists all available built-in validation rules that Fano Framework provides. For information on how to use these validation rules in application, please read [Form Validation](/security/form-validation) documentation.
 
-| [Required](#trequiredvalidator) | [Present](#tpresentvalidator) | [Required if](#trequiredifvalidator) |
 | [Alpha](#talphavalidator) | [Alpha Num](#talphanumvalidator) | [Alpha num space](#talphanumspacevalidator) |
+| [Required](#trequiredvalidator) | [Present](#tpresentvalidator) | [Required if](#trequiredifvalidator) |
 | [Alpha num dash](#talphanumdashvalidator) | [Email](#temailvalidator) | [Url](#turlvalidator) |
 | [Slug](#tslugvalidator) | [Phone](#tphonevalidator) | [Regex](#tregexvalidator) |
 | [Equal string](#tequalstrvalidator) | [Case insensitive equal string](#tcaseinsensitiveequalstrvalidator) | [Equal length](#tequallengthvalidator) |
@@ -31,7 +31,7 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
 | [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [IPv6](#tipv6validator) |
 | [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) | [Base64](#tbase64validator) |
-| [Color](#tcolorvalidator) | [Start With](#tstartwithvalidator) | [End With](#tendwithvalidator) |
+| [Color](#tcolorvalidator) | [Start With](#tstartwithvalidator) | [End With](#tendwithvalidator) || [Latitude](#tlatitudevalidator) | [Longitude](#tlongitudevalidator) | [Between](#tbetweenvalidator) || [Less or equal than](#tlessorequalthanvalidator) | [Greater or equal than](#tgreaterorequalthanvalidator) |
 
 ## Field availability
 
@@ -347,7 +347,7 @@ rule := TMaxIntegerValidator.create(100);
 ```
 Validation will pass only if you pass integer value <= 100.
 
-### <a name="tlessthanvalidator"></a>TLessThanValidator
+### <a name="tlessthanvalidator"></a>TLessThanValidator, TFloatLessThanValidator, TCurrLessThanValidator
 
 Data must be integer value less than predefined value.
 
@@ -356,7 +356,18 @@ rule := TLessThanValidator.create(100);
 ```
 Validation will pass only if you pass integer value < 100.
 
-### <a name="tgreaterthanvalidator"></a>TGreaterThanValidator
+To validate floating-point or currency value use `TFloatLessThanValidator` or `TCurrLessThanValidator` respectively as shown below.
+
+```
+rule := TFloatLessThanValidator.create(100.5);
+```
+Validation will pass only if you pass float value less than 100.5.
+
+### <a name="tlessorequalthanvalidator"></a>TLessOrEqualThanValidator, TFloatLessOrEqualThanValidator, TCurrLessOrEqualThanValidator
+
+Similar to `TLessThanValidator` above except it uses <= comparison.
+
+### <a name="tgreaterthanvalidator"></a>TGreaterThanValidator, TFloatGreaterThanValidator, TCurrGreaterThanValidator
 
 Data must be integer value greater than predefined value.
 
@@ -364,6 +375,33 @@ Data must be integer value greater than predefined value.
 rule := TGreaterThanValidator.create(100);
 ```
 Validation will pass only if you pass integer value > 100.
+
+To validate floating-point or currency value use `TFloatGreaterThanValidator` or `TCurrGreaterThanValidator` respectively as shown below.
+
+```
+rule := TFloatGreaterThanValidator.create(100.5);
+```
+Validation will pass only if you pass float value greater than 100.5.
+
+### <a name="tgreaterorequalthanvalidator"></a>TGreaterOrEqualThanValidator, TFloatGreaterOrEqualThanValidator, TCurrGreaterOrEqualThanValidator
+
+Similar to `TGreaterThanValidator` above except it uses >= comparison.
+
+### <a name="tbetweenvalidator"></a>TBetweenValidator, TFloatBetweenValidator, TCurrBetweenValidator
+
+Data must be integer value btween predefined low and high value.
+
+```
+rule := TBetweenValidator.create(50, 100);
+```
+Validation will pass only if you pass integer value >=50 and <= 100.
+
+To validate floating-point or currency value use `TFloatBetweenValidator` or `TCurrBetweenValidator` respectively as shown below.
+
+```
+rule := TFloatBetweenValidator.create(50.5, 100.5);
+```
+Validation will pass only if you pass float value value >=50.5 and <= 100.5.
 
 ### <a name="tequalintvalidator"></a>TEqualIntValidator
 
@@ -827,6 +865,21 @@ Data must be valid hex color value such as `#ffffff` or `#fff`.
 
 ```
 rule := TColorValidator.create(TRegex.create());
+```
+
+### <a name="tlatitudevalidator"></a>TLatitudeValidator
+
+Data must be valid latitude float value.
+
+```
+rule := TLatitudeValidator.create();
+```
+### <a name="tlongitudevalidator"></a>TlongitudeValidator
+
+Data must be valid longitude float value.
+
+```
+rule := TLongitudeValidator.create();
 ```
 
 ### TBaseValidator
