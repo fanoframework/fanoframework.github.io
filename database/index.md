@@ -67,7 +67,7 @@ db := TSQLiteDb.create();
 db.connect('', 'your_data.db', '', '', 0);
 ```
 
-It will open database connection which is stored in `your_data.db` file.
+It will open database which is stored in `your_data.db` file.
 
 ### ODBC
 
