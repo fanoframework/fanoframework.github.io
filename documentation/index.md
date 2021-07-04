@@ -82,4 +82,5 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Missing libcurl development package](/known-issues#missing-libcurl-development-package)
 - [Missing /etc/fpc.cfg](/known-issues#missing-etc-fpc-cfg)
 - [Missing MySQL client library](/known-issues#missing-mysql-client-library)
+- [Missing ODBC client library](/known-issues#missing-odbc-client-library)
 - [Memory leak due to database shutdown](/known-issues#shut-down-database-server-may-cause-memory-leak)
