@@ -292,3 +292,4 @@ Rate-limiting video tutorial explains how to use rate limit middleware to restri
 - [TThrottleMiddleware source](https://github.com/fanoframework/fano/blob/master/src/Libs/Throttle/Implementations/ThrottleMiddlewareImpl.pas)
 - [TThrottleMiddlewareFactory source](https://github.com/fanoframework/fano/blob/master/src/Libs/Throttle/Implementations/Factories/ThrottleMiddlewareFactoryImpl.pas)
 - [Rate-limiting demo application](https://github.com/fanoframework/fano-rate-limiting)
+- [Rate-limiting demo application with MySQL as storage](https://github.com/fanoframework/fano-rate-limiting-db).

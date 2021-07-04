@@ -114,7 +114,7 @@ While Fano Db logger example web application demonstrates how to [log messages t
 
 ## Rate-limit
 
-[Rate-limiting demo application](https://github.com/fanoframework/fano-rate-limiting) demonstrates how to limit number of request a client can make. [View video tutorial](https://youtu.be/dfmArIN4s-o).
+[Rate-limiting demo application](https://github.com/fanoframework/fano-rate-limiting) demonstrates how to limit number of request a client can make. [View video tutorial](https://youtu.be/dfmArIN4s-o). [Rate-limiting with MySQL demo application](https://github.com/fanoframework/fano-rate-limiting-db) is similar except that it stores request states in MySQL database instead of memory.
 
 ## Explore more
 
