@@ -168,7 +168,7 @@ Development of other type rate limiter such as rate limiter which keeps track re
 By default, `TThrottleMiddlewareFactory` uses `TMemoryRateLimiter`. Internal implementation of this class store data using hash map in memory.
 
 ### Database storage rate limiter
-You need `TDbRateLimiter` to use relational database such as MySQL, PostgreSQL, Firebird or SQLite to track requests.
+You need `TDbRateLimiter` to [use relational database](/database) such as MySQL, PostgreSQL, Firebird or SQLite to track requests.
 
 `TDbRateLimiter` class requires instance if `IRdbms` interface which responsible to do actual database operation. You need to tell what table to use and also column name of identifier column, operation column and reset timestamp.
 
