@@ -11,7 +11,7 @@ Photo by [Jan Antonin Kolar](https://unsplash.com/@jankolar?utm_source=unsplash&
 
 ## IRdbms interface
 
-`IRdbms` interface is just a thin wrapper for Free Pascal SQLdb package. Currently supported RDBMS system is
+`IRdbms` interface is just a thin wrapper for Free Pascal SQLdb package. Currently supported RDBMS systems are
 
 - MySQL via `TMysqlDb` class
 - PostgreSQL via `TPostgreSqlDb` class
