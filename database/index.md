@@ -168,6 +168,21 @@ var
 resultSet := db.prepare('SELECT * FROM users').execute();
 ```
 
+Unlike SQLdb which separates how you execute SQL command that returns result set and ones that do not return result set such
+`open()` for `SELECT` and `execSQL()` for `INSERT` or `UPDATE`, IRdbms interface
+abstracts this, so you always call `execute()` method for `SELECT`, `INSERT` or `UPDATE`.
+
+```
+fRdbms.prepare(
+    'INSERT INTO atable ' +
+    '(id, operation, resetTimestamp) VALUES ' +
+    '(:idCol, :oprCol, :resetTmp)'
+).paramStr('idCol', 'abc')
+.paramInt('oprCol', 10)
+.paramInt('resetTmp', 2000)
+.execute();
+```
+
 ### Passing parameters to SQL query
 
 To avoid SQL injection, it is recommended to use prepared statement with parameter
@@ -177,6 +192,8 @@ resultSet := db.prepare('SELECT * FROM users WHERE user_email = :userEmail')
     .paramStr('userEmail', 'john@fanoframework.github.io')
     .execute();
 ```
+
+To pass integer, float, datetime data, use `paramInt()`, `paramFloat()`, `paramDateTime()` respectively.
 
 ## Get total rows in result set
 
