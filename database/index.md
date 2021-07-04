@@ -5,6 +5,10 @@ description: Working with database in Fano Framework
 
 <h1 class="major">Working with Database</h1>
 
+![Database illustration](/assets/images/database.jpg){:class="image fit"}
+
+Photo by [Jan Antonin Kolar](https://unsplash.com/@jankolar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/database-administrators?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
 ## IRdbms interface
 
 `IRdbms` interface is just a thin wrapper for Free Pascal SQLdb package. Currently supported RDBMS system is
