@@ -141,6 +141,7 @@ container.add(
         .database('my-app-db')
 );
 ```
+## Retrieve IRdmbs instance from dependency container
 
 To get instance of `IRdbms` instance, just get it from dependency container as shown in following code.
 
