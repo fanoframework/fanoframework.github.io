@@ -138,7 +138,7 @@ For `TOdbcDbFactory`, using ODBC with DSN, you can register simply by using its 
 container.add(
     'db',
     TOdbcDbFactory.create()
-        .database('my-app-d')
+        .database('my-app-db')
 );
 ```
 
