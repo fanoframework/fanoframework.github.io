@@ -7,12 +7,13 @@ description: Working with database in Fano Framework
 
 ## IRdbms interface
 
-IRdbms is just a thin wrapper for Free Pascal SQLdb package. Currently supported RDBMS system is
+`IRdbms` interface is just a thin wrapper for Free Pascal SQLdb package. Currently supported RDBMS system is
 
 - MySQL via `TMysqlDb` class
 - PostgreSQL via `TPostgreSqlDb` class
 - Firebird via `TFirebirdDb` class,
 - SQLite via `TSQLiteDb` class
+- Any databases which support ODBC, via `TOdbcDb` class.
 
 ## Creating Database Connection
 
@@ -66,7 +67,7 @@ It will open database connection which is stored in `your_data.db` file.
 
 ### ODBC
 
-If you use database which not yet supported directly by FreePascal sqldb library you may use ODBC connection.
+If you use database which not yet supported directly by FreePascal sqldb library, you may use ODBC connection.
 `TOdbcDb` class is thin wrapper for `TODBCConnection` class which implements `IRdbms` interface.
 
 For example, if you have `/etc/odbcinst.ini` with content as follows
@@ -230,3 +231,9 @@ You may find thing does not work due to missing library for example you [do not 
 ## Explore more
 
 - [Working with Models](/working-with-models)
+- [IRdbms interface](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Contracts/RdbmsIntf.pas).
+- [TMySQLDb class](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/MySql/MySqlDbImpl.pas).
+- [TPostgreSqlDb class](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/PostgreSql/PostgreSqlDbImpl.pas).
+- [TFirebirdDb class](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/Firebird/FirebirdDbImpl.pas).
+- [TOdbcDb ckass](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/Odbc/OdbcDbImpl.pas).
+- [TSQLiteDb class](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/SQLite/SQLiteDbImpl.pas).
