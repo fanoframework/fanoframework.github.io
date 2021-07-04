@@ -109,7 +109,7 @@ container.add(
 );
 ```
 
-If you need to use different ways to identify request, for example using unique key passed as query string or POST parameter, ypu can create a class which implements `IRequestIdentifier` interface and implement its `getId()` method. For example
+If you need to use different ways to identify request, for example using unique key passed as query string or POST parameter, you can create a class which implements `IRequestIdentifier` interface and implement its `getId()` method. For example
 
 ```
 unit MyRequestIdentifierImpl;
