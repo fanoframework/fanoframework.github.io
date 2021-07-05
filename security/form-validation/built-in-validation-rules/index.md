@@ -391,7 +391,7 @@ Similar to `TGreaterThanValidator` above except it uses >= comparison.
 
 ### <a name="tbetweenvalidator"></a>TBetweenValidator, TFloatBetweenValidator, TCurrBetweenValidator
 
-Data must be integer value btween predefined low and high value.
+Data must be integer value between predefined low and high value.
 
 ```
 rule := TBetweenValidator.create(50, 100);
