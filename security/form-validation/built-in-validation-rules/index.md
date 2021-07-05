@@ -31,7 +31,9 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
 | [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [IPv6](#tipv6validator) |
 | [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) | [Base64](#tbase64validator) |
-| [Color](#tcolorvalidator) | [Start With](#tstartwithvalidator) | [End With](#tendwithvalidator) || [Latitude](#tlatitudevalidator) | [Longitude](#tlongitudevalidator) | [Between](#tbetweenvalidator) || [Less or equal than](#tlessorequalthanvalidator) | [Greater or equal than](#tgreaterorequalthanvalidator) |
+| [Color](#tcolorvalidator) | [Start With](#tstartwithvalidator) | [End With](#tendwithvalidator) |
+| [Latitude](#tlatitudevalidator) | [Longitude](#tlongitudevalidator) | [Between](#tbetweenvalidator) |
+| [Less or equal than](#tlessorequalthanvalidator) | [Greater or equal than](#tgreaterorequalthanvalidator) | - |
 
 ## Field availability
 
