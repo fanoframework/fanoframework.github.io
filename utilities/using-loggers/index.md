@@ -84,7 +84,7 @@ logger := TFileLogger.create('storages/logs/app.log');
 
 ### Logging to STDOUT
 
-`TStdOutLogger` is logger implementation that will output log message to STDOUT.
+`TStdOutLogger` is logger implementation that will output log message to STDOUT. This logger can not be used in CGI application.
 
 ### Logging to STDERR
 
@@ -273,6 +273,14 @@ To register `TNullLogger`,
 
 ```
 container.add('logger', TNullLoggerFactory.create());
+```
+
+### Register TStdOutLogger
+
+To register `TStdOutLogger`,
+
+```
+container.add('logger', TStdOutLoggerFactory.create());
 ```
 
 ### Register TStdErrLogger
