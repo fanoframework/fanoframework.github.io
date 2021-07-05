@@ -67,7 +67,7 @@ begin
     if sess.has('loggedIn') then
     begin
         //user is logged in
-        result := next.requestHandler(request, response, args);
+        result := next.handleRequest(request, response, args);
     end else
     begin
         result := doSomethingWhenUserNotLoggedIn(request, response, args);
