@@ -73,6 +73,7 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 - [Form Validation example](https://github.com/fanoframework/fano-validation) demonstrate how to use Fano Framework input [validation feature](/security/form-validation).
 - [File upload validation example](https://github.com/fanoframework/fano-scgi-upload) demonstrate how to use Fano Framework input [validation feature](/security/form-validation) to validate [file upload](/handling-file-upload) using various validation rules.
+- [Input validation example web application](https://github.com/fanoframework/input-validation) demonstrates how to validate latitude and latitude value.
 
 ## HTTP Verb tunneling examples
 
