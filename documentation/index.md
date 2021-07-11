@@ -44,7 +44,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [XSS Protection](/security/xss-protection)
 - [Clickjacking Protection](/security/clickjacking-protection)
 - **[Password hash](/security/password-hash)** explains how to properly hash password using Argon2i, SCrypt, BCrypt password hash algorithm.
-- **[JSON Web Token (JWT)](/security/jwt)** discusses varous topic regarding JWT such as generate, sign and verify JWT token with Fano Framework.
+- **[JSON Web Token (JWT)](/security/jwt)** discusses various topic regarding JWT such as how to generate, sign and verify JWT token with Fano Framework.
 
 ## Utilities
 
