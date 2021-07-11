@@ -87,7 +87,7 @@ To be able to tell which clients exceed limit, throttle middleware need to be ab
 Currently, Fano Framework provides two implementations of this interface.
 
 - `TIpAddrRequestIdentifier` which identifies request based on IP address.
-- `TSessionRequestIdentifier` which identifies request based on session ID.
+- `TSessionRequestIdentifier` which identifies request based on [session ID](/working-with-session).
 
 By default, request is identified using its IP address. To change request identifier instance, call `requestIdentifier()` method of factory and pass new instance
 
