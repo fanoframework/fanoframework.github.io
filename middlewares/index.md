@@ -309,6 +309,8 @@ Fano Framework provides several built-in middlewares.
 - `TNoCacheMiddleware`, middleware class which adds `Cache-Control` response header to prevent browser from caching response.
 - `TStaticFilesMiddleware`, middleware class which serves static files. For more information, read [Serving static files](/working-with-response/serve-static-files).
 - `TThrottleMiddleware`, middleware class which [limits rate of request](/utilities/rate-limit) to one or more routes.
+- `TFuncMiddleware`, adapter middleware class which allow function be used as middleware.
+- `TMethodMiddleware`, adapter middleware class which allow class method be used as middleware.
 
 ### Group several middlewares as one
 
@@ -364,6 +366,55 @@ var helloCtrlMiddleware : IMiddleware;
 helloCtrlMiddleware := TRequestHandlerAsMiddleware.create(helloController);
 ```
 
+### Use function or method as a middleware
+
+`TFuncMiddleware` and `TMethodMiddleware` are adapter middlewares that allows function and method of class be used as middleware. It means you can wrap a function and attach it to a route and to be executed as part of middleware chain.
+
+For example, if you have following code
+```
+unit mymiddleware;
+
+interface
+
+uses
+    fano;
+
+function myAjax(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+
+implementation
+
+function myAjax(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    if (not request.isXhr()) then
+    begin
+        response.headers().setHeader('Status', '403 Not Ajax Request');
+        result := response;
+    end else
+    begin
+        result := next.handleRequest(request, response, args);
+    end;
+end;
+
+end.
+```
+You can use `myAjax()` as middleware as shown below.
+```
+router.get(
+    '/hello/{name}',
+    helloController
+).add(TFuncMiddleware.create(@myMiddleware.myAjax));
+
+```
 ## Middleware issues
 
 ### Middleware is not being called
