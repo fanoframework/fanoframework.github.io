@@ -44,11 +44,11 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [XSS Protection](/security/xss-protection)
 - [Clickjacking Protection](/security/clickjacking-protection)
 - **[Password hash](/security/password-hash)** explains how to properly hash password using Argon2i, SCrypt, BCrypt password hash algorithm.
-- **[JSON Web Token (JWT)](/security/jwt)** discusses various topic regarding JWT such as how to generate, sign and verify JWT token with Fano Framework.
+- **[JSON Web Token (JWT)](/security/jwt)** discusses various topics regarding JWT such as how to generate, sign and verify JWT token with Fano Framework.
 
 ## Utilities
 
-- [Using Loggers](/utilities/using-loggers)
+- **[Using Loggers](/utilities/using-loggers)** explains how to log to syslog, file, database or email.
 - [Use HTTP client to call API](/utilities/http-clients)
 - [Sending email](/utilities/sending-email)
 - [Identifying client user-agent](/utilities/identifying-client-user-agent)
