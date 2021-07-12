@@ -44,11 +44,11 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [XSS Protection](/security/xss-protection)
 - [Clickjacking Protection](/security/clickjacking-protection)
 - **[Password hash](/security/password-hash)** explains how to properly hash password using Argon2i, SCrypt, BCrypt password hash algorithm.
-- [JSON Web Token (JWT)](/security/jwt)
+- **[JSON Web Token (JWT)](/security/jwt)** discusses various topics regarding JWT such as how to generate, sign and verify JWT token with Fano Framework.
 
 ## Utilities
 
-- [Using Loggers](/utilities/using-loggers)
+- **[Using Loggers](/utilities/using-loggers)** explains how to log to syslog, file, database or email.
 - [Use HTTP client to call API](/utilities/http-clients)
 - [Sending email](/utilities/sending-email)
 - [Identifying client user-agent](/utilities/identifying-client-user-agent)
@@ -57,17 +57,17 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## Database
 
-- [Working with Database](/database)
+- **[Working with Database](/database)** explains how to work with database such as MySQL, PostgreSQL, Firebird, SQLite or other database via ODBC.
 
 ## Deployment
 
 - [Deploy Fano Framework web application on various server setup](/deployment)
-- [Deploy as CGI application](/deployment/cgi)
-- [Deploy as FastCGI application](/deployment/fastcgi)
-- [Deploy as SCGI application](/deployment/scgi)
-- [Deploy as uwsgi application](/deployment/uwsgi)
-- [Deploy as http application](/deployment/standalone-web-server)
-- [Deploy Fano web application with web server as load balancer](/deployment/load-balancer-setup)
+- **[Deploy as CGI application](/deployment/cgi)** explains how to deploy CGI web application with Apache mod_cgi or mod_cgid.
+- **[Deploy as FastCGI application](/deployment/fastcgi)** explains how to deploy FastCGI web application using reverse proxy with Apache mod_proxy_fcgi or mod_fcgid module or Nginx.
+- **[Deploy as SCGI application](/deployment/scgi)** explains how to deploy SCGI web application using reverse proxy with Apache mod_proxy_scgi module or Nginx.
+- **[Deploy as uwsgi application](/deployment/uwsgi)** explains how to deploy uwsgi web application using reverse proxy with Apache mod_proxy_uwsgi module or Nginx.
+- **[Deploy as http application](/deployment/standalone-web-server)** explains how to deploy HTTP web application using reverse proxy with Apache mod_proxy_http module or Nginx or as stand-alone web server.
+- **[Deploy Fano web application with web server as load balancer](/deployment/load-balancer-setup)** explains how to deploy and load balance several Fano Framework web applications using Apache or Nginx load balancer.
 
 ## Debugging
 
