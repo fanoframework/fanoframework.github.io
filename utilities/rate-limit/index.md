@@ -191,6 +191,7 @@ Currently, Fano Framework provides two implementations of this interface.
 
 - `TIpAddrRequestIdentifier` which identifies request based on IP address.
 - `TSessionRequestIdentifier` which identifies request based on [session ID](/working-with-session).
+- `TQueryParamRequestIdentifier` which identifies request based on [query parameter](/working-with-request).
 
 By default, request is identified using its IP address. To change request identifier instance, call `requestIdentifier()` method of factory and pass new instance
 
@@ -201,6 +202,18 @@ container.add(
         .requestIdentifier(TSessionRequestIdentifier.create())
 );
 ```
+For `TQueryParamRequestIdentifier`
+
+```
+container.add(
+    'throttle-one-request-per-sec',
+    TThrottleMiddlewareFactory.create()
+        .requestIdentifier(TQueryParamRequestIdentifier.create('my-key'))
+);
+```
+where `my-key` is query parameter key used to identify. So
+`http://myapp.fano?my-key=1` and `http://myapp.fano?my-key=2` will be identified as separate request.
+
 `requestIdentifier()` returns current factory instance so that you can chain with other methods,
 
 ```
