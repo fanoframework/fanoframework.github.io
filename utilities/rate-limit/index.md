@@ -202,7 +202,17 @@ container.add(
         .requestIdentifier(TSessionRequestIdentifier.create())
 );
 ```
-For `TQueryParamRequestIdentifier`
+`requestIdentifier()` returns current factory instance so that you can chain with other methods,
+
+```
+container.add(
+    'throttle-one-request-per-sec',
+    TThrottleMiddlewareFactory.create()
+        .requestIdentifier(TSessionRequestIdentifier.create())
+        .ratePerSecond(1)
+);
+```
+`TQueryParamRequestIdentifier` class constructor requires one parameter, name of query string key.
 
 ```
 container.add(
@@ -214,18 +224,7 @@ container.add(
 where `my-key` is query parameter key used to identify. So
 `http://myapp.fano?my-key=1` and `http://myapp.fano?my-key=2` will be identified as separate request.
 
-`requestIdentifier()` returns current factory instance so that you can chain with other methods,
-
-```
-container.add(
-    'throttle-one-request-per-sec',
-    TThrottleMiddlewareFactory.create()
-        .requestIdentifier(TSessionRequestIdentifier.create())
-        .ratePerSecond(1)
-);
-```
-
-If you need to use different ways to identify request, for example using unique key passed as query string or POST parameter, you can create a class which implements `IRequestIdentifier` interface and implement its `getId()` method. For example
+If you need to use different ways to identify request, for example using several unique key passed as query string or POST parameter, you can create a class which implements `IRequestIdentifier` interface and implement its `getId()` method. For example
 
 ```
 unit MyRequestIdentifierImpl;
@@ -255,6 +254,9 @@ type
 
 implementation
 
+uses
+    md5;
+
 (*!------------------------------------------------
  * get identifier from request
  *-----------------------------------------------
@@ -264,8 +266,11 @@ implementation
 function TMyRequestIdentifier.getId(
     const request : IRequest
 ) : shortstring;
+var key, country : string;
 begin
-    result := request.getParam('accesskey');
+    key := request.getParam('accesskey');
+    country := request.getParam('country');
+    result := MD5Print(MD5String(country+key));
 end;
 ```
 You can also create class inherit from `TAbstractRequestIdentifier` and implement its abstract method `getId()`.
