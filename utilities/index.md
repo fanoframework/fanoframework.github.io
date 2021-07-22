@@ -25,6 +25,10 @@ description: Tutorial on how to work with some utilities provided by Fano Framew
 
 - [Working with regular expression](/utilities/regular-expression)
 
+## Helper functions
+
+- [Helper functions](/utilities/helper-functions)
+
 ## Rate limiting request
 
 - [Rate limiting request](/utilities/rate-limit)

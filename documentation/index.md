@@ -53,6 +53,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Sending email](/utilities/sending-email)
 - [Identifying client user-agent](/utilities/identifying-client-user-agent)
 - [Working with regular expression](/utilities/regular-expression)
+- [Helper functions](/utilities/helper-functions)
 - [Rate limiting request](/utilities/rate-limit)
 
 ## Database
