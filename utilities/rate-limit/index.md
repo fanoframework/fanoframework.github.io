@@ -17,7 +17,7 @@ You will define a maximum number of request in a given amount of time. When clie
 
 ## TLimitStatus record
 
-`TLimitStatus is internal data structure that is used to maintain rate-limiting data and declared as shown below
+`TLimitStatus` is internal data structure that is used to maintain rate-limiting data and declared as shown below
 
 ```
 type
