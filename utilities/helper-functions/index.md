@@ -11,13 +11,13 @@ description: Tutorial on how to use helper functions provided by Fano Framework
 
 Photo by [Austin Kehmeier](https://unsplash.com/@a_kehmeier?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/helping-hand?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-Fano Framework provides helper functions to simplify common tasks such as generate slug string, join string with delimiter or read file content.
+Fano Framework provides helper functions to simplify common tasks such as [generate slug string](#generate-slug-string), [join string with delimiter](#join-string) or [read file content](#read-file-content).
 
 All helpers functions are declared in `fano.pas` unit.
 
-## Read file content to string
+## <a name="generate-slug-string"></a>Read file content to string
 
-`readFile()` reads file content and output is as string. It accepts one parameter file path of filename to load.
+`readFile()` reads file content and output it as string. It accepts one parameter file path of filename to load.
 
 ```
 (*!------------------------------------------------
@@ -38,7 +38,7 @@ var fileContent : string;
 fileContent := readFile('/tmp/myfile');
 ```
 
-## Join array of string as string
+## <a name="join-string"></a>Join array of string as string
 
 `join()` function concatenates array of string as a single string with delimiter.
 
@@ -61,7 +61,7 @@ var joinedStr : string;
 joinedStr := join('#', ['hello', 'good', 'people']);
 ```
 
-## Generate slug
+## <a name="generate-slug-string"></a>Generate slug
 
 `slug()` function generates string consists of alpha numeric characters separated by dash characters and strips everything else.
 
