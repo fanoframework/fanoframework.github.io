@@ -14,7 +14,7 @@ Fano Framework provides helper functions to simplify common tasks such as [gener
 
 All helpers functions are declared in `fano.pas` unit.
 
-## <a name="generate-slug-string"></a>Read file content to string
+## <a name="read-file-content"></a>Read file content to string
 
 `readFile()` reads file content and output it as string. It accepts one parameter file path of filename to load.
 
