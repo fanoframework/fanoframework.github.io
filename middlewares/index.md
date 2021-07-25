@@ -224,7 +224,7 @@ authOnly := TAuthOnlyMiddleware.create();
 
 ## <a name="attaching-middleware-to-application-middleware"></a>Attaching middleware to application middleware
 
-When you use initialize `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup one global `IMiddlewareLinkList` instances which stores list of middlewares applied globally to all routes. Read [Dispatcher](/dispatcher) for more information.
+When you use `IDispatcher` implementation which support middlewares, such as `TDispatcher` class, you are required to setup one global `IMiddlewareLinkList` instances which stores list of middlewares applied globally to all routes. Read [Dispatcher](/dispatcher) for more information.
 
 As shown in following code
 
