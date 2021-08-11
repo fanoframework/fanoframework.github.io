@@ -8,14 +8,13 @@ description: Tutorial on how to use helper functions provided by Fano Framework
 ## About Helper function
 
 ![Helper illustration](/assets/images/helping-hand.jpg){:class="image fit"}
-
-Photo by [Austin Kehmeier](https://unsplash.com/@a_kehmeier?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/helping-hand?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+(Photo by [Austin Kehmeier](https://unsplash.com/@a_kehmeier?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/helping-hand?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText))
 
 Fano Framework provides helper functions to simplify common tasks such as [generate slug string](#generate-slug-string), [join string with delimiter](#join-string) or [read file content](#read-file-content).
 
 All helpers functions are declared in `fano.pas` unit.
 
-## <a name="generate-slug-string"></a>Read file content to string
+## <a name="read-file-content"></a>Read file content to string
 
 `readFile()` reads file content and output it as string. It accepts one parameter file path of filename to load.
 
