@@ -239,7 +239,8 @@ You can read `lastLogin` data as follows,
 lastLogin := jsonRequest.getParsedBodyParam('login.lastLogin');
 ```
 
-The process of wrapping original request as `TJsonRequest` is implemented in `TJsonContentTypeMiddleware` middleware. When you attach this middleware to a route, everytime application receive method `POST`, `PUT`, `PATCH` or `DELETE` with `Content-Type` header set to `application/json`, original request will be wrapped inside `TJsonRequest`.
+The process of wrapping original request as `TJsonRequest` is implemented in `TJsonContentTypeMiddleware` middleware ([View TJsonContentTypeMiddleware source](https://github.com/fanoframework/fano/blob/master/src/Middleware/BuiltIns/JsonContentTypeMiddlewareImpl.pas)).
+. When you attach this middleware to a route, everytime application receive method `POST`, `PUT`, `PATCH` or `DELETE` with `Content-Type` header set to `application/json`, original request will be wrapped inside `TJsonRequest` ([View TJsonRequest source](https://github.com/fanoframework/fano/blob/master/src/Http/Request/JsonRequestImpl.pas)).
 
 To register this middleware, use `TJsonContentTypeMiddlewareFactory` class.
 
