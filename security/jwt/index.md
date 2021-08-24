@@ -81,7 +81,7 @@ container.add(
         .issuer(('fano')
 );
 ```
-Following code shows how to retrieve `ITokenGenerator`instance, query it from dependency container.
+Following code shows how to retrieve `ITokenVerifierr`instance, query it from dependency container.
 
 ```
 var fTokenVerifier : ITokenVerifier;
