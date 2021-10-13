@@ -361,7 +361,7 @@ Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.
 $ fanocli --project-scgi=Hello --with-csrf
 ```
 
-`--with-csrf` adds `--config` and `--with-session` parameters implicitly, so folowing command generate similar project.
+`--with-csrf` adds `--config` and `--with-session` parameters implicitly, so following command generate similar project.
 
 ```
 $ fanocli --project-scgi=Hello --with-csrf
