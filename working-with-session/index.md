@@ -222,6 +222,14 @@ sessionMgrFactory := TJsonFileSessionManagerFactory.create(
     TSha2KeyRandSessionIdGeneratorFactory.create('your very secret hush hush key')
 );
 ```
+## Session initialization and serialization
+To be able to keep track of client request, session data needs to be initialized each time request is coming and it needs to be serialized and persisted in storage when response is about to get sent over wire.
+
+There is two mechanism where session initialization and serialization can be done, i.e via dispatcher and middleware.
+
+When using dispatcher for working with session, session is initialized after request object is created and serialized to storage before response is sent to client over the wire. So session is always applied globally through out application.
+
+When using middeware for working with session, session is initialized when middleware is attached globally to application middleware list or per route. Using middleware when working with session is more flexible. For example you may want to apply session management only for certain routes and not other.
 
 ## Create dispatcher instance which support session
 
@@ -249,6 +257,38 @@ container.add(
 );
 ```
 Please read [Dispatcher](/dispatcher) for more information or you may want to get information about [how to create Fano web application project with session using Fano CLI](/scaffolding-with-fano-cli#add-session-support).
+
+## Session middleware
+Since v1.10.0, Fano Framework provides session middleware `TSessionMiddleware` which can be use as alternative to using dispatcher when working with session. `TSessionMiddlewareFactory` class is factory class for this middleware.
+
+```
+container.add(
+    'my.session.middleware',
+    TSessionMiddlewareFactory.create(
+        container.get('sessionManager') as ISessionManager
+    )
+);
+```
+
+To apply session middleware globally so that session is initialized and serialized through out application. If you attach middleware as first middleware to run globally, it is similar compare to when using dispatcher.
+
+```
+(container['appMiddlewares'] as IMiddlewareList)
+    .add(container['my.session.middleware'] as IMiddleware);
+```
+
+To apply session middleware so that session is only initialized and serialized when certain routes is accessed, attach middleware to route.
+
+```
+router.get('/', container['myHomeCtrl'] as IRequestHandler)
+    .add(container['my.session.middleware'] as IMiddleware);
+router.get('/account', container['myAccountCtrl'] as IRequestHandler)
+    .add(container['my.session.middleware'] as IMiddleware);
+router.get('/staticfile.pdf', container['myFileCtrl'] as IRequestHandler);
+
+```
+
+Code above cause session to be initialized and persisted when route '/' and '/account' is accessed but not when '/staticfile.pdf' route is accessed.
 
 ## Injecting session manager instance to controller or middleware
 
