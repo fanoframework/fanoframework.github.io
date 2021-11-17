@@ -48,7 +48,7 @@ Fano Framework provides `TAbstractController`, `TController`,
 `TMethodRequestHandler` and `TFuncRequestHandler` class. They implement `IRequestHandler` interface.
 
 ### TAbstractController
-[`TAbstractController` is an abstract class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/AbstractControllerImpl.pas). You need to derive and implements its `handleRequest()` method to be able to use it.
+`TAbstractController` is an abstract class. You need to derive and implements its `handleRequest()` method to be able to use it. [View TAbstractController source code](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/AbstractControllerImpl.pas).
 
 ```
 unit MyController;
@@ -90,15 +90,15 @@ implementation
 end.
 ```
 ### TController
-[`TController` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas). It extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template.
+`TController` is concrete class. It extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template. [View TController source code](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas)
 
 ### TMethodRequestHandler
 
-[`TMethodRequestHandler` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/MethodRequestHandlerImpl.pas). It allows [use of any class method as request handler](#method-function-as-request-handler) as long as it matches [`THandlerMethod`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas).
+`TMethodRequestHandler` is concrete class. It allows [use of any class method as request handler](#method-function-as-request-handler) as long as it matches [`THandlerMethod`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas). [View TMethodRequestHandler source code](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/MethodRequestHandlerImpl.pas).
 
 ### TFuncRequestHandler
 
-[`TFuncRequestHandler` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/FuncRequestHandlerImpl.pas). It allows [use of Pascal function as request handler](#method-function-as-request-handler) as long as it matches [`THandlerFunc`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas).
+`TFuncRequestHandler` is concrete class. It allows [use of Pascal function as request handler](#method-function-as-request-handler) as long as it matches [`THandlerFunc`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas). [View TFuncRequestHandler source code](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/FuncRequestHandlerImpl.pas).
 
 
 ## Using TController class
