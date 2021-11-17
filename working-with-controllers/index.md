@@ -5,9 +5,11 @@ description: Tutorial on how to work with controllers in Fano Framework
 
 <h1 class="major">Working with Controllers</h1>
 
-## IRequestHandler interface
-
 When web application receives [request](/working-with-request), [dispatcher](/dispatcher) uses uri and HTTP method to [match route](/working-with-router) for the request. If route is found, associated request handler will be called, otherwise it raises `ERouteHandlerNotFound` exception.
+
+In Fano Framework, request handler is any class implements `IRequestHandler` interface thus can be used as controller.
+
+## IRequestHandler interface
 
 `IRequestHandler` interface is basis of request handler implementation in Fano Framework. It consists of `handleRequest()` method that implementor class must provide. Dispatcher invokes this method and passes request, response and route argument objects. It must return instance of [response](/working-with-response). You can return response given by dispatcher or return entirely new response instance.
 
@@ -25,7 +27,7 @@ function handleRequest(
 
 ## Built-in IRequestHandler implementation
 Fano Framework provides `TAbstractController`, `TController`,
-`TMethodRequestHandler` and `TFuncRequestHandler` class.
+`TMethodRequestHandler` and `TFuncRequestHandler` class. They implement `IRequestHandler` interface.
 
 ### TAbstractController
 [`TAbstractController` is an abstract class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/AbstractControllerImpl.pas). You need to derive and implements its `handleRequest()` method to be able to use it.
@@ -267,9 +269,9 @@ router.get(
 );
 ```
 
-[![TFuncRequestHandler video tutorial](/assets/images/func-as-controller.png){:class="image fit"}](https://youtu.be/-EG27KqI1ao "TFuncRequestHandler video tutorial") 
-    
- TFuncRequestHandler video tutorial explains how to use this class.
+[![TFuncRequestHandler video tutorial](/assets/images/func-as-controller.png){:class="image fit"}](https://youtu.be/-EG27KqI1ao "TFuncRequestHandler video tutorial")
+
+TFuncRequestHandler video tutorial explains how to use this class.
 
 ## Explore more
 

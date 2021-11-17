@@ -30,8 +30,8 @@ description: Documentation and developer's resources for Fano Framework, web app
 
 ## MVC
 
-- [Working With Controllers](/working-with-controllers)
-- [Working With Views](/working-with-views)
+- **[Working With Controllers](/working-with-controllers)** explains how to use built-in controller classes or create you own custom implementation for handling request.
+- **[Working With Views](/working-with-views)** explains how to handle presentation logic so that application can return response as HTML, JSON or binary format such as image or PDF files.
 - [Working With Models](/working-with-models)
 
 ## Security
