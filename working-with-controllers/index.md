@@ -6,7 +6,7 @@ description: Tutorial on how to work with controllers in Fano Framework
 <h1 class="major">Working with Controllers</h1>
 
 <a href="/assets/images/request-response-cycle.svg">
-<img src="/assets/images/request-response-cycle.svg" alt="Request response cycle diagram" width="100%">
+<img src="/assets/images/request-response-cycle.svg" alt="Request response cycle diagram" width="60%">
 </a>
 
 When web application receives [request](/working-with-request), [dispatcher](/dispatcher) uses uri and HTTP method to [match route](/working-with-router) for the request. If route is found, associated request handler will be called, otherwise it raises `ERouteHandlerNotFound` exception.
