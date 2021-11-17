@@ -5,11 +5,11 @@ description: Tutorial on how to work with controllers in Fano Framework
 
 <h1 class="major">Working with Controllers</h1>
 
+## Request response cycle.
+
 <a href="/assets/images/request-response-cycle.svg">
 <img src="/assets/images/request-response-cycle.svg" alt="Request response cycle diagram" width="50%">
 </a>
-
-Request response cycle diagram.
 
 When web application receives [request](/working-with-request), [dispatcher](/dispatcher) uses uri and HTTP method to [match route](/working-with-router) for the request. If route is found, associated controller will be called, otherwise it raises `ERouteHandlerNotFound` exception. Controller than fetch required data from model. Model may retrieve data from storage such as database system. View builds response output to controller which pass response back to web server and eventually back to client browser.
 
