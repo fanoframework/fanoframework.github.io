@@ -90,7 +90,7 @@ implementation
 end.
 ```
 ### TController
-`TController` is concrete class. It extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template. [View TController source code](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas)
+`TController` is concrete class. It extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template. [View TController source code](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas).
 
 ### TMethodRequestHandler
 
