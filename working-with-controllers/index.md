@@ -6,7 +6,7 @@ description: Tutorial on how to work with controllers in Fano Framework
 <h1 class="major">Working with Controllers</h1>
 
 <a href="/assets/images/request-response-cycle.svg">
-<img src="/assets/images/request-response-cycle.svg" alt="Request response cycle diagram" width="60%">
+<img src="/assets/images/request-response-cycle.svg" alt="Request response cycle diagram" width="50%">
 </a>
 
 Request response cycle diagram.
