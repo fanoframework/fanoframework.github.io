@@ -173,7 +173,7 @@ begin
     );
 end;
 ```
-You can also output JSON from `TJSONData` class or `TObject` with RTTI information with help of `TJsonSerializeable` and ``TJsonRttiSerializeable` class as shown in following code
+You can also output JSON from `TJSONData` class or `TObject` with RTTI information with help of `TJsonSerializeable` and `TJsonRttiSerializeable` class as shown in following code
 
 ```
 uses
