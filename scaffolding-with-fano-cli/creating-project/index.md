@@ -91,9 +91,9 @@ To create web application that use [uwsgi protocol](https://uwsgi-docs.readthedo
 See [Deploy as uwsgi application](/deployment/uwsgi) for information on how to
 setup uwsgi application to work with various web server.
 
-## <a name="scaffolding-libmicrohttpd-project"></a>Scaffolding libmicrohttpd project directory structure
+## <a name="scaffolding-libmicrohttpd-project"></a>Scaffolding libmicrohttpd http project directory structure
 
-To create web application that use http using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/), use `--project-mhd` parameter. Other parameters are similar to SCGI, FastCGI or uwsgi project above.
+To create web application that use http protocol using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/), use `--project-mhd` parameter. Other parameters are similar to SCGI, FastCGI or uwsgi project above.
 
 It will add conditional define `-dLIBMICROHTTPD` in `build.cfg` which cause libmicrohttpd to be linked with application.
 
@@ -110,6 +110,12 @@ Inside generated project directory, you can find that `src/app.pas` will have fo
 //svrConfig.tlsCert := '/path/to/ssl/cert/cert';
 ```
 If you want to support https, you need to uncomment those three lines of codes and set correct path for SSL certificate files. You need to make sure that they are readable by application.
+
+## <a name="scaffolding-http-project"></a>Scaffolding http project directory structure
+
+To create http web application that use Free Pascal built-in http server,`TFpHttpServer` class, use `--project-http` parameter. Other parameters are similar to SCGI, FastCGI or uwsgi project above.
+
+See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behind various reverse proxy web server.
 
 ## <a name="use-fano-framework-specific-release-version"></a>Use Fano Framework specific release version
 

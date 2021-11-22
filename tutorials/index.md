@@ -5,6 +5,7 @@ description: Collection of step-by-step tutorial to create web application from 
 
 <h1 class="major">Tutorials</h1>
 
+- [Getting started with CGI application](/tutorials/getting-started-cgi-application)
 - [Creating Hello World application](/tutorials/hello-world-application)
 - [Creating Hello World application with Fano CLI](/tutorials/hello-world-application-with-fano-cli)
 - [Creating Hello World FastCGI application with Fano CLI](/tutorials/hello-world-fastcgi-application-with-fano-cli)
