@@ -5,7 +5,7 @@ description: Basic tutorial to get started with Fano Framework, web application 
 
 <h1 class="major">Getting Started basic CGI application</h1>
 
-Following document explains minimum steps required to setup a working Fano web application on development machine.
+Following document explains minimum steps required to setup a working Fano CGI web application on development machine.
 
 ## Requirement
 
