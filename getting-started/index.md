@@ -29,7 +29,7 @@ $ ./bin/app.cgi
 
 ## Run it from browser
 
-Open web browser and go to `http://localhost:20477`. You should see `Home controller` text is printed in browser. Congratulations, your application is working. If you do not see text is printed, [read What could go wrong section](#what-could-go-wrong) below.
+Open web browser and go to `http://localhost:20477`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
 ## Command walkthrough
 
