@@ -90,7 +90,8 @@ However, Fano CLI creates several files and directories that follows certain ass
 ## Explore more
 
 - [Read query, cookie or POST parameters](/working-with-request).
-- [Working with views and HTML templates](/working-with-views)
+- [Working with views and HTML templates](/working-with-views).
+- [Return HTML, JSON or image response](/working-with-response).
 - [Step by Step Tutorials](/tutorials)
 - [Examples](/examples)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
