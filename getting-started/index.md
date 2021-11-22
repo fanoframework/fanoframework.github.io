@@ -45,7 +45,8 @@ We change active directory to newly created `Hello` directory.
 $ cd Hello
 ```
 
-Create controller name `HomeController.pas` that will handle request to route `/`. For more information regarding route, read *[Working with Router](/working-with-router)*.
+Create [controller](/working-with-controllers) name `HomeController.pas` that will handle [request](/working-with-request) to route `/`. For more information regarding route, read *[Working with Router](/working-with-router)*.
+
 ```
 $ fanocli --controller=Home --route=/
 ```
@@ -88,6 +89,8 @@ However, Fano CLI creates several files and directories that follows certain ass
 
 ## Explore more
 
+- [Read query, cookie or POST parameters](/working-with-request).
+- [Working with views and HTML templates](/working-with-views)
 - [Step by Step Tutorials](/tutorials)
 - [Examples](/examples)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
