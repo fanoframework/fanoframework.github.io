@@ -12,12 +12,8 @@ Following document explains minimum steps required to setup a working Fano web a
 - Linux or FreeBSD
 - [Free Pascal >= 3.0](https://www.freepascal.org)
 - [git](https://git-scm.com/)
-- [Fano CLI](https://github.com/fanoframework/fano-cli)
+- [Fano CLI](https://github.com/fanoframework/fano-cli). Read *[Installation](/scaffolding-with-fano-cli#installation)* section of *[Scaffolding with Fano CLI](/scaffolding-with-fano-cli)* documentation for more information.
 - Working Internet connection.
-
-## Install Fano CLI
-
-Install [Fano CLI](https://github.com/fanoframework/fano-cli) as described in *[Installation](/scaffolding-with-fano-cli#installation)* section of *[Scaffolding with Fano CLI](/scaffolding-with-fano-cli)* documentation.
 
 ## Create application
 
