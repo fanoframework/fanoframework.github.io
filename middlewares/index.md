@@ -144,7 +144,26 @@ begin
         result := next.handleRequest(request, response, args);
     end;
 end;
+```
 
+You can also raise an exception to stop execution. Fano Framework will handle exception and call apropriate [error handler](/error-handler).
+
+```
+function TAjaxOnlyMiddleware.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader;
+    const next : IRequestHandler
+) : IResponse;
+begin
+    if (not request.isXhr()) then
+    begin
+        raise EForbidden.create('Not Ajax Request');
+    end else
+    begin
+        result := next.handleRequest(request, response, args);
+    end;
+end;
 ```
 
 ## Type of middlewares

@@ -25,14 +25,31 @@ function handleError(
 - `status` is integer value of HTTP code to send to client.
 - `msg` is string value of HTTP message to send to client
 
-If you take a look at Fano Framework sample applications, e.g.,
-[Fano App](https://github.com/fanoframework/fano-app), you can observe
-that error handler instance is injected during application instance creation.
+Error handler are registered in application service provider `buildErrorHandler()` method [as shown below](#display-verbose-error-message-as-json).
 
-The reason that error handler instance is injected directly in constructor and
-not relying on dependency container is to ensure that when you create application
-you must provide the error handler. It is mandatory. While when using
-dependency container, developer may forget to inject error handler instance.
+## Exceptions
+
+Fano Framework defines some exception classes which corresponds to [HTTP error code](https://datatracker.ietf.org/doc/html/rfc7231).
+
+- `EBadRequest`, HTTP 400 Bad Request.
+- `EUnauthorized`, HTTP 401 Unauthorized.
+- `EForbidden`, HTTP 403 Forbidden
+- `ENotFound`, HTTP 404 Not Found.
+- `EMethodNotAllowed`, HTTP 405 Method Not Allowed.
+- `ENotAcceptable`, HTTP 406 Not Acceptable.
+- `EGone`, HTTP 410 Gone.
+- `EUnsupportedMediaType`, HTTP 415 Unsupported Media Type.
+- `EUnprocessableEntity`, HTTP 422 Unprocessable Entity.
+- `ETooManyRequest`, HTTP 429 Too Many Request.
+- `EInternalServerError`, HTTP 500 Internal Server Error.
+- `ENotImplemented`, HTTP 501 Not Implemented.
+- `EBadGateway`, HTTP 502 Bad Gateway.
+- `EServiceUnavailable`, HTTP 503 Service Unavailable.
+- `EGatewayTimeout`, HTTP 504 Gateway Timeout.
+
+If you raise any of execption above, Fano Framework returns its corresponding HTPP error as response. All exception classes above derived from `EHttpException` class.
+
+Fano Framework also defines other exceptions not related to HTTP error code. Any of these exceptions will result in HTTP 500 error response except `ERouteHandlerNotFound` which result in HTTP 404 error.
 
 ## Built-in error handler implementation
 
@@ -49,9 +66,11 @@ Fano Framework comes with several `IErrorHandler` implementation.
 - `TDecoratorErrorHandler` abstract error handler that is decorate other error handler.
 - `TConditionalErrorHandler` abstract error handler that is select one from two error handlers based on a condition. Descendant must implement its `condition()` abstract method.
 - `TBoolErrorHandler` error handler that is select one from two error handlers based on a condition specified in constructor parameter.
-- `TNotFoundErrorHandler` error handler that is select one from two error handlers based on a condition if the the exception is `ERouteHandlerNotFound`.
+- `TNotFoundErrorHandler` error handler that is select one from two error handlers based on a condition if the the exception is `ERouteHandlerNotFound`. This is provided so you can handle HTTP 404 error separately, for example, to display different HTML template for HTTP 404 error.
+- `TMethodNotAllowedErrorHandler` error handler that is select one from two error handlers based on a condition if the the exception is `EMethodNotAllowed`. This is provided so you can handle HTTP 405 error separately, for example, to use different HTML template for HTTP 405 error.
+- `TInternalServerErrorHandler` error handler that is select one from two error handlers based on a condition if the the exception is `EInternalServerError`. This is provided so you can handle HTTP 500 error separately, for example, to use different HTML template for HTTP 500 error.
 
-## Display verbose error message
+## <a name="display-verbose-error-message"></a>Display verbose error message
 
 `TFancyErrorHandler` and `TErrorHandler` are basic implementation of `IErrorHandler`, which
 display basic error information in HTML content type such as type of exception
@@ -73,7 +92,7 @@ type
 
 To register different error handler type, you need to override `buildErrorHandler()` method.
 
-## Display verbose error message as JSON
+## <a name="display-verbose-error-message-as-json">Display verbose error message as JSON
 
 ```
 type
