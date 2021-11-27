@@ -68,7 +68,8 @@ Fano Framework comes with several `IErrorHandler` implementation.
 - `THtmlAjaxErrorHandler`, composite error handler that output basic HTML error or JSON based on whether request is AJAX or not.
 - `TLogErrorHandler`, error handler that log error information instead of output it to client.
 - `TTemplateErrorHandler`, error handler that output error using HTML template. This class is provided to enable developer to display nicely formatted error page. For production setup, this is mostly what you use.
-- `TCompositeErrorHandler` error handler that is composed from two other error handler. This is provided so we combine, for example, log error to file and also displaying nicely formatted output to client.
+- `TCompositeErrorHandler` error handler that is composed from two other error handler. This is provided so we combine, for example, log error to file and also displaying nicely formatted output to client. To combine three or more error handlers, you need to daisy-chain them.
+- `TGroupErrorHandler` error handler that is composed from one or more error handlers. This is similar to composite error handler above except it is more flexible as you can composite arbitrary number of error handlers.
 - `TDecoratorErrorHandler` abstract error handler that is decorate other error handler.
 - `TConditionalErrorHandler` abstract error handler that is select one from two error handlers based on a condition. Descendant must implement its `condition()` abstract method.
 - `TBoolErrorHandler` error handler that is select one from two error handlers based on a condition specified in constructor parameter.
@@ -158,9 +159,11 @@ begin
 end;
 ```
 
-You need to make sure that `/path/to/log/file` is writeable.
+You need to make sure that `/path/to/log/file` is writeable. Read [Using Logger documentation](/utilities/using-loggers) for more information on how to use logger utility.
 
 ## Log error to file and display error from template
+
+Use `TCompositeErrorHandler` or `TGroupErrorHandler` to compose several error handlers as one.
 
 ```
 function TAppServiceProvider.buildErrorHandler(
@@ -172,6 +175,19 @@ begin
         TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
         TTemplateErrorHandler.create('/path/to/error/template.html')
     );
+end;
+```
+or with `TGroupErrorHandler`
+```
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
+begin
+    result := TGroupErrorHandler.create([
+        TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
+        TTemplateErrorHandler.create('/path/to/error/template.html')
+    ]);
 end;
 ```
 
@@ -187,6 +203,42 @@ begin
         TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
         TNullErrorHandler.create()
     );
+end;
+```
+
+## Compose several error handlers
+
+Use `TCompositeErrorHandler` with daisy-chain or `TGroupErrorHandler` to compose several error handlers as one.
+
+```
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
+begin
+    result := TCompositeErrorHandler.create(
+        TCompositeErrorHandler.create(
+            //log to file and STDERR
+            TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
+            TLogErrorHandler.create(TStdErrLogger.create())
+        ),
+        TTemplateErrorHandler.create('/path/to/error/template.html')
+    );
+end;
+```
+or with `TGroupErrorHandler`
+```
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
+begin
+    //log error to file and STDERR and also display error template
+    result := TGroupErrorHandler.create([
+        TLogErrorHandler.create(TFileLogger.create('/path/to/log/file')),
+        TLogErrorHandler.create(TStdErrLogger.create()),
+        TTemplateErrorHandler.create('/path/to/error/template.html')
+    ]);
 end;
 ```
 
