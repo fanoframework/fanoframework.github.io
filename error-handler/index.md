@@ -5,7 +5,7 @@ description: Tutorial on how to handle error with Fano Framework
 
 <h1 class="major">Error Handler</h1>
 
-Any application will face situation where something wrong happen and we can not provide solution other than tell user about it, such when user try to retrieve resource A when in fact, it does not exist at all.
+Any application will face situation where something wrong happen and we can not provide solution other than tell user about it. For example, user try to retrieve resource A when in fact, it does not exist at all.
 
 <img src="/assets/images/404.jpg" alt="Error illustration" width="100%">
 
