@@ -31,7 +31,7 @@ function handleError(
 - `status` is integer value of HTTP code to send to client.
 - `msg` is string value of HTTP message to send to client
 
-Error handler are registered in application service provider `buildErrorHandler()` method [as shown below](#display-verbose-error-message-as-json).
+Error handler are registered in application service provider `buildErrorHandler()` method [as shown in example code below](#display-verbose-error-message-as-json).
 
 ## Exceptions
 
