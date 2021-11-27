@@ -5,6 +5,12 @@ description: Tutorial on how to handle error with Fano Framework
 
 <h1 class="major">Error Handler</h1>
 
+Any application will face situation where something wrong happen and we can not provide solution other than tell user about it, such when user try to retrieve resource A when in fact, it does not exist at all.
+
+<img src="/assets/images/404.jpg" alt="Error illustration" width="100%">
+
+Photo by <a href="https://unsplash.com/@woodies11?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Romson Preechawit</a> on <a href="https://unsplash.com/s/photos/error?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+
 ## Handling exception
 
 In web application built with Fano Framework, any unhandled exceptions that are raised will be handled by `IErrorHandler` interface instance.
