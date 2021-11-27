@@ -67,6 +67,7 @@ Fano Framework comes with several `IErrorHandler` implementation.
 - `TNullErrorHandler`, error handler that output nothing except HTTP error.
 - `THtmlAjaxErrorHandler`, composite error handler that output basic HTML error or JSON based on whether request is AJAX or not.
 - `TLogErrorHandler`, error handler that log error information instead of output it to client.
+- `TLoggerErrorHandler`, error handler that similar to `TLogErrorHandler` except it can determine what log level to be log. For example it can log critical type log only.
 - `TTemplateErrorHandler`, error handler that output error using HTML template. This class is provided to enable developer to display nicely formatted error page. For production setup, this is mostly what you use.
 - `TCompositeErrorHandler` error handler that is composed from two other error handler. This is provided so we combine, for example, log error to file and also displaying nicely formatted output to client. To combine three or more error handlers, you need to daisy-chain them.
 - `TGroupErrorHandler` error handler that is composed from one or more error handlers. This is similar to composite error handler above, except, it is more flexible as you can compose arbitrary number of error handlers.
@@ -159,7 +160,23 @@ begin
 end;
 ```
 
-You need to make sure that `/path/to/log/file` is writeable. Read [Using Logger documentation](/utilities/using-loggers) for more information on how to use logger utility.
+You need to make sure that `/path/to/log/file` is writeable.
+
+Or if you want to log emergency and critical message only, use `TLoggerErrorHandler` instead.
+```
+function TAppServiceProvider.buildErrorHandler(
+    const ctnr : IDependencyContainer;
+    const config : IAppConfiguration
+) : IErrorHandler;
+begin
+    result := TLoggerErrorHandler.create(
+        TFileLogger.create('/path/to/log/file'),
+        [ logEmergency, logCritical ]
+    );
+end;
+```
+
+Read [Using Logger documentation](/utilities/using-loggers) for more information on how to use logger utility.
 
 ## Log error to file and display error from template
 
