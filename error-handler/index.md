@@ -53,7 +53,7 @@ Fano Framework defines some exception classes which corresponds to [HTTP error c
 - `EServiceUnavailable`, HTTP 503 Service Unavailable.
 - `EGatewayTimeout`, HTTP 504 Gateway Timeout.
 
-If you raise any of execption above, Fano Framework returns its corresponding HTPP error as response. All exception classes above derived from `EHttpException` class.
+If you raise any of execption above, Fano Framework returns its corresponding HTTP error as response. All exception classes above derived from `EHttpException` class.
 
 Fano Framework also defines other exceptions not related to HTTP error code. Any of these exceptions will result in HTTP 500 error response except `ERouteHandlerNotFound` which result in HTTP 404 error.
 
