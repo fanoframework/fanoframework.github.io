@@ -85,3 +85,4 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Missing MySQL client library](/known-issues#missing-mysql-client-library)
 - [Missing ODBC client library](/known-issues#missing-odbc-client-library)
 - [Memory leak due to database shutdown](/known-issues#shut-down-database-server-may-cause-memory-leak)
+- [Indy memory leak issue](/known-issues#indy-memory-leak-issue)
