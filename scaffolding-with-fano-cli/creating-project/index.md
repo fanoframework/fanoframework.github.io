@@ -117,6 +117,12 @@ To create http web application that use Free Pascal built-in http server,`TFpHtt
 
 See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behind various reverse proxy web server.
 
+## <a name="scaffolding-http-indy-project"></a>Scaffolding http project with Indy
+
+To create http web application that use Indy http server,`TIdHttpServer` class, use `--project-indy` parameter. Other parameters are similar to SCGI, FastCGI or uwsgi project above.
+
+See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behind various reverse proxy web server.
+
 ## <a name="use-fano-framework-specific-release-version"></a>Use Fano Framework specific release version
 
 By default, when you use any `--project-*` option, it will use latest commit of `master` branch of Fano Framework repository. To use Fano Framework specific release version when creating project, add `--fano-ver=[VER]` option, `[VER]` is string that contains specific release tag to use. For example, to use Fano Framework version 1.0.0, run following command.
