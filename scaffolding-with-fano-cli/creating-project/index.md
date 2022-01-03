@@ -121,6 +121,22 @@ See [Deploy as standalone web server](/deployment/standalone-web-server) for inf
 
 To create http web application that use Indy http server,`TIdHttpServer` class, use `--project-indy` parameter. Other parameters are similar to SCGI, FastCGI or uwsgi project above.
 
+Make sure you set `INDY_DIR` environment variable to point to where Indy directory installation before compilation.
+
+```
+$ export INDY_DIR="/path/to/indy"
+```
+or you can set it in `.env` file which will be loaded when you run build script. Please not that you should not add trailing slash, so use
+
+```
+$ export INDY_DIR="/path/to/indy"
+```
+and not
+
+```
+$ export INDY_DIR="/path/to/indy/"
+```
+
 When you use Indy, you must aware of [Indy memory leak issue](/known-issues#indy-memory-leak-issue).
 
 See [Deploy as standalone web server](/deployment/standalone-web-server) for information on how to setup http application to work as a standalone web server or run behind various reverse proxy web server.
