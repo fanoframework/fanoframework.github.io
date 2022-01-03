@@ -13,7 +13,7 @@ Photo by [Aaron Burden](https://unsplash.com/@aaronburden?utm_source=unsplash&ut
 There are times when developers need to log something to keep track of things, e.g,
 what went wrong (a.k.a error logs), auditing purpose and so on.
 
-Fano Framework provides logging mechanism thorough `ILogger` interface. This interface exposes several methods:
+Fano Framework provides logging mechanism through `ILogger` interface. This interface exposes several methods:
 
 - `log()` to log messages in any levels.
 - `emergency()` to log emergency messages.
