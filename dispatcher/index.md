@@ -35,13 +35,15 @@ Fano Framework will pass instance of CGI environment and `IStdIn` instance based
 
 ## Built-in Dispatcher implementation
 
-Fano Framework comes with two dispatcher implementation, `TSimpleDispatcher` and
-`TDispatcher` class.
+Fano Framework comes with several dispatcher implementations.
 
-`TSimpleDispatcher` is light-weight dispatcher that does not offer middleware layer
-while the latter supports middleware.
-
-`TVerbTunnellingDispatcher` is decorator dispatcher that allows web application to serve request through [HTTP verb tunnelling](/security/http-verb-tunnelling).
+- `TSimpleDispatcher` is light-weight dispatcher that does not offer middleware layer.
+- `TXSimpleDispatcher` is similar to `TSimpleDispatcher` with capability to decorate request, response and CGI environment. This is provided, for example, to [allow HTTP override]((/security/http-verb-tunnelling)) `_method` parameter.
+- `TDispatcher` is dispatcher that supports middleware.
+- `TXDispatcher` is similar to `TDispatcher` with capability like `TXSimpleDispatcher`.
+- `TMwExecDispatcher` is similar to `TXDispatcher` except it makes sure global middlewares are always executed although route does not exist or method verb is not allowed.
+- `TMaintenanceModeDispatcher` is decorater dispatcher that makes application enters maintenance mode when a special file exists.
+- `TVerbTunnellingDispatcher` is decorator dispatcher that allows web application to serve request through [HTTP verb tunnelling](/security/http-verb-tunnelling).
 
 ## Creating dispatcher
 If you use [Fano CLI](https://github.com/fanoframework/fano-cli) to [scaffold your web application project](/scaffolding-with-fano-cli), you can skip this as Fano CLI creates dispatcher instance for you.
@@ -104,6 +106,65 @@ container.add(
             TRequestResponseFactory.create()
         )
     )
+);
+```
+
+### Maintenance mode
+
+To allow application to enter maintenance mode, use `TMaintenanceModeDispatcher`.
+```
+var actualDispatcher : IDispatcher;
+    maintenanceModeDispatcher : IDispatcher;
+...
+
+maintenanceModeDispatcher := TMaintenanceModeDispatcher.create(actualDispatcher);
+```
+
+To register maintenance mode dispatcher in dependency container, use
+`TMaintenanceModeDispatcherFactory` class.
+
+```
+container.add(
+    'dispatcher',
+    TMaintenanceModeDispatcherFactory.create(
+        TVerbTunnellingDispatcherFactory.create(
+            TSimpleDispatcherFactory.create(
+                router,
+                TRequestResponseFactory.create()
+            )
+        )
+    )
+);
+```
+
+By default, this dispatcher checks if file `__maintenance__` exists in current
+directory. If it does then it assumes application is in maintenance mode and
+raise `EServiceUnavailable` exception.
+
+To make application enters maintenance mode, create empty file with name
+`__maintenance__` in current working directory.  For example
+
+```
+$ touch __maintenance__
+```
+To leave maintenance mode, just remove it.
+```
+$ rm __maintenance__
+```
+
+To use different filename, set its file path using `path()` method of `TMaintenanceModeDispatcherFactory()`.
+
+```
+container.add(
+    'dispatcher',
+    TMaintenanceModeDispatcherFactory.create(
+        TVerbTunnellingDispatcherFactory.create(
+            TSimpleDispatcherFactory.create(
+                router,
+                TRequestResponseFactory.create()
+            )
+        )
+    ).path('/home/example/maintenance')
 );
 ```
 ## <a name="set-dispatcher"></a> Set dispatcher

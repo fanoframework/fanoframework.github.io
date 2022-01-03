@@ -5,18 +5,38 @@ description: Tutorial on how to work with controllers in Fano Framework
 
 <h1 class="major">Working with Controllers</h1>
 
-## IRequestHandler interface
+## Request response cycle.
 
-When web application receives [request](/working-with-request), [dispatcher](/dispatcher) uses uri and HTTP method to [match route](/working-with-router) for the request. If route is found, associated request handler will be called, otherwise it raises `ERouteHandlerNotFound` exception.
+<a href="/assets/images/request-response-cycle.svg">
+<img src="/assets/images/request-response-cycle.svg" alt="Request response cycle diagram" width="100%">
+</a>
+
+When web application receives [request](/working-with-request), [dispatcher](/dispatcher) uses uri and HTTP method to [match route](/working-with-router) for the request. If route is found, associated controller will be called, otherwise it raises `ERouteHandlerNotFound` exception. Controller fetches required data from model and use view to compose presentation. Model may retrieve data from storage such as database system. View builds response output to controller which pass response back to web server and eventually back to client browser.
+
+In Fano Framework, controller is any class implements `IRequestHandler` interface. This is where application business logic resides.
+
+## IRequestHandler interface
 
 `IRequestHandler` interface is basis of request handler implementation in Fano Framework. It consists of `handleRequest()` method that implementor class must provide. Dispatcher invokes this method and passes request, response and route argument objects. It must return instance of [response](/working-with-response). You can return response given by dispatcher or return entirely new response instance.
 
 ```
-function handleRequest(
-    const request : IRequest;
-    const response : IResponse;
-    const args : IRouteArgsReader
-) : IResponse;
+IRequestHandler = interface
+    ['{483E0FAB-E1E6-4B8C-B193-F8615E039369}']
+
+    (*!-------------------------------------------
+     * handle request
+     *--------------------------------------------
+     * @param request object represent current request
+     * @param response object represent current response
+     * @param args object represent current route arguments
+     * @return new response
+     *--------------------------------------------*)
+    function handleRequest(
+        const request : IRequest;
+        const response : IResponse;
+        const args : IRouteArgsReader
+    ) : IResponse;
+end;
 ```
 
 - `request`, current request object
@@ -25,10 +45,10 @@ function handleRequest(
 
 ## Built-in IRequestHandler implementation
 Fano Framework provides `TAbstractController`, `TController`,
-`TMethodRequestHandler` and `TFuncRequestHandler` class.
+`TMethodRequestHandler` and `TFuncRequestHandler` class. They implement `IRequestHandler` interface.
 
 ### TAbstractController
-[`TAbstractController` is an abstract class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/AbstractControllerImpl.pas). You need to derive and implements its `handleRequest()` method to be able to use it.
+`TAbstractController` is an abstract class. You need to derive and implements its `handleRequest()` method to be able to use it. [View TAbstractController source code](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/AbstractControllerImpl.pas).
 
 ```
 unit MyController;
@@ -70,15 +90,15 @@ implementation
 end.
 ```
 ### TController
-[`TController` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas). It extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template.
+`TController` is concrete class. It extends `TAbstractController` capability by adding view and view parameters to allow, for example, to use template. [View TController source code](https://github.com/fanoframework/fano/blob/master/src/Mvc/Controllers/ControllerImpl.pas).
 
 ### TMethodRequestHandler
 
-[`TMethodRequestHandler` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/MethodRequestHandlerImpl.pas). It allows [use of any class method as request handler](#method-function-as-request-handler) as long as it matches [`THandlerMethod`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas).
+`TMethodRequestHandler` is concrete class. It allows [use of any class method as request handler](#method-function-as-request-handler) as long as it matches [`THandlerMethod`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas). [View TMethodRequestHandler source code](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/MethodRequestHandlerImpl.pas).
 
 ### TFuncRequestHandler
 
-[`TFuncRequestHandler` is concrete class](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/FuncRequestHandlerImpl.pas). It allows [use of Pascal function as request handler](#method-function-as-request-handler) as long as it matches [`THandlerFunc`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas).
+`TFuncRequestHandler` is concrete class. It allows [use of Pascal function as request handler](#method-function-as-request-handler) as long as it matches [`THandlerFunc`](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/Contracts/HandlerTypes.pas). [View TFuncRequestHandler source code](https://github.com/fanoframework/fano/blob/master/src/Dispatcher/FuncRequestHandlerImpl.pas).
 
 
 ## Using TController class
@@ -267,9 +287,9 @@ router.get(
 );
 ```
 
-[![TFuncRequestHandler video tutorial](/assets/images/func-as-controller.png){:class="image fit"}](https://youtu.be/-EG27KqI1ao "TFuncRequestHandler video tutorial") 
-    
- TFuncRequestHandler video tutorial explains how to use this class.
+[![TFuncRequestHandler video tutorial](/assets/images/func-as-controller.png){:class="image fit"}](https://youtu.be/-EG27KqI1ao "TFuncRequestHandler video tutorial")
+
+TFuncRequestHandler video tutorial explains how to use this class.
 
 ## Explore more
 

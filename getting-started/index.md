@@ -12,67 +12,58 @@ Following document explains minimum steps required to setup a working Fano web a
 - Linux or FreeBSD
 - [Free Pascal >= 3.0](https://www.freepascal.org)
 - [git](https://git-scm.com/)
-- [Apache 2.4](https://httpd.apache.org/)
-- [mod_cgi](https://httpd.apache.org/docs/current/mod/mod_cgi.html) or [mod_cgid](https://httpd.apache.org/docs/current/mod/mod_cgid.html)
-- [mod_rewrite](https://httpd.apache.org/docs/current/mod/mod_rewrite.html)
-- [Fano CLI](https://github.com/fanoframework/fano-cli)
+- [Fano CLI](https://github.com/fanoframework/fano-cli). Read *[Installation](/scaffolding-with-fano-cli#installation)* section of *[Scaffolding with Fano CLI](/scaffolding-with-fano-cli)* documentation for more information.
 - Working Internet connection.
-- Root privilege (for setting up virtual host).
-
-## Install Fano CLI
-
-Install [Fano CLI](https://github.com/fanoframework/fano-cli) as described in *[Installation](/scaffolding-with-fano-cli#installation)* section of *[Scaffolding with Fano CLI](/scaffolding-with-fano-cli)* documentation.
 
 ## Create application
 
 Make sure all requirements above are met. Run
 
 ```
-$ fanocli --project-cgi=Hello
+$ fanocli --project-http=Hello
 $ cd Hello
 $ fanocli --controller=Home --route=/
 $ ./build.sh
-$ sudo fanocli --deploy-cgi=hello.fano
+$ ./bin/app.cgi
 ```
 
 ## Run it from browser
 
-Open web browser and go to `http://hello.fano`. You should see `Home controller` text is printed in browser. Congratulations, your application is working. If you do not see text is printed, [read What could go wrong section](#what-could-go-wrong) below.
-
-Following video shows step by step creating Fano Framework web application project.
-
-[![Getting Started with Fano Framework video](/assets/images/getting-started.png)](https://www.youtube.com/watch?v=393pMHp8yj8 "Getting Started with Fano Framework video")
+Open web browser and go to `http://localhost:20477`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
 ## Command walkthrough
 
 Let us take a look at each command above to understand what it does.
 
-Following command tells Fano CLI to create CGI web application project in `Hello` directory. Directory must not exist. Read *[Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project)* for creating different web application project ([FastCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-fastcgi-project), [SCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-scgi-project), [uwsgi](/scaffolding-with-fano-cli/creating-project#scaffolding-uwsgi-project) or [http](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project)).
+Following command tells Fano CLI to create http web application project in `Hello` directory. Directory must not exist. Read *[Creating Project with Fano CLI](/scaffolding-with-fano-cli/creating-project)* for creating different web application project ([CGI](/scaffolding-with-fano-cli/creating-project#scaffolding-cgi-project), [FastCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-fastcgi-project), [SCGI](/scaffolding-with-fano-cli/creating-project#scaffolding-scgi-project), [uwsgi](/scaffolding-with-fano-cli/creating-project#scaffolding-uwsgi-project) or [http](/scaffolding-with-fano-cli/creating-project#scaffolding-libmicrohttpd-project)).
 
 ```
-$ fanocli --project-cgi=Hello
+$ fanocli --project-http=Hello
 ```
 We change active directory to newly created `Hello` directory.
 ```
 $ cd Hello
 ```
 
-Create controller name `HomeController.pas` that will handle request to route `/`. For more information regarding route, read *[Working with Router](/working-with-router)*.
+Create [controller](/working-with-controllers) name `HomeController.pas` that will handle [request](/working-with-request) to route `/`. For more information regarding route, read *[Working with Router](/working-with-router)*.
+
 ```
 $ fanocli --controller=Home --route=/
 ```
-Without `--route=/`, by default, Fano CLI will create route same as lower case of controller's name, i.e, `/home`. If you omit `--route=/` then you can only access `HomeController` using URL `http://hello.fano/home` instead of `http://hello.fano`.
+Without `--route=/`, by default, Fano CLI will create route same as lower case of controller's name, i.e, `/home`. If you omit `--route=/` then you can only access `HomeController` using URL `http://localhost:20477/home` instead of `http://localhost:20477`.
 
 Compile application
 ```
 $ ./build.sh
 ```
 
-Setup a virtual host for domain `hello.fano` and associate it with our CGI application binary.
+Run application
+
 ```
-$ sudo fanocli --deploy-cgi=hello.fano
+$ ./bin/app.cgi
 ```
-`--deploy-cgi` modifies web server configuration and reload it. That is why you need to use `sudo` command. Read *[Deployment](/deployment)* for deploying different protocol web application project ([FastCGI](/deployment/fastcgi), [SCGI](/deployment/scgi), [uwsgi](/deployment/uwsgi), [http](/deployment/standalone-web-server)).
+
+By default, generated executable will have name `app.cgi` inside `bin` directory.
 
 ## Project directory walkthrough
 Fano Framework has no opinion about your project directory structure.
@@ -96,23 +87,11 @@ However, Fano CLI creates several files and directories that follows certain ass
 - Include file `src/Routes/Home/route.inc` associates default URL `/` with home controller.
 - Include file `controllers.dependencies.inc` in `src/Dependencies` directory, registers factory class for home controller.
 
-## <a name="what-could-go-wrong"></a>What could go wrong
-
-### Browser downloads application binary
-
-When you visit http://hello.fano URL, browser displays confirmation dialog to download application binary instead of displaying `Home Controller` text. This is most likely because
-`mod_cgi` or `mod_cgid` is not enabled. Both modules are installed by default on Apache 2 but are not enabled.
-
-To remedy, you need to enable it and restart Apache. For example, to enable `mod_cgi` module
-
-```
-$ sudo a2enmod cgi
-$ sudo systemctl restart apache2
-```
-Replace `cgi` with `cgid` if you want to enable `mod_cgid` module instead.
-
 ## Explore more
 
+- [Read query, cookie or POST parameters](/working-with-request).
+- [Working with views and HTML templates](/working-with-views).
+- [Return HTML, JSON or image response](/working-with-response).
 - [Step by Step Tutorials](/tutorials)
 - [Examples](/examples)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)

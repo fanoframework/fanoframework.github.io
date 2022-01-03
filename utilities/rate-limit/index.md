@@ -15,9 +15,37 @@ While developing API, we want to be able to maximize our application so that it 
 
 You will define a maximum number of request in a given amount of time. When clients reached maximum value, your application answers HTTP error code `429 Too Many Requests`.
 
+## TLimitStatus record
+
+`TLimitStatus` is internal data structure that is used to maintain rate-limiting data and declared as shown below
+
+```
+type
+
+     TLimitStatus = record
+        limitReached : boolean;
+        limit : integer;
+        remainingAttempts : integer;
+
+        //timestamp when counter will be reset
+        resetTimestamp : integer;
+
+        //number of seconds after counter will be reset
+        retryAfter : integer;
+    end;
+```
+
+- `limitReached` is boolean value to identify if current request exceeds its limit.
+- `limit` is maximum number of operation allowed.
+- `remainingAttempts` is number of operation available. If it equals 0 then limit is reached.
+- `resetTimestamp` is timestamp when remaining attempts will be reset back to maximum operation allowed.
+- `retryAfter` is number of seconds before remaining attempts in reset.
+
 ## Rate-limit middleware
 
-Fano Framework provides `TThrottleMiddleware` to limit number of request to certain application routes or global to all routes. To use this [middleware](/middlewares), register its factory class (`TThrottleMiddlewareFactory`) to [service container](/dependency-container) as shown in following code.
+Fano Framework provides `TThrottleMiddleware` and `TNonBlockingThrottleMiddleware` to limit number of request to certain application routes or global to all routes. The latter will not block request, it only tests if limit is reached and modify request to include rate limit status. Next middleware or controller can decides what to do with it. This is useful for example, you want to count excess number of request as additional billing charge instead of blocking request.
+
+To use this [middleware](/middlewares), register its factory class [`TThrottleMiddlewareFactory`](https://github.com/fanoframework/fano/blob/master/src/Libs/Throttle/Implementations/Factories/ThrottleMiddlewareFactoryImpl.pas) or [`TNonBlockingThrottleMiddlewareFactory`](https://github.com/fanoframework/fano/blob/master/src/Libs/Throttle/Implementations/Factories/ThrottleMiddlewareFactoryImpl.pas) to [service container](/dependency-container) as shown in following code.
 
 ```
 container.add(
@@ -32,6 +60,81 @@ router.get(
     '/',
     container['homeController'] as IRequestHandler
 ).add(container['throttle-one-request-per-sec'] as IMiddleware);
+```
+### Non blocking middleware
+For non blocking throttle middleware
+```
+container.add(
+    'throttle-one-request-per-sec',
+    TNonBlockingThrottleMiddlewareFactory.create()
+);
+```
+After attaching `TNonBlockingMiddleware` to a route, everytime route is executed then
+request contains additional rate-limiting data (`TLimitStatus`) which can be retrieved from request object in next middleware or controller using `getParam()` method as shown below.
+
+```
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var
+    limitReached : boolean;
+begin
+    if (tryStrtoBool(request.getParam('__limitreached'), limitReached)) and
+        limitReached then
+    begin
+        response.body().write(
+            'limit reach retry after:' + request.getParam('__retry_after')
+        );
+    end else
+    begin
+        response.body().write('Home controller');
+    end;
+    result := response;
+end;
+```
+
+By default, this middleware add following key parameters
+
+- `__limit_reached`, this key is related to field `limitReached` of `TLimitStatus`.
+- `__limit`, this key is related to field `limit` of `TLimitStatus`.
+- `__remaining_attempts`, this key is related to field `remainingAttempts` of `TLimitStatus`.
+- `__reset_timestamp`, this key is related to field `resetTimestamp` of `TLimitStatus`.
+- `__retry_after`, this key is related to field `retry_after` of `TLimitStatus`.
+
+Using getParam(), data is always in string so you need to convert it to its correct type.
+Other means to query rate limiting data is by testing if request object is `IThrottleRequest` instance. [This interface](https://github.com/fanoframework/fano/blob/master/src/Libs/Throttle/Contracts/ThrottleRequestIntf.pas) exposes additional property `limitStatus`.
+
+```
+function TMyController.handleRequest(
+    const request : IRequest;
+    const response : IResponse;
+    const args : IRouteArgsReader
+) : IResponse;
+var
+    throttleRequest : IThrottleRequest;
+begin
+    if request is IThrottleRequest then
+    begin
+        throttleRequest := request as IThrottleRequest;
+        if throttleRequest.limitStatus.limitReached then
+        begin
+            response.body().write(
+                'limit reach retry after:' +
+                    intToStr(throttleRequest.limitStatus.retryAfter)
+
+            );
+        end else
+        begin
+            response.body().write('Home controller');
+        end;
+    end else
+    begin
+        response.body().write('Home controller');
+    end;
+    result := response;
+end;
 ```
 
 ## Change number of requests
@@ -87,7 +190,8 @@ To be able to tell which clients exceed limit, throttle middleware need to be ab
 Currently, Fano Framework provides two implementations of this interface.
 
 - `TIpAddrRequestIdentifier` which identifies request based on IP address.
-- `TSessionRequestIdentifier` which identifies request based on session ID.
+- `TSessionRequestIdentifier` which identifies request based on [session ID](/working-with-session).
+- `TQueryParamRequestIdentifier` which identifies request based on [query parameter](/working-with-request).
 
 By default, request is identified using its IP address. To change request identifier instance, call `requestIdentifier()` method of factory and pass new instance
 
@@ -108,8 +212,19 @@ container.add(
         .ratePerSecond(1)
 );
 ```
+`TQueryParamRequestIdentifier` class constructor requires one parameter, name of query string key.
 
-If you need to use different ways to identify request, for example using unique key passed as query string or POST parameter, ypu can create a class which implements `IRequestIdentifier` interface and implement its `getId()` method. For example
+```
+container.add(
+    'throttle-one-request-per-sec',
+    TThrottleMiddlewareFactory.create()
+        .requestIdentifier(TQueryParamRequestIdentifier.create('my-key'))
+);
+```
+where `my-key` is query parameter key used to identify. So
+`http://myapp.fano?my-key=1` and `http://myapp.fano?my-key=2` will be identified as separate request.
+
+If you need to use different ways to identify request, for example using several unique key passed as query string or POST parameter, you can create a class which implements `IRequestIdentifier` interface and implement its `getId()` method. For example
 
 ```
 unit MyRequestIdentifierImpl;
@@ -139,6 +254,9 @@ type
 
 implementation
 
+uses
+    md5;
+
 (*!------------------------------------------------
  * get identifier from request
  *-----------------------------------------------
@@ -148,8 +266,11 @@ implementation
 function TMyRequestIdentifier.getId(
     const request : IRequest
 ) : shortstring;
+var key, country : string;
 begin
-    result := request.getParam('accesskey');
+    key := request.getParam('accesskey');
+    country := request.getParam('country');
+    result := MD5Print(MD5String(country+key));
 end;
 ```
 You can also create class inherit from `TAbstractRequestIdentifier` and implement its abstract method `getId()`.
@@ -168,7 +289,7 @@ Development of other type rate limiter such as rate limiter which keeps track re
 By default, `TThrottleMiddlewareFactory` uses `TMemoryRateLimiter`. Internal implementation of this class store data using hash map in memory.
 
 ### Database storage rate limiter
-You need `TDbRateLimiter` to use relational database such as MySQL, PostgreSQL, Firebird or SQLite to track requests.
+You need `TDbRateLimiter` to [use relational database](/database) such as MySQL, PostgreSQL, Firebird or SQLite to track requests.
 
 `TDbRateLimiter` class requires instance if `IRdbms` interface which responsible to do actual database operation. You need to tell what table to use and also column name of identifier column, operation column and reset timestamp.
 
@@ -292,3 +413,4 @@ Rate-limiting video tutorial explains how to use rate limit middleware to restri
 - [TThrottleMiddleware source](https://github.com/fanoframework/fano/blob/master/src/Libs/Throttle/Implementations/ThrottleMiddlewareImpl.pas)
 - [TThrottleMiddlewareFactory source](https://github.com/fanoframework/fano/blob/master/src/Libs/Throttle/Implementations/Factories/ThrottleMiddlewareFactoryImpl.pas)
 - [Rate-limiting demo application](https://github.com/fanoframework/fano-rate-limiting)
+- [Rate-limiting demo application with MySQL as storage](https://github.com/fanoframework/fano-rate-limiting-db).

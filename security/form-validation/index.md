@@ -304,6 +304,7 @@ end.
 - [Working with request](/working-with-request)
 - [Middlewares](/middlewares)
 - [Form Validation example project](https://github.com/fanoframework/fano-validation)
+- [Input validation example web application](https://github.com/fanoframework/input-validation).
 - [TValidation class](https://github.com/fanoframework/fano/blob/master/src/Security/Validation/ValidationImpl.pas)
 - [IValidator interface](https://github.com/fanoframework/fano/blob/master/src/Security/Validation/Contracts/ValidatorIntf.pas)
 - [IRequestValidator interface](https://github.com/fanoframework/fano/blob/master/src/Security/Validation/Contracts/RequestValidatorIntf.pas)

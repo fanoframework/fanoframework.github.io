@@ -66,7 +66,7 @@ $ fanocli --task=project-scgi
 
 ## <a name="creating-project"></a>Creating Web Application Project
 
-Fano CLI provides several commands for scaffolding Fano Framework web application easily, such as, `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi` and `--project-mhd` which is to create web application project supporting CGI, FastCGI, SCGI and uwsgi, http protocol. Currently http implementation is using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/) library.
+Fano CLI provides several commands for scaffolding Fano Framework web application easily, such as, `--project-cgi`, `--project-fcgi`, `--project-fcgid`, `--project-scgi`,  `--project-uwsgi`, `--project-mhd`, `--project-indy` and `--project-http` which is to create web application project supporting CGI, FastCGI, SCGI and uwsgi, http protocol. Currently http implementation is using [libmicrohttpd](https://www.gnu.org/software/libmicrohttpd/) library, [Indy](https://indyprojects.org) or Free Pascal built-in `TFpHttpServer` class.
 
 ```
 $ fanocli --project-cgi=[project-name]
@@ -361,7 +361,7 @@ Any [project creation commands](/scaffolding-with-fano-cli/creating-project), i.
 $ fanocli --project-scgi=Hello --with-csrf
 ```
 
-`--with-csrf` adds `--config` and `--with-session` parameters implicitly, so folowing command generate similar project.
+`--with-csrf` adds `--config` and `--with-session` parameters implicitly, so following command generate similar project.
 
 ```
 $ fanocli --project-scgi=Hello --with-csrf

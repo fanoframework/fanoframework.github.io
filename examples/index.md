@@ -73,6 +73,7 @@ Following example applications demonstrate how to use session with Fano Framewor
 
 - [Form Validation example](https://github.com/fanoframework/fano-validation) demonstrate how to use Fano Framework input [validation feature](/security/form-validation).
 - [File upload validation example](https://github.com/fanoframework/fano-scgi-upload) demonstrate how to use Fano Framework input [validation feature](/security/form-validation) to validate [file upload](/handling-file-upload) using various validation rules.
+- [Input validation example web application](https://github.com/fanoframework/input-validation) demonstrates how to validate latitude and latitude value.
 
 ## HTTP Verb tunneling examples
 
@@ -114,7 +115,7 @@ While Fano Db logger example web application demonstrates how to [log messages t
 
 ## Rate-limit
 
-[Rate-limiting demo application](https://github.com/fanoframework/fano-rate-limiting) demonstrates how to limit number of request a client can make. [View video tutorial](https://youtu.be/dfmArIN4s-o).
+[Rate-limiting demo application](https://github.com/fanoframework/fano-rate-limiting) demonstrates how to limit number of request a client can make. [View video tutorial](https://youtu.be/dfmArIN4s-o). [Rate-limiting with MySQL demo application](https://github.com/fanoframework/fano-rate-limiting-db) is similar except that it stores request states in MySQL database instead of memory.
 
 ## Explore more
 

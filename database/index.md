@@ -5,14 +5,19 @@ description: Working with database in Fano Framework
 
 <h1 class="major">Working with Database</h1>
 
+![Database illustration](/assets/images/database.jpg){:class="image fit"}
+
+Photo by [Jan Antonin Kolar](https://unsplash.com/@jankolar?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/database-administrators?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
 ## IRdbms interface
 
-IRdbms is just a thin wrapper for Free Pascal SQLdb package. Currently supported RDBMS system is
+`IRdbms` interface is just a thin wrapper for Free Pascal SQLdb package. Currently supported RDBMS systems are
 
 - MySQL via `TMysqlDb` class
 - PostgreSQL via `TPostgreSqlDb` class
 - Firebird via `TFirebirdDb` class,
 - SQLite via `TSQLiteDb` class
+- Any databases which support ODBC, via `TOdbcDb` class.
 
 ## Creating Database Connection
 
@@ -62,11 +67,11 @@ db := TSQLiteDb.create();
 db.connect('', 'your_data.db', '', '', 0);
 ```
 
-It will open database connection which is stored in `your_data.db` file.
+It will open database which is stored in `your_data.db` file.
 
 ### ODBC
 
-If you use database which not yet supported directly by FreePascal sqldb library you may use ODBC connection.
+If you use database which not yet supported directly by FreePascal sqldb library, you may use ODBC connection.
 `TOdbcDb` class is thin wrapper for `TODBCConnection` class which implements `IRdbms` interface.
 
 For example, if you have `/etc/odbcinst.ini` with content as follows
@@ -133,9 +138,10 @@ For `TOdbcDbFactory`, using ODBC with DSN, you can register simply by using its 
 container.add(
     'db',
     TOdbcDbFactory.create()
-        .database('my-app-d')
+        .database('my-app-db')
 );
 ```
+## Retrieve IRdmbs instance from dependency container
 
 To get instance of `IRdbms` instance, just get it from dependency container as shown in following code.
 
@@ -163,6 +169,21 @@ var
 resultSet := db.prepare('SELECT * FROM users').execute();
 ```
 
+Unlike SQLdb which separates how you execute SQL command that returns result set and ones that do not return result set such
+`open()` for `SELECT` and `execSQL()` for `INSERT` or `UPDATE`, IRdbms interface
+abstracts this, so you always call `execute()` method for `SELECT`, `INSERT` or `UPDATE`.
+
+```
+fRdbms.prepare(
+    'INSERT INTO atable ' +
+    '(id, operation, resetTimestamp) VALUES ' +
+    '(:idCol, :oprCol, :resetTmp)'
+).paramStr('idCol', 'abc')
+.paramInt('oprCol', 10)
+.paramInt('resetTmp', 2000)
+.execute();
+```
+
 ### Passing parameters to SQL query
 
 To avoid SQL injection, it is recommended to use prepared statement with parameter
@@ -172,6 +193,8 @@ resultSet := db.prepare('SELECT * FROM users WHERE user_email = :userEmail')
     .paramStr('userEmail', 'john@fanoframework.github.io')
     .execute();
 ```
+
+To pass integer, float, datetime data, use `paramInt()`, `paramFloat()`, `paramDateTime()` respectively.
 
 ## Get total rows in result set
 
@@ -230,3 +253,9 @@ You may find thing does not work due to missing library for example you [do not 
 ## Explore more
 
 - [Working with Models](/working-with-models)
+- [IRdbms interface](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Contracts/RdbmsIntf.pas).
+- [TMySQLDb class](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/MySql/MySqlDbImpl.pas).
+- [TPostgreSqlDb class](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/PostgreSql/PostgreSqlDbImpl.pas).
+- [TFirebirdDb class](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/Firebird/FirebirdDbImpl.pas).
+- [TOdbcDb ckass](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/Odbc/OdbcDbImpl.pas).
+- [TSQLiteDb class](https://github.com/fanoframework/fano/blob/master/src/Db/Rdbms/Implementations/SQLite/SQLiteDbImpl.pas).

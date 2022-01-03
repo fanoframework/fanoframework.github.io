@@ -6,6 +6,10 @@ description: How to use loggers in Fano Framework
 
 ## Logger and why should you care?
 
+![Logger illustration](/assets/images/logger.jpg){:class="image fit"}
+
+Photo by [Aaron Burden](https://unsplash.com/@aaronburden?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/writing?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
 There are times when developers need to log something to keep track of things, e.g,
 what went wrong (a.k.a error logs), auditing purpose and so on.
 
@@ -84,7 +88,7 @@ logger := TFileLogger.create('storages/logs/app.log');
 
 ### Logging to STDOUT
 
-`TStdOutLogger` is logger implementation that will output log message to STDOUT.
+`TStdOutLogger` is logger implementation that will output log message to STDOUT. This logger can not be used in CGI application.
 
 ### Logging to STDERR
 
@@ -273,6 +277,14 @@ To register `TNullLogger`,
 
 ```
 container.add('logger', TNullLoggerFactory.create());
+```
+
+### Register TStdOutLogger
+
+To register `TStdOutLogger`,
+
+```
+container.add('logger', TStdOutLoggerFactory.create());
 ```
 
 ### Register TStdErrLogger
