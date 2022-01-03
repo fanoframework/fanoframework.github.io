@@ -126,7 +126,7 @@ Make sure you set `INDY_DIR` environment variable to point to where Indy directo
 ```
 $ export INDY_DIR="/path/to/indy"
 ```
-or you can set it in `.env` file which will be loaded when you run build script. Please not that you should not add trailing slash, so use
+or you can set it in `.env` file which will be loaded when you run build script. Please note that you should not add trailing slash, so use
 
 ```
 $ export INDY_DIR="/path/to/indy"
