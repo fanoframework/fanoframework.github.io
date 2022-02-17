@@ -162,6 +162,12 @@ $ sudo apt install libcurl4-gnutls-dev
 ```
 $ sudo ln -s ~/fpcupdeluxe/fpc/bin/x86_64-linux/fpc.cfg /etc/fpc.cfg
 ```
+
+or if you can not do that, you may want to use shell script provided by fpcupdeluxe when build.
+
+```
+$ FPC_BIN=~/fpcupdeluxe/fpc/bin/x86_64-linux/fpc.sh ./build.sh
+```
 ## <a name="missing-mysql-client-library"></a>Missing MySQL client library
 
 If you encounter error *Can't load default MySQL library ("libmysqlclient.so.20" or "libmysqlclient.so"). Check your installation*, you need to install MySQL client development library. For example on Debian,

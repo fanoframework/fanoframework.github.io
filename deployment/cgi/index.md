@@ -159,13 +159,9 @@ $ sudo systemctl reload httpd
 
 ### Shared-hosting
 
-This section explains how to deploy server that you have no full control and have very limited administrative privelege.
+This section explains how to deploy server that you have no full control and have very limited administrative privilege.
 
-#### Debian-based Linux
-
-#### Fedora-based Linux
-
-#### CPanel-based server
+What you need to do is to copy executable binary into `cgi-bin` and any public files to `public_html` or `public`. You may want to make sure that relative path works correctly.
 
 ## Nginx
 
