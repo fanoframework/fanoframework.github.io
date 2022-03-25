@@ -206,7 +206,7 @@ end.
 
 `TAppServiceProvider` is class implements `IServiceProvider` interface which has
 one method name `register()`. It will be invoked by Fano Framework during intialization and will receive
-instance of [dependency container](/dependency-container/). In this method, you intialize all services required by your application. `TAppServiceProvider` inherits from `TDaemonAppServiceProvider` which setups common
+instance of [dependency container](/dependency-container/). In this method, you initialize all services required by your application. `TAppServiceProvider` inherits from `TDaemonAppServiceProvider` which setups common
 services for long-running web application.
 
 `TAppRoutes` is class implements `IRouteBuilder` interface which has one method `buildRoutes()` to implements.
