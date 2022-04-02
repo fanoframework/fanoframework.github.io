@@ -31,6 +31,11 @@ $ ./bin/app.cgi
 
 Open web browser and go to `http://localhost:20477`. You should see `Home controller` text is printed in browser. Congratulations, your application is working.
 
+Following video shows step by step creating HTTP web application project.
+
+[![Getting Started with Fano Framework video](/assets/images/getting-started-http-application.png)](https://youtu.be/SWtcIyTVzEo "Getting Started with Fano Framework video")
+
+
 ## Command walkthrough
 
 Let us take a look at each command above to understand what it does.
