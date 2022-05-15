@@ -69,6 +69,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 - **[Deploy as uwsgi application](/deployment/uwsgi)** explains how to deploy uwsgi web application using reverse proxy with Apache mod_proxy_uwsgi module or Nginx.
 - **[Deploy as http application](/deployment/standalone-web-server)** explains how to deploy HTTP web application using reverse proxy with Apache mod_proxy_http module or Nginx or as stand-alone web server.
 - **[Deploy Fano web application with web server as load balancer](/deployment/load-balancer-setup)** explains how to deploy and load balance several Fano Framework web applications using Apache or Nginx load balancer.
+- **[Deploy using Docker](/deployment/docker)** explains how to deploy Fano web application inside Docker container.
 
 ## Debugging
 
