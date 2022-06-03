@@ -13,6 +13,8 @@ to help scaffolding [Fano Framework](https://github.com/fanoframework/fano) web 
 *[creating Fano web application project](#creating-project)*, *[creating controller](#creating-controller)*, *[model](#creating-model)*, *[view](#creating-view)*, *[middleware](#creating-middleware)* classes,
 *[generate random key](#generate-random-key)* and *[GUID](#generate-guid)*, *[minify JavaScript files](#minify-javascript)* and also *[setting up web server configuration](#deployment)*.
 
+Fano CLI is supplemental tool. You can use Fano Framework without Fano CLI installed. However it is recommended to use Fano CLI as you can generate web application project easily in few seconds. 
+
 ## <a name="installation"></a>Installation
 
 Make sure Free Pascal and git are installed. Run
