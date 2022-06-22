@@ -14,7 +14,7 @@ It is assumed your current user is in group `docker`. If you are not in `docker`
 ## Deploy Fano CGI Application with Docker
 
 ### Create Dockerfile
-Create file name `Dockerfile` in project root directory with content like so
+Create file name `Dockerfile` in project root directory with content as shown below
 
 ```
 FROM httpd:2.4
@@ -200,7 +200,7 @@ For that we need to create two Dockerfiles for Fano application and Apache.
 
 ### Dockerfile for Fano application
 
-Dockerfile for Fano application is just pull Ubuntu image and copy binary executable, configuration file, HTML templates etc.
+Dockerfile for Fano application pulls Ubuntu image and copies binary executable, configuration file, HTML templates etc.
 
 Last, we tells Docker to execute application and listen on `0.0.0.0:7704`. Parameter `--host=0.0.0.0` is required, otherwise our application will only listen on `127.0.0.1`. Because Apache will act as reverse-proxy server on different container, it will not be able to connect to Fano application without `--host=0.0.0.0`.
 
@@ -263,7 +263,7 @@ We create new file `vhost.example` with content aim to setup FastCGI reverse pro
 
 ### Create docker-compose configuration.
 
-To simplify running both application, we use docker-compose with configuration like so
+To simplify running both application, we use `docker-compose` with configuration like so
 
 ```
 version: "2"
@@ -282,13 +282,13 @@ services:
             - fano
 ```
 
-Here we tells docker-compose to build two services from two dockerfiles we previously created. We also forward traffic on port `7704` so that Apache container can connect it.
+Here we tells `docker-compose` to build two services from two dockerfiles we previously created. We also forward traffic on port `7704` so that Apache container can connect it.
 
 Do not forget to save it as `docker-compose.yaml`.
 
 ### Run FastCGI application with docker-compose
 
-To run application and Apache, run build.sh script first and then,
+To run application and Apache, run `build.sh` script first and then,
 
 ```
 $ docker-compose up
