@@ -116,7 +116,7 @@ Run `build.sh` to compile application first and then from inside directory where
 $ docker build -t fano-app .
 ```
 
-This will build docker image with tag `fano-app` and may take a while.
+This builds docker image with tag `fano-app` and may take a while.
 
 After that run
 
@@ -216,7 +216,7 @@ We name this Dockerfile as `fano_dockerfile`.
 
 ### Dockerfile for Apache reverse proxy server
 
-Dockerfile for Apache mostly similar to above Dockerfile for CGI but with goal to setup Apache as FastCGI reverse proxy server that connect to our application. This is done by tells Apache to load `mod_proxy` and `mod_proxy_fcgi`.
+Dockerfile for Apache is similar to above Dockerfile for CGI, except it sets Apache as FastCGI reverse proxy server that connect to our application. This is done by tells Apache to load `mod_proxy` and `mod_proxy_fcgi`.
 
 ```
 FROM httpd:2.4
@@ -251,7 +251,7 @@ We copy `vhost.example` into container virtual host configuraton. We will create
 We name this Dockerfile as `httpd_dockerfile`.
 
 ### Create virtual host configuration
-We create new file `vhost.example` with content aim to setup FastCGI reverse proxy. `fcgi://fano:7704` line tells Apache to forward FastCGI data to our application container identified as `fano` (This is service we defined in `docker-compose.yaml` below).
+We create new file `vhost.example` to set FastCGI reverse proxy. `fcgi://fano:7704` line tells Apache to forward FastCGI data to our application container identified as `fano` (This is service we define in `docker-compose.yaml` below).
 
 ```
 <VirtualHost *:80>
@@ -313,11 +313,11 @@ Then open browser and visit `http://172.20.0.3` to access our application.
 
 ## Deploy Fano SCGI Application with Docker
 
-This will mostly similar to FastCGI reverse proxy setup above, except that `httpd_dockerfile` will load `mod_proxy_scgi` and `vhost.example` contains `scgi://fano:7704` line
+This is similar to FastCGI reverse proxy configuration above, except `httpd_dockerfile` loads `mod_proxy_scgi` and `vhost.example` contains `scgi://fano:7704` line.
 
 ## Deploy Fano uwsgi Application with Docker
 
-This will mostly similar to FastCGI reverse proxy setup above, except that `httpd_dockerfile` will load `mod_proxy_uwsgi` and `vhost.example` contains `uwsgi://fano:7704` line
+This is similar to FastCGI reverse proxy configuration above, except `httpd_dockerfile` loads `mod_proxy_uwsgi` and `vhost.example` contains `uwsgi://fano:7704` line.
 
 ## Deploy Fano CLI-generated Project with Docker
 
