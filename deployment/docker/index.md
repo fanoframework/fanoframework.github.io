@@ -308,8 +308,8 @@ it is listed as `testfano_default` by default. To get IP address
 $ docker network inspect testfano_default
 ```
 
-Find IP address for Apache, for example if it prints `172.20.0.3/16`
-Then open browser and visit `http://172.20.0.3` to access our application.
+Find IP address for Apache, for example if it prints `172.20.0.3/16`,
+then open browser and visit `http://172.20.0.3` to access our application.
 
 ## Deploy Fano SCGI Application with Docker
 
