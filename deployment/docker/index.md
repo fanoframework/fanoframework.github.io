@@ -301,8 +301,8 @@ Run
 $ docker network ls
 ```
 
-It will list all Docker available networks. If our application is in `testfano` directory,
-it will be listed as `testfano_default` by default. To get IP address
+It lists all Docker available networks. If our application is in `testfano` directory,
+it is listed as `testfano_default` by default. To get IP address
 
 ```
 $ docker network inspect testfano_default
