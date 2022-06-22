@@ -9,7 +9,7 @@ description: Tutorial on how to deploy Fano application with Docker container.
 
 You have working Docker and Docker Compose installation.
 
-It is assumed your current user is in group `docker`. If you are not in `docker` group, you will have to prefix all docker command with `sudo` or run it with elevated privilege (root).
+It is assumed your current user is in group `docker`. If you are not in `docker` group, you have to prefix all docker command with `sudo` or run it with elevated privilege (root).
 
 ## Deploy Fano CGI Application with Docker
 
