@@ -316,3 +316,4 @@ for example, to read query string parameter.
 - [Examples](/examples)
 - [Scaffolding with Fano CLI](/scaffolding-with-fano-cli)
 - [Creating Hello World application with Fano CLI](https://fanoframework.github.io/tutorials/hello-world-application-with-fano-cli)
+- [Deployment](/deployment)
