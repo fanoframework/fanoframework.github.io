@@ -11,6 +11,19 @@ You have working Docker and Docker Compose installation.
 
 It is assumed your current user is in group `docker`. If you are not in `docker` group, you have to prefix all docker command with `sudo` or run it with elevated privilege (root).
 
+## Deploy Fano CLI-generated Project with Docker
+
+[Fano CLI](/scaffolding-with-fano-cli/) since `v1.13.0` generates `docker-compose.yaml` file during creation of [CGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-cgi-project), [FastCGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-fcgid-project), [SCGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-scgi-project) and [uwsgi](/scaffolding-with-fano-cli/creating-project/#scaffolding-uwsgi-project) project.
+
+Which means you can skip steps explained in sections below and just compile application and then run with `docker-compose up`.
+```
+$ fanocli --project-fcgi=my-fcgi.fano
+$ cd my-fcgi.fano
+$ fanocli --controller=Home --route=/
+$ ./build.sh
+$ docker-compose up
+```
+
 ## Deploy Fano CGI Application with Docker
 
 ### Create Dockerfile
@@ -318,19 +331,6 @@ This is similar to FastCGI reverse proxy configuration above, except `httpd_dock
 ## Deploy Fano uwsgi Application with Docker
 
 This is similar to FastCGI reverse proxy configuration above, except `httpd_dockerfile` loads `mod_proxy_uwsgi` and `vhost.example` contains `uwsgi://fano:7704` line.
-
-## Deploy Fano CLI-generated Project with Docker
-
-[Fano CLI](/scaffolding-with-fano-cli/) since `v1.13.0` generates `docker-compose.yaml` file during creation of [CGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-cgi-project), [FastCGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-fcgid-project), [SCGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-scgi-project) and [uwsgi](/scaffolding-with-fano-cli/creating-project/#scaffolding-uwsgi-project) project.
-
-Which means you can skip steps above and just compile application and then run with `docker-compose up`.
-```
-$ fanocli --project-fcgi=my-fcgi.fano
-$ cd my-fcgi.fano
-$ fanocli --controller=Home --route=/
-$ ./build.sh
-$ docker-compose up
-```
 
 ## Explore more
 
