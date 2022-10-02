@@ -196,7 +196,7 @@ Fedora, Red Hat Enterprise Linux and Centos come with SELinux enabled and with v
 2019/10/17 15:17:58 [crit] 1022#0: *6 connect() to 127.0.0.1:20477 failed (13: Permission denied) while connecting to upstream, client: 192.168.0.79, server: example.fano, request: "GET / HTTP/1.1", upstream: "scgi://127.0.0.1:20477", host: "example.fano"
 ```
 
-Simple solution is to run SELinux with `permissive` mode. In permissive mode, SELinux permits all operations but log operations that would have breached in `enforcing` mode.
+For development, simple solution is to run SELinux with `permissive` mode. In permissive mode, SELinux permits all operations but log operations that would have breached in `enforcing` mode.
 
 Web server such Apache or Nginx is listed in SELinux under `httpd_t` context. Run following command as root to add `httpd_t` to permissive mode.
 
@@ -232,7 +232,10 @@ Take a note of value `policycoreutils-python-utils-2.8-16.1.el8.noarch` and run
 ```
 # yum install policycoreutils-python-utils-2.8-16.1.el8.noarch
 ```
-
+### Setup SELinux policy for custom application
+     
+For setting up proper SELinux policy please consult [Writing a custom SELinux policy](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/writing-a-custom-selinux-policy_using-selinux)
+     
 ## Explore more
 
 - [Deploy as FastCGI application](/deployment/fastcgi)
