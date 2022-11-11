@@ -7,31 +7,31 @@ description: List of built-in validation rules in Fano Framework
 
 This page lists all available built-in validation rules that Fano Framework provides. For information on how to use these validation rules in application, please read [Form Validation](/security/form-validation) documentation.
 
-| [Alpha](#talphavalidator) | [Alpha Num](#talphanumvalidator) | [Alpha num space](#talphanumspacevalidator) |
-| [Required](#trequiredvalidator) | [Present](#tpresentvalidator) | [Required if](#trequiredifvalidator) |
-| [Alpha num dash](#talphanumdashvalidator) | [Email](#temailvalidator) | [Url](#turlvalidator) |
-| [Slug](#tslugvalidator) | [Phone](#tphonevalidator) | [Regex](#tregexvalidator) |
-| [Equal string](#tequalstrvalidator) | [Case insensitive equal string](#tcaseinsensitiveequalstrvalidator) | [Equal length](#tequallengthvalidator) |
-| [Min length](#tminlengthvalidator) | [Max length](#tmaxlengthvalidator) | [Integer](#tintegervalidator) |
-| [Int64](#tint64validator) | [Dword](#tdwordvalidator) | [Qword](#tqwordvalidator) |
-| [Float](#tfloatvalidator) | [Currency](#tcurrencyvalidator) | [Numeric](#tnumericvalidator) |
-| [Min integer](#tminintegervalidator) | [Max integer](#tmaxintegervalidator) | [Less than](#tlessthanvalidator) |
-| [Greater than](#tgreaterthanvalidator) | [Equal integer](#tequalintvalidator) | [Positive integer](#tpositiveintvalidator) |
-| [Negative integer](#tnegativeintvalidator) | [Odd integer](#toddintvalidator) | [Even integer](#tevenintvalidator) |
-| [Boolean](#tbooleanvalidator) | [Accepted](#tacceptedvalidator) | [In](#tinvalidator) |
-| [In integer](#tinintvalidator) | [Not in integer](#tnotinintvalidator) | [Date](#tdatevalidator) |
-| [Date time](#tdatetimevalidator) | [Time](#ttimevalidator) | [Equal date time](#tequaldatetimevalidator) |
-| [After date time](#tafterdatetimevalidator) | [Before date time](#tbeforedatetimevalidator) | [After date time field](#tafterdatetimefieldvalidator) |
-| [Before date time field](#tbeforedatetimefieldvalidator) | [File](#tfilevalidator) | [Directory](#tdirectoryvalidator) |
+| [Accepted](#tacceptedvalidator) | [After date time](#tafterdatetimevalidator) | [After date time field](#tafterdatetimefieldvalidator) |
+| [Alpha](#talphavalidator) | [Alpha Num](#talphanumvalidator) | [Alpha num dash](#talphanumdashvalidator) |
+| [Alpha num space](#talphanumspacevalidator) | [Always pass](#talwayspassvalidator) | [And](#tandvalidator) |
+| [Anti virus](#tantivirusvalidator) | [Any of](#tanyofvalidator) | [Base64](#tbase64validator) |
+| [Before date time](#tbeforedatetimevalidator) | [Before date time field](#tbeforedatetimefieldvalidator) | [Boolean](#tbooleanvalidator) |
+| [Case insensitive equal string](#tcaseinsensitiveequalstrvalidator) | [Color](#tcolorvalidator) | [Collective](#tcollectivevalidator) |
+| [Confirmed](#tconfirmedvalidator) | [Composite](#tcompositevalidator) | [Currency](#tcurrencyvalidator) |
+| [Date](#tdatevalidator) | [Date time](#tdatetimevalidator) | [Directory](#tdirectoryvalidator) |
+| [Dword](#tdwordvalidator) | [Email](#temailvalidator) | [Equal string](#tequalstrvalidator)  |
+| [Equal length](#tequallengthvalidator) | [Equal date time](#tequaldatetimevalidator) | [Equal integer](#tequalintvalidator) |
+| [Even integer](#tevenintvalidator) | [Float](#tfloatvalidator) | [Greater than](#tgreaterthanvalidator) |
+| [In](#tinvalidator) | [IPv4](#tipv4validator) | [Int64](#tint64validator) |
+| [Less than](#tlessthanvalidator) | [Max integer](#tmaxintegervalidator) | [Max length](#tmaxlengthvalidator) |
+| [Min integer](#tminintegervalidator) | [Min length](#tminlengthvalidator) | [Negative integer](#tnegativeintvalidator) |
+| [Numeric](#tnumericvalidator) | [Integer](#tintegervalidator) | [In integer](#tinintvalidator) |
+| [Not in integer](#tnotinintvalidator) | [Odd integer](#toddintvalidator) | [Present](#tpresentvalidator) |
+| [Positive integer](#tpositiveintvalidator) | [Qword](#tqwordvalidator) | [Required](#trequiredvalidator) |
+| [Required if](#trequiredifvalidator) | [Time](#ttimevalidator) | [Url](#turlvalidator) |
+| [Slug](#tslugvalidator) | [File](#tfilevalidator) | [Not](#tnotvalidator) |
 | [Uploaded file](#tuploadedfilevalidator) | [Uploaded Mime](#tuploadedmimevalidator) | [Uploaded size](#tuploadedsizevalidator) |
 | [File format](#tfileformatvalidator) | [Image PNG](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) | [Image JPG](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) |
-| [Image GIF](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) | [Anti virus](#tantivirusvalidator) | [Composite](#tcompositevalidator) |
-| [Collective](#tcollectivevalidator) | [Or](#torvalidator) | [Any of](#tanyofvalidator) |
-| [And](#tandvalidator) | [Not](#tnotvalidator) | [Confirmed](#tconfirmedvalidator) |
+| [Image GIF](#timagepngvalidator-timagejpgvalidator-timagegifvalidator) | [Regex](#tregexvalidator) | [Or](#torvalidator) |
 | [Same](#tsamevalidator) | [UUID](#tuuidvalidator) | [Exists](#texistsvalidator) |
-| [Always pass](#talwayspassvalidator) | [IPv4](#tipv4validator) | [IPv6](#tipv6validator) |
-| [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) | [Base64](#tbase64validator) |
-| [Color](#tcolorvalidator) | [Start With](#tstartwithvalidator) | [End With](#tendwithvalidator) |
+| [IPv6](#tipv6validator) | [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) |
+| [Phone](#tphonevalidator) | [Start With](#tstartwithvalidator) | [End With](#tendwithvalidator) |
 | [Latitude](#tlatitudevalidator) | [Longitude](#tlongitudevalidator) | [Between](#tbetweenvalidator) |
 | [Less or equal than](#tlessorequalthanvalidator) | [Greater or equal than](#tgreaterorequalthanvalidator) | - |
 
