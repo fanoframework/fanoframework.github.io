@@ -210,7 +210,7 @@ Please note that `lastValidationResult()` return last validation status so, abov
 
 Fano Framework comes with several built-in validation rules, some are validation rule mentioned in above code example. Read [Built-in Validation Rules](/security/form-validation/built-in-validation-rules) for more information.
 
-## <a name="writing-your-own-validation-rule">Writing your own validation rule
+## <a name="writing-your-own-validation-rule"></a>Writing your own validation rule
 
 If built-in validation rules do not meet your requirement, you can create your own validation rule by creating class that implements `IValidator`.
 
