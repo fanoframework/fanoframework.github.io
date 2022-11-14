@@ -33,7 +33,9 @@ This page lists all available built-in validation rules that Fano Framework prov
 | [IPv6](#tipv6validator) | [MAC](#tmacaddrvalidator) | [JSON](#tjsonvalidator) |
 | [Phone](#tphonevalidator) | [Start With](#tstartwithvalidator) | [End With](#tendwithvalidator) |
 | [Latitude](#tlatitudevalidator) | [Longitude](#tlongitudevalidator) | [Between](#tbetweenvalidator) |
-| [Less or equal than](#tlessorequalthanvalidator) | [Greater or equal than](#tgreaterorequalthanvalidator) | - |
+| [Less or equal than](#tlessorequalthanvalidator) | [Greater or equal than](#tgreaterorequalthanvalidator) | [At least one alpha](#tatleastonealphavalidator) |
+| [At least one lower alpha](#tatleastoneloweralphavalidator) | [At least one upper alpha](#tatleastoneupperalphavalidator) | [At least one digit](#tatleastonedigitvalidator) |
+| [At least one symbol](#tatleastonesymbolvalidator) | [Mixed capitalization](#tmixedcapsvalidator) | - |
 
 ## Field availability
 
@@ -693,6 +695,45 @@ rule := TAntivirusValidator.create(TNullAv.create());
 ```
 This is provided to bypass antivirus scanning.
 
+## Password-related validation
+
+### <a name="tatleastonealphavalidator"></a>TAtLeastOneAlphaValidator
+
+Validate string contains at least one alphabet character.
+
+### <a name="tatleastoneloweralphavalidator"></a>TAtLeastOneLowerAlphaValidator
+
+Validate string contains at least one lower case alphabet character.
+
+### <a name="tatleastoneupperalphavalidator"></a>TAtLeastOneUpperAlphaValidator
+
+Validate string contains at least one upper case alphabet character.
+
+### <a name="tatleastonedigitvalidator"></a>TAtLeastOneDigitValidator
+
+Validate string contains at least one digit character.
+
+### <a name="tatleastonesymbolvalidator"></a>TAtLeastOneSymbolValidator
+
+Validate string contains at least one symbol character (e.g., #$@!%^&*+-_ etc).
+
+### <a name="tmixedcapsvalidator"></a>TMixedCapsValidator
+
+Validate string contains at least one lower case and one upper case alphabet characters.
+
+For example, following validation rules ensure that password is mandatory with minimum length of 8 characters that contains at least one lower case letter,
+one upper case letter, one digit character and one symbol character.
+```
+passwordRule := TCompositeValidator.create([
+    TRequiredValidator.create(),
+    TMinLengthValidator.create(8),
+    TAtLeastOneAlphaValidator.create(TRegex.create()),
+    TAtLeastOneDigitValidator.create(TRegex.create()),
+    TAtLeastOneSymbolValidator.create(TRegex.create()),
+    TMixedCapsValidator.create(TRegex.create())
+]);
+```
+
 ## Miscellaneous
 
 ### <a name="tcompositevalidator"></a>TCompositeValidator
@@ -704,7 +745,7 @@ rule := TCompositeValidator.create([
     TRequiredValidator.create(),
     TAlphaNumDashValidator.create(TRegex.create()),
     TMinLengthValidator.create(8),
-    TMaxLengthValidator.create(10),
+    TMaxLengthValidator.create(10)
 ]);
 ```
 
@@ -719,7 +760,7 @@ rule := TCollectiveValidator.create([
     TRequiredValidator.create(),
     TAlphaNumDashValidator.create(TRegex.create()),
     TMinLengthValidator.create(8),
-    TMaxLengthValidator.create(10),
+    TMaxLengthValidator.create(10)
 ]);
 ```
 
@@ -732,7 +773,7 @@ rule := TOrValidator.create([
     TRequiredValidator.create(),
     TAlphaNumDashValidator.create(TRegex.create()),
     TMinLengthValidator.create(8),
-    TMaxLengthValidator.create(10),
+    TMaxLengthValidator.create(10)
 ]);
 ```
 
@@ -749,7 +790,7 @@ rule := TAndValidator.create([
     TRequiredValidator.create(),
     TAlphaNumDashValidator.create(TRegex.create()),
     TMinLengthValidator.create(8),
-    TMaxLengthValidator.create(10),
+    TMaxLengthValidator.create(10)
 ]);
 ```
 
