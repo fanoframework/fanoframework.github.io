@@ -206,11 +206,11 @@ Please note that `lastValidationResult()` return last validation status so, abov
 
 `lastValidationResult()` method is provided so developer can execute validation in middleware and later in controller inspects last validation status and act accordingly.
 
-## <a name="built-in-validation-rule"></a>Built-in validation rule
+## <a name="built-in-validation-rule"></a>Built-in validation rules
 
 Fano Framework comes with several built-in validation rules, some are validation rule mentioned in above code example. Read [Built-in Validation Rules](/security/form-validation/built-in-validation-rules) for more information.
 
-## Writing your own validation rule
+## <a name="writing-your-own-validation-rule">Writing your own validation rule
 
 If built-in validation rules do not meet your requirement, you can create your own validation rule by creating class that implements `IValidator`.
 

@@ -37,7 +37,7 @@ description: Documentation and developer's resources for Fano Framework, web app
 ## Security
 
 - **[Handling CORS](/security/handling-cors)** discusses how to handle *Cross-origin Resource Sharing (CORS)* issue in Fano Framework.
-- **[Form Validation](/security/form-validation)**. It explains how to validate form input data.
+- **[Form Validation](/security/form-validation)**. It explains how to validate form input data including how to use [built-in validation rules](/security/form-validation/built-in-validation-rules/) or [creating your own validation rule]((/security/form-validation#writing-your-own-validation-rule)).
 - **[CSRF Protection](/security/csrf-protection)** discusses how to protect application from *Cross-site request Forgery (CSRF)* attack.
 - **[HTTP Verb Tunnelling](/security/http-verb-tunnelling)** explains about how to override HTTP verb such as `PUT`, `PATCH` and `DELETE`.
 - **[HTTP Authentication](/security/http-authentication)** discusses authentication using basic, digest, bearer token authentication. It is also related to JSON Web Token.
