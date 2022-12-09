@@ -87,4 +87,4 @@ description: Documentation and developer's resources for Fano Framework, web app
 - [Missing ODBC client library](/known-issues#missing-odbc-client-library)
 - [Memory leak due to database shutdown](/known-issues#shut-down-database-server-may-cause-memory-leak)
 - [Indy memory leak issue](/known-issues#indy-memory-leak-issue)
-- [Fano with fcl-web compiled with FPC returns empty response](/known-issues#empty-response-in-fpc-3.0.4-fcl-web)
+- [Fano with fcl-web compiled with FPC 3.0.4 returns empty response](/known-issues#empty-response-in-fpc-3.0.4-fcl-web)
