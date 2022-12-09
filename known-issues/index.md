@@ -212,7 +212,7 @@ This may cause compilation to stop, so if you use Indy, you may want to make it 
 
 ## <a name="empty-response-in-fpc-3.0.4-fcl-web"></a>Fano web application with TFpHttpServer compiled with FPC 3.0.4 returns empty response.
 
-Before version 1.14.1, Fano web application using TFpHttpServer that is compiled with FPC 3.0.4 will return empty response. [This is bug](https://github.com/fanoframework/fano/issues/28) and cause by different behavior of FileExists() between FPC 3.0.4 and FPC 3.2.0.
+Before version [1.14.1](https://github.com/fanoframework/fano/releases/tag/v1.14.1), Fano web application using TFpHttpServer that is compiled with FPC 3.0.4 will return empty response. [This is bug](https://github.com/fanoframework/fano/issues/28) and cause by different behavior of FileExists() between FPC 3.0.4 and FPC 3.2.0.
 
 In FPC 3.0.4 or older, FileExists() in Linux/Unix returns true if input name is existing file or directory. In FPC 3.2.0, FileExists() in Linux/Unix returns false if input name is existing directory.
 
