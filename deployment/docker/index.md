@@ -25,7 +25,7 @@ $ docker-compose up
 ```
 
 Open IP address of Fano application container to access it.
-Read [Get IP address of Fano application docker container](/#get-ip-address-of-fano-application-docker-container) for more information.
+Read [Get IP address of Fano application docker container](#get-ip-address-of-fano-application-docker-container) for more information.
 
 ## Deploy Fano CGI Application with Docker
 
@@ -141,7 +141,7 @@ $ docker run fano-app
 ```
 
 Open IP address of Fano application container to access application.
-Read [Get IP address of Fano application docker container](/#get-ip-address-of-fano-application-docker-container) for more information.
+Read [Get IP address of Fano application docker container](#get-ip-address-of-fano-application-docker-container) for more information.
 
 ### Run with docker-compose
 
@@ -312,7 +312,7 @@ $ docker-compose up
 ```
 
 Open IP address of Fano application container to access it.
-Read [Get IP address of Fano application docker container](/#get-ip-address-of-fano-application-docker-container) for more information.
+Read [Get IP address of Fano application docker container](#get-ip-address-of-fano-application-docker-container) for more information.
 
 ## Deploy Fano SCGI Application with Docker
 
