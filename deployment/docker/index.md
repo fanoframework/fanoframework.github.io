@@ -364,8 +364,8 @@ $ docker network inspect testfano_default
             "Options": null,
             "Config": [
                 {
-                    "Subnet": "172.24.0.0/16",
-                    "Gateway": "172.24.0.1"
+                    "Subnet": "172.20.0.0/16",
+                    "Gateway": "172.20.0.1"
                 }
             ]
         },
