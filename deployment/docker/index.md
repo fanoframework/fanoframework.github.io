@@ -24,6 +24,9 @@ $ ./build.sh
 $ docker-compose up
 ```
 
+Open IP address of Fano application container to access it.
+Read [Get IP address of Fano application docker container](/#get-ip-address-of-fano-application-docker-container) for more information.
+
 ## Deploy Fano CGI Application with Docker
 
 ### Create Dockerfile
@@ -137,7 +140,8 @@ After that run
 $ docker run fano-app
 ```
 
-Open Internet browser and go to `http://172.17.0.2` to access application.
+Open IP address of Fano application container to access application.
+Read [Get IP address of Fano application docker container](/#get-ip-address-of-fano-application-docker-container) for more information.
 
 ### Run with docker-compose
 
@@ -307,22 +311,8 @@ To run application and Apache, run `build.sh` script first and then,
 $ docker-compose up
 ```
 
-To access application, we need to get IP address of Apache container image.
-Run
-
-```
-$ docker network ls
-```
-
-It lists all Docker available networks. If our application is in `testfano` directory,
-it is listed as `testfano_default` by default. To get IP address
-
-```
-$ docker network inspect testfano_default
-```
-
-Find IP address for Apache, for example if it prints `172.20.0.3/16`,
-then open browser and visit `http://172.20.0.3` to access our application.
+Open IP address of Fano application container to access it.
+Read [Get IP address of Fano application docker container](/#get-ip-address-of-fano-application-docker-container) for more information.
 
 ## Deploy Fano SCGI Application with Docker
 
@@ -331,6 +321,91 @@ This is similar to FastCGI reverse proxy configuration above, except `httpd_dock
 ## Deploy Fano uwsgi Application with Docker
 
 This is similar to FastCGI reverse proxy configuration above, except `httpd_dockerfile` loads `mod_proxy_uwsgi` and `vhost.example` contains `uwsgi://fano:7704` line.
+
+## <a name="get-ip-address-of-fano-application-docker-container"></a>Get IP address of Fano application Docker container
+
+To access application, we need to get IP address of Apache container image.
+Run
+
+```
+$ docker network ls
+```
+
+It lists all Docker available networks. For example,
+
+```
+$ docker network ls
+NETWORK ID     NAME                            DRIVER    SCOPE
+f520b12e38fb   testfano_default                bridge    local
+```
+
+`Network ID` and `Name` may be different on your system. If our application is in `testfano` directory, it is listed as `testfano_default` by default.
+
+To get IP address
+
+```
+$ docker network inspect testfano_default
+```
+
+It shows network information on that container. For example,
+
+```
+$ docker network inspect testfano_default
+[
+   {
+        "Name": "testscgifano_default",
+        "Id": "f520b12e38fb0c5f1bab61922b6a9082bd9f2323904b5870a985d04c78d81bfa",
+        "Created": "2023-03-22T05:57:55.059000134+07:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.24.0.0/16",
+                    "Gateway": "172.24.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": true,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "8a24d3bfb7686432ae3fdd8b48b30aa019a8b78cce6f5bbba00349f777f7bbaa": {
+                "Name": "testfano_apache_1",
+                "EndpointID": "60bfaa82b8e7714a7de85aef6426b6874019862e7137929ce1313adcd9a0be11",
+                "MacAddress": "02:42:ac:18:00:03",
+                "IPv4Address": "172.20.0.3/16",
+                "IPv6Address": ""
+            },
+            "b888c7aac3dc0bec9248ba9d6e74f2f0da89e0db13e331103c461d98c50650cf": {
+                "Name": "testfano_fano_1",
+                "EndpointID": "38f929d0f99cc430c20e0bb736f292ba9773fa416eaa13852c006298579f7aad",
+                "MacAddress": "02:42:ac:18:00:02",
+                "IPv4Address": "172.20.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {
+            "com.docker.compose.network": "default",
+            "com.docker.compose.project": "testfano",
+            "com.docker.compose.version": "1.29.2"
+        }
+    }
+]
+```
+Actual values may be different on your system.
+
+Find IP address for Apache container. In above example,
+it is `testfano_apache_1`, with IP `172.20.0.3/16`.
+Open browser and visit `http://172.20.0.3` to access our application.
 
 ## Explore more
 
