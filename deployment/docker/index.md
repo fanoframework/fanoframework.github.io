@@ -353,7 +353,7 @@ It shows network information on that container. For example,
 $ docker network inspect testfano_default
 [
    {
-        "Name": "testscgifano_default",
+        "Name": "testfano_default",
         "Id": "f520b12e38fb0c5f1bab61922b6a9082bd9f2323904b5870a985d04c78d81bfa",
         "Created": "2023-03-22T05:57:55.059000134+07:00",
         "Scope": "local",
