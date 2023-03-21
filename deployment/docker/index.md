@@ -7,15 +7,16 @@ description: Tutorial on how to deploy Fano application with Docker container.
 
 ## Prerequisite
 
-You have working Docker and Docker Compose installation.
+You must have a working Docker and Docker Compose installation.
 
-It is assumed your current user is in group `docker`. If you are not in `docker` group, you have to prefix all docker command with `sudo` or run it with elevated privilege (root).
+It is assumed that your current user is in the group `docker`. If you are not in the `docker` group, you have to prefix all Docker commands with sudo or run them with elevated privileges (root).
 
 ## Deploy Fano CLI-generated Project with Docker
 
-[Fano CLI](/scaffolding-with-fano-cli/) since `v1.13.0` generates `docker-compose.yaml` file during creation of [CGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-cgi-project), [FastCGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-fcgid-project), [SCGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-scgi-project) and [uwsgi](/scaffolding-with-fano-cli/creating-project/#scaffolding-uwsgi-project) project.
+[Fano CLI](/scaffolding-with-fano-cli/) generates `docker-compose.yaml` file during creation of [CGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-cgi-project), [FastCGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-fcgid-project), [SCGI](/scaffolding-with-fano-cli/creating-project/#scaffolding-scgi-project) and [uwsgi](/scaffolding-with-fano-cli/creating-project/#scaffolding-uwsgi-project) project since `v1.13.0`.
 
-Which means you can skip steps explained in sections below and just compile application and then run with `docker-compose up`.
+This means you can skip the steps explained in the sections below and simply compile the application and run it with `docker-compose up`.
+
 ```
 $ fanocli --project-fcgi=my-fcgi.fano
 $ cd my-fcgi.fano
@@ -24,8 +25,8 @@ $ ./build.sh
 $ docker-compose up
 ```
 
-Open IP address of Fano application container to access it.
-Read [Get IP address of Fano application docker container](#get-ip-address-of-fano-application-docker-container) for more information.
+Open the IP address of the Fano application container to access it.
+Read [Get IP Address of Fano Application Docker Container](#get-ip-address-of-fano-application-docker-container) for more information.
 
 ## Deploy Fano CGI Application with Docker
 
@@ -36,7 +37,7 @@ Create file name `Dockerfile` in project root directory with content as shown be
 FROM httpd:2.4
 ```
 
-This tells Docker to create container image based Apache 2.4. This is Debian-based image with common Apache modules are installed.
+This tells Docker to create container image with Apache 2.4. This is Debian-based image with common Apache modules  installed.
 
 Now append lines below. We make sure that `mod_cgi`, `mod_cgid` and `mod_rewrite` modules are loaded by modifying main Apache configuration like so.
 
@@ -50,18 +51,17 @@ RUN sed -i \
         /usr/local/apache2/conf/httpd.conf
 ```
 
-In case unclear to you, regular expressions replace `#LoadModule mod_cgi` to become `LoadModule mod_cgi` effectively tells Apache  to load `mod_cgi`.
+If it is not clear to you, regular expression replaces `#LoadModule mod_cgi` to become `LoadModule mod_cgi`, effectively telling Apache to load `mod_cgi`.
 
-We also tells Apache to include any additional configurations in `httpd-vhosts.conf` file and set `ServerName` configuration.
+We also tell Apache to include any additional configurations in the `httpd-vhosts.conf` file and set the `ServerName` configuration.
 
-
-Append line below to copy `vhost.example` file to `httpd-vhosts.conf` inside container. We will create `vhost.example` latter.
+Append the line below to copy the `vhost.example` file to `httpd-vhosts.conf` inside the container. We will create `vhost.example` later.
 
 ```
 COPY ./vhost.example /usr/local/apache2/conf/extra/httpd-vhosts.conf
 ```
 
-Remove `index.html` as we do not need it, but this is optional step.
+Remove `index.html` as we do not need it, but this is an optional step.
 ```
 RUN rm /usr/local/apache2/htdocs/index.html
 ```
