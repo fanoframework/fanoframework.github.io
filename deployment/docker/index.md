@@ -322,7 +322,7 @@ This is similar to FastCGI reverse proxy configuration above, except `httpd_dock
 
 This is similar to FastCGI reverse proxy configuration above, except `httpd_dockerfile` loads `mod_proxy_uwsgi` and `vhost.example` contains `uwsgi://fano:7704` line.
 
-## <a name="get-ip-address-of-fano-application-docker-container"></a>Get IP address of Fano application Docker container
+## <a name="get-ip-address-of-fano-application-docker-container"></a>Get IP Address of Fano Application Docker Container
 
 To access application, we need to get IP address of Apache container image.
 Run
