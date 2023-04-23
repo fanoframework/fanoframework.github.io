@@ -178,7 +178,7 @@ $ sudo apt install libmysqlclient-dev
 ## <a name="missing-odbc-client-library"></a>Missing ODBC client library
 
 If you use ODBC to connect to a database server and you encounter error
-*Can not load ODBC client. Is it installed? (libodbc.so)*
+`Can not load ODBC client. Is it installed? (libodbc.so)`
 
 Install `unixodbc` and `unixodbc-dev`
 
