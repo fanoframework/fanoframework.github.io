@@ -170,7 +170,7 @@ $ FPC_BIN=~/fpcupdeluxe/fpc/bin/x86_64-linux/fpc.sh ./build.sh
 ```
 ## <a name="missing-mysql-client-library"></a>Missing MySQL client library
 
-If you encounter error *Can't load default MySQL library ("libmysqlclient.so.20" or "libmysqlclient.so"). Check your installation*, you need to install MySQL client development library. For example on Debian,
+If you encounter error `Can't load default MySQL library ("libmysqlclient.so.20" or "libmysqlclient.so"). Check your installation`, you need to install MySQL client development library. For example on Debian,
 
 ```
 $ sudo apt install libmysqlclient-dev
